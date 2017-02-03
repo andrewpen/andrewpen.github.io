@@ -17,7 +17,6 @@
 		<link href='https://fonts.googleapis.com/css?family=Fira+Sans:300' rel='stylesheet' type='text/css'>
 
 		<style>
-			html{background:#00246B;}
 			#splash div{text-align:center;padding:150px 0;background-color:#000000;position: fixed;left:0;right:0;}
 			#splash{color:#fff;background-color:black;height:700px;}
 			#splash embed{max-width:250px;padding-bottom:10px;}
@@ -51,28 +50,17 @@
 			#splash a:hover{background-color:white;color:black;}
 
 			section div.header-container div.headlines h1, section div.header-container div.headlines h2{font-weight:100;}
-			@media only screen and (min-width:481px){
-				section div.text-container{max-width:800px;position:relative;margin:0 auto;}
-			}
 			section div.content{max-width:800px;margin:0 auto;}
 
+			header{position:relative;}
 			section#main {position:relative;background-color:#efefef;}
-			@media only screen and (max-width:480px) {
-				section#main {background-color:#fff;}
-			}
-			section#main .content-box{padding:4%;}
-			@media only screen and (min-width:480px) {
-				section#main .content-box{background-color:#fff;top:-40px;}
-			}
-			@media only screen and (min-width:800px) {
-				section#main .content-box{position:relative;}
-			}
+
 			footer{padding-left:4%;padding-right:4%;}
 			footer div{max-width: 800px;position:relative;margin:0 auto;}
 			footer div p{left:0;}
 			footer nav ul{right:0;}
 
-			@media only screen and (max-width: 480px) {
+			@media only screen and (max-width: 450px) {
 				#splash li{width:50%;display:inline-block;margin:10px 0;}
 				#splash a{padding:10%;width:initial;}
 
@@ -83,10 +71,10 @@
 
 	<body id="pageWrapper">
 
-		<!-- <section id="splash">
+		<section id="splash">
 			<div id="splash-content">
 		    <object>
-		      <embed src="img/ap-logo.svg" width="50%" height="50%">
+		      <embed src="../resources/Logo/ap-logo.svg" width="50%" height="50%">
 		    </object>
 				<h1>Andrew Pendleton</h1>
 				<h2>designer &amp; developer</h2>
@@ -98,9 +86,9 @@
 					</ul>
 				</nav>
 		  </div>
-		</section> -->
+		</section>
 		<header id="header" class="wrapper">
-			<nav class="icon-ap-icon-svg">
+			<nav class="icon-ap-icon-svg" style="background-color:#000000;">
 				<ul>
 					<li><a href="#">home</a></li>
 					<li><a href="#">resume</a></li>
@@ -110,20 +98,17 @@
 		</header>
 		<section id="main">
 			<div class="header-container">
-				<div class="text-container">
-					<div class="headlines">
-						<h1>Andrew Pendleton</h1>
-						<h2>web developer</h2>
-					</div>
+				<!-- <div class="top-image"></div> -->
+				<div class="headlines">
+					<h1>Andrew Pendleton</h1>
+					<h2>web developer</h2>
 				</div>
 			</div>
 			<div class="content">
-				<div class="content-box">
-					<p>Hi, my name is Andrew and I have more than 10 years experience in web design and development. I have worked alongside some of the largest technology companies in the world including Adobe, Oracle, Google, Samsung, LG, and Apple.</p>
-					<p>I currently reside in the beautiful state of Arkansas, where people’s spirits are as high as the humidity! When I am not working, I enjoy spending time with my family, traveling, and reading. Reach out to me via email if you would like to connect concerning a web design or development project.</p>
-				</div>
+				<p>Andrew Pendleton has more than 10 years experience in web design and development. He has worked alongside some of the largest technology companies in the world including Adobe, Oracle, Google, Samsung, LG, and Apple.</p>
+				<p>Andrew resides in the beautiful state of Arkansas, where people’s spirits are as high as the humidity! When he is not working, he enjoys spending time with my family, traveling, and reading. Reach out to Andrew via email if you would like to connect concerning a web design or development project.</p>
 			</div>
-		</section><!--
+		</section>
 		<section>
 			<h2>Professional Skills</h2>
 			<div>
@@ -138,7 +123,7 @@
 				<h3>Layout</h3>
 				<p></p>
 			</div>
-		</section>-->
+		</section>
 		<footer>
 			<div>
 				<p>Copyright &copy; 2015 Andrew Pendleton</p>
@@ -159,5 +144,12 @@
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="http://localhost:35729/livereload.js"></script>
 		<script src="js/scripts.js"></script>
+		<script>
+			$(window).scroll(function() {
+				$("#splash div").css({
+				'opacity' : 1-(($(this).scrollTop())/250)
+				});
+			});
+		</script>
 	</body>
 </html>
