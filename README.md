@@ -14,3 +14,12 @@ Index.html is now being tracked
 `git commit -m "First commit of new index file."`
 6. Push all committed changes (index.html) to github repository
 `git push`
+**On Mac machine, in Terminal**
+1. Navigate to local host directory within Terminal
+Go to HD\
+cd ..\
+cd ..\
+Go to localhost directory\
+cd Library/WebServer/Documents
+2. Clone repo
+`sudo git clone https://github.com/andrewpen/apps`
