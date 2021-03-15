@@ -1,1 +1,16 @@
 # apps
+- Created repository on github
+- On Windows machine, in Terminal
+-   Changed directory to C:\inetpub\wwwroot
+-   git clone https://github.com/andrewpen/apps
+-       This cloned my starter files from Github to my Windows machine 
+-       and saved them in the wwwroot direction in a folder named \apps
+-   Changed directory to new repo to C:\inetpub\wwwroot\apps
+- Created new HTML index file within \apps
+- Add new index file to track file and stage
+-   git add index.html
+- Index.html is now being tracked
+- Commit the changes within index.html
+-   git commit -m "First commit of new index file."
+- Push all committed changes (index.html) to github repository
+-   git push
