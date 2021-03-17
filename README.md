@@ -23,3 +23,6 @@ Go to localhost directory\
 cd Library/WebServer/Documents
 2. Clone repo
 `sudo git clone https://github.com/andrewpen/apps`
+
+## Database Setup
+**On Windows machine**
