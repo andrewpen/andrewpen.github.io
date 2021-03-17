@@ -1,0 +1,14 @@
+{
+  "name": "napm",
+  "version": "1.0.0",
+  "description": "Alpha version of my Notes and Project Manager application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+  },
+  "author": "Andrew Pendleton",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
