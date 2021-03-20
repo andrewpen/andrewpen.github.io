@@ -1,0 +1,33 @@
+Windows Powershell
+
+Check Python and Pip versions
+1. change directory to c:  
+    ```cd\
+2. check python version 
+    ```python --version 
+    ```response: Python 3.9.2 
+    ```We're all good here
+3. check pip version 
+    ```pip --version 
+    ```response: pip 20.2.3
+    ```This is outdated - we need to update
+    ```cd C:Python39
+    ```python -m pip install --upgrade pip 
+    ```Note that I need to be running powershell in admin mode for this to work
+    ```response: Successfully installed pip-21.0.1
+    ```We're all good here too
+
+Install PyMongo to connect Python with my MongoDB database
+1. Install the PyMongo driver
+    ```python -m pip install pymongo 
+    ```response: Successfully installed pymongo-3.11.3
+2. Install dnspython to support mongodb+srv:// URIs
+    ```python -m pip install pymongo[srv]
+    ```response: Successfully installed dnspython-1.16.0
+
+Run a Python script from Powershell
+Test the connection between Python and MongoDB 
+1. Make sure you are in the directory that contains the py file 
+2. Run serverStatus.py from Powershell 
+    ```python serverStatus.py 
+    ```response: output from file
