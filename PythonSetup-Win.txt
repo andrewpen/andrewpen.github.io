@@ -18,10 +18,10 @@ Check Python and Pip versions
     ```We're all good here too
 
 Install PyMongo to connect Python with my MongoDB database
-1. Install the PyMongo driver
+1. Install the PyMongo driver (pip)
     ```python -m pip install pymongo 
     ```response: Successfully installed pymongo-3.11.3
-2. Install dnspython to support mongodb+srv:// URIs
+2. Install dnspython to support mongodb+srv:// URIs (pip)
     ```python -m pip install pymongo[srv]
     ```response: Successfully installed dnspython-1.16.0
 
@@ -31,3 +31,13 @@ Test the connection between Python and MongoDB
 2. Run serverStatus.py from Powershell 
     ```python serverStatus.py 
     ```response: output from file
+
+Install Flask (pip)
+1. Install Flask 
+    ```python -m pip install flask 
+    ```response: Successfully installed jinja, MarkupSafe, Werkzeug, click, flask, itsdangerous
+
+Install Yarn and NPX (npm)
+1. Install Yarn and NPX     
+    ```npm install -g yarn
+    ```npm install -g npx  
