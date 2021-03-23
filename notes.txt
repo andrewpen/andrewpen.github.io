@@ -1,0 +1,36 @@
+Open Browser (localhost, github)
+Open VSCode
+On Windows, using Terminal from VSCode footer (Mac uses Terminal outside VSCode) 
+mongodb-windows-x86_64-4.4.4-signed
+
+
+**First Run Mongod.exe**
+Then start mongo.exe
+**Starting Up Mongo.exe**
+C:\Program Files\MongoDB\Server\4.4\bin>mongo.exe
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("84777495-a396-4568-90b1-367c6290eb65") }
+MongoDB server version: 4.4.4
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+        https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+        https://community.mongodb.com
+---
+The server generated these startup warnings when booting:
+        2021-03-16T21:34:38.818-05:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2021-03-16T21:34:38.818-05:00: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
