@@ -1,0 +1,22 @@
+body{
+    background:#162d33;
+    color: #dedede;
+}
+nav{
+    background:#1d3a40;
+    position:absolute;
+    width:15%;
+    height:99%;
+}
+ul{
+    list-style:none;
+}
+a{
+    color:#dedede;
+    text-decoration:none;
+}
+section{
+    position:absolute;
+    margin-left:15%;
+    height:100%;
+}
