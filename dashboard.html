@@ -4,41 +4,42 @@
         <link rel="stylesheet" href="assets/style.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="assets/json.js"></script>
         <script src="assets/script.js"></script>
-        <title>My Dash</title>
+        <title>Dashboard</title>
         <link rel="icon" href="assets/rocket.ico" type="image/x-icon"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     </head>
     <body>
         <main>
-            <header></header>
+            <header>
+                <h1>dashboard</h1>
+                <img class="vlogo" alt="Verizon Logo" src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMi45NCA0MCI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNkNTJiMWU7fTwvc3R5bGU+PC9kZWZzPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyNi44NSAwIDExLjgyIDMyLjIzIDYuMTQgMjAgMCAyMCA5LjMzIDQwIDE0LjI5IDQwIDMyLjk0IDAgMjYuODUgMCIvPjwvc3ZnPg==">
+                <span id="time"></span>
+            </header>
             <div>     
                 <nav id="nav_content"></nav>
                 <section>
-                    <h1></h1>
+                    <h2 class="capitalize"></h1>
                     <div id="body_content"></div>
                 </section>
             </div>
             <footer>
-<!--===================================================================================--> 
-<!--===================================================================================-->                   
-                    <!-- Left Column Navigation Links -->
-                    <script id="dashNavLinks" type="text/x-handlebars-template">
-                        <ul>{{#each .}}
-                                <li><a href="#" onclick="popGroupLinks('{{group_label}}');">{{group_id}}</a></li>
-                            {{/each}}</ul>
-                    </script>
-<!--===================================================================================-->
-<!--===================================================================================-->
-                    <!-- Right Column Body Links -->
-                    <script id="dashBodyLinks" type="text/x-handlebars-template">
-                        <ul>{{#each .}}
-                                <li><a href={{link_url}}>{{link_label}}</a></li>
-                            {{/each}}</ul>
-                    </script>
-<!--===================================================================================-->
-<!--===================================================================================-->  
-
+                <p>This web application was made for personal use only as a means to increase personal productivity. Developed by Andrew Pendleton, 2021.</p>
             </footer>
         </main>
+            <!-- Left Column Navigation Links -->
+            <script id="dashNavLinks" type="text/x-handlebars-template">
+                <ul>{{#each .}}
+                        <li><a href="#" onclick="popGroupLinks('{{group_label}}');">{{group_id}}</a></li>
+                    {{/each}}</ul>
+            </script>
+
+            <!-- Right Column Body Links -->
+            <script id="dashBodyLinks" type="text/x-handlebars-template">
+                <ul>{{#each .}}
+                        <li><a href={{link_url}}>{{link_label}}</a></li>
+                    {{/each}}</ul>
+            </script>
     </body>
 </html>
