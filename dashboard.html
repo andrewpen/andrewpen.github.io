@@ -11,46 +11,39 @@
     <body>
         <main>
             <header>
-
+                <ul>
+                    <li><a href="" onclick="test('Dash');">Dash</a></li>
+                    <li><a href="" onclick="">Admin</a></li>
+                    <li><a href="" onclick="">AEM</a></li>
+                </ul>
             </header>
             <div>     
                 <nav id="nav_content"></nav>
-
-                </nav>
                 <section>
-                    <!--Content div is used to render the compile code of handlebar -->
-                    <div id="content"></div>
-                    
-                    <!-- note the type attribute of script tag. Without this, code will be treated as javascript code -->
-                    <script id="dashTemplateLinks" type="text/x-handlebars-template">
-                        <div>
-                        Hi,This template is rendered using<b> {{group_id}}</b>.<br> 
-                        Take a look at script.js to understand the example better.<br><br>
-                        
-                        HTML code will be rendered as it without the execution<br>
-                        {{italicText}}<br><br>
-                        
-                        <b>To explicitly execute the html code without escaping ,we just have to add one more curly brace</b>
-                        {{{italicText}}}
-                        </div>
-                    </script>
-                    <script id="dashNavLinks" type="text/x-handlebars-template">
-                        <ul>
-                            <li>
-                                <a href="#">{{group_id}}</a>
-                            </li>
-                            <li>
-                                <a href="#">link group 2</a>
-                            </li>
-                            <li>
-                                <a href="#">link group 3</a>
-                            </li>
-                        </ul>
-                    </script>
+                    <div id="body_content"></div>
                 </section>
             </div>
             <footer>
-
+<!--===================================================================================--> 
+<!--===================================================================================-->                   
+                    <!-- Left Column Navigation Links -->
+                    <script id="dashNavLinks" type="text/x-handlebars-template">
+                        <ul>{{#each .}}
+                            <!-- <li><a href={{group_url}}>{{group_id}}</a></li> -->
+                            <li><a href="" onclick="test();">{{group_id}}</a></li>
+                            {{/each}}</ul>
+                    </script>
+<!--===================================================================================-->
+<!--===================================================================================-->
+                    <!-- Right Column Body Links -->
+                    <script id="dashBodyLinks" type="text/x-handlebars-template">
+                        <h1>{{0.link_group}} Links</h1>
+                        <ul>{{#each .}}
+                                <li><a href={{link_url}}>{{link_label}}</a></li>
+                            {{/each}}</ul>
+                    </script>
+<!--===================================================================================-->
+<!--===================================================================================-->  
             </footer>
         </main>
     </body>
