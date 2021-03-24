@@ -7,7 +7,7 @@
         <script src="assets/json.js"></script>
         <script src="assets/script.js"></script>
         <title>Dashboard</title>
-        <link rel="icon" href="assets/rocket.ico" type="image/x-icon"/>
+        <link rel="icon" href="assets/circle2.ico" type="image/x-icon"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     </head>
     <body>
@@ -38,7 +38,10 @@
             <!-- Right Column Body Links -->
             <script id="dashBodyLinks" type="text/x-handlebars-template">
                 <ul>{{#each .}}
-                        <li><a href={{link_url}}>{{link_label}}</a></li>
+                        <li>
+                            <img src="{{link_image}}" />
+                            <a href={{link_url}}>{{link_label}}</a>
+                        </li>
                     {{/each}}</ul>
             </script>
     </body>
