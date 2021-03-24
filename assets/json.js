@@ -16,27 +16,27 @@ var dashGroups =  [
 var dashLinks = {
     dash: [
         {
-            link_label: "Dash link 1",
+            link_label: "Verizon",
             link_url: "https://www.verizon.com",
-            link_image: "",
+            link_image: "https://www.google.com/s2/favicons?domain=verizon.com",
             link_target: "_blank" 
         },
         {
-            link_label: "Dash link 2",
-            link_url: "https://www.verizon.com",
-            link_image: "",
+            link_label: "Google",
+            link_url: "https://www.google.com",
+            link_image: "https://www.google.com/s2/favicons?domain=google.com",
             link_target: "_blank" 
         },
         {
-            link_label: "Dash link 3",
+            link_label: "Yahoo",
             link_url: "https://www.verizon.com",
-            link_image: "",
+            link_image: "https://www.google.com/s2/favicons?domain=yahoo.com",
             link_target: "_blank" 
         },
         {
-            link_label: "Dash link 4",
+            link_label: "Facebook",
             link_url: "https://www.verizon.com",
-            link_image: "",
+            link_image: "https://www.google.com/s2/favicons?domain=facebook.com",
             link_target: "_blank" 
         }
     ],
@@ -44,33 +44,33 @@ var dashLinks = {
         {
             link_label: "Home",
             link_url: "https://www.verizon.com",
-            link_image: "",
+            link_image: "https://www.google.com/s2/favicons?domain=andrewpen.github.io",
             link_target: "_blank"
         },
         {
-            link_label: "Shop",
+            link_label: "Gitlab",
             link_url: "https://www.verizon.com/shop",
-            link_image: "",
+            link_image: "https://www.google.com/s2/favicons?domain=gitlab.com",
             link_target: "_blank"
         },
         {
-            link_label: "Deals",
+            link_label: "Github",
             link_url: "https://www.verizon.com/deals",
-            link_image: "",
+            link_image: "https://www.google.com/s2/favicons?domain=github.com",
             link_target: "_blank"
         }
     ],
     aem: [
         {
-            link_label: "AEM link 1",
-            link_url: "https://www.adobe.com",
-            link_image: "",
+            link_label: "Amazon",
+            link_url: "https://www.amazon.com",
+            link_image: "https://www.google.com/s2/favicons?domain=amazon.com",
             link_target: "_blank"
         },
         {
-            link_label: "AEM link 2",
+            link_label: "Adobe",
             link_url: "https://www.adobe.com",
-            link_image: "",
+            link_image: "https://www.google.com/s2/favicons?domain=adobe.com",
             link_target: "_blank"
         }
     ]
