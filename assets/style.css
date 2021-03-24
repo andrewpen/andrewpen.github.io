@@ -1,5 +1,5 @@
 body {
-    background:#c6c6c6;
+    background:#fff;
     font-family: "Poppins", sans-serif;
     margin:0;
     padding:0;
@@ -13,11 +13,11 @@ header {
     z-index:1000;
 }
 nav {
-    background:#bababa;
+    background:#e6e6e6;
     position:absolute;
     min-width: 200px;
     height:100%;
-    box-shadow: 0 0 15px #828282;
+    box-shadow: 0 0 20px #ababab;
 }
 section {
     position:absolute;
@@ -69,7 +69,7 @@ nav a {
 nav a:hover {
     border-left:solid #d52b1e 7px;
     font-weight: 900;
-    background:#c6c6c6;
+    background:#f1f1f1;
     padding-left: 23px !important;
 }
 footer p {
