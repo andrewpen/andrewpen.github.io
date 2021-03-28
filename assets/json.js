@@ -16,15 +16,15 @@ var dashGroups =  [
 var dashLinks = {
     dash: [
         {
-            link_label: "Favorites",
+            link_label: "Chrome Favorites",
             link_url: "https://www.google.com/save",
             link_image: "https://www.google.com/s2/favicons?domain=google.com",
             link_target: "_blank"
         },
         {
-            link_label: "Verizon",
-            link_url: "https://www.verizon.com",
-            link_image: "https://www.google.com/s2/favicons?domain=verizon.com",
+            link_label: "Reddit Saves",
+            link_url: "https://www.reddit.com/user/IamA3K/saved",
+            link_image: "https://www.google.com/s2/favicons?domain=reddit.com",
             link_target: "_blank" 
         },
         {
