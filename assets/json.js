@@ -1,4 +1,19 @@
-var dashGroups =  [
+var dashFeatures = [
+    {
+        group_id:"Links",
+        group_label:"links"
+    },
+    {
+        group_id:"To Do",
+        group_label:"todo"
+    },
+    {
+        group_id:"Notes",
+        group_label:"notes"
+    }
+]
+
+var dashLinkGroups =  [
     {
         group_id: "Dash",
         group_label: "dash"
@@ -13,6 +28,15 @@ var dashGroups =  [
     }
 ]
  
+var dashPermaLinks = [
+    {
+        link_label: "Miro Board",
+        link_url: "https://miro.com/app/board/o9J_kgpq9iY=/",
+        link_image: "https://www.google.com/s2/favicons?domain=miro.com",
+        link_target: "_blank"
+    }
+]
+
 var dashLinks = {
     dash: [
         {

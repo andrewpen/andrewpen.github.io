@@ -2,9 +2,9 @@ $(document).ready(function(){
 // Populate left column navigation
     var navTemplate = $("#dashNavLinks").html();
     var compiledNavCode = Handlebars.compile(navTemplate);
-    var navResult = compiledNavCode(dashGroups);
+    var navResult = compiledNavCode(dashLinkGroups);
     $("#nav_content").html(navResult);
-    popGroupLinks('dash');
+    popGroupLinks('notes');
 
 
 
@@ -19,17 +19,24 @@ $(document).ready(function(){
 // Populate body navigation based on nav click
 function popGroupLinks(group_label){
     var bodyTemplate = $("#dashBodyLinks").html();
-    var compiledBodyCode = Handlebars.compile(bodyTemplate);   
+    var compiledBodyCode = Handlebars.compile(bodyTemplate);
+    
+    
+    var bodyNotesTemplate = $("#dashBodyNotes").html();
+    var compiledBodyNotesCode = Handlebars.compile(bodyNotesTemplate);
+
     switch(group_label) {
         case "dash": var bodyResult = compiledBodyCode(dashLinks.dash); break;
         case "admin": var bodyResult = compiledBodyCode(dashLinks.admin); break;
         case "aem": var bodyResult = compiledBodyCode(dashLinks.aem); break;
+        case "notes": var bodyResult = compiledBodyNotesCode(); break;
         default: var bodyResult = compiledBodyCode(dashLinks.dash); break;
       }    
-    $("h2").html(group_label + " Links");
+    $("h2.content").html(group_label + " Links");
     $("#body_content").html(bodyResult);
 };
 
+/*
 // Populate body navigation based on nav click version 2!
 function popGroupLinks2(group_label){
     var bodyTemplate = $("#dashBodyLinks").html();
@@ -38,8 +45,10 @@ function popGroupLinks2(group_label){
         case "dash": var bodyResult = compiledBodyCode(dashLinks.dash); break;
         case "admin": var bodyResult = compiledBodyCode(dashLinks.admin); break;
         case "aem": var bodyResult = compiledBodyCode(dashLinks.aem); break;
+        case "notes": var bodyResult = compiledBodyCode(); break;
         default: var bodyResult = compiledBodyCode(dashLinks.dash); break;
       }    
     $("h2").html(group_label + " Links");
     $("#body_content").html(bodyResult);
 };
+*/
