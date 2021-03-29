@@ -47,22 +47,33 @@ function popPermaLinks(){
   $("#perma_links").html(permaResult);
 }
 
-function popGroupLinks(group_label){
+function popNotes(){
+  var bodyNotesTemplate = $("#dashBodyNotes").html();
+  var compiledBodyNotesCode = Handlebars.compile(bodyNotesTemplate);
+  var bodyResult = compiledBodyNotesCode();
+  $("h2.content").html("Notes");
+  $("#body_content").html(bodyResult);
+}
 
+function popGroupLinks(group_label){
     var bodyTemplate = $("#dashBodyLinks").html();
     var compiledBodyCode = Handlebars.compile(bodyTemplate);
-    
-    var bodyNotesTemplate = $("#dashBodyNotes").html();
-    var compiledBodyNotesCode = Handlebars.compile(bodyNotesTemplate);
 
     switch(group_label) {
-        case "dash": var bodyResult = compiledBodyCode(dashLinks.dash); break;
-        case "admin": var bodyResult = compiledBodyCode(dashLinks.admin); break;
-        case "aem": var bodyResult = compiledBodyCode(dashLinks.aem); break;
-        case "notes": var bodyResult = compiledBodyNotesCode(); break;
-        default: var bodyResult = compiledBodyCode(dashLinks.dash); break;
+        case "dash": var bodyResult = compiledBodyCode(dashLinks.dash);     
+          $("h2.content").html(group_label + " Links");
+          $("#body_content").html(bodyResult); 
+          break;
+        case "admin": var bodyResult = compiledBodyCode(dashLinks.admin);     
+          $("h2.content").html(group_label + " Links");
+          $("#body_content").html(bodyResult); 
+          break;
+        case "aem": var bodyResult = compiledBodyCode(dashLinks.aem);     
+          $("h2.content").html(group_label + " Links");
+          $("#body_content").html(bodyResult); 
+          break;
+        default: var bodyResult = popNotes(); break;
       }    
-    $("h2.content").html(group_label + " Links");
-    $("#body_content").html(bodyResult);
+
 };
 
