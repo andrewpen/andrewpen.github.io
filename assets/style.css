@@ -59,6 +59,9 @@ a {
 nav#features li {
     display:inline-block;
 }
+nav#features img {
+    width: 25px;
+}
 nav#links ul {
     margin-top:20px;
 }
