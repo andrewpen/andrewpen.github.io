@@ -68,7 +68,7 @@ function popGroupLinks(group_label){
           $("h2.content").html(group_label + " Links");
           $("#body_content").html(bodyResult); 
           break;
-        case "aem": var bodyResult = compiledBodyCode(dashLinks.aem);     
+        case "helpful": var bodyResult = compiledBodyCode(dashLinks.helpful);     
           $("h2.content").html(group_label + " Links");
           $("#body_content").html(bodyResult); 
           break;

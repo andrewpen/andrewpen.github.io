@@ -23,8 +23,8 @@ var dashLinkGroups =  [
         group_label: "admin"
     },
     {
-        group_id:"AEM",
-        group_label:"aem"
+        group_id:"Helpful",
+        group_label:"helpful"
     }
 ]
  
@@ -108,7 +108,7 @@ var dashLinks = {
             link_target: "_blank"
         }
     ],
-    aem: [
+    helpful: [
         {
             link_label: "Amazon",
             link_url: "https://www.amazon.com",
@@ -119,6 +119,12 @@ var dashLinks = {
             link_label: "Adobe",
             link_url: "https://www.adobe.com",
             link_image: "https://www.google.com/s2/favicons?domain=adobe.com",
+            link_target: "_blank"
+        },
+        {
+            link_label: "Build ToDo List",
+            link_url: "https://www.w3schools.com/howto/howto_js_todolist.asp",
+            link_image: "https://www.google.com/s2/favicons?domain=w3schools.com",
             link_target: "_blank"
         }
     ]
