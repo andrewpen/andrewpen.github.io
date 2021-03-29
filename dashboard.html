@@ -5,6 +5,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <script src="assets/json.js"></script>
+        <script src="assets/notebook.js"></script>
         <script src="assets/script.js"></script>
         <title>Dashboard</title>
         <link rel="icon" href="assets/icons/circle2.ico" type="image/x-icon"/>
@@ -21,21 +22,33 @@
                     src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMi45NCA0MCI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNkNTJiMWU7fTwvc3R5bGU+PC9kZWZzPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyNi44NSAwIDExLjgyIDMyLjIzIDYuMTQgMjAgMCAyMCA5LjMzIDQwIDE0LjI5IDQwIDMyLjk0IDAgMjYuODUgMCIvPjwvc3ZnPg==">
                 <span id="time"></span>
             </header>
-            <div>
-                <!-- Navigation -->
-                <nav>
-                    <div id="nav_feature"></div>
-                    <div id="nav_content"></div>
-                </nav>
+            <!-- Navigation -->
+            <nav>
+                <h3>Features</h3>
+                <div id="nav_feature"></div>
+                <h3>Links</h3>
+                <div id="nav_content"></div>
+                <h3>Notes</h3>
+                <div id="nav_note_list"></div>
+            </nav>
+            <div style="display:flex">
                 <!-- Main Body -->
-                <section>
+                <section id="column1" style="order:1">
                     <h2>Perma Links</h2>
                     <div id="perma_links"></div>  
 
                     <h2 class="content capitalize"></h2>
                     <div id="body_content"></div>
                 </section>
+                <section id="column2" style="order:2">
+                    <h2>Column 2</h2>
+                </section>
+                <section id="column3" style="order:3">
+                    <h2 class="notes">Column 3</h2>
+                    <div id="notes_content"></div>
+                </section>
             </div>
+            
             <!-- Footer -->
             <footer>
                 <a href="https://www.google.com/save">Read Later</a>
@@ -61,6 +74,13 @@
                     <li><a href="#" onclick="popGroupLinks('{{group_label}}');">{{group_id}}</a></li>
                 {{/each}}</ul>
         </script>
+
+        <!-- Left Column Notes List -->
+        <script id="dashNoteList" type="text/x-handlebars-template">
+            <ul>{{#each .}}
+                    <li><a href="#" onclick="popNotes();">{{note_name}}</a></li>
+                {{/each}}</ul>
+        </script>        
 
         <!-- Right Column Body Links -->
         <script id="dashBodyLinks" type="text/x-handlebars-template">
@@ -89,6 +109,7 @@
                 <input type="text" id="date" name="date"><br>
                 <label for="notes">Notes:</label><br>
                 <input type="text" id="notes" name="notes">
+                <input type="submit">
             </form>
         </script>
         <!--
