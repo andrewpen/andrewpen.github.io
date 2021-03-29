@@ -12,44 +12,47 @@
     </head>
     <body>
         <main>
+            <!-- Header -->
             <header>
                 <h1>dashboard</h1>
-                <img class="vlogo" alt="Verizon Logo" src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMi45NCA0MCI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNkNTJiMWU7fTwvc3R5bGU+PC9kZWZzPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyNi44NSAwIDExLjgyIDMyLjIzIDYuMTQgMjAgMCAyMCA5LjMzIDQwIDE0LjI5IDQwIDMyLjk0IDAgMjYuODUgMCIvPjwvc3ZnPg==">
+                <img 
+                    class="vlogo" 
+                    alt="Verizon Logo" 
+                    src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMi45NCA0MCI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNkNTJiMWU7fTwvc3R5bGU+PC9kZWZzPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyNi44NSAwIDExLjgyIDMyLjIzIDYuMTQgMjAgMCAyMCA5LjMzIDQwIDE0LjI5IDQwIDMyLjk0IDAgMjYuODUgMCIvPjwvc3ZnPg==">
                 <span id="time"></span>
             </header>
             <div>
-                <nav id="features">
-                    <div id="nav_feature">
-                        <ul>
-                            <li><img src="assets/icons/login.ico" data-label="links" /></li>
-                            <li><img src="assets/icons/tick.ico" data-label="todo" /></li>
-                            <li><img src="assets/icons/file.ico" data-label="notes" /></li>
-                        </ul>
-                    </div>
-                </nav>   
-                <nav id="links">
+                <!-- Navigation -->
+                <nav>
+                    <div id="nav_feature"></div>
                     <div id="nav_content"></div>
                 </nav>
+                <!-- Main Body -->
                 <section>
                     <h2>Perma Links</h2>
-                    <div id="subnav_content">
-                        <ul>
-                            <li><a href="https://miro.com/app/board/o9J_kgpq9iY=/">Miro Board</a></li>
-                            <li><a href="#">Verizon HP</a></li>
-                            <li><a href="#">Financial Doc</a></li>
-                            <li><a href="#">Reddit</a></li>
-                        </ul>
-                    </div>  
+                    <div id="perma_links"></div>  
 
                     <h2 class="content capitalize"></h2>
                     <div id="body_content"></div>
                 </section>
             </div>
+            <!-- Footer -->
             <footer>
                 <a href="https://www.google.com/save">Read Later</a>
                 <p>This web application was made for personal use only as a means to increase personal productivity. Developed by Andrew Pendleton, 2021.</p>
             </footer>
         </main>
+        <!--
+            =======================
+            == Handlebar Scripts ==
+            =======================
+        -->
+        <!-- Left Column Feature Links -->
+        <script id="dashFeatureLinks" type="text/x-handlebars-template">
+            <ul>{{#each .}}
+                    <li><a href="#" onclick="popGroupLinks('{{group_label}}');">{{group_id}}</a></li>
+                {{/each}}</ul>
+        </script>
 
         <!-- Left Column Navigation Links -->
         <script id="dashNavLinks" type="text/x-handlebars-template">
@@ -68,6 +71,16 @@
                 {{/each}}</ul>
         </script>
 
+        <!-- Perma Links -->
+        <script id="dashPermaLinks" type="text/x-handlebars-template">
+            <ul>{{#each .}}
+                <li>
+                    <img src="{{link_image}}" />
+                    <a href={{link_url}} target={{link_target}}>{{link_label}}</a>
+                </li>
+            {{/each}}</ul>
+        </script>
+
         <!-- Notes Section -->
         <script id="dashBodyNotes" type="text/x-handlebars-template">
             <form>
@@ -77,5 +90,10 @@
                 <input type="text" id="notes" name="notes">
             </form>
         </script>
+        <!--
+            =======================
+            =======================
+            =======================
+        -->
     </body>
 </html>

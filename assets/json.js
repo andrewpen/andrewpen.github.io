@@ -34,7 +34,25 @@ var dashPermaLinks = [
         link_url: "https://miro.com/app/board/o9J_kgpq9iY=/",
         link_image: "https://www.google.com/s2/favicons?domain=miro.com",
         link_target: "_blank"
-    }
+    },
+    {
+        link_label: "Verizon HP",
+        link_url: "https://www.verizon.com",
+        link_image: "https://www.google.com/s2/favicons?domain=verizon.com",
+        link_target: "_blank"
+    },
+    {
+        link_label: "Financial Doc",
+        link_url: "https://miro.com/app/board/o9J_kgpq9iY=/",
+        link_image: "https://www.google.com/s2/favicons?domain=google.com",
+        link_target: "_blank"
+    },
+    {
+        link_label: "Reddit",
+        link_url: "https://www.reddit.com",
+        link_image: "https://www.google.com/s2/favicons?domain=reddit.com",
+        link_target: "_blank"
+    },
 ]
 
 var dashLinks = {

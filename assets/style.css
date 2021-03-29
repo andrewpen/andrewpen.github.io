@@ -12,7 +12,7 @@ header {
     position:relative; 
     z-index:1000;
 }
-nav#links {
+nav {
     background:#e6e6e6;
     position:absolute;
     min-width: 200px;
@@ -56,20 +56,16 @@ a {
     color:#000000;
     text-decoration:none;
 }
-nav#features li {
-    display:inline-block;
+nav #nav_feature {
+    padding-bottom:25px;
 }
-nav#features img {
-    width: 25px;
-}
-nav#links ul {
-    margin-top:20px;
-}
-nav#links a {
+nav #nav_content a, 
+nav #nav_feature a {
     display:block;
     padding:5px 30px;
 }
-nav#links a:hover {
+nav #nav_content a:hover, 
+nav #nav_feature a:hover {
     border-left:solid #d52b1e 7px;
     font-weight: 900;
     background:#f1f1f1;
