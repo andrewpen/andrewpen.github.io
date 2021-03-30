@@ -31,21 +31,21 @@ function leftColumnFeatures(){
   var v1 = "dashFeatureLinks";
   var v2 = dashFeatures;
   var v3 = "nav_feature";
-  helperHandleBar(v1, v2, v3);
+  h(v1, v2, v3);
 }
 
 function leftColumnNav(){
   var v1 = "dashNavLinks";
   var v2 = dashLinkGroups;
   var v3 = "nav_content";
-  helperHandleBar(v1, v2, v3);
+  h(v1, v2, v3);
 }
 
 function leftColumnNotes(){
   var v1 = "dashNoteList";
   var v2 = notebook;
   var v3 = "nav_note_list";
-  helperHandleBar(v1, v2, v3);
+  h(v1, v2, v3);
 }
 
 //==============================================================
@@ -56,7 +56,7 @@ function popPermaLinks(){
   var v1 = "dashPermaLinks";
   var v2 = dashPermaLinks;
   var v3 = "perma_links";
-  helperHandleBar(v1, v2, v3);
+  h(v1, v2, v3);
 }
 
 function popNotes(){
@@ -64,7 +64,7 @@ function popNotes(){
   var v2 = "";
   var v3 = "notes_content";
   var v4 = "notes";
-  helperHandleBar(v1, v2, v3, v4);
+  h(v1, v2, v3, v4);
 }
 
 function popGroupLinks(group_label){
@@ -98,7 +98,7 @@ function popGroupLinks(group_label){
 //== Helper Functions ==========================================
 //==============================================================
 
-function helperHandleBar(v1, v2, v3, v4){
+function h(v1, v2, v3, v4){
   var t = $("#" + v1).html();
   var c = Handlebars.compile(t);
   var r = c(v2);
