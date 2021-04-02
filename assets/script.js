@@ -104,3 +104,10 @@ function helperHandleBar(v1, v2, v3, v4){
   if (v4){ $("h2." + v4).html(v4); }
   $("#" + v3).html(r);
 }
+
+
+function submitFunction(that){
+  alert(that.date.value);
+  alert(that.notes.value);
+  return false;
+}

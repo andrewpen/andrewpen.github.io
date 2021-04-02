@@ -104,11 +104,15 @@
 
         <!-- Notes Section -->
         <script id="dashBodyNotes" type="text/x-handlebars-template">
-            <form>
-                <label for="date">Date:</label><br>
-                <input type="text" id="date" name="date"><br>
-                <label for="notes">Notes:</label><br>
-                <input type="text" id="notes" name="notes">
+            <form onsubmit="submitFunction(this);">
+                <label for="label">Label:</label><br>
+                <input type="text" id="label" name="label"><br>
+                <label for="url">URL:</label><br>
+                <input type="text" id="url" name="url"><br>
+                <label for="image">Image:</label><br>
+                <input type="text" id="image" name="image"><br>
+                <label for="target">Target:</label><br>
+                <input type="text" id="target" name="target"><br>
                 <input type="submit">
             </form>
         </script>
