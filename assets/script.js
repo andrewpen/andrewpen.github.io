@@ -9,7 +9,7 @@ leftColumnNav();
 // Populate left column notes list
 leftColumnNotes();
 // Populates the body on page load
-popGroupLinks('dash');
+popGroupLinks('helpful');
 // Populates the body permanent links
 popPermaLinks();
 
@@ -31,21 +31,21 @@ function leftColumnFeatures(){
   var v1 = "dashFeatureLinks";
   var v2 = dashFeatures;
   var v3 = "nav_feature";
-  h(v1, v2, v3);
+  helperHandleBar(v1, v2, v3);
 }
 
 function leftColumnNav(){
   var v1 = "dashNavLinks";
   var v2 = dashLinkGroups;
   var v3 = "nav_content";
-  h(v1, v2, v3);
+  helperHandleBar(v1, v2, v3);
 }
 
 function leftColumnNotes(){
   var v1 = "dashNoteList";
   var v2 = notebook;
   var v3 = "nav_note_list";
-  h(v1, v2, v3);
+  helperHandleBar(v1, v2, v3);
 }
 
 //==============================================================
@@ -56,7 +56,7 @@ function popPermaLinks(){
   var v1 = "dashPermaLinks";
   var v2 = dashPermaLinks;
   var v3 = "perma_links";
-  h(v1, v2, v3);
+  helperHandleBar(v1, v2, v3);
 }
 
 function popNotes(){
@@ -64,7 +64,7 @@ function popNotes(){
   var v2 = "";
   var v3 = "notes_content";
   var v4 = "notes";
-  h(v1, v2, v3, v4);
+  helperHandleBar(v1, v2, v3, v4);
 }
 
 function popGroupLinks(group_label){
@@ -93,24 +93,14 @@ function popGroupLinks(group_label){
 
 };
 
-
 //==============================================================
 //== Helper Functions ==========================================
 //==============================================================
 
-function h(v1, v2, v3, v4){
+function helperHandleBar(v1, v2, v3, v4){
   var t = $("#" + v1).html();
   var c = Handlebars.compile(t);
   var r = c(v2);
   if (v4){ $("h2." + v4).html(v4); }
   $("#" + v3).html(r);
-}
-
-function mongoConnect(){
-  client = mongoc_client_new ("mongodb+srv://andrewpen:pendleton@cluster0.mongodb.net/?serverSelectionTryOnce=false&serverSelectionTimeoutMS=15000&w=majority");
-  db = mongoc_client_get_database (client, "test");
-
-  //Python code example
-  client = pymongo.MongoClient("mongodb+srv://andrewpen:pendleton@napm.hmj5g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-  db = client.test
 }

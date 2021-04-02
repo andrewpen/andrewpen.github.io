@@ -114,12 +114,6 @@ var dashLinks = {
     ],
     helpful: [
         {
-            link_label: "Amazon",
-            link_url: "https://www.amazon.com",
-            link_image: "https://www.google.com/s2/favicons?domain=amazon.com",
-            link_target: "_blank"
-        },
-        {
             link_label: "Flexbox",
             link_url: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
             link_image: "https://www.google.com/s2/favicons?domain=css-tricks.com",
@@ -129,6 +123,30 @@ var dashLinks = {
             link_label: "Build ToDo List",
             link_url: "https://www.w3schools.com/howto/howto_js_todolist.asp",
             link_image: "https://www.google.com/s2/favicons?domain=w3schools.com",
+            link_target: "_blank"
+        }, 
+        {
+            link_label: "React Trello Clone",
+            link_url: "https://snyk.io/advisor/npm-package/react-trello",
+            link_image: "https://www.google.com/s2/favicons?domain=snyk.io",
+            link_target: "_blank"
+        },
+        {
+            link_label: "React Draggable Table Rows",
+            link_url: "https://autodesk.github.io/react-base-table/examples/draggable-rows",
+            link_image: "https://www.google.com/s2/favicons?domain=github.com",
+            link_target: "_blank"
+        },
+        {
+            link_label: "Ruby Jira script",
+            link_url: "https://gist.github.com/mattfinlayson/7902002",
+            link_image: "https://www.google.com/s2/favicons?domain=github.com",
+            link_target: "_blank"
+        },
+        {
+            link_label: "Ruby React MongoDB Example",
+            link_url: "https://medium.com/@bravemaster619/react-ror-mongodb-how-to-decouple-frontend-and-backend-using-react-and-ruby-on-rails-fc6adf40376b",
+            link_image: "https://www.google.com/s2/favicons?domain=medium.com",
             link_target: "_blank"
         }
     ]
