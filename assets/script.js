@@ -12,6 +12,7 @@ leftColumnNotes();
 popGroupLinks('helpful');
 // Populates the body permanent links
 popPermaLinks();
+popNotes();
 
 });
 
@@ -106,8 +107,8 @@ function helperHandleBar(v1, v2, v3, v4){
 }
 
 
-function submitFunction(that){
-  alert(that.date.value);
-  alert(that.notes.value);
-  return false;
+function submitFunction(){
+  var a = document.getElementById("noteForm");
+  var b = "<span>"+a.label.value+"</span><br><span>"+a.url.value+"</span><br><span>"+a.image.value+"</span><br><span>"+a.target.value+"</span>";
+  $("#results").html(b);
 }

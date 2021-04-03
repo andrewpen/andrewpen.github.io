@@ -148,7 +148,13 @@ var dashLinks = {
             link_url: "https://medium.com/@bravemaster619/react-ror-mongodb-how-to-decouple-frontend-and-backend-using-react-and-ruby-on-rails-fc6adf40376b",
             link_image: "https://www.google.com/s2/favicons?domain=medium.com",
             link_target: "_blank"
-        }
+        },
+        {
+            link_label:"Next.js and Mongo",
+            link_url:"https://github.com/vercel/next.js/tree/master/examples/with-mongodb-mongoose",
+            link_image:"https://www.google.com/s2/favicons?domain=github.com",
+            link_target:"_blank"
+        },
     ]
 }
 

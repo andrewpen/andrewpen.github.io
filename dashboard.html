@@ -104,7 +104,7 @@
 
         <!-- Notes Section -->
         <script id="dashBodyNotes" type="text/x-handlebars-template">
-            <form onsubmit="submitFunction(this);">
+            <form id="noteForm">
                 <label for="label">Label:</label><br>
                 <input type="text" id="label" name="label"><br>
                 <label for="url">URL:</label><br>
@@ -114,7 +114,9 @@
                 <label for="target">Target:</label><br>
                 <input type="text" id="target" name="target"><br>
                 <input type="submit">
+                <button onclick="submitFunction(); return false;">Non reload submit</button>
             </form>
+            <div id="results"></div>
         </script>
         <!--
             =======================
