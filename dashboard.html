@@ -8,7 +8,8 @@
         <script src="assets/notebook.js"></script>
         <script src="assets/script.js"></script>
         <title>Dashboard</title>
-        <link rel="icon" href="assets/icons/circle2.ico" type="image/x-icon"/>
+        <link rel="icon" type="image/svg+xml" href="assets/check.svg"/>
+		<link rel="alternate icon" type="image/x-icon" href="assets/icons/circle2.ico"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     </head>
     <body>
@@ -19,7 +20,7 @@
                 <img 
                     class="vlogo" 
                     alt="Verizon Logo" 
-                    src="data:image/svg+xml;charset=utf-8;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMi45NCA0MCI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiNkNTJiMWU7fTwvc3R5bGU+PC9kZWZzPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyNi44NSAwIDExLjgyIDMyLjIzIDYuMTQgMjAgMCAyMCA5LjMzIDQwIDE0LjI5IDQwIDMyLjk0IDAgMjYuODUgMCIvPjwvc3ZnPg==">
+                    src="assets/check.svg">
                 <span id="time"></span>
             </header>
             <!-- Navigation -->
@@ -48,6 +49,28 @@
                     <div id="notes_content"></div>
                 </section>
             </div> 
+            <div id="action">
+                <svg
+                    onclick="newThing();"  
+                    viewBox="0 0 512 512"
+                    xmlns="http://www.w3.org/2000/svg"> 
+                    
+                    <path 
+                        d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0"
+                        id="outside-svg"
+                        class="inactive" />
+                    <path 
+                        d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"
+                        id="inside-svg"/>
+                </svg>
+            </div>
+            <div id="addThingsModal" class="inactive">
+                <ul>
+                    <li>Thing 1</li>
+                    <li>Thing 2</li>
+                    <li>Thing 3</li>
+                </ul>
+            </div>
             
             <!-- Footer -->
             <footer>

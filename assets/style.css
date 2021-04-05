@@ -104,6 +104,41 @@ footer p {
     top:40px;
     right:30px;
 }
+div#action {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    z-index: 100;
+    width: 45px;
+}
+
+div#action svg {
+    width:inherit; 
+}
+div#action svg:hover{
+    cursor:pointer;
+}
+div#action path {
+    fill: #d52b1e;
+}
+div#action path.active {
+    fill: #b70c00;
+}
+div#action path#inside-svg {
+    fill: #fafafa;
+}
+div#addThingsModal {
+    background:#fff;
+    position:absolute;
+    bottom:120px;
+    right:50px;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px #ababab;
+}
+div#addThingsModal.inactive{
+    visibility: hidden;
+}
 
 /* Class Styles */
 .capitalize {

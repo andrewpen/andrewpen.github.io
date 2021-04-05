@@ -112,3 +112,18 @@ function submitFunction(){
   var b = "<span>"+a.label.value+"</span><br><span>"+a.url.value+"</span><br><span>"+a.image.value+"</span><br><span>"+a.target.value+"</span>";
   $("#results").html(b);
 }
+
+function newThing(){
+  var a = "active";
+  var i = "inactive";
+  var e = document.getElementById("outside-svg");
+  var f = document.getElementById("addThingsModal");
+
+  if(e.classList.contains(a)){
+    e.classList.remove(a);
+    f.classList.add(i);
+  } else {
+    e.classList.add(a);
+    f.classList.remove(i);
+  }
+}
