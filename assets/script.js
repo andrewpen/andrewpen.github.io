@@ -127,3 +127,18 @@ function newThing(){
     f.classList.remove(i);
   }
 }
+
+function newLinkModal(){
+  var m = document.getElementById("linkModal");
+  var l = document.getElementById("addLink");
+  
+  l.onclick = function() {
+    m.style.display = "block";
+  }
+
+  window.onclick = function(event) {
+    if (event.target == m) {
+      m.style.display = "none";
+    }
+  } 
+}

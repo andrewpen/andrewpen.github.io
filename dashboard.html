@@ -41,41 +41,56 @@
                     <h2 class="content capitalize"></h2>
                     <div id="body_content"></div>
                 </section>
-                <section id="column2" style="order:2">
+                <!-- <section id="column2" style="order:2">
                     <h2>Column 2</h2>
-                </section>
+                </section> -->
                 <section id="column3" style="order:3">
-                    <h2 class="notes">Column 3</h2>
+                    <h2 class="notes capitalize">Column 3</h2>
                     <div id="notes_content"></div>
                 </section>
-            </div> 
-            <div id="action">
-                <svg
-                    onclick="newThing();"  
-                    viewBox="0 0 512 512"
-                    xmlns="http://www.w3.org/2000/svg"> 
-                    
-                    <path 
-                        d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0"
-                        id="outside-svg"
-                        class="inactive" />
-                    <path 
-                        d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"
-                        id="inside-svg"/>
-                </svg>
-            </div>
-            <div id="addThingsModal" class="inactive">
-                <ul>
-                    <li>Thing 1</li>
-                    <li>Thing 2</li>
-                    <li>Thing 3</li>
-                </ul>
-            </div>
-            
+            </div>             
             <!-- Footer -->
             <footer>
-                <a href="https://www.google.com/save">Read Later</a>
                 <p>This web application was made for personal use only as a means to increase personal productivity. Developed by Andrew Pendleton, 2021.</p>
+                <div id="action">
+                    <svg
+                        onclick="newThing();"  
+                        viewBox="0 0 512 512"
+                        xmlns="http://www.w3.org/2000/svg"> 
+                        
+                        <path 
+                            d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0"
+                            id="outside-svg"
+                            class="inactive" />
+                        <path 
+                            d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"
+                            id="inside-svg"/>
+                    </svg>
+                </div>
+                <div id="addThingsModal" class="inactive">
+                    <ul>
+                        <li><a href="#">To Do</a></li>
+                        <li><a href="#" id="addLink">Link</a></li>
+                        <li><a href="#">Note</a></li>
+                        <li><a href="#">Project</a></li>
+                    </ul>
+                </div>
+                <div id="linkModal" class="modal">
+                    <div id="addLinkModal" class="inactive">
+                        <form id="linkForm">
+                            <label for="label">Label:</label><br>
+                            <input type="text" id="label" name="label"><br>
+                            <label for="url">URL:</label><br>
+                            <input type="text" id="url" name="url"><br>
+                            <label for="image">Image:</label><br>
+                            <input type="text" id="image" name="image"><br>
+                            <label for="target">Target:</label><br>
+                            <input type="text" id="target" name="target"><br>
+                            <input type="submit">
+                            <button onclick="submitFunction(); return false;">Non reload submit</button>
+                        </form>
+                    </div>
+                </div>
             </footer>
         </main>
         <span data-label="handlebars">
