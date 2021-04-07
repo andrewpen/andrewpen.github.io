@@ -113,11 +113,16 @@ function submitFunction(){
   $("#results").html(b);
 }
 
-function newThing(){
+function newThing(v){
   var a = "active";
   var i = "inactive";
   var e = document.getElementById("outside-svg");
   var f = document.getElementById("addThingsModal");
+  var m = document.getElementById("linkModal");
+
+  if(v == 'linkModal'){
+    m.style.display = "block";
+  }else{};
 
   if(e.classList.contains(a)){
     e.classList.remove(a);
@@ -126,15 +131,20 @@ function newThing(){
     e.classList.add(a);
     f.classList.remove(i);
   }
+
+  window.onclick = function(event) {
+    if (event.target == m) {
+      m.style.display = "none";
+    }
+  }
 }
 
 function newLinkModal(){
   var m = document.getElementById("linkModal");
-  var l = document.getElementById("addLink");
+  var l = document.getElementById("addThingsModal");
   
-  l.onclick = function() {
-    m.style.display = "block";
-  }
+  m.style.display = "block";
+
 
   window.onclick = function(event) {
     if (event.target == m) {

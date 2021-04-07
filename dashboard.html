@@ -54,7 +54,7 @@
                 <p>This web application was made for personal use only as a means to increase personal productivity. Developed by Andrew Pendleton, 2021.</p>
                 <div id="action">
                     <svg
-                        onclick="newThing();"  
+                        onclick="newThing(this);"  
                         viewBox="0 0 512 512"
                         xmlns="http://www.w3.org/2000/svg"> 
                         
@@ -70,7 +70,7 @@
                 <div id="addThingsModal" class="inactive">
                     <ul>
                         <li><a href="#">To Do</a></li>
-                        <li><a href="#" id="addLink">Link</a></li>
+                        <li><a href="#" onclick="newThing('linkModal');" id="addLink">Link</a></li>
                         <li><a href="#">Note</a></li>
                         <li><a href="#">Project</a></li>
                     </ul>
