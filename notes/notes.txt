@@ -39,6 +39,7 @@ Requirements:
 1) Links 
         Group
         Sort by 
+        Context (look at current dashboard)
 2) To-do list 
         Properties
                 - Date added 
@@ -50,6 +51,7 @@ Requirements:
                         Project 
                         One on one 
                         Meeting 
+                - Is this a commitment 
 3) Notes
         Categories/Notebooks (model evernote)
                 Daily
@@ -212,3 +214,46 @@ Input - Implementation Requirements (?? Merch) & Assets (140)
 Output - Test live in production (Target)
 5) Deploy & Measure
 6) Scale & Maintain
+
+Just want to connect in general and get your take on how it all works and how we future proof as we take on more RTM work I would love to scale you and your thinking but don't know what I don't know about the ops piece to create space for that. It will also require us to be more connected so somewhat want pick your brain a bit related to my note on horizontal connection on Merch, FED/Catalog, sales, etc.... Nothing formal required.
+
+
+VCG Goals
+Digital Goals
+Operations Goals - Know the other Org leads and goals
+Dev Goals
+
+Dev Performance Agreement
+Dev KPIs
+
+
+
+
+
+Naratives
+Accountability
+Templates
+Meeting agenda
+One on ones
+Weekly followups
+Week start kickoff
+Week end review
+
+
+
+Defects to Zero
+Systems Mapping and Documentation
+Consolidation
+Systems of Scale
+Information Architecture
+Team Operations
+
+Project management
+Workflow management
+Bandwidth management
+
+Inventory
+Operational Expense
+Throughput 
+
+Networking Opportunities
