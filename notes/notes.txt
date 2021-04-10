@@ -105,3 +105,24 @@ Determine what needs to be done - the tasks and milestones that will get you the
 What is the date you want to achieve this by? Needs a deadline - end date.
 What routines will get you there - schedule and action 
 Reflection time once a week to say how did I do, what needs to change, what needs to continue 
+
+
+List feeds
+		Allow search within all feeds but only return node name and feed
+		Query a feed property json and only show feeds that uswins are tagged to
+			This enables only certain users to be able to use the CaaS Navigator and only for certain feeds
+	Select a feed - choice of views
+		Detail view - show the node titles
+				Add button to view feed node in browser (json view)
+				Don't limit node titles (scrollable through all)
+				Allow search within titles (but not details)
+				Display detail view as a left side column
+			Select a node title - show the node details
+			Ability to add new node and fill in node details
+		Complete view - show all feed as table rows
+				Add button to view feed in browser (json view)
+				Limit number of rows in view, show pagination
+				Allow search within the feed
+				Allow full screen view which hides nav columns
+			Select individual fields to edit
+			Ability to append to feed by importing or adding a new row
