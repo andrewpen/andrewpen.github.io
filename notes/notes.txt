@@ -34,3 +34,74 @@ The server generated these startup warnings when booting:
         To enable free monitoring, run the following command: db.enableFreeMonitoring()
         To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
 ---
+
+Requirements:
+1) Links 
+        Group
+        Sort by 
+2) To-do list 
+        Properties
+                - Date added 
+                - Date due (defaults to today)
+                - Priority 
+                - Name 
+                - Description
+                - Add to (Tagging)
+                        Project 
+                        One on one 
+                        Meeting 
+3) Notes
+        Categories/Notebooks (model evernote)
+                Daily
+                One on ones
+                Team meetings
+                Mentor meetings 
+                Dev lead meeting 
+                Project meeting 
+                Thoughts
+                Reviews
+                Scratchpad/General notes 
+        Tagging functionality that I can use to pull together like topics
+        Date created, date modified added automatically
+4) Projects
+        Views
+                - Table 
+                        Sort capability
+                        Selectable - Displays detail view 
+                - Kanban (view all projects)
+                - Gantt (view all projects) 
+                - Kanban (within single project)
+                - Gantt (within single project)
+        Properties
+                - Project name 
+                - Date added 
+                - Date modified
+                - Date completed
+                - Priority (1,2,3)
+                - Urgency (1,2,3)
+5) Calendar 
+        Display to-dos and projects  
+        Look ahead to meetings for the week and create to-dos associated with them 
+        Look back on meetings for the week and create to-dos or necessary documentation
+
+Templates
+        - Daily Notes
+        - One on ones 
+        - Projects 
+        - Stories to tell 
+                Based on time allotted - what needs to be present and how much detail is necessary   
+                        - 30 sec pitch 
+                        - 5 min 
+                        - 15 min
+                        - 30 min 
+                        - 1 hour
+        
+
+What is it that you want?
+Make it trackable - you need to be able to see the finishline.
+Why do you want to achieve that goal?
+Find who has achieved this before and model them.
+Determine what needs to be done - the tasks and milestones that will get you there.
+What is the date you want to achieve this by? Needs a deadline - end date.
+What routines will get you there - schedule and action 
+Reflection time once a week to say how did I do, what needs to change, what needs to continue 
