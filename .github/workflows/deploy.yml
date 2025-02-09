@@ -1,0 +1,23 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checkout your repository's code
+
+      - name: Merge main into gh-pages
+        run: |
+          git config --global user.name "andrewpen"
+          git config --global user.email "andrew.d.pendleton@gmail.com"
+          git checkout gh-pages
+          git pull origin gh-pages #Pull in case of changes on remote
+          git merge origin/main --no-edit -m "Merge main into gh-pages"
+          git push origin gh-pages
