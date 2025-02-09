@@ -1,0 +1,108 @@
+<!--
+	1) Just as the logo outline animates on page load, can I animate the erasing of the logo as the user scrolls down the page?
+-->
+
+<!doctype html>
+<html>
+	<head>
+		<title>About Andrew Pendleton</title>
+		<link rel="stylesheet" href="css/styles.css" type="text/css">
+		<link rel="stylesheet" href="css/fonts.css" type="text/css">
+		<meta charset="utf-8">
+		<meta name="description" content="Andrew Pendleton is a web designer and developer in Central Arkansas, based out of Little Rock. With over 10 years of digital marketing experience, he brings indepth knowledge and insight to any web design or development project.">
+		<meta name="keywords" content="Andrew Pendleton, web design, web developer, web development, develoment, digital marketing, marketing, Little Rock, Central Arkansas, Arkansas, html, css, javascript">
+		<meta name="viewport" content="width=device-width" />
+		<link id="canonical" rel="canonical" href="https://andrewpen.github.io/about.html">
+		<link rel="icon" type="image/png" sizes="32x32" href="img/ap-logo-favicon.png">
+		<link href='https://fonts.googleapis.com/css?family=Fira+Sans:300' rel='stylesheet' type='text/css'>
+
+		<style>
+			body{background-color:#000;}
+			section div.header-container div.headlines h1, section div.header-container div.headlines h2{font-weight:100;}
+			section div.content{max-width:800px;margin:0 auto;}
+
+			#header.wrapper{position:relative;background-color:#000;}
+			#header nav{background-color:#000;max-width:800px;margin:0 auto;}
+			section#main {position:relative;background-color:#efefef;}
+
+			footer{padding-left:4%;padding-right:4%;}
+			footer div{max-width: 800px;position:relative;margin:0 auto;}
+			footer div p{left:0;}
+			footer nav ul{right:0;}
+
+			@media only screen and (max-width: 450px) {
+				#splash li{width:50%;display:inline-block;margin:10px 0;}
+				#splash a{padding:10%;width:initial;}
+
+			}
+		</style>
+
+	</head>
+
+	<body id="pageWrapper">
+		<header id="header" class="wrapper">
+			<nav class="icon-ap-icon-svg">
+				<ul>
+					<li><a href="index.html">home</a></li>
+					<li><a href="#">resume</a></li>
+					<!-- <li><a href="http://blog.apendleton.com">blog</a></li> -->
+				</ul>
+			</nav>
+		</header>
+		<section id="main">
+			<div class="header-container">
+				<!-- <div class="top-image"></div> -->
+				<div class="headlines">
+					<h1>Andrew Pendleton</h1>
+					<h2>web developer</h2>
+				</div>
+			</div>
+			<div class="content">
+				<p>Andrew Pendleton has more than 10 years experience in web design and development. He has worked alongside some of the largest technology companies in the world including Adobe, Oracle, Google, Samsung, LG, and Apple.</p>
+				<p>Andrew resides in the beautiful state of Arkansas, where people’s spirits are as high as the humidity! When he is not working, he enjoys spending time with my family, traveling, and reading. Reach out to Andrew via email if you would like to connect concerning a web design or development project.</p>
+			</div>
+		</section>
+		<!-- <section>
+			<h2>Professional Skills</h2>
+			<div>
+				<h3>Photoshop</h3>
+				<p></p>
+			</div>
+			<div>
+				<h3>Illustration</h3>
+				<p></p>
+			</div>
+			<div>
+				<h3>Layout</h3>
+				<p></p>
+			</div>
+		</section> -->
+		<footer>
+			<div>
+				<p>Copyright &copy; 2017 Andrew Pendleton</p>
+				<nav>
+					<ul>
+						<!--<li><a href="mail:contact@apendleton.com" title="email me" class="icon-mail2" target="_blank"></a></li>
+						<li><a href="http://blog.apendleton.com" title="read my latest blog post" class="icon-wordpress" target="_blank"></a></li>-->
+						<li><a href="https://www.linkedin.com/in/andrewpendleton
+	" title="reach out to me on LinkedIn" class="icon-linkedin2" target="_blank"></a></li>
+						<li><a href="https://www.facebook.com/andrew.d.pendleton" title="follow me on Facebook" class="icon-facebook" target="_blank"></a></li>
+						<li><a href="https://twitter.com/IamA3K" title="follow me on Twitter" class="icon-twitter" target="_blank"></a></li>
+						<li><a href="https://instagram.com/andrewpen/" title="follow me on Instagram" class="icon-instagram" target="_blank"></a></li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
+
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="http://localhost:35729/livereload.js"></script>
+		<script src="js/scripts.js"></script>
+		<script>
+			$(window).scroll(function() {
+				$("#splash div").css({
+				'opacity' : 1-(($(this).scrollTop())/250)
+				});
+			});
+		</script>
+	</body>
+</html>

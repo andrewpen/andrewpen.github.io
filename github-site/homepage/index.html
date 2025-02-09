@@ -1,0 +1,96 @@
+<!--
+	1) Just as the logo outline animates on page load, can I animate the erasing of the logo as the user scrolls down the page?
+-->
+
+<!doctype html>
+<html>
+	<head>
+		<title>Andrew Pendleton | Digital Web Developer</title>
+		<link rel="stylesheet" href="css/styles.css" type="text/css">
+		<link rel="stylesheet" href="css/fonts.css" type="text/css">
+		<meta charset="utf-8">
+		<meta name="description" content="Andrew Pendleton is a web designer and developer in Central Arkansas, based out of Little Rock. With over 10 years of digital marketing experience, he brings indepth knowledge and insight to any web design or development project.">
+		<meta name="keywords" content="Andrew Pendleton, web design, web developer, web development, develoment, digital marketing, marketing, Little Rock, Central Arkansas, Arkansas, html, css, javascript">
+		<meta name="viewport" content="width=device-width" />
+		<link id="canonical" rel="canonical" href="https://andrewpen.github.io/index.html">
+		<link rel="icon" type="image/png" sizes="32x32" href="img/ap-logo-favicon.png">
+		<link href='https://fonts.googleapis.com/css?family=Fira+Sans:300' rel='stylesheet' type='text/css'>
+
+		<style>
+			body{background-color:#000;}
+			#splash div{text-align:center;padding:250px 0;background-color:#000000;position: fixed;left:0;right:0;}
+			#splash{color:#fff;background-color:black;height:700px;}
+			#splash embed{max-width:250px;padding-bottom:10px;}
+			#splash h2{font-size:110%;}
+			#splash h1, #splash h2{
+	      opacity:0;
+	      color:#ffffff;
+				font-weight:100;
+				margin:0;
+	      -webkit-animation: fadein 2s ease-in 3s forwards; /* Safari, Chrome and Opera > 12.1 */
+	         -moz-animation: fadein 2s ease-in 3s forwards; /* Firefox < 16 */
+	          -ms-animation: fadein 2s ease-in 3s forwards; /* Internet Explorer */
+	           -o-animation: fadein 2s ease-in 3s forwards; /* Opera < 12.1 */
+	              animation: fadein 2s ease-in 3s forwards;
+	    }
+	    @keyframes          fadein {from { opacity: 0; } to   { opacity: 1; } }
+	    @-moz-keyframes     fadein {from { opacity: 0; } to   { opacity: 1; } }
+	    @-webkit-keyframes  fadein {from { opacity: 0; } to   { opacity: 1; } }
+	    @-ms-keyframes      fadein {from { opacity: 0; } to   { opacity: 1; } }
+	    @-o-keyframes       fadein {from { opacity: 0; } to   { opacity: 1; } }
+
+			#splash ul{list-style-type:none;padding:0;margin-top:50px;opacity:0;
+				-webkit-animation: fadein 2s ease-in 4s forwards; /* Safari, Chrome and Opera > 12.1 */
+	         -moz-animation: fadein 2s ease-in 4s forwards; /* Firefox < 16 */
+	          -ms-animation: fadein 2s ease-in 4s forwards; /* Internet Explorer */
+	           -o-animation: fadein 2s ease-in 4s forwards; /* Opera < 12.1 */
+	              animation: fadein 2s ease-in 4s forwards;
+			}
+			#splash li{display:inline-block;border:1px solid #fff;margin:0 10px;font-size:14px;}
+			#splash a{color:white;text-decoration:none;display:block;width:160px;padding:10px 0;}
+			#splash a:hover{background-color:white;color:black;}
+
+			section div.header-container div.headlines h1, section div.header-container div.headlines h2{font-weight:100;}
+			section div.content{max-width:800px;margin:0 auto;}
+
+			@media only screen and (max-width: 450px) {
+				#splash li{width:50%;display:inline-block;margin:10px 0;}
+				#splash a{padding:10%;width:initial;}
+
+			}
+		</style>
+
+	</head>
+
+	<body id="pageWrapper">
+
+		<section id="splash">
+			<div id="splash-content">
+		    <object>
+		      <embed src="img/ap-logo.svg" width="50%" height="50%">
+		    </object>
+				<!--<h1>Andrew Pendleton</h1>
+				 <h2>designer &amp; developer</h2>
+				<nav>
+					<ul>
+						<li><a href="#">About Andrew</a></li>
+						<li><a href="#">Digital Resume</a></li>
+						<li><a href="#">Web Development</a></li>
+					</ul>
+				</nav> -->
+		  </div>
+		</section>
+
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="https://localhost:35729/livereload.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="https://api.trello.com/1/client.js?key=1f6986bce3d2c9558c9f5f7224625ff1"></script>
+		<script>
+			$(window).scroll(function() {
+				$("#splash div").css({
+				'opacity' : 1-(($(this).scrollTop())/250)
+				});
+			});
+		</script>
+	</body>
+</html>
