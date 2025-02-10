@@ -15,9 +15,10 @@ jobs:
 
       - name: Merge main into gh-pages
         run: |
-          git config --global user.name "andrewpen"
-          git config --global user.email "andrew.d.pendleton@gmail.com"
-          git checkout gh-pages
-          git pull origin gh-pages #Pull in case of changes on remote
-          git merge origin/main --no-edit -m "Merge main into gh-pages"
-          git push origin gh-pages
+            git config --global user.name "andrewpen"
+            git config --global user.email "andrew.d.pendleton@gmail.com"
+            git fetch origin gh-pages:gh-pages  # Fetch the remote gh-pages branch
+            git checkout gh-pages
+            git pull origin gh-pages #Pull in case of changes on remote
+            git merge origin/main --no-edit -m "Merge main into gh-pages"
+            git push origin gh-pages
