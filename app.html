@@ -9,28 +9,32 @@
 
     table {
       border-collapse: collapse;
-      width: 80%; /* Adjust as needed */
-      margin: 20px auto; /* Center the table */
+      width: auto; /* Let the table size based on content */
+      margin: 20px auto;
     }
 
     th, td {
       border: 1px solid #ddd;
-      padding: 8px;
+      padding: 0; /* Remove default padding */
       text-align: center;
+      width: 30px;  /* Set a fixed width for square cells */
+      height: 30px; /* Set a fixed height for square cells */
+      box-sizing: border-box; /* Include padding/border in width/height */
+      vertical-align: middle; /* Vertically center text, if any */
     }
 
-    th {
-      background-color: #f2f2f2;
-    }
 
-    td:not(:first-child) { /* Style all cells except the first column */
-      cursor: pointer; /* Make cells interactive */
+    td:not(:first-child) {
+      cursor: pointer;
     }
 
     td.completed {
-      background-color: #4CAF50; /* Green for completed */
+      background-color: #4CAF50;
       color: white;
     }
+      td.current-day {
+          background-color: #c0e5ff; /* Light blue for the current day */
+      }
 
     .add-habit-container {
       margin: 20px auto;
@@ -40,7 +44,7 @@
     }
 
     #newHabitInput {
-      flex-grow: 1; /* Input takes up remaining space */
+      flex-grow: 1;
       padding: 8px;
       margin-right: 10px;
     }
@@ -59,7 +63,11 @@
         padding: 2px 6px;
         cursor: pointer;
         border-radius: 4px;
-        margin-left: 5px; /* Space it out from the habit text*/
+        margin-left: 5px;
+    }
+    .date-header {
+      font-size: smaller;
+      color: #777; /* Light grey for date headers */
     }
 
   </style>
@@ -74,20 +82,8 @@
   </div>
 
   <table id="habitTable">
-    <thead>
-      <tr>
-        <th>Habit</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-        <th>Sunday</th>
-      </tr>
-    </thead>
     <tbody>
-      </tbody>
+    </tbody>
   </table>
 
   <script>
@@ -95,33 +91,61 @@
     const newHabitInput = document.getElementById('newHabitInput');
     const addHabitBtn = document.getElementById('addHabitBtn');
 
+    // Get the current date and days in the current month
+    const today = new Date();
+    const currentMonth = today.getMonth(); // 0-indexed (0 = January)
+    const currentYear = today.getFullYear();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate(); // Get days in the current month.
+
+
+
+    // Function to create the date header row
+    function createDateHeaderRow() {
+        const headerRow = habitTable.insertRow();
+        headerRow.insertCell(); // Empty cell above the "Habit" column
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const dateCell = headerRow.insertCell();
+            dateCell.textContent = i; // Display the day number
+            dateCell.classList.add("date-header");
+
+            // Highlight the current day
+            if (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+              dateCell.classList.add("current-day");
+            }
+        }
+
+    }
+
     // Function to add a new habit row
     function addHabitRow(habitText) {
       const newRow = habitTable.insertRow();
       const habitCell = newRow.insertCell();
       habitCell.textContent = habitText;
 
-        // Add a delete button to the habit cell
         const deleteButton = document.createElement('button');
         deleteButton.textContent = "X";
         deleteButton.className = "delete-button";
         deleteButton.addEventListener('click', () => {
-            newRow.remove(); // Remove the entire row when the button is clicked
-            saveHabits();   // Save habits after deletion
+            newRow.remove();
+            saveHabits();
         });
         habitCell.appendChild(deleteButton);
 
 
-
-      // Create day cells and add event listeners
-      for (let i = 0; i < 7; i++) {
+      for (let i = 1; i <= daysInMonth; i++) {
         const dayCell = newRow.insertCell();
         dayCell.addEventListener('click', toggleHabitCompletion);
+
+          //Highlight current day
+          if (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+              dayCell.classList.add("current-day");
+          }
       }
       saveHabits();
     }
 
-    // Function to toggle habit completion status
+    // Function to toggle habit completion
     function toggleHabitCompletion() {
       this.classList.toggle('completed');
         saveHabits();
@@ -132,14 +156,14 @@
       const habitText = newHabitInput.value.trim();
       if (habitText) {
         addHabitRow(habitText);
-        newHabitInput.value = ''; // Clear input
+        newHabitInput.value = '';
       } else {
           alert("Please Enter a Habit");
       }
     });
 
-    //Pressing enter in input adds habit.
-    newHabitInput.addEventListener('keypress', function (e) {
+      //Pressing enter in input adds habit.
+      newHabitInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
             const habitText = newHabitInput.value.trim();
             if (habitText) {
@@ -151,16 +175,14 @@
         }
     });
 
-
-
       // --- Local Storage Functions ---
 
     function saveHabits() {
       const habitData = [];
-      const rows = habitTable.querySelectorAll('tbody tr');
+      const rows = habitTable.querySelectorAll('tbody tr:not(:first-child)'); // Select all rows except the header row
 
       rows.forEach(row => {
-        const habitText = row.cells[0].childNodes[0].textContent; //get first node of first cell to obtain habit name.
+        const habitText = row.cells[0].childNodes[0].textContent;
         const completionStatus = [];
         for (let i = 1; i < row.cells.length; i++) {
           completionStatus.push(row.cells[i].classList.contains('completed'));
@@ -171,8 +193,6 @@
       localStorage.setItem('habits', JSON.stringify(habitData));
     }
 
-
-
     function loadHabits() {
       const savedHabits = localStorage.getItem('habits');
       if (savedHabits) {
@@ -182,7 +202,7 @@
           const habitCell = newRow.insertCell();
           habitCell.textContent = habit.text;
 
-            //add delete button on load
+            //add delete button
             const deleteButton = document.createElement('button');
             deleteButton.textContent = "X";
             deleteButton.className = "delete-button";
@@ -192,20 +212,26 @@
             });
             habitCell.appendChild(deleteButton);
 
-
-          for (let i = 0; i < 7; i++) {
+          for (let i = 1; i <= daysInMonth; i++) { // Correct loop for days in month
             const dayCell = newRow.insertCell();
-            if (habit.completed[i]) {
-              dayCell.classList.add('completed');
-            }
+              if (habit.completed[i-1]) {   // -1 since the completion array is 0-indexed
+                  dayCell.classList.add('completed');
+              }
+
+                //Highlight current day.
+              if (i === today.getDate() && currentMonth === today.getMonth() && currentYear === today.getFullYear()) {
+                  dayCell.classList.add("current-day");
+              }
             dayCell.addEventListener('click', toggleHabitCompletion);
           }
         });
       }
     }
 
-    // Load saved habits on page load
-    loadHabits();
+
+    createDateHeaderRow(); // Create the date header row *first*
+    loadHabits();       // Then load habits (which now expects the header row)
+
   </script>
 
 </body>
