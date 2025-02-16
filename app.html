@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Habit Tracker</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%; /* Adjust as needed */
+      margin: 20px auto; /* Center the table */
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td:not(:first-child) { /* Style all cells except the first column */
+      cursor: pointer; /* Make cells interactive */
+    }
+
+    td.completed {
+      background-color: #4CAF50; /* Green for completed */
+      color: white;
+    }
+
+    .add-habit-container {
+      margin: 20px auto;
+      width: 80%;
+      display: flex;
+      align-items: center;
+    }
+
+    #newHabitInput {
+      flex-grow: 1; /* Input takes up remaining space */
+      padding: 8px;
+      margin-right: 10px;
+    }
+
+    #addHabitBtn {
+      padding: 8px 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .delete-button {
+        background-color: #ff6347;
+        color: white;
+        border: none;
+        padding: 2px 6px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 5px; /* Space it out from the habit text*/
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Habit Tracker</h1>
+
+  <div class="add-habit-container">
+    <input type="text" id="newHabitInput" placeholder="Enter a new habit">
+    <button id="addHabitBtn">Add Habit</button>
+  </div>
+
+  <table id="habitTable">
+    <thead>
+      <tr>
+        <th>Habit</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+        <th>Sunday</th>
+      </tr>
+    </thead>
+    <tbody>
+      </tbody>
+  </table>
+
+  <script>
+    const habitTable = document.getElementById('habitTable');
+    const newHabitInput = document.getElementById('newHabitInput');
+    const addHabitBtn = document.getElementById('addHabitBtn');
+
+    // Function to add a new habit row
+    function addHabitRow(habitText) {
+      const newRow = habitTable.insertRow();
+      const habitCell = newRow.insertCell();
+      habitCell.textContent = habitText;
+
+        // Add a delete button to the habit cell
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = "X";
+        deleteButton.className = "delete-button";
+        deleteButton.addEventListener('click', () => {
+            newRow.remove(); // Remove the entire row when the button is clicked
+            saveHabits();   // Save habits after deletion
+        });
+        habitCell.appendChild(deleteButton);
+
+
+
+      // Create day cells and add event listeners
+      for (let i = 0; i < 7; i++) {
+        const dayCell = newRow.insertCell();
+        dayCell.addEventListener('click', toggleHabitCompletion);
+      }
+      saveHabits();
+    }
+
+    // Function to toggle habit completion status
+    function toggleHabitCompletion() {
+      this.classList.toggle('completed');
+        saveHabits();
+    }
+
+    // Event listener for adding habits
+    addHabitBtn.addEventListener('click', () => {
+      const habitText = newHabitInput.value.trim();
+      if (habitText) {
+        addHabitRow(habitText);
+        newHabitInput.value = ''; // Clear input
+      } else {
+          alert("Please Enter a Habit");
+      }
+    });
+
+    //Pressing enter in input adds habit.
+    newHabitInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const habitText = newHabitInput.value.trim();
+            if (habitText) {
+                addHabitRow(habitText);
+                newHabitInput.value = ''; // Clear input
+            } else {
+                alert("Please Enter a Habit");
+            }
+        }
+    });
+
+
+
+      // --- Local Storage Functions ---
+
+    function saveHabits() {
+      const habitData = [];
+      const rows = habitTable.querySelectorAll('tbody tr');
+
+      rows.forEach(row => {
+        const habitText = row.cells[0].childNodes[0].textContent; //get first node of first cell to obtain habit name.
+        const completionStatus = [];
+        for (let i = 1; i < row.cells.length; i++) {
+          completionStatus.push(row.cells[i].classList.contains('completed'));
+        }
+        habitData.push({ text: habitText, completed: completionStatus });
+      });
+
+      localStorage.setItem('habits', JSON.stringify(habitData));
+    }
+
+
+
+    function loadHabits() {
+      const savedHabits = localStorage.getItem('habits');
+      if (savedHabits) {
+        const habitData = JSON.parse(savedHabits);
+        habitData.forEach(habit => {
+          const newRow = habitTable.insertRow();
+          const habitCell = newRow.insertCell();
+          habitCell.textContent = habit.text;
+
+            //add delete button on load
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = "X";
+            deleteButton.className = "delete-button";
+            deleteButton.addEventListener('click', () => {
+                newRow.remove();
+                saveHabits();
+            });
+            habitCell.appendChild(deleteButton);
+
+
+          for (let i = 0; i < 7; i++) {
+            const dayCell = newRow.insertCell();
+            if (habit.completed[i]) {
+              dayCell.classList.add('completed');
+            }
+            dayCell.addEventListener('click', toggleHabitCompletion);
+          }
+        });
+      }
+    }
+
+    // Load saved habits on page load
+    loadHabits();
+  </script>
+
+</body>
+</html>
