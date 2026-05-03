@@ -1,1 +1,390 @@
-resume.html
+<!doctype html>
+<html>
+	<head>
+		<title>Resume | Andrew Pendleton</title>
+		<link rel="stylesheet" href="css/styles.css" type="text/css">
+		<link rel="stylesheet" href="css/fonts.css" type="text/css">
+		<meta charset="utf-8">
+		<meta name="description" content="Resume of Andrew Pendleton — Senior Product Executive with 14+ years of experience in digital strategy, design systems, and front-end engineering leadership.">
+		<meta name="keywords" content="Andrew Pendleton, resume, senior product executive, design systems, Verizon, front end engineering, leadership">
+		<meta name="viewport" content="width=device-width" />
+		<link id="canonical" rel="canonical" href="https://andrewpen.github.io/resume.html">
+		<link rel="icon" type="image/png" sizes="32x32" href="img/ap-logo-favicon.png">
+		<link href='https://fonts.googleapis.com/css?family=Fira+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+
+		<style>
+			body { background-color: #000; margin: 0; padding: 0; }
+
+			#header.wrapper { position: relative; background-color: #000; }
+			#header nav { background-color: #000; max-width: 960px; margin: 0 auto; }
+
+			section#main { position: relative; background-color: #ffffff; }
+
+			/* ── Hero header ── */
+			.resume-hero {
+				background-color: #111129;
+				color: #fff;
+				padding: 40px 6%;
+				display: flex;
+				align-items: center;
+				gap: 30px;
+			}
+			.resume-hero .profile-photo {
+				width: 140px;
+				height: 140px;
+				border-radius: 50%;
+				object-fit: cover;
+				flex-shrink: 0;
+			}
+			.resume-hero .hero-text { flex: 1; }
+			.resume-hero h1 {
+				font-family: 'Fira Sans', sans-serif;
+				font-size: 2.4rem;
+				font-weight: 700;
+				margin: 0 0 2px;
+				line-height: 1.1;
+			}
+			.resume-hero .subtitle {
+				font-family: 'Fira Sans', sans-serif;
+				font-size: 1.1rem;
+				font-weight: 300;
+				margin: 0 0 14px;
+				opacity: 0.85;
+			}
+			.resume-hero .contact-info {
+				font-family: Arial, sans-serif;
+				font-size: 0.85rem;
+				opacity: 0.75;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 6px 18px;
+			}
+			.resume-hero .contact-info a {
+				color: #fff;
+				text-decoration: none;
+			}
+			.resume-hero .contact-item {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+			}
+			.resume-hero .contact-item svg {
+				width: 14px;
+				height: 14px;
+				fill: #fff;
+				opacity: 0.7;
+				flex-shrink: 0;
+			}
+
+			/* ── Two-column body ── */
+			.resume-body {
+				max-width: 960px;
+				margin: 0 auto;
+				padding: 44px 6% 50px;
+				display: grid;
+				grid-template-columns: 280px 1fr;
+				gap: 50px;
+			}
+
+			.resume-body h2 {
+				font-family: 'Fira Sans', sans-serif;
+				font-size: 1.6rem;
+				font-weight: 300;
+				margin: 0 0 18px;
+				color: #111;
+			}
+
+			/* ── Left column: Education + Skills ── */
+			.resume-sidebar h2 { margin-top: 36px; }
+			.resume-sidebar h2:first-child { margin-top: 0; }
+
+			.edu-item { margin-bottom: 16px; }
+			.edu-item h3 {
+				font-family: 'Fira Sans', sans-serif;
+				font-size: 0.95rem;
+				font-weight: 700;
+				margin: 0;
+				color: #111;
+				line-height: 1.3;
+			}
+			.edu-item p {
+				font-family: Arial, sans-serif;
+				font-size: 0.85rem;
+				color: #666;
+				margin: 2px 0 0;
+				padding: 0;
+			}
+
+			.skills-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.skills-list li {
+				font-family: Arial, sans-serif;
+				font-size: 0.9rem;
+				padding: 5px 0;
+				color: #222;
+				font-weight: 700;
+			}
+
+			/* ── Right column: Summary + Experience ── */
+			.resume-main .summary-text {
+				font-family: Arial, sans-serif;
+				font-size: 0.9rem;
+				line-height: 1.65;
+				color: #333;
+				margin: 0 0 12px;
+				padding: 0;
+			}
+			.resume-main .summary-text:last-of-type { margin-bottom: 0; }
+
+			.resume-main h2.experience-heading { margin-top: 36px; }
+
+			/* Company block */
+			.job { margin-bottom: 28px; }
+			.job-header {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-bottom: 4px;
+			}
+			.job-header .company-icon {
+				width: 22px;
+				height: 22px;
+				flex-shrink: 0;
+			}
+			.job-company {
+				font-family: 'Fira Sans', sans-serif;
+				font-size: 1rem;
+				font-weight: 700;
+				color: #111;
+				margin: 0;
+				padding: 0;
+			}
+			.job-company .tenure {
+				font-weight: 300;
+				font-size: 0.85rem;
+				color: #888;
+			}
+
+			/* Role with timeline dot */
+			.job-role {
+				position: relative;
+				margin: 14px 0 8px 10px;
+				padding-left: 22px;
+			}
+			.job-role::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 6px;
+				width: 10px;
+				height: 10px;
+				background: #333;
+				border-radius: 50%;
+			}
+			.job-role h3 {
+				font-family: 'Fira Sans', sans-serif;
+				font-size: 0.95rem;
+				font-weight: 700;
+				margin: 0;
+				color: #111;
+				line-height: 1.3;
+			}
+			.job-role .role-subtitle {
+				font-family: Arial, sans-serif;
+				font-size: 0.85rem;
+				color: #555;
+				margin: 1px 0 0;
+			}
+			.job-role .role-dates {
+				font-family: Arial, sans-serif;
+				font-size: 0.82rem;
+				color: #999;
+				margin: 2px 0 6px;
+			}
+			.job-role p.role-desc {
+				font-family: Arial, sans-serif;
+				font-size: 0.88rem;
+				line-height: 1.6;
+				color: #333;
+				margin: 6px 0 0;
+				padding: 0;
+			}
+
+			/* ── Footer ── */
+			footer { padding-left: 4%; padding-right: 4%; }
+			footer div { max-width: 960px; position: relative; margin: 0 auto; }
+			footer div p { left: 0; }
+			footer nav ul { right: 0; }
+
+			/* ── Responsive ── */
+			@media only screen and (max-width: 700px) {
+				.resume-hero {
+					flex-direction: column;
+					text-align: center;
+					padding: 30px 5%;
+				}
+				.resume-hero .contact-info { justify-content: center; }
+				.resume-body {
+					grid-template-columns: 1fr;
+					gap: 24px;
+					padding: 30px 5% 40px;
+				}
+				.resume-hero h1 { font-size: 1.8rem; }
+				.resume-hero .subtitle { font-size: 1rem; }
+			}
+		</style>
+	</head>
+
+	<body id="pageWrapper">
+		<header id="header" class="wrapper">
+			<nav class="icon-ap-icon-svg">
+				<ul>
+					<li><a href="index.html">home</a></li>
+					<li><a href="about.html">about</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<section id="main">
+			<!-- Hero header with photo -->
+			<div class="resume-hero">
+				<img class="profile-photo" src="img/2023-profile.png" alt="Andrew Pendleton">
+				<div class="hero-text">
+					<h1>Andrew Pendleton</h1>
+					<p class="subtitle">Senior Product Executive</p>
+					<div class="contact-info">
+						<span class="contact-item">
+							<svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.36 11.36 0 00.57 3.58 1 1 0 01-.25 1.01l-2.2 2.2z"/></svg>
+							870.692.0649
+						</span>
+						<span class="contact-item">
+							<svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+							<a href="mailto:andrew.d.pendleton@gmail.com">andrew.d.pendleton@gmail.com</a>
+						</span>
+						<span class="contact-item">
+							<svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+							New York, NY
+						</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="resume-body">
+				<!-- Left column: Education, Skills -->
+				<div class="resume-sidebar">
+					<h2>Education</h2>
+					<div class="edu-item">
+						<h3>Master of Management<br>Information Systems</h3>
+						<p>University of Arkansas, Little Rock</p>
+					</div>
+					<div class="edu-item">
+						<h3>Bachelor of Computer Sciences</h3>
+						<p>Henderson State University</p>
+					</div>
+					<div class="edu-item">
+						<h3>Bachelor of Digital Art &amp; Design</h3>
+						<p>Henderson State University</p>
+					</div>
+
+					<h2>Skills</h2>
+					<ul class="skills-list">
+						<li>Strategic Leadership</li>
+						<li>Financial Acumen</li>
+						<li>Operational Excellence</li>
+						<li>Business Development</li>
+						<li>Change Management</li>
+						<li>Stakeholder Management</li>
+						<li>Innovation &amp; Transformation</li>
+						<li>Global Team Building</li>
+						<li>Data-Driven Decision Making</li>
+					</ul>
+				</div>
+
+				<!-- Right column: Summary, Experience -->
+				<div class="resume-main">
+					<h2>Summary</h2>
+					<p class="summary-text">
+						In my role as a senior executive, I prioritize innovation and excellence in user experience across all digital platforms. Leading the development and adoption of comprehensive design systems, I focus on enhancing customer connectivity and delivering creative solutions to complex business challenges.
+					</p>
+					<p class="summary-text">
+						With a robust foundation in web development, usability, and cross-functional collaboration, I have successfully optimized workflows and driven high standards in accessibility and usability. My leadership style is centered on fostering strong executive-level collaboration, enabling organizational-wide alignment on key strategic initiatives. I excel in bringing diverse perspectives together, building consensus, and driving unified action to achieve business goals.
+					</p>
+					<p class="summary-text">
+						I am committed to cultivating a culture of continuous learning and growth, empowering teams to deliver exceptional customer experiences. My passion lies in driving organizational success through strategic leadership, effective communication, and a customer-centric approach.
+					</p>
+
+					<h2 class="experience-heading">Experience</h2>
+
+					<div class="job">
+						<div class="job-header">
+							<svg class="company-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#cd040b"/><path d="M5 7l3.5 10h2.2L12 13.2 13.3 17h2.2L19 7h-2.4l-2.2 6.8L12.8 7h-1.6l-1.6 6.8L7.4 7H5z" fill="#fff"/></svg>
+							<p class="job-company">Verizon <span class="tenure">(12 yrs 7 months)</span></p>
+						</div>
+
+						<div class="job-role">
+							<h3>Sr Director</h3>
+							<p class="role-subtitle">Design Systems</p>
+							<p class="role-dates">2021 &ndash; Present</p>
+							<p class="role-desc">
+								As Senior Director of Design Systems within the Customer Experience Organization, I lead a global team of product managers, designers, engineers, and content strategists focused on optimizing Verizon's digital experiences. We build content and design systems that allow us to scale the very best from our research, user testing, accessibility, design, and engineering north stars across the Verizon enterprise. I actively collaborate with teams at the executive level and working team level across Verizon to raise awareness and advocate for the effective utilization and integration of our systems.
+							</p>
+						</div>
+
+						<div class="job-role">
+							<h3>Sr Manager</h3>
+							<p class="role-subtitle">Digital Marketing Business Operations</p>
+							<p class="role-dates">2016 &ndash; 2021</p>
+							<p class="role-desc">
+								As Senior Manager of Front End Engineering within the Digital Marketing Business Operations team, I had the privilege of leading a global team of 20+ developers focused on delivering best in class customer experiences on Verizon.com, ensuring our web pages met the highest level of accessibility and usability standards. This role allowed me to partner with various teams and business units across Verizon enabling me to constantly learn and grow my capacity as a leader.
+							</p>
+						</div>
+
+						<div class="job-role">
+							<h3>Manager,</h3>
+							<p class="role-subtitle">Front End Web Development</p>
+							<p class="role-dates">2014 &ndash; 2016</p>
+						</div>
+
+						<div class="job-role">
+							<h3>Consultant,</h3>
+							<p class="role-subtitle">Front End Web Development</p>
+							<p class="role-dates">2013 &ndash; 2014</p>
+						</div>
+					</div>
+
+					<div class="job">
+						<div class="job-header">
+							<svg class="company-icon" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#00843d"/><path d="M7 8v8h2v-3h2v3h2v-3h2v3h2V8h-2v3h-2V8h-2v3H9V8H7z" fill="#fff"/></svg>
+							<p class="job-company">Baptist Health <span class="tenure">(1 yr 10 months)</span></p>
+						</div>
+
+						<div class="job-role">
+							<h3>Web Application Developer</h3>
+							<p class="role-dates">2011 &ndash; 2013</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<div>
+				<p>Copyright &copy; 2025 Andrew Pendleton</p>
+				<nav>
+					<ul>
+						<li><a href="https://www.linkedin.com/in/andrewpendleton" title="reach out to me on LinkedIn" class="icon-linkedin2" target="_blank"></a></li>
+						<li><a href="https://www.facebook.com/andrew.d.pendleton" title="follow me on Facebook" class="icon-facebook" target="_blank"></a></li>
+						<li><a href="https://twitter.com/IamA3K" title="follow me on Twitter" class="icon-twitter" target="_blank"></a></li>
+						<li><a href="https://instagram.com/andrewpen/" title="follow me on Instagram" class="icon-instagram" target="_blank"></a></li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
+
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="js/scripts.js"></script>
+	</body>
+</html>
