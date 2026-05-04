@@ -5,6 +5,8 @@ import { Skills } from "./components/Skills";
 import { Experience } from "./components/Experience";
 import { Timeline } from "./components/Timeline";
 import { Projects } from "./components/Projects";
+import { Speaking } from "./components/Speaking";
+import { Education } from "./components/Education";
 import { Contact } from "./components/Contact";
 
 export default function App() {
@@ -14,6 +16,8 @@ export default function App() {
       <main>
         <Hero />
         <About />
+        <Speaking />
+        <Education />
         <Skills />
         <Experience />
         <Timeline />

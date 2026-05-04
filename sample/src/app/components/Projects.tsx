@@ -2,22 +2,22 @@ import { ArrowUpRight } from "lucide-react";
 
 const projects = [
   {
-    tag: "Design Systems",
-    title: "Verizon Enterprise Design System",
-    text: "Unified content and design system that scales research, accessibility, and engineering across Verizon's digital surfaces.",
-    metric: "Enterprise-wide adoption",
+    tag: "Agent-Native Infrastructure",
+    title: "VDS MCP Server & AI Tooling Suite",
+    text: "Designed and shipped an agent-native layer for the Verizon Design System — enabling AI agents to consume, generate from, and validate against VDS standards in real time via MCP. Paired with a VS Code Dev Assistant and Figma Design Assistant that translate design intent cleanly into developer workflows. Both tools delivered a full year ahead of schedule.",
+    metric: "Verizon's first agent-native design system",
   },
   {
-    tag: "Customer Experience",
-    title: "Verizon.com Performance Initiative",
-    text: "Led 20+ engineers in elevating accessibility, usability, and performance across the verizon.com customer experience.",
-    metric: "20+ engineers",
+    tag: "Design Infrastructure",
+    title: "Verizon Design System (VDS) — Monarch",
+    text: "Transformed VDS from a component library into an opinionated, scalable design infrastructure platform. Led an 18-month rebranding (Monarch) reducing complexity, enforcing standards, and embedding accessibility-by-default. Achieved 86% adoption across Verizon product teams — exceeding the 75% target without mandate.",
+    metric: "86% adoption · Fortune 50 scale",
   },
   {
-    tag: "Transformation",
-    title: "Cross-Functional Operating Model",
-    text: "Established a working model uniting product, design, engineering, and content strategy under shared north stars.",
-    metric: "4 disciplines aligned",
+    tag: "Mobile Platforms",
+    title: "VDS Native — iOS & Android Parity",
+    text: "Delivered VDS Native libraries for iOS (SwiftUI) and Android (Jetpack Compose), reaching 17 components and achieving full mobile parity with the web system — a year ahead of the original roadmap.",
+    metric: "17 components · 1 year early",
   },
 ];
 

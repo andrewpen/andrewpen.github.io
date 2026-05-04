@@ -1,19 +1,19 @@
 import { useState } from "react";
 import {
-  Crown, DollarSign, Cog, TrendingUp, RefreshCw,
-  Handshake, Lightbulb, Globe2, BarChart3,
+  Layers, Brain, Globe2, ShieldCheck, BarChart3,
+  Users, Cpu, RefreshCw, Handshake,
 } from "lucide-react";
 
 const skills = [
-  { name: "Strategic Leadership", icon: Crown, level: 95, desc: "Setting vision and aligning organizations around long-term outcomes." },
-  { name: "Financial Acumen", icon: DollarSign, level: 88, desc: "Translating strategy into measurable business and financial impact." },
-  { name: "Operational Excellence", icon: Cog, level: 92, desc: "Building scalable systems and workflows for high-performing teams." },
-  { name: "Business Development", icon: TrendingUp, level: 85, desc: "Forging partnerships that unlock new growth opportunities." },
-  { name: "Change Management", icon: RefreshCw, level: 90, desc: "Guiding organizations through transformation with clarity and care." },
-  { name: "Stakeholder Management", icon: Handshake, level: 93, desc: "Building consensus across executive and working teams." },
-  { name: "Innovation & Transformation", icon: Lightbulb, level: 94, desc: "Pioneering new approaches to digital experience at scale." },
-  { name: "Global Team Building", icon: Globe2, level: 91, desc: "Cultivating high-trust, distributed teams across geographies." },
-  { name: "Data-Driven Decision Making", icon: BarChart3, level: 89, desc: "Pairing intuition with analytics for confident strategic moves." },
+  { name: "Enterprise Platform Strategy", icon: Layers, level: 96, desc: "Defining multi-year roadmaps for systems that serve entire organizations — balancing velocity, quality, and adoption at scale." },
+  { name: "Agent-Native Platform Architecture", icon: Brain, level: 91, desc: "Designed Verizon's first MCP server enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native." },
+  { name: "Global Team Leadership", icon: Globe2, level: 93, desc: "Leading cross-functional, cross-geographic teams spanning the US and India across product, design, engineering, and content disciplines." },
+  { name: "Accessibility at Scale", icon: ShieldCheck, level: 94, desc: "Embedded accessibility-by-default into a design system used across 86% of a Fortune 50 company's product surfaces. Awarded Verizon Accessibility Champion (2025). Championed WCAG compliance, dynamic type, and inclusive design as a core system primitive — not an afterthought." },
+  { name: "Data-Driven Adoption Models", icon: BarChart3, level: 90, desc: "Built intelligent adoption dashboards with automated measurement, achieving 86% design system adoption against a 75% target — without organizational mandate." },
+  { name: "Stakeholder & Executive Alignment", icon: Handshake, level: 95, desc: "Driving strategic buy-in across VP, SVP, and C-suite levels. Secured additional Q4 capital to accelerate roadmap initiatives based on performance evidence." },
+  { name: "Cross-Functional Org Design", icon: Users, level: 89, desc: "Structured and scaled product, design, and engineering squads under a unified operating model, eliminating silos across disciplines and time zones." },
+  { name: "Design-to-Code Infrastructure", icon: Cpu, level: 97, desc: "Shipped a VS Code Dev Assistant and Figma Design Assistant that translate design intent cleanly into developer workflows. Proven experience building design-to-code systems that bridge disciplines and reduce implementation drift at scale." },
+  { name: "Organizational Change Management", icon: RefreshCw, level: 88, desc: "Guided an 18-month enterprise rebranding (Monarch) and led adoption of new systems across dozens of teams — through partnership, not mandate." },
 ];
 
 export function Skills() {
@@ -79,3 +79,4 @@ export function Skills() {
     </section>
   );
 }
+

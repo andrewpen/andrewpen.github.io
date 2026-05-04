@@ -1,37 +1,23 @@
-import { GraduationCap, Sparkles, Users, Target } from "lucide-react";
+import { Sparkles, Users, Target } from "lucide-react";
 
 const highlights = [
   {
     icon: Sparkles,
-    title: "Innovation Leader",
-    text: "Champion of design systems scaling research, accessibility, and engineering north stars across the enterprise.",
+    title: "Agent-Native Infrastructure",
+    text: "Architected Verizon's first MCP server — enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
   },
   {
     icon: Users,
-    title: "Global Team Builder",
-    text: "Lead diverse teams of product managers, designers, engineers, and content strategists.",
+    title: "Manager of Managers",
+    text: "Lead a global team of Directors across product, design, engineering, and content strategy — spanning the US and India. Build leadership layers that drive accountability, performance, and craft.",
   },
   {
     icon: Target,
-    title: "Strategic Operator",
-    text: "Driving organizational alignment, consensus, and unified action toward business goals.",
+    title: "Design-to-Code Systems",
+    text: "Shipped a VDS Dev Assistant for VS Code and Design Assistant for Figma — translating design intent cleanly into developer workflows. Drove 86% enterprise adoption across a Fortune 50 digital ecosystem without mandate.",
   },
 ];
 
-const education = [
-  {
-    degree: "Master of Management Information Systems",
-    school: "University of Arkansas, Little Rock",
-  },
-  {
-    degree: "Bachelor of Computer Sciences",
-    school: "Henderson State University",
-  },
-  {
-    degree: "Bachelor of Digital Art & Design",
-    school: "Henderson State University",
-  },
-];
 
 export function About() {
   return (
@@ -40,17 +26,18 @@ export function About() {
         <div className="max-w-2xl mb-16">
           <span className="text-indigo-600">About</span>
           <h2 className="tracking-tight text-slate-900 mt-2 mb-4">
-            Driving organizational success through strategic leadership.
+            I build design infrastructure that humans and AI agents both build from.
           </h2>
           <p className="text-slate-600">
-            With a robust foundation in web development, usability, and cross-functional
-            collaboration, I optimize workflows and drive high standards in accessibility
-            and customer experience. My passion lies in cultivating continuous learning
-            and empowering teams to deliver exceptional outcomes.
+            With 12+ years at Verizon — starting as a developer and growing into a Senior Director
+            owning enterprise design infrastructure — I specialize in transforming fragmented
+            component libraries into opinionated, agent-native platforms. I reduce accumulated
+            complexity, enforce quality and accessibility at scale, and drive cross-functional
+            alignment across design, engineering, and product without relying on mandate.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-20">
+        <div className="grid md:grid-cols-3 gap-6">
           {highlights.map((h) => (
             <div
               key={h.title}
@@ -63,27 +50,6 @@ export function About() {
               <p className="text-slate-600">{h.text}</p>
             </div>
           ))}
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="md:col-span-1 flex items-start gap-3">
-            <GraduationCap className="text-indigo-600 shrink-0" size={28} />
-            <div>
-              <h3 className="text-slate-900">Education</h3>
-              <p className="text-slate-500">Academic foundation</p>
-            </div>
-          </div>
-          <div className="md:col-span-2 space-y-4">
-            {education.map((e) => (
-              <div
-                key={e.degree}
-                className="p-5 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/30 transition-colors"
-              >
-                <div className="text-slate-900">{e.degree}</div>
-                <div className="text-slate-500">{e.school}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

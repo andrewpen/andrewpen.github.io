@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Linkedin } from "lucide-react";
 
 const links = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
+  { id: "speaking", label: "Speaking" },
+  { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "timeline", label: "Timeline" },
@@ -44,12 +46,23 @@ export function Navbar() {
           ))}
         </ul>
 
-        <button
-          onClick={() => scrollTo("contact")}
-          className="hidden md:inline-flex px-5 py-2 rounded-full bg-slate-900 text-white hover:bg-indigo-600 transition-colors"
-        >
-          Get in touch
-        </button>
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="https://www.linkedin.com/in/andrewpendleton/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
+            aria-label="LinkedIn"
+          >
+            <Linkedin size={16} />
+          </a>
+          <button
+            onClick={() => scrollTo("contact")}
+            className="px-5 py-2 rounded-full bg-slate-900 text-white hover:bg-indigo-600 transition-colors"
+          >
+            Get in touch
+          </button>
+        </div>
 
         <button
           className="md:hidden text-slate-700"

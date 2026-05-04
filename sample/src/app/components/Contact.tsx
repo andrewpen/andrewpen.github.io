@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send, CheckCircle2, AlertCircle, Linkedin } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Linkedin } from "lucide-react";
 
 type Errors = { name?: string; email?: string; subject?: string; message?: string };
 
@@ -62,13 +62,7 @@ export function Contact() {
                   <div>andrew.d.pendleton@gmail.com</div>
                 </div>
               </a>
-              <a href="tel:8706920649" className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                <div className="w-11 h-11 rounded-lg bg-indigo-500 flex items-center justify-center"><Phone size={18} /></div>
-                <div>
-                  <div className="text-slate-400">Phone</div>
-                  <div>870.692.0649</div>
-                </div>
-              </a>
+
               <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
                 <div className="w-11 h-11 rounded-lg bg-indigo-500 flex items-center justify-center"><MapPin size={18} /></div>
                 <div>
@@ -77,7 +71,7 @@ export function Contact() {
                 </div>
               </div>
               <div className="flex gap-3 pt-2">
-                <a href="#" className="w-11 h-11 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="LinkedIn">
+                <a href="https://www.linkedin.com/in/andrewpendleton/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="LinkedIn">
                   <Linkedin size={18} />
                 </a>
               </div>
