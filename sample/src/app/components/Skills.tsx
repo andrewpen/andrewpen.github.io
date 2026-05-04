@@ -1,20 +1,5 @@
 import { useState } from "react";
-import {
-  Layers, Brain, Globe2, ShieldCheck, BarChart3,
-  Users, Cpu, RefreshCw, Handshake,
-} from "lucide-react";
-
-const skills = [
-  { name: "Enterprise Platform Strategy", icon: Layers, level: 96, desc: "Defining multi-year roadmaps for systems that serve entire organizations — balancing velocity, quality, and adoption at scale." },
-  { name: "Agent-Native Platform Architecture", icon: Brain, level: 91, desc: "Designed Verizon's first MCP server enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native." },
-  { name: "Global Team Leadership", icon: Globe2, level: 93, desc: "Leading cross-functional, cross-geographic teams spanning the US and India across product, design, engineering, and content disciplines." },
-  { name: "Accessibility at Scale", icon: ShieldCheck, level: 94, desc: "Embedded accessibility-by-default into a design system used across 86% of a Fortune 50 company's product surfaces. Awarded Verizon Accessibility Champion (2025). Championed WCAG compliance, dynamic type, and inclusive design as a core system primitive — not an afterthought." },
-  { name: "Data-Driven Adoption Models", icon: BarChart3, level: 90, desc: "Built intelligent adoption dashboards with automated measurement, achieving 86% design system adoption against a 75% target — without organizational mandate." },
-  { name: "Stakeholder & Executive Alignment", icon: Handshake, level: 95, desc: "Driving strategic buy-in across VP, SVP, and C-suite levels. Secured additional Q4 capital to accelerate roadmap initiatives based on performance evidence." },
-  { name: "Cross-Functional Org Design", icon: Users, level: 89, desc: "Structured and scaled product, design, and engineering squads under a unified operating model, eliminating silos across disciplines and time zones." },
-  { name: "Design-to-Code Infrastructure", icon: Cpu, level: 97, desc: "Shipped a VS Code Dev Assistant and Figma Design Assistant that translate design intent cleanly into developer workflows. Proven experience building design-to-code systems that bridge disciplines and reduce implementation drift at scale." },
-  { name: "Organizational Change Management", icon: RefreshCw, level: 88, desc: "Guided an 18-month enterprise rebranding (Monarch) and led adoption of new systems across dozens of teams — through partnership, not mandate." },
-];
+import { skills } from "../content";
 
 export function Skills() {
   const [active, setActive] = useState<number | null>(null);

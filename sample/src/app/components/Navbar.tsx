@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, Linkedin } from "lucide-react";
+import { hero } from "../content";
 
 const links = [
   { id: "home", label: "Home" },
@@ -48,7 +49,7 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://www.linkedin.com/in/andrewpendleton/"
+            href={hero.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"

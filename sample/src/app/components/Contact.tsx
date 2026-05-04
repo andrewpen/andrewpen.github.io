@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Linkedin } from "lucide-react";
+import { contact } from "../content";
 
 type Errors = { name?: string; email?: string; subject?: string; message?: string };
 
@@ -48,18 +49,17 @@ export function Contact() {
         <div className="grid lg:grid-cols-2 gap-12">
           <div>
             <span className="text-indigo-300">Contact</span>
-            <h2 className="tracking-tight mt-2 mb-5">Let's build something great.</h2>
+            <h2 className="tracking-tight mt-2 mb-5">{contact.heading}</h2>
             <p className="text-slate-300 mb-10 max-w-md">
-              Open to executive conversations, advisory roles, and speaking
-              opportunities. I respond to every message personally.
+              {contact.description}
             </p>
 
             <div className="space-y-5">
-              <a href="mailto:andrew.d.pendleton@gmail.com" className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
                 <div className="w-11 h-11 rounded-lg bg-indigo-500 flex items-center justify-center"><Mail size={18} /></div>
                 <div>
                   <div className="text-slate-400">Email</div>
-                  <div>andrew.d.pendleton@gmail.com</div>
+                  <div>{contact.email}</div>
                 </div>
               </a>
 
@@ -67,11 +67,11 @@ export function Contact() {
                 <div className="w-11 h-11 rounded-lg bg-indigo-500 flex items-center justify-center"><MapPin size={18} /></div>
                 <div>
                   <div className="text-slate-400">Based in</div>
-                  <div>New York, NY</div>
+                  <div>{contact.location}</div>
                 </div>
               </div>
               <div className="flex gap-3 pt-2">
-                <a href="https://www.linkedin.com/in/andrewpendleton/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="LinkedIn">
+                <a href={contact.linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors" aria-label="LinkedIn">
                   <Linkedin size={18} />
                 </a>
               </div>
@@ -119,8 +119,8 @@ export function Contact() {
       </div>
 
       <div className="mt-20 pt-8 border-t border-white/10 max-w-7xl mx-auto px-6 text-slate-400 flex flex-wrap gap-4 justify-between">
-        <div>© 2026 Andrew Pendleton</div>
-        <div>Senior Product Executive · New York, NY</div>
+        <div>{contact.footerCopyright}</div>
+        <div>{contact.footerTagline}</div>
       </div>
     </section>
   );

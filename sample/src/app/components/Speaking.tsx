@@ -1,34 +1,10 @@
+import { useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-
-const events = [
-  {
-    src: "/img/speaking%20events/2026-CES.png",
-    label: "CES",
-    year: "2026",
-  },
-  {
-    src: "/img/speaking%20events/2025-CES.png",
-    label: "CES",
-    year: "2025",
-  },
-  {
-    src: "/img/speaking%20events/2025-AccessibilitySummit.PNG",
-    label: "Accessibility Summit",
-    year: "2025",
-  },
-  {
-    src: "/img/speaking%20events/2025-BrowserStackEvent.jpg",
-    label: "BrowserStack World",
-    year: "2025",
-  },
-  {
-    src: "/img/speaking%20events/2023-UXIndia-1.JPG",
-    label: "UX India",
-    year: "2023",
-  },
-];
+import { speakingEvents as events } from "../content";
 
 export function Speaking() {
+  const [selected, setSelected] = useState<(typeof events)[number] | null>(null);
+
   return (
     <section id="speaking" className="py-24 bg-slate-50">
       <div className="max-w-7xl mx-auto px-6">
@@ -47,9 +23,10 @@ export function Speaking() {
           <div className="shrink-0 w-[calc((100vw-var(--content-width,1280px))/2)] hidden xl:block" />
 
           {events.map((e) => (
-            <div
+            <button
               key={`${e.label}-${e.year}`}
-              className="relative shrink-0 w-80 h-52 rounded-2xl overflow-hidden shadow-md group"
+              onClick={() => setSelected(e)}
+              className="relative shrink-0 w-80 h-52 rounded-2xl overflow-hidden shadow-md group cursor-pointer text-left"
             >
               <ImageWithFallback
                 src={e.src}
@@ -61,10 +38,31 @@ export function Speaking() {
                 <div className="font-medium leading-tight">{e.label}</div>
                 <div className="text-slate-300 text-sm">{e.year}</div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* Summary panel */}
+      {selected && (
+        <div className="max-w-7xl mx-auto px-6 mt-8">
+          <div className="relative bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+            <button
+              onClick={() => setSelected(null)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+              aria-label="Close"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+            <div className="mb-1 text-indigo-600 text-sm font-medium">{selected.year}</div>
+            <h3 className="text-xl font-semibold text-slate-900 mb-4">{selected.label}</h3>
+            <p className="text-slate-600 leading-relaxed">{selected.summary}</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

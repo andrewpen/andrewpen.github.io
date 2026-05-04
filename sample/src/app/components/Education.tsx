@@ -1,23 +1,5 @@
 import { GraduationCap } from "lucide-react";
-
-const education = [
-  {
-    degree: "MS in Analytics & Applied AI",
-    school: "Dakota State University (In Progress, Est. 2028)",
-  },
-  {
-    degree: "Master of Management Information Systems",
-    school: "University of Arkansas, Little Rock",
-  },
-  {
-    degree: "Bachelor of Computer Sciences",
-    school: "Henderson State University",
-  },
-  {
-    degree: "Bachelor of Digital Art & Design",
-    school: "Henderson State University",
-  },
-];
+import { education } from "../content";
 
 export function Education() {
   return (

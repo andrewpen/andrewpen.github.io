@@ -35,6 +35,12 @@ export default defineConfig({
     // Output built files to the repo root so GitHub Pages serves them directly
     outDir: path.resolve(__dirname, '..'),
     emptyOutDir: false,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        resume: path.resolve(__dirname, 'resume.html'),
+      },
+    },
   },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.

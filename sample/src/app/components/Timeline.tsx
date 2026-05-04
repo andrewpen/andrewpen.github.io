@@ -1,12 +1,4 @@
-const milestones = [
-  { year: "2011", title: "Started in tech", text: "Joined Baptist Health as a Web Application Developer — building patient-facing digital products from the ground up." },
-  { year: "2013", title: "Joined Verizon", text: "Brought on as a Front End Web Development Consultant at one of the world's largest telecom companies." },
-  { year: "2014", title: "First leadership role", text: "Promoted to Manager of Front End Web Development. Began building and scaling engineering teams." },
-  { year: "2016", title: "Senior Manager", text: "Led a global team of 20+ engineers delivering accessibility and usability standards across Verizon.com." },
-  { year: "2021", title: "Senior Director", text: "Appointed Senior Director of Experience Design, owning the Verizon Design System strategy, roadmap, and cross-functional team." },
-  { year: "2025", title: "Accessibility Champion", text: "Awarded Verizon Accessibility Champion. Exceeded adoption targets at 86%. Shipped VDS Native mobile parity a year ahead of schedule." },
-  { year: "Today", title: "Scaling AI & systems", text: "Architecting AI-native enterprise systems including VDS MCP server, AI design assistants, and pursuing an MS in Analytics & Applied AI." },
-];
+import { milestones } from "../content";
 
 export function Timeline() {
   return (

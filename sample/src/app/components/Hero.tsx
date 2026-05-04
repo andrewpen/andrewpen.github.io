@@ -1,5 +1,6 @@
 import { Mail, MapPin, ArrowRight, Download } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { hero } from "../content";
 
 export function Hero() {
   return (
@@ -12,22 +13,25 @@ export function Hero() {
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
       </div>
 
+      {/* Diagonal white panel — right side background */}
+      <div
+        className="absolute inset-y-0 right-0 w-[45%] bg-white hidden md:block"
+        style={{ clipPath: "polygon(85% 0, 100% 0, 100% 100%, 0% 100%)" }}
+      />
+
       <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
         <div>
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-indigo-200 mb-6">
-            Senior Executive · Design Infrastructure &amp; Agent-Native Systems
+            {hero.tagline}
           </span>
           <h1 className="tracking-tight mb-6">
-            Hi, I'm Andrew Pendleton.
+            {hero.headline}
             <span className="block bg-gradient-to-r from-indigo-300 to-blue-200 bg-clip-text text-transparent">
-              I build the systems humans and AI agents build from.
+              {hero.subheadline}
             </span>
           </h1>
           <p className="text-slate-300 mb-8 max-w-xl">
-            Senior Director at Verizon leading enterprise design infrastructure, agent-native AI tooling,
-            and design-to-code platform strategy. I transform component libraries into opinionated,
-            scalable systems that enable both people and AI to generate high-quality,
-            accessible experiences — across one of the world's largest developer ecosystems.
+            {hero.bio}
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10">
@@ -47,10 +51,10 @@ export function Hero() {
 
           <div className="flex flex-wrap gap-x-6 gap-y-3 text-slate-300">
             <span className="flex items-center gap-2">
-              <Mail size={16} className="text-indigo-300" /> andrew.d.pendleton@gmail.com
+              <Mail size={16} className="text-indigo-300" /> {hero.email}
             </span>
             <span className="flex items-center gap-2">
-              <MapPin size={16} className="text-indigo-300" /> New York, NY
+              <MapPin size={16} className="text-indigo-300" /> {hero.location}
             </span>
           </div>
         </div>
@@ -61,18 +65,10 @@ export function Hero() {
       {/* Standing figure — anchored to bottom of hero */}
       <div className="absolute bottom-0 right-0 hidden md:flex items-end justify-end w-1/2 h-full pointer-events-none">
         <ImageWithFallback
-          src="/img/profile-standing.png"
-          alt="Andrew Pendleton"
+          src={hero.profileImage}
+          alt={hero.name}
           className="absolute bottom-[-200px] h-[120%] w-auto object-cover"
         />
-        <div className="absolute bottom-8 left-6 bg-white text-slate-900 rounded-2xl px-5 py-3 shadow-xl pointer-events-auto">
-          <div className="text-indigo-600">12+ years</div>
-          <div className="text-slate-500">at Verizon</div>
-        </div>
-        <div className="absolute top-8 right-4 bg-white text-slate-900 rounded-2xl px-5 py-3 shadow-xl pointer-events-auto">
-          <div className="text-indigo-600">20+</div>
-          <div className="text-slate-500">global team</div>
-        </div>
       </div>
     </section>
   );
