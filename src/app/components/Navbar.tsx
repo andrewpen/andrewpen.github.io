@@ -67,13 +67,15 @@ export function Navbar() {
           className="md:hidden text-slate-700"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </nav>
 
       {open && (
-        <div className="md:hidden border-t border-slate-200 bg-white">
+        <div id="mobile-nav" className="md:hidden border-t border-slate-200 bg-white">
           <ul className="flex flex-col px-6 py-4 gap-3">
             {links.map((l) => (
               <li key={l.id}>

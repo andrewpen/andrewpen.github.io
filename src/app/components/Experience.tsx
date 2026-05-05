@@ -18,11 +18,14 @@ export function Experience() {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8">
-          <div className="lg:col-span-2 space-y-3">
+          <div role="list" aria-label="Career roles" className="lg:col-span-2 space-y-3">
             {roles.map((r, i) => (
               <button
                 key={i}
+                role="listitem"
                 onClick={() => setActive(i)}
+                aria-pressed={active === i}
+                aria-controls="experience-detail"
                 className={`w-full text-left p-5 rounded-xl border transition-all ${
                   active === i
                     ? "border-indigo-600 bg-indigo-50 shadow-md"
@@ -53,7 +56,7 @@ export function Experience() {
           </div>
 
           <div className="lg:col-span-3">
-            <div className="sticky top-24 p-8 rounded-2xl bg-slate-900 text-white shadow-xl">
+            <div id="experience-detail" className="sticky top-24 p-8 rounded-2xl bg-slate-900 text-white shadow-xl">
               <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-indigo-200 mb-4">
                 {role.period}
               </span>

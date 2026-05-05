@@ -11,7 +11,7 @@ export function Skills() {
           <span className="text-indigo-600">Capabilities</span>
           <h2 className="tracking-tight text-slate-900 mt-2 mb-4">Core skills</h2>
           <p className="text-slate-600">
-            Hover or tap each card to explore how I apply these capabilities in practice.
+            Select each card to explore how I apply these capabilities in practice.
           </p>
         </div>
 
@@ -24,6 +24,8 @@ export function Skills() {
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
                 onClick={() => setActive(isActive ? null : i)}
+                aria-pressed={isActive}
+                aria-label={`${s.name}${isActive ? ", expanded" : ""}`}
                 className={`relative text-left p-6 rounded-2xl border transition-all duration-300 ${
                   isActive
                     ? "bg-slate-900 border-slate-900 text-white shadow-2xl -translate-y-1"

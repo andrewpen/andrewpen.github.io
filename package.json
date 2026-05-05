@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
+    "deploy": "vite build && cp dist/assets/* assets/ && cp dist/index.html index.html && cp dist/resume.html resume.html",
     "dev": "vite"
   },
   "dependencies": {

@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { speakingEvents as events } from "../content";
 
 export function Speaking() {
   const [selected, setSelected] = useState<(typeof events)[number] | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleCarouselKeyDown = (e: React.KeyboardEvent) => {
+    if (!scrollRef.current) return;
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
+    }
+  };
 
   return (
     <section id="speaking" className="py-24 bg-slate-50">
@@ -18,7 +30,13 @@ export function Speaking() {
         {/* Fade hint on the right edge */}
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10" />
 
-        <div className="flex gap-5 overflow-x-auto pb-4 px-6 max-w-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div
+          ref={scrollRef}
+          role="region"
+          aria-label="Speaking events carousel — use left and right arrow keys to scroll"
+          onKeyDown={handleCarouselKeyDown}
+          className="flex gap-5 overflow-x-auto pb-4 px-6 max-w-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
           {/* Left inset to align with page content */}
           <div className="shrink-0 w-[calc((100vw-var(--content-width,1280px))/2)] hidden xl:block" />
 

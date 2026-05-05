@@ -36,7 +36,7 @@ export function About() {
             <GraduationCap className="text-indigo-600 shrink-0 mt-1" size={28} />
             <div>
               <span className="text-indigo-600">Academic background</span>
-              <h2 className="tracking-tight text-slate-900 mt-2">Education</h2>
+              <h3 className="tracking-tight text-slate-900 mt-2">Education</h3>
             </div>
           </div>
           <p className="text-slate-500 mb-10 max-w-2xl">
