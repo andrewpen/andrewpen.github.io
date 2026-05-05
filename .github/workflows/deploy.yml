@@ -3,22 +3,33 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Trigger the workflow on pushes to the main branch
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Checkout your repository's code
+        uses: actions/checkout@v4
 
-      - name: Merge main into gh-pages
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Deploy to gh-pages
         run: |
-          git config --global user.name "Your GitHub Username"
-          git config --global user.email "your-email@example.com"
+          git config --global user.name "Andrew Pendleton"
+          git config --global user.email "andrew.d.pendleton@gmail.com"
           git fetch origin gh-pages:gh-pages
           git checkout gh-pages
           git pull origin gh-pages
-          git merge origin/main --allow-unrelated-histories -X theirs --no-edit -m "Merge main into gh-pages"
+          git merge origin/main --allow-unrelated-histories -X theirs --no-edit -m "Deploy: merge main into gh-pages"
           git push origin gh-pages

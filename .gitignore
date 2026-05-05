@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Build output
+dist/
+
+# Claude Code
+.claude/
+
+# Personal / not for public repo
+archive/job-applications/
+archive/misc/
+
+# Sensitive / large files
+*.zip
+resume/
+cover-*.md
+posting-*.md
+
+# Env / local config
+.env
+.env.local
+.env*.local
