@@ -28,13 +28,9 @@ jobs:
         run: |
           git config --global user.name "Andrew Pendleton"
           git config --global user.email "andrew.d.pendleton@gmail.com"
-          git add dist/ -f
-          git stash
-          git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
-          git checkout gh-pages
-          git checkout stash -- dist/
-          cp -r dist/* .
-          rm -rf dist/
+          cd dist
+          git init
+          git checkout -b gh-pages
           git add -A
-          git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "Nothing to commit"
-          git push origin gh-pages
+          git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/andrewpen/andrewpen.github.io.git gh-pages
