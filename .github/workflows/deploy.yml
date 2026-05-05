@@ -28,8 +28,13 @@ jobs:
         run: |
           git config --global user.name "Andrew Pendleton"
           git config --global user.email "andrew.d.pendleton@gmail.com"
-          git fetch origin gh-pages:gh-pages
+          git add dist/ -f
+          git stash
+          git fetch origin gh-pages:gh-pages || git checkout --orphan gh-pages
           git checkout gh-pages
-          git pull origin gh-pages
-          git merge origin/main --allow-unrelated-histories -X theirs --no-edit -m "Deploy: merge main into gh-pages"
+          git checkout stash -- dist/
+          cp -r dist/* .
+          rm -rf dist/
+          git add -A
+          git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')" || echo "Nothing to commit"
           git push origin gh-pages

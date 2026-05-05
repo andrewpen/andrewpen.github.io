@@ -32,8 +32,8 @@ export default defineConfig({
   },
 
   build: {
-    // Output built files to repo root for GitHub Pages
-    outDir: path.resolve(__dirname, '.'),
+    // Output built files to dist/ for deployment
+    outDir: path.resolve(__dirname, 'dist'),
     emptyOutDir: false,
     rollupOptions: {
       input: {
