@@ -6,7 +6,7 @@ export function Resume() {
 
       {/* Header */}
       <header className="bg-slate-900 text-white">
-        <div className="max-w-5xl mx-auto px-10 py-10 flex items-center gap-8">
+        <div className="max-w-5xl mx-auto px-6 md:px-10 py-8 md:py-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
           <img src="/img/2023-profile.png" alt={hero.name} className="w-24 h-24 rounded-full object-cover shrink-0 border-2 border-indigo-400" />
           <div>
             <h1 className="text-4xl font-bold tracking-tight mb-1">{hero.name}</h1>
@@ -23,7 +23,7 @@ export function Resume() {
       </header>
 
       {/* Body */}
-      <div id="resume-body" className="max-w-5xl mx-auto px-10 py-10 grid grid-cols-[260px_1fr] gap-12">
+      <div id="resume-body" className="max-w-5xl mx-auto px-6 md:px-10 py-8 md:py-10 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8 md:gap-12">
 
         {/* Sidebar */}
         <aside className="space-y-8">
@@ -78,7 +78,7 @@ export function Resume() {
                 <div key={r.title}>
                   <div className="flex items-baseline justify-between gap-4 mb-1">
                     <h3 className="font-bold text-slate-900">{r.title}</h3>
-                    <span className="text-xs text-slate-400 shrink-0">{r.period}</span>
+                    <span className="text-xs text-slate-500 shrink-0">{r.period}</span>
                   </div>
                   <p className="text-sm text-indigo-600 mb-2">{r.company}</p>
                   <p className="text-sm text-slate-600 leading-relaxed mb-3">{r.summary}</p>

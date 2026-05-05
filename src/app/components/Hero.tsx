@@ -9,8 +9,8 @@ export function Hero() {
       className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 text-white min-h-[600px] md:min-h-[680px]"
     >
       <div className="absolute inset-0 opacity-20" aria-hidden>
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-indigo-500 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-indigo-500 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-blue-500 rounded-full blur-3xl" />
       </div>
 
       {/* Diagonal white panel — right side background */}
@@ -59,16 +59,15 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Spacer to keep left column from spanning full width */}
-        <div className="hidden md:block" />
-      </div>
-      {/* Standing figure — anchored to bottom of hero */}
-      <div className="absolute bottom-0 right-0 hidden md:flex items-end justify-end w-1/2 h-full pointer-events-none">
-        <ImageWithFallback
-          src={hero.profileImage}
-          alt={hero.name}
-          className="absolute bottom-[-200px] h-[120%] w-auto object-cover"
-        />
+        {/* Right column — image inside grid column so right edge is bounded by content margin */}
+        <div className="hidden md:block" aria-hidden="true">
+          <ImageWithFallback
+            src={hero.profileImage}
+            alt=""
+            className="absolute bottom-[-200px] h-[120%] w-auto object-cover pointer-events-none"
+            style={{ right: "-100px" }}
+          />
+        </div>
       </div>
     </section>
   );

@@ -8,12 +8,13 @@ export function Speaking() {
 
   const handleCarouselKeyDown = (e: React.KeyboardEvent) => {
     if (!scrollRef.current) return;
+    const step = scrollRef.current.clientWidth * 0.85;
     if (e.key === "ArrowRight") {
       e.preventDefault();
-      scrollRef.current.scrollBy({ left: 340, behavior: "smooth" });
+      scrollRef.current.scrollBy({ left: step, behavior: "smooth" });
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
-      scrollRef.current.scrollBy({ left: -340, behavior: "smooth" });
+      scrollRef.current.scrollBy({ left: -step, behavior: "smooth" });
     }
   };
 
@@ -28,7 +29,7 @@ export function Speaking() {
 
       <div className="relative">
         {/* Fade hint on the right edge */}
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10" aria-hidden="true" />
 
         <div
           ref={scrollRef}
@@ -44,7 +45,7 @@ export function Speaking() {
             <button
               key={`${e.label}-${e.year}`}
               onClick={() => setSelected(e)}
-              className="relative shrink-0 w-80 h-52 rounded-2xl overflow-hidden shadow-md group cursor-pointer text-left"
+              className="relative shrink-0 w-[min(320px,80vw)] h-52 rounded-2xl overflow-hidden shadow-md group cursor-pointer text-left"
             >
               <ImageWithFallback
                 src={e.src}
@@ -67,7 +68,7 @@ export function Speaking() {
           <div className="relative bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
             <button
               onClick={() => setSelected(null)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+              className="absolute top-2 right-2 p-3 text-slate-500 hover:text-slate-700 transition-colors"
               aria-label="Close"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

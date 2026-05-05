@@ -32,7 +32,7 @@ export function Skills() {
                     : "bg-white border-slate-200 hover:border-indigo-300 hover:shadow-lg"
                 }`}
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center mb-4">
                   <div
                     className={`w-11 h-11 rounded-xl flex items-center justify-center transition-colors ${
                       isActive ? "bg-indigo-500 text-white" : "bg-indigo-50 text-indigo-600"
@@ -40,24 +40,14 @@ export function Skills() {
                   >
                     <s.icon size={20} />
                   </div>
-                  <span className={isActive ? "text-indigo-300" : "text-slate-400"}>
-                    {s.level}%
-                  </span>
                 </div>
 
                 <h3 className={`mb-2 ${isActive ? "text-white" : "text-slate-900"}`}>
                   {s.name}
                 </h3>
-                <p className={`mb-4 ${isActive ? "text-slate-300" : "text-slate-500"}`}>
+                <p className={`${isActive ? "text-slate-300" : "text-slate-500"}`}>
                   {isActive ? s.desc : "Click to learn more"}
                 </p>
-
-                <div className={`h-1.5 w-full rounded-full overflow-hidden ${isActive ? "bg-white/10" : "bg-slate-100"}`}>
-                  <div
-                    className="h-full bg-gradient-to-r from-indigo-500 to-blue-400 transition-all duration-700"
-                    style={{ width: `${s.level}%` }}
-                  />
-                </div>
               </button>
             );
           })}

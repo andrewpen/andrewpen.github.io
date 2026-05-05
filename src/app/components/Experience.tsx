@@ -56,7 +56,7 @@ export function Experience() {
           </div>
 
           <div className="lg:col-span-3">
-            <div id="experience-detail" className="sticky top-24 p-8 rounded-2xl bg-slate-900 text-white shadow-xl">
+            <div id="experience-detail" aria-live="polite" className="lg:sticky lg:top-24 p-5 sm:p-8 rounded-2xl bg-slate-900 text-white shadow-xl">
               <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-indigo-200 mb-4">
                 {role.period}
               </span>

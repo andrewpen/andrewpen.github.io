@@ -50,7 +50,7 @@ export function Navbar() {
             href={hero.linkedinUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
+            className="w-11 h-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
             aria-label="LinkedIn"
           >
             <Linkedin size={16} />

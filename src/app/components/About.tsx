@@ -16,7 +16,7 @@ export function About() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {aboutHighlights.map((h) => (
             <div
               key={h.title}
@@ -48,7 +48,7 @@ export function About() {
               const group = education.filter((e) => e.level === level);
               return (
                 <div key={level}>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-4">
                     {level === "graduate" ? "Graduate" : "Undergraduate"}
                   </p>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -66,7 +66,7 @@ export function About() {
                           )}
                         </div>
                         <div className="text-slate-500 mb-4">{e.school}</div>
-                        <img src={e.logo} alt={e.school} className="w-40 h-20 rounded-xl object-contain bg-white border border-slate-100 p-2" />
+                        <img src={e.logo} alt={e.school} className="w-36 h-16 sm:w-40 sm:h-20 rounded-xl object-contain bg-white border border-slate-100 p-2" />
                       </div>
                     ))}
                   </div>
