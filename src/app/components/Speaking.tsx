@@ -3,7 +3,7 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { speakingEvents as events } from "../content";
 
 export function Speaking() {
-  const [selected, setSelected] = useState<(typeof events)[number] | null>(null);
+  const [selected, setSelected] = useState<(typeof events)[number]>(events[0]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleCarouselKeyDown = (e: React.KeyboardEvent) => {
@@ -45,7 +45,7 @@ export function Speaking() {
             <button
               key={`${e.label}-${e.year}`}
               onClick={() => setSelected(e)}
-              className="relative shrink-0 w-[min(320px,80vw)] h-52 rounded-2xl overflow-hidden shadow-md group cursor-pointer text-left"
+              className={`relative shrink-0 w-[min(320px,80vw)] h-52 rounded-2xl overflow-hidden shadow-md group cursor-pointer text-left transition-all ${selected?.label === e.label && selected?.year === e.year ? "ring-2 ring-indigo-500 ring-offset-2 ring-offset-slate-50" : ""}`}
             >
               <ImageWithFallback
                 src={e.src}
@@ -63,25 +63,13 @@ export function Speaking() {
       </div>
 
       {/* Summary panel */}
-      {selected && (
-        <div className="max-w-7xl mx-auto px-6 mt-8">
-          <div className="relative bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
-            <button
-              onClick={() => setSelected(null)}
-              className="absolute top-2 right-2 p-3 text-slate-500 hover:text-slate-700 transition-colors"
-              aria-label="Close"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
+      <div className="max-w-7xl mx-auto px-6 mt-8">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
             <div className="mb-1 text-indigo-600 text-sm font-medium">{selected.year}</div>
             <h3 className="text-xl font-semibold text-slate-900 mb-4">{selected.label}</h3>
             <p className="text-slate-600 leading-relaxed">{selected.summary}</p>
-          </div>
         </div>
-      )}
+      </div>
     </section>
   );
 }

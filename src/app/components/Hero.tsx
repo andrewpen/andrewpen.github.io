@@ -15,11 +15,11 @@ export function Hero() {
 
       {/* Diagonal white panel — right side background */}
       <div
-        className="absolute inset-y-0 right-0 w-[45%] bg-white hidden md:block"
+        className="absolute inset-y-0 right-0 w-[45%] bg-white hidden min-[1100px]:block"
         style={{ clipPath: "polygon(85% 0, 100% 0, 100% 100%, 0% 100%)" }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid min-[1100px]:grid-cols-2 gap-12 items-center">
         <div>
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-indigo-200 mb-6">
             {hero.tagline}
@@ -60,7 +60,7 @@ export function Hero() {
         </div>
 
         {/* Right column — image inside grid column so right edge is bounded by content margin */}
-        <div className="hidden md:block" aria-hidden="true">
+        <div className="hidden min-[1100px]:block" aria-hidden="true">
           <ImageWithFallback
             src={hero.profileImage}
             alt=""
