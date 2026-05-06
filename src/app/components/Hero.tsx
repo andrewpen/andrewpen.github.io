@@ -42,7 +42,7 @@ export function Hero() {
               Let's connect <ArrowRight size={18} />
             </a>
             <a
-              href="#experience"
+              href="/resume.html"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 hover:bg-white/10 transition-colors"
             >
               <Download size={18} /> View resume
