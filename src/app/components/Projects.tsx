@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import { projects } from "../content";
 
 export function Projects() {
@@ -20,14 +19,10 @@ export function Projects() {
             >
               <div className="absolute -top-12 -right-12 w-40 h-40 bg-indigo-100 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
               <div className="relative">
-                <div className="flex items-center justify-between mb-6">
+                <div className="mb-6">
                   <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700">
                     {p.tag}
                   </span>
-                  <ArrowUpRight
-                    className="text-slate-400 group-hover:text-indigo-600 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all"
-                    size={20}
-                  />
                 </div>
                 <h3 className="text-slate-900 mb-3">{p.title}</h3>
                 <p className="text-slate-600 mb-6">{p.text}</p>

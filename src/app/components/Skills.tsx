@@ -23,6 +23,8 @@ export function Skills() {
                 key={s.name}
                 onMouseEnter={() => setActive(i)}
                 onMouseLeave={() => setActive(null)}
+                onFocus={() => setActive(i)}
+                onBlur={() => setActive(null)}
                 onClick={() => setActive(isActive ? null : i)}
                 aria-pressed={isActive}
                 aria-label={`${s.name}${isActive ? ", expanded" : ""}`}

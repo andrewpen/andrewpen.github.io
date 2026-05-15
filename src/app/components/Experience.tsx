@@ -18,42 +18,42 @@ export function Experience() {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8">
-          <div role="list" aria-label="Career roles" className="lg:col-span-2 space-y-3">
+          <ul aria-label="Career roles" className="lg:col-span-2 space-y-3 list-none p-0 m-0">
             {roles.map((r, i) => (
-              <button
-                key={i}
-                role="listitem"
-                onClick={() => setActive(i)}
-                aria-pressed={active === i}
-                aria-controls="experience-detail"
-                className={`w-full text-left p-5 rounded-xl border transition-all ${
-                  active === i
-                    ? "border-indigo-600 bg-indigo-50 shadow-md"
-                    : "border-slate-200 hover:border-indigo-200 hover:bg-slate-50"
-                }`}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
-                      active === i ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-600"
-                    }`}>
-                      <Building2 size={16} />
+              <li key={i}>
+                <button
+                  onClick={() => setActive(i)}
+                  aria-pressed={active === i}
+                  aria-controls="experience-detail"
+                  className={`w-full text-left p-5 rounded-xl border transition-all ${
+                    active === i
+                      ? "border-indigo-600 bg-indigo-50 shadow-md"
+                      : "border-slate-200 hover:border-indigo-200 hover:bg-slate-50"
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
+                        active === i ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-600"
+                      }`}>
+                        <Building2 size={16} />
+                      </div>
+                      <div>
+                        <div className="text-slate-900">{r.title}</div>
+                        <div className="text-slate-500">{r.company} · {r.period}</div>
+                      </div>
                     </div>
-                    <div>
-                      <div className="text-slate-900">{r.title}</div>
-                      <div className="text-slate-500">{r.company} · {r.period}</div>
-                    </div>
+                    <ChevronRight
+                      size={18}
+                      className={`shrink-0 transition-transform ${
+                        active === i ? "text-indigo-600 translate-x-1" : "text-slate-400"
+                      }`}
+                    />
                   </div>
-                  <ChevronRight
-                    size={18}
-                    className={`shrink-0 transition-transform ${
-                      active === i ? "text-indigo-600 translate-x-1" : "text-slate-400"
-                    }`}
-                  />
-                </div>
-              </button>
+                </button>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <div className="lg:col-span-3">
             <div id="experience-detail" aria-live="polite" className="lg:sticky lg:top-24 p-5 sm:p-8 rounded-2xl bg-slate-900 text-white shadow-xl">
