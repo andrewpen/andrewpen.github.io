@@ -29,7 +29,7 @@ export const aboutHighlights = [
   {
     icon: Sparkles,
     title: "Agent-Native Infrastructure",
-    text: "Delivered one of Verizon's first MCP server enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
+    text: "Delivered one of Verizon's first MCP servers enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
   },
   {
     icon: Users,
@@ -56,7 +56,7 @@ export const skills = [
     name: "Agent-Native Platform Architecture",
     icon: Brain,
     level: 91,
-    desc: "Delivered one of Verizon's first MCP server enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
+    desc: "Delivered one of Verizon's first MCP servers enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
   },
   {
     name: "Global Team Leadership",
@@ -112,7 +112,7 @@ export const roles = [
     summary:
       "Lead the Verizon Design System (VDS), enterprise design infrastructure spanning web, iOS, and Android, as a Senior Director managing a team across product, design, engineering, and content strategy. Transforming a component library into an agent-native platform that both humans and AI can generate high-quality, accessible experiences from.",
     achievements: [
-      "Shipped an agent-native layer for VDS via MCP enabling AI agents to consume, generate from, and validate against design system standards in real time (one of Verizon's first MCP server)",
+      "Shipped an agent-native layer for VDS via MCP enabling AI agents to consume, generate from, and validate against design system standards in real time (one of Verizon's first MCP servers)",
       "Achieved 86% VDS adoption enterprise-wide, exceeding the 75% target, without organizational mandate, through quality, tooling, and partnership",
       "Delivered VDS Native (iOS SwiftUI + Android Jetpack Compose) with 48 components for each platform, achieving mobile parity a full year ahead of schedule",
       //"Prototyped VDS Dev Assistant (VS Code) and Design Assistant (Figma), translating design intent cleanly into developer workflows; both delivered a full year ahead of schedule",
