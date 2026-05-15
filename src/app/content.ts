@@ -158,16 +158,6 @@ export const roles = [
       "Delivered impactful front-end solutions rapidly leading to full-time conversion",
     ],
   },
-  {
-    company: "Baptist Health",
-    title: "Web Application Developer",
-    period: "2011 — 2013",
-    summary:
-      "Began career building administrative and employee-facing digital experiences for a major healthcare system.",
-    achievements: [
-      "Developed and maintained healthcare web applications serving administration and clinical staff",
-    ],
-  },
 ];
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
@@ -231,10 +221,10 @@ export const speakingEvents = [
 // ─── Education ────────────────────────────────────────────────────────────────
 
 export const education = [
-  { degree: "MS in Analytics & Applied AI", school: "Dakota State University (Est. 2028)", level: "graduate", inProgress: true, logo: "/img/education/dsu.png" },
-  { degree: "Master of Management Information Systems", school: "University of Arkansas, Little Rock", level: "graduate", inProgress: false, logo: "/img/education/ualr.png" },
-  { degree: "Bachelor of Computer Sciences", school: "Henderson State University", level: "undergraduate", inProgress: false, logo: "/img/education/hsu.png" },
-  { degree: "Bachelor of Digital Art & Design", school: "Henderson State University", level: "undergraduate", inProgress: false, logo: "/img/education/hsu.png" },
+  { degree: "MS in Analytics & Applied AI", school: "Dakota State University", level: "graduate", inProgress: true, expectedYear: "2028", logo: "/img/education/dsu.png" },
+  { degree: "Master of Management Information Systems", school: "University of Arkansas, Little Rock", level: "graduate", inProgress: false, expectedYear: undefined, logo: "/img/education/ualr.png" },
+  { degree: "Bachelor of Computer Sciences", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
+  { degree: "Bachelor of Digital Art & Design", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
 ];
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
@@ -246,5 +236,5 @@ export const contact = {
   location: "New York, NY",
   linkedinUrl: "https://www.linkedin.com/in/andrewpendleton/",
   footerCopyright: "© 2026 Andrew Pendleton",
-  footerTagline: "Senior Product Executive · New York, NY",
+  footerTagline: "Senior Executive · Design Infrastructure & Agent-Native Systems",
 };
