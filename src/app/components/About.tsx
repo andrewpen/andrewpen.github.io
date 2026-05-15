@@ -61,7 +61,7 @@ export function About() {
                           <div className="text-slate-900">{e.degree}</div>
                           {e.inProgress && (
                             <span className="shrink-0 text-xs font-medium px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200">
-                              In Progress
+                              {e.expectedYear ? `Expected ${e.expectedYear}` : "In Progress"}
                             </span>
                           )}
                         </div>

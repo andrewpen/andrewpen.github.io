@@ -34,7 +34,7 @@ export function Resume() {
               {education.map((e) => (
                 <div key={e.degree}>
                   <p className="font-semibold text-sm text-slate-900 leading-snug">{e.degree}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">{e.school}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">{e.school}{e.expectedYear ? ` · Est. ${e.expectedYear}` : ""}</p>
                 </div>
               ))}
             </div>
@@ -74,7 +74,7 @@ export function Resume() {
           <section>
             <h2 className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-5">Experience</h2>
             <div className="space-y-8">
-              {roles.filter((r) => r.company !== "Baptist Health").map((r) => (
+              {roles.map((r) => (
                 <div key={r.title}>
                   <div className="flex items-baseline justify-between gap-4 mb-1">
                     <h3 className="font-bold text-slate-900">{r.title}</h3>
