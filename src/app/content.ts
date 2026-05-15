@@ -34,7 +34,7 @@ export const aboutHighlights = [
   {
     icon: Users,
     title: "Manager of Managers",
-    text: "Lead a global team of Directors across product, design, engineering, and content strategy, spanning the US and India. Build leadership layers that drive accountability, performance, and craft.",
+    text: "Lead a global team across product, design, engineering, and content strategy, spanning the US and India. Build leadership layers that drive accountability, performance, and craft.",
   },
   {
     icon: Target,
@@ -110,7 +110,7 @@ export const roles = [
     title: "Sr Director, Experience Design (Design Systems)",
     period: "2021 — Present",
     summary:
-      "Lead the Verizon Design System (VDS), enterprise design infrastructure spanning web, iOS, and Android, as a Senior Director managing a team of Associate Directors across product, design, engineering, and content strategy. Transforming a component library into an agent-native platform that both humans and AI can generate high-quality, accessible experiences from.",
+      "Lead the Verizon Design System (VDS), enterprise design infrastructure spanning web, iOS, and Android, as a Senior Director managing a team across product, design, engineering, and content strategy. Transforming a component library into an agent-native platform that both humans and AI can generate high-quality, accessible experiences from.",
     achievements: [
       "Shipped an agent-native layer for VDS via MCP enabling AI agents to consume, generate from, and validate against design system standards in real time (one of Verizon's first MCP server)",
       "Achieved 86% VDS adoption enterprise-wide, exceeding the 75% target, without organizational mandate, through quality, tooling, and partnership",
