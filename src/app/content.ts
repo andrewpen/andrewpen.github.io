@@ -29,7 +29,7 @@ export const aboutHighlights = [
   {
     icon: Sparkles,
     title: "Agent-Native Infrastructure",
-    text: "Architected one of Verizon's first MCP server enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
+    text: "Delivered one of Verizon's first MCP server enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
   },
   {
     icon: Users,
@@ -56,7 +56,7 @@ export const skills = [
     name: "Agent-Native Platform Architecture",
     icon: Brain,
     level: 91,
-    desc: "Designed Verizon's first MCP server enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
+    desc: "Delivered one of Verizon's first MCP server enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
   },
   {
     name: "Global Team Leadership",
@@ -166,7 +166,7 @@ export const projects = [
   {
     tag: "Agent-Native Infrastructure",
     title: "VDS MCP Server & AI Tooling Suite",
-    text: "Designed and shipped an agent-native layer for the Verizon Design System enabling AI agents to consume, generate from, and validate against VDS standards in real time via MCP. Paired with a VS Code Dev Assistant and Figma Design Assistant that translate design intent cleanly into developer workflows. Both tools delivered a full year ahead of schedule.",
+    text: "Delivered an agent-native layer for the Verizon Design System enabling AI agents to consume, generate from, and validate against VDS standards in real time via MCP. Paired with a VS Code Dev Assistant and Figma Design Assistant that translate design intent cleanly into developer workflows. Both tools delivered a full year ahead of schedule.",
     metric: "One of Verizon's first agent-native design system",
   },
   {
