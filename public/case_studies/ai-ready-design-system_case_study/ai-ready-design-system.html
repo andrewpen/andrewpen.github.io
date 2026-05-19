@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study · AI-Ready Architecture: Transforming the Design System into an LLM Knowledge Source</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo-50: #eef2ff;
+    --indigo-100: #e0e7ff;
+    --indigo-200: #c7d2fe;
+    --indigo-300: #a5b4fc;
+    --indigo-500: #6366f1;
+    --indigo-600: #4f46e5;
+    --indigo-700: #4338ca;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+  }
+  html, body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--slate-900); }
+  body { background: #fff; }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  h1, h2, h3, h4 { letter-spacing: -0.02em; }
+  h1 { font-weight: 600; line-height: 1.05; }
+  h2 { font-weight: 600; line-height: 1.15; }
+  h3 { font-weight: 600; line-height: 1.25; }
+  .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+  section { scroll-margin-top: 80px; }
+  .dot-grid {
+    background-image: radial-gradient(rgba(99,102,241,0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .pill-ring {
+    background: conic-gradient(from -90deg, #4f46e5 0deg, #6366f1 90deg, #818cf8 180deg, #a5b4fc 270deg, #4f46e5 360deg);
+  }
+  .metric-num { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+  .adoption-bar {
+    background: linear-gradient(90deg, #4f46e5 0%, #6366f1 60%, #818cf8 100%);
+  }
+  .pillar { transition: border-color .2s, box-shadow .2s, transform .2s; }
+  .pillar:hover { border-color: var(--indigo-300); box-shadow: 0 20px 40px -20px rgba(79,70,229,0.25); transform: translateY(-2px); }
+  .nav-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--slate-300); transition: background .2s, transform .2s; }
+  .nav-dot.active { background: var(--indigo-600); transform: scale(1.6); }
+  .quote-rule { border-left: 3px solid var(--indigo-500); }
+  .hero-bg {
+    background:
+      radial-gradient(1200px 600px at 90% -10%, rgba(99,102,241,0.35), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(59,130,246,0.25), transparent 60%),
+      linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  }
+  .hero-grid {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .pillar-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+  @media print {
+    .no-print { display: none; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ───────────────────── Top utility nav ───────────────────── -->
+<header class="no-print sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-slate-200">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2 text-slate-700 hover:text-indigo-700 transition">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      <span class="text-sm">Back to portfolio</span>
+    </a>
+    <div class="hidden md:flex items-center gap-6 text-sm text-slate-500">
+      <a href="#challenge" class="hover:text-indigo-700 transition">Challenge</a>
+      <a href="#approach" class="hover:text-indigo-700 transition">Approach</a>
+      <a href="#pipeline" class="hover:text-indigo-700 transition">Pipeline</a>
+      <a href="#results" class="hover:text-indigo-700 transition">Results</a>
+      <a href="#reflections" class="hover:text-indigo-700 transition">Reflections</a>
+    </div>
+    <span class="font-mono text-[11px] tracking-widest text-slate-400 uppercase">Case Study · 03</span>
+  </div>
+</header>
+
+<!-- ───────────────────── Hero ───────────────────── -->
+<section class="relative hero-bg text-white overflow-hidden">
+  <div class="absolute inset-0 hero-grid opacity-60" aria-hidden="true"></div>
+  <div class="absolute top-10 right-10 hidden lg:block opacity-30" aria-hidden="true">
+    <div class="w-64 h-64 rounded-full border border-indigo-300/40 flex items-center justify-center">
+      <div class="w-44 h-44 rounded-full border border-indigo-300/40 flex items-center justify-center">
+        <div class="w-24 h-24 rounded-full pill-ring opacity-90"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-indigo-300">Verizon Design System</span>
+      <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+      <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-indigo-300">2024 — Present</span>
+    </div>
+
+    <h1 class="text-4xl md:text-6xl max-w-4xl mb-6">
+      AI-Ready Architecture: Transforming the Design System into
+      <span class="bg-gradient-to-r from-indigo-300 to-blue-200 bg-clip-text text-transparent">an LLM Knowledge Source</span>.
+    </h1>
+
+    <p class="text-lg md:text-xl text-slate-300 max-w-3xl mb-10">
+      How we transformed the Verizon Design System from a passive code repository into an active AI infrastructure layer, making compliant code the default output of every AI tool in our designers' and engineers' hands.
+    </p>
+
+    <!-- Headline metrics strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 max-w-4xl">
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">Components normalized for AI</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">48</div>
+        <div class="text-xs text-slate-400 mt-1">machine-readable JSON schemas</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">AI tools integrated</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">6</div>
+        <div class="text-xs text-slate-400 mt-1">across design and engineering</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">MCP server</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">1</div>
+        <div class="text-xs text-slate-400 mt-1">one of Verizon's first</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">Engineering hours reclaimed</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">700<span class="text-indigo-300">hrs</span></div>
+        <div class="text-xs text-slate-400 mt-1">VZA Studio migration</div>
+      </div>
+    </div>
+
+    <!-- Role meta -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Role</div>
+        <div class="text-slate-200">Sr. Director, Design Systems</div>
+      </div>
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Team</div>
+        <div class="text-slate-200">Design · Eng · Product · Content<br><span class="text-slate-400">US & India</span></div>
+      </div>
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Surfaces</div>
+        <div class="text-slate-200">Gemini · Claude Code · Cursor<br><span class="text-slate-400">Notebook LM · Figma Make · Custom Models</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Challenge ───────────────────── -->
+<section id="challenge" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <span class="eyebrow text-indigo-600">01 — The Challenge</span>
+        <h2 class="text-3xl md:text-4xl text-slate-900 mt-3">The AI hallucination tax.</h2>
+      </div>
+      <div class="lg:col-span-8 space-y-5 text-slate-600 text-lg leading-relaxed">
+        <p>
+          Because commercial LLMs are trained on general public repositories, they do not understand the highly specific, private design tokens, theme variations, and component signatures of our enterprise platform. When instructed to build a feature, an AI agent generates clean-looking code that relies on arbitrary CSS, non-standard layout blocks, or broken accessibility patterns.
+        </p>
+        <p>
+          The instinct is to treat this as a prompt engineering problem. It is not. LLMs are a new user persona the design system was not serving. Rather than speeding up delivery, designers and engineers were spending valuable sprint cycles fixing, refactoring, and manually aligning AI-generated output to fit our production standards. To capture the actual promise of AI-driven development, the design system team had to become the systemic context provider for the models.
+        </p>
+        <div class="quote-rule pl-5 mt-8 text-slate-900">
+          Every AI tool our designers and engineers relied on was operating without VDS context. <span class="font-medium">The design system had thousands of human adopters and zero AI ones.</span> That had to change.
+        </div>
+      </div>
+    </div>
+
+    <!-- Before/after snapshot -->
+    <div class="mt-16 grid md:grid-cols-2 gap-6">
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-4">Before</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Public LLMs with no knowledge of VDS tokens, themes, or component signatures</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>AI-generated code requiring extensive manual refactoring every sprint</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Accessibility violations introduced at the code-generation phase, not caught until review</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Design intent lost in translation between Figma specifications and AI output</li>
+        </ul>
+      </div>
+      <div class="p-7 rounded-2xl bg-gradient-to-br from-indigo-50 to-white border border-indigo-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-4">After</div>
+        <ul class="space-y-3 text-slate-800">
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>VDS exposed as a real-time context source for every major AI tool in the ecosystem</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>AI-generated code grounded in actual VDS components, not guessed abstractions</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Design and engineering aligned in a single AI-assisted context loop</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Automated verification catching non-compliant code before it merges</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Approach: Pipeline ───────────────────── -->
+<section id="approach" class="py-24 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
+  <div class="absolute inset-0 dot-grid opacity-50" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-5">
+        <span class="eyebrow text-indigo-600">02 — The Approach</span>
+        <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-6">The smarter code pipeline.</h2>
+        <p class="text-slate-600 text-lg leading-relaxed mb-6">
+          Making the right thing the easy thing for AI tools requires the same infrastructure investment it required for human teams. We could not train every LLM on VDS, but we could make VDS legible to every LLM that mattered.
+        </p>
+        <p class="text-slate-600 leading-relaxed">
+          We built in four phases: structure the context, serve it live, integrate it into the tools designers and engineers already use, and verify the output automatically. Each phase closes a gap between AI-generated code and production-ready VDS code.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Build the guardrails into the runway</span>
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">LLMs are a user persona</span>
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Anticipate the workflow, don't react to it</span>
+        </div>
+      </div>
+
+      <!-- Journey / Pipeline visual -->
+      <div class="lg:col-span-7 flex items-start justify-center">
+        <div class="relative pl-8 border-l-2 border-indigo-200 space-y-5 w-full max-w-sm">
+          <!-- Phase 01 -->
+          <div class="relative">
+            <div class="absolute -left-[21px] w-4 h-4 rounded-full bg-indigo-600 border-2 border-white"></div>
+            <div class="p-5 rounded-2xl bg-white border border-indigo-200 shadow-sm">
+              <div class="font-mono text-xs text-indigo-600 mb-1">PHASE · 01</div>
+              <div class="text-sm font-medium text-slate-900">Structuring Context</div>
+              <div class="text-xs text-slate-500 mt-1">Make VDS legible to machines</div>
+            </div>
+          </div>
+          <!-- Phase 02 -->
+          <div class="relative">
+            <div class="absolute -left-[21px] w-4 h-4 rounded-full bg-indigo-600 border-2 border-white"></div>
+            <div class="p-5 rounded-2xl bg-white border border-indigo-200 shadow-sm">
+              <div class="font-mono text-xs text-indigo-600 mb-1">PHASE · 02</div>
+              <div class="text-sm font-medium text-slate-900">Live Data Serving</div>
+              <div class="text-xs text-slate-500 mt-1">Build a real-time bridge to AI agents</div>
+            </div>
+          </div>
+          <!-- Phase 03 -->
+          <div class="relative">
+            <div class="absolute -left-[21px] w-4 h-4 rounded-full bg-indigo-600 border-2 border-white"></div>
+            <div class="p-5 rounded-2xl bg-white border border-indigo-200 shadow-sm">
+              <div class="font-mono text-xs text-indigo-600 mb-1">PHASE · 03</div>
+              <div class="text-sm font-medium text-slate-900">IDE Tooling Integration</div>
+              <div class="text-xs text-slate-500 mt-1">Deliver context inside the tools teams use</div>
+            </div>
+          </div>
+          <!-- Phase 04 -->
+          <div class="relative">
+            <div class="absolute -left-[21px] w-4 h-4 rounded-full bg-indigo-500 border-2 border-white"></div>
+            <div class="p-5 rounded-2xl bg-white border border-indigo-200 shadow-sm">
+              <div class="font-mono text-xs text-indigo-600 mb-1">PHASE · 04</div>
+              <div class="text-sm font-medium text-slate-900">Automated Verification</div>
+              <div class="text-xs text-slate-500 mt-1">Verify the output before it merges</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Pipeline Deep Dive ───────────────────── -->
+<section id="pipeline" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-14">
+      <span class="eyebrow text-indigo-600">03 — The Pipeline</span>
+      <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-4">Four phases, one smarter code pipeline.</h2>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        Each phase closed a specific gap between AI-generated output and production-ready VDS code. The context engine made VDS machine-readable. The MCP server made it live. The IDE integrations made it present at the point of creation. The linters made deviation costly.
+      </p>
+    </div>
+
+    <!-- Phase 01 — Structuring Context -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 01</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">Structuring Context</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Making VDS legible to machines, not just designers and engineers.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Normalized all 48 component properties, style tokens, and implementation guidelines into rigid machine-readable JSON schemas.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Structured design tokens as platform-agnostic data that LLM attention mechanisms could natively parse.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Translated visual specifications and behavioral rules into a private, authoritative data foundation.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Eliminated the gap between what VDS defines and what AI tools could understand.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">48<span class="text-indigo-600"> components</span></div>
+          <div class="text-sm text-slate-600">normalized for AI context</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">JSON<span class="text-indigo-600"> schemas</span></div>
+          <div class="text-sm text-slate-600">machine-readable component architecture</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 02 — Live Data Serving -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 02</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">Live Data Serving</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Building a real-time bridge between AI agents and VDS knowledge.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Architected a secure, lightweight Model Context Protocol (MCP) server exposing live system schemas, design patterns, and component lookup APIs.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Built one of Verizon's first MCP servers, establishing VDS as an authoritative real-time context source for LLM agents.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Enabled AI agents to query VDS directly, ensuring generated code mapped to real components rather than guessed abstractions.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Created a secure bridge between proprietary design system knowledge and commercial AI tools.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">1 <span class="text-slate-500 text-base font-normal">of Verizon's first</span></div>
+          <div class="text-sm text-slate-600">MCP servers deployed</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">6<span class="text-indigo-600"> tools</span></div>
+          <div class="text-sm text-slate-600">connected across design and engineering</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 03 — IDE Tooling Integration -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 03</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">IDE Tooling</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Delivering VDS context directly inside the tools designers and engineers already use.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Configured developer environments to surface the MCP server as a background daemon feeding real-time context to Copilot and Cursor.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Integrated Figma Make to deliver VDS-compliant context to design workflows, bridging design intent and production code.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Enabled developers to generate correct, high-fidelity UI layouts on the first try inside their IDEs.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Brought design and engineering into the same AI-assisted context loop for the first time.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">2<span class="text-indigo-600"> disciplines</span></div>
+          <div class="text-sm text-slate-600">design and engineering in one context loop</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">Clean<span class="text-indigo-600"> handoff</span></div>
+          <div class="text-sm text-slate-600">design to dev via IDE tooling integration</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 04 — Automated Verification -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 04</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">Auto Verification</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Making the wrong thing harder than the right thing, automatically.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Deployed automated semantic AI linters within CI/CD pipelines to flag unapproved inline styling.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Configured linters to recommend design system component replacements at the pull-request phase.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Ensured accessibility standards were enforced at the AI code-generation phase, not as a downstream audit.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Closed the loop: every AI-generated code submission is verified against VDS standards before it merges.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">CI/CD<span class="text-indigo-600"> linter</span></div>
+          <div class="text-sm text-slate-600">semantic verification deployed to pipeline</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ───────────────────── Results ───────────────────── -->
+<section id="results" class="py-24 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 text-white relative overflow-hidden">
+  <div class="absolute inset-0 hero-grid opacity-50" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <span class="eyebrow text-indigo-300">04 — Results</span>
+      <h2 class="text-3xl md:text-4xl text-white mt-3 mb-4">Early signals. Real infrastructure.</h2>
+      <p class="text-slate-300 text-lg leading-relaxed">
+        These are not projected outcomes. They are proof points from work already in production. The design system is now a live context source for every major AI tool in our ecosystem. The hallucination tax is no longer a given.
+      </p>
+    </div>
+
+    <!-- Big hours reclaimed progress bar -->
+    <div class="rounded-2xl bg-slate-900/40 border border-white/10 p-8 mb-8">
+      <div class="flex items-end justify-between mb-3">
+        <div>
+          <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Engineering hours reclaimed</div>
+          <div class="metric-num text-5xl md:text-6xl font-semibold">700<span class="text-indigo-300 text-3xl md:text-4xl">hrs</span></div>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-slate-400 mb-1">Manual estimate</div>
+          <div class="text-2xl text-slate-200 metric-num">800hrs</div>
+        </div>
+      </div>
+      <!-- bar -->
+      <div class="relative h-3 rounded-full bg-white/10 overflow-hidden">
+        <div class="absolute inset-y-0 left-0 adoption-bar rounded-full" style="width: 87.5%"></div>
+      </div>
+      <div class="flex justify-between text-[11px] text-slate-400 mt-2 font-mono">
+        <span>0</span><span>200</span><span class="text-slate-300">400</span><span class="text-slate-300">600</span><span class="text-white">700 saved</span><span>800 estimated</span>
+      </div>
+    </div>
+
+    <!-- Secondary metrics -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">48<span class="text-indigo-300 text-xl"> comp</span></div>
+        <div class="text-sm text-slate-300 mt-1">components serving AI context</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">6 <span class="text-indigo-300 text-xl">tools</span></div>
+        <div class="text-sm text-slate-300 mt-1">AI tools integrated</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">1 <span class="text-indigo-300 text-xl">MCP</span></div>
+        <div class="text-sm text-slate-300 mt-1">live design system bridge</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">2 <span class="text-indigo-300 text-xl">disciplines</span></div>
+        <div class="text-sm text-slate-300 mt-1">design and engineering unified</div>
+      </div>
+    </div>
+
+    <!-- Pull quotes -->
+    <div class="mt-12 max-w-3xl space-y-8">
+      <div class="quote-rule pl-6">
+        <p class="text-xl md:text-2xl text-white leading-snug">
+          "Preparing an enterprise design system for AI is the ultimate evolution of outreach and enablement. By treating LLMs as a critical new user persona, we moved the design system beyond a passive code repository into an active, intelligent infrastructure layer."
+        </p>
+        <div class="mt-3 text-sm text-slate-400">— Leadership Retrospective, AI-Ready Design Systems initiative</div>
+      </div>
+      <div class="quote-rule pl-6">
+        <p class="text-xl md:text-2xl text-white leading-snug">
+          "Andrew architected and prototyped one of Verizon's first Model Context Protocol (MCP) servers, creating a live bridge between AI agents and VDS documentation."
+        </p>
+        <div class="mt-3 text-sm text-slate-400">— Richard Dalton, 2025 Year-End Performance Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Reflections ───────────────────── -->
+<section id="reflections" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <span class="eyebrow text-indigo-600">05 — Reflections</span>
+      <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-4">What I'd carry forward.</h2>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        The infrastructure is the early win. The strategic model is the lasting asset.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 01</div>
+        <h3 class="text-lg text-slate-900 mb-2">Treat LLMs as a user persona, not a tool.</h3>
+        <p class="text-slate-600">The moment we asked what an AI needs from the design system, instead of how we use AI on the design system, the entire strategy changed. Treating LLMs as adopters unlocked a fundamentally different infrastructure approach.</p>
+      </div>
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 02</div>
+        <h3 class="text-lg text-slate-900 mb-2">Trailblaze in a way others can follow.</h3>
+        <p class="text-slate-600">Moving first only has value if others can replicate the path. Every architecture decision, from the MCP server to the JSON schemas to the IDE integrations, was built to be legible, documented, and extensible by the teams that follow.</p>
+      </div>
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 03</div>
+        <h3 class="text-lg text-slate-900 mb-2">Bet on where the industry is going, not where it is.</h3>
+        <p class="text-slate-600">AI coding assistants are already in every developer's hands. Design-to-code tools are maturing fast. The organizations that built AI-readable infrastructure now will set the standards everyone else adopts later.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── CTA / Footer ───────────────────── -->
+<section class="py-20 bg-slate-50 border-t border-slate-200">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div class="max-w-2xl">
+        <span class="eyebrow text-indigo-600">Next</span>
+        <h2 class="text-2xl md:text-3xl text-slate-900 mt-2 mb-3">Want the longer version of this story?</h2>
+        <p class="text-slate-600">I'm happy to walk through the architecture, the early use cases, and the strategic model in detail, and where VDS's AI-first approach is heading next.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="../index.html#contact" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-slate-900 text-white hover:bg-indigo-700 transition">
+          Get in touch
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="../index.html" class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-300 text-slate-700 hover:border-indigo-300 hover:text-indigo-700 transition">
+          Back to portfolio
+        </a>
+      </div>
+    </div>
+    <div class="mt-16 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
+      <span>© 2026 Andrew Pendleton · Senior Executive, Design Infrastructure & Agent-Native Systems</span>
+      <span class="font-mono text-[11px] tracking-widest uppercase">Case Study · 03 / AI-Ready Architecture</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
