@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study · Value-Driven Alignment: Cultivating Enterprise Adoption Through Cross-Functional Partnership</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/favicon-180.png">
+<style>
+  :root {
+    --indigo-50: #eef2ff;
+    --indigo-100: #e0e7ff;
+    --indigo-200: #c7d2fe;
+    --indigo-300: #a5b4fc;
+    --indigo-500: #6366f1;
+    --indigo-600: #4f46e5;
+    --indigo-700: #4338ca;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+  }
+  html { scroll-behavior: smooth; }
+  html, body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--slate-900); }
+  body { background: #fff; }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  h1, h2, h3, h4 { letter-spacing: -0.02em; }
+  h1 { font-weight: 600; line-height: 1.05; }
+  h2 { font-weight: 600; line-height: 1.15; }
+  h3 { font-weight: 600; line-height: 1.25; }
+  .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+  section { scroll-margin-top: 80px; }
+  .dot-grid {
+    background-image: radial-gradient(rgba(99,102,241,0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .pill-ring {
+    background: conic-gradient(from -90deg, #4f46e5 0deg, #6366f1 90deg, #818cf8 180deg, #a5b4fc 270deg, #4f46e5 360deg);
+  }
+  .metric-num { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+  .adoption-bar {
+    background: linear-gradient(90deg, #4f46e5 0%, #6366f1 60%, #818cf8 100%);
+  }
+  .pillar { transition: border-color .2s, box-shadow .2s, transform .2s; }
+  .pillar:hover { border-color: var(--indigo-300); box-shadow: 0 20px 40px -20px rgba(79,70,229,0.25); transform: translateY(-2px); }
+  .nav-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--slate-300); transition: background .2s, transform .2s; }
+  .nav-dot.active { background: var(--indigo-600); transform: scale(1.6); }
+  .quote-rule { border-left: 3px solid var(--indigo-500); }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  }
+  .pillar-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+  @media print {
+    .no-print { display: none; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ───────────────────── Top utility nav ───────────────────── -->
+<header class="no-print sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2 tracking-tight">
+      <span class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 text-white text-sm font-semibold flex items-center justify-center">AP</span>
+      <span class="hidden sm:inline text-slate-900">Andrew Pendleton</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#challenge" class="text-slate-600 hover:text-indigo-600 transition-colors">Challenge</a>
+      <a href="#approach" class="text-slate-600 hover:text-indigo-600 transition-colors">Approach</a>
+      <a href="#phases" class="text-slate-600 hover:text-indigo-600 transition-colors">Phases</a>
+      <a href="#results" class="text-slate-600 hover:text-indigo-600 transition-colors">Results</a>
+      <a href="#reflections" class="text-slate-600 hover:text-indigo-600 transition-colors">Reflections</a>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="https://www.linkedin.com/in/andrewpendleton/" target="_blank" rel="noopener noreferrer"
+         class="w-11 h-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
+         aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="../index.html#contact" class="px-5 py-2 rounded-full bg-slate-900 text-white hover:bg-indigo-600 transition-colors">
+        Get in touch
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ───────────────────── Hero ───────────────────── -->
+<section class="relative hero-bg text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-20" aria-hidden="true">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-indigo-500 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-indigo-300">Verizon Design System</span>
+      <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+      <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-indigo-300">2021 — Present</span>
+    </div>
+
+    <h1 class="text-4xl md:text-6xl max-w-4xl mb-6">
+      Value-Driven Alignment:
+      <span class="bg-gradient-to-r from-indigo-300 to-blue-200 bg-clip-text text-transparent">cultivating enterprise adoption</span>
+      through cross-functional partnership.
+    </h1>
+
+    <p class="text-lg md:text-xl text-slate-300 max-w-3xl mb-10">
+      How a deliberate stakeholder strategy built on empathy, tailored value propositions, shared governance, and measurable outcomes, moved VDS from a contested platform to a funded enterprise standard.
+    </p>
+
+    <!-- Headline metrics strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 max-w-4xl">
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">For Design</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">Validated</div>
+        <div class="text-xs text-slate-400 mt-1">pre-built, accessible UI asset library</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">For Product</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">Faster</div>
+        <div class="text-xs text-slate-400 mt-1">out-of-the-box core features & blocks</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">For Engineering</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">Extensible</div>
+        <div class="text-xs text-slate-400 mt-1">pre-tested, semantic components</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">Governance</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">Shared</div>
+        <div class="text-xs text-slate-400 mt-1">co-authored roadmap, not mandated</div>
+      </div>
+    </div>
+
+    <!-- Role meta -->
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Role</div>
+        <div class="text-slate-200">Sr. Director, Design Systems</div>
+      </div>
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Team</div>
+        <div class="text-slate-200">Design · Eng · Product · Content<br><span class="text-slate-400">US & India</span></div>
+      </div>
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Scope</div>
+        <div class="text-slate-200">Enterprise-wide</div>
+      </div>
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Mandate</div>
+        <div class="text-slate-200">None — earned, not enforced</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Challenge ───────────────────── -->
+<section id="challenge" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <span class="eyebrow text-indigo-600">01 — The Challenge</span>
+        <h2 class="text-3xl md:text-4xl text-slate-900 mt-3">The illusion of the mandate.</h2>
+      </div>
+      <div class="lg:col-span-8 space-y-5 text-slate-600 text-lg leading-relaxed">
+        <p>
+          The most common mistake in enterprise platform management is relying on an executive mandate to force component adoption. Mandates create compliance theater: teams do the bare minimum to pass audits while building custom, unaligned workarounds in the shadows to preserve their sprint velocity. This friction creates deep organizational fractures, pitting the central systems team against the delivery teams.
+        </p>
+        <p>
+          Recognizing that lasting alignment cannot be legislated, our leadership approach treated adoption as a <span class="text-slate-900 font-medium">relationship and value-exchange framework</span>. We set out to win the hearts and minds of the engineering, product, and design trios by solving their specific, day-to-day operational pain points.
+        </p>
+        <div class="quote-rule pl-5 mt-8 text-slate-900">
+          <p class="italic">"Your VDS 'product model' is a company-leading example of how to design, deliver, and manage software — an example we need more teams to adopt."</p>
+          <div class="mt-2 text-sm text-slate-500">— Richard Dalton, VP CX Design</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Before/after snapshot -->
+    <div class="mt-16 grid md:grid-cols-2 gap-6">
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-4">Before</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Executive mandates driving after-thought usage, not true integration</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Design, Product, and Engineering operating as siloed, autonomous divisions</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Design system value proposition focused only on design specific concerns</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Design system team positioned as enforcer, not enabler</li>
+        </ul>
+      </div>
+      <div class="p-7 rounded-2xl bg-gradient-to-br from-indigo-50 to-white border border-indigo-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-4">After</div>
+        <ul class="space-y-3 text-slate-800">
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Cross-functional collaboration with shared roadmap ownership</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Tailored value propositions securing buy-in from all three leadership verticals</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Skeptical organizational leads converted into active platform advocates</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Permanent corporate funding secured on measurable business outcomes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Approach: Value-Exchange Model ───────────────────── -->
+<section id="approach" class="py-24 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
+  <div class="absolute inset-0 dot-grid opacity-50" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5">
+        <span class="eyebrow text-indigo-600">02 — The Approach</span>
+        <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-6">The value-exchange model.</h2>
+        <p class="text-slate-600 text-lg leading-relaxed mb-6">
+          Design system adoption is earned through demonstrated value. The value-exchange model starts with understanding what each leadership vertical actually needs, then proving, explicitly, that the system solves it.
+        </p>
+        <p class="text-slate-600 leading-relaxed">
+          By mapping each stakeholder's pressures, tailoring the value proposition to their KPIs, and co-creating governance with their input, the system transformed from a contested platform into a shared asset that every vertical had a stake in protecting.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Influence, not authority</span>
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Value before adoption</span>
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Partnership, not policing</span>
+        </div>
+      </div>
+
+      <!-- Hub-and-spoke visual -->
+      <div class="lg:col-span-7">
+        <div class="flex items-center gap-4 max-w-xl mx-auto">
+
+          <!-- Source boxes -->
+          <div class="flex-none flex flex-col gap-3 self-center">
+            <div class="w-36 px-4 py-5 rounded-2xl border-2 border-indigo-600 bg-indigo-50 text-center shadow-md">
+              <div class="font-mono text-[10px] tracking-widest text-indigo-700 uppercase font-semibold leading-relaxed">Design<br>System</div>
+            </div>
+            <div class="w-36 px-4 py-4 rounded-2xl border border-indigo-300 bg-white text-center shadow-sm">
+              <div class="font-mono text-[10px] tracking-widest text-indigo-400 uppercase leading-relaxed">Value<br>Proof</div>
+            </div>
+          </div>
+
+          <!-- SVG connector: fans from source center to 3 destinations -->
+          <div class="flex-none">
+            <svg width="72" height="248" viewBox="0 0 72 248" fill="none">
+              <defs>
+                <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#6366f1"/>
+                </marker>
+              </defs>
+              <!-- Origin: 0,124 (center of source column) -->
+              <!-- To Design card center (y≈36) -->
+              <path d="M0,124 Q36,124 66,36" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#arr2)"/>
+              <!-- To Product card center (y≈124) -->
+              <line x1="0" y1="124" x2="66" y2="124" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#arr2)"/>
+              <!-- To Engineering card center (y≈212) -->
+              <path d="M0,124 Q36,124 66,212" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#arr2)"/>
+            </svg>
+          </div>
+
+          <!-- Destination cards -->
+          <div class="flex-1 flex flex-col gap-4">
+            <div class="p-4 rounded-2xl bg-white border border-indigo-200 shadow-sm">
+              <div class="font-mono text-[10px] tracking-widest text-indigo-600 uppercase mb-1.5">Design</div>
+              <div class="text-sm font-medium text-slate-800">Eliminates UX Debt & Compliance Risks</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-indigo-200 shadow-sm">
+              <div class="font-mono text-[10px] tracking-widest text-indigo-600 uppercase mb-1.5">Product</div>
+              <div class="text-sm font-medium text-slate-800">Accelerates Sprints & Feature Launch Velocity</div>
+            </div>
+            <div class="p-4 rounded-2xl bg-white border border-indigo-200 shadow-sm">
+              <div class="font-mono text-[10px] tracking-widest text-indigo-600 uppercase mb-1.5">Engineering</div>
+              <div class="text-sm font-medium text-slate-800">Eradicates Redundant Boilerplate Code</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Four Phases Deep Dive ───────────────────── -->
+<section id="phases" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-14">
+      <span class="eyebrow text-indigo-600">03 — The Phases</span>
+      <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-4">Four phases, one aligned enterprise.</h2>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        Each phase built toward a single outcome: an enterprise that adopted the design system not because it had to, but because it wanted to.
+      </p>
+    </div>
+
+    <!-- Phase 01 — Empathy Mapping -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 01</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="text-xl text-slate-900">Empathy Mapping</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Understanding each vertical's pressures before prescribing solutions.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Conducted an internal listening tour with directors and VPs across Design, Product, and Engineering to map their unique operational pressures.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Uncovered key friction points stalling product delivery: designers bogged down by repetitive layouts, product managers fearing missed deadlines, engineers drowning in technical debt.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Identified exactly where the design system could step in to unlock velocity for each team.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">42<span class="text-indigo-600">+</span></div>
+          <div class="text-sm text-slate-600">cross-disciplinary stakeholders engaged</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">3</div>
+          <div class="text-sm text-slate-600">leadership verticals mapped</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 02 — Tailoring the Value Proposition -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 02</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3 class="text-xl text-slate-900">Value Proposition</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Speaking each vertical's language, in terms of their KPIs.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Translated the design system's capabilities into three distinct value messages tailored to the explicit KPIs of each executive vertical.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Framed the system as a liberating infrastructure for Design, a prototype-accelerator for Product, and a regression-free code library for Engineering.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Turned skeptical department heads into active system champions.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">3</div>
+          <div class="text-sm text-slate-600">distinct value propositions crafted</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">0<span class="text-indigo-600"> mandates</span></div>
+          <div class="text-sm text-slate-600">required to secure buy-in</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 03 — Governance Model -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 03</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 class="text-xl text-slate-900">Governance Model</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Giving delivery teams a seat at the table, permanently.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Dismantled the top-down, centralized control model.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Established regular meetups with department leaders to ensure shared governance and co-authored roadmap standards.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Shifted the organizational culture from passive compliance to active ownership.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Transformed former internal critics into platform advocates.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">3</div>
+          <div class="text-sm text-slate-600">leadership verticals in recurring alignment cadence</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">0</div>
+          <div class="text-sm text-slate-600">top-down decisions required post-model</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 04 — Bottom-Line Impact -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 04</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3 class="text-xl text-slate-900">Bottom-Line Impact</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Translating system output into business outcomes leadership could fund.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Established transparent telemetry pipelines to measure and broadcast engineering hours saved, accessibility risks avoided, and launch acceleration vectors.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Transitioned from abstract output metrics (like "number of components built") to actual business outcomes (like dollars saved and speed-to-market margins).</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Proved the system's financial return, cementing it as an essential enterprise asset rather than an experimental project.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">86<span class="text-indigo-600">%</span></div>
+          <div class="text-sm text-slate-600">adoption observed across digital experiences</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">Q4<span class="text-indigo-600"> +capital</span></div>
+          <div class="text-sm text-slate-600">additional funding secured to expand reach</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ───────────────────── Results ───────────────────── -->
+<section id="results" class="py-24 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 text-white relative overflow-hidden">
+  <div class="absolute inset-0 hero-grid opacity-50" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <span class="eyebrow text-indigo-300">04 — Results</span>
+      <h2 class="text-3xl md:text-4xl text-white mt-3 mb-4">The compounding number.</h2>
+      <p class="text-slate-300 text-lg leading-relaxed">
+        Partnership is the precondition for everything downstream: stakeholder advocacy, shared ownership, sustained funding, and measurable adoption.
+      </p>
+    </div>
+
+    <!-- Big adoption progress bar -->
+    <div class="rounded-2xl bg-slate-900/40 border border-white/10 p-8 mb-8">
+      <div class="flex items-end justify-between mb-3">
+        <div>
+          <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Enterprise VDS adoption</div>
+          <div class="metric-num text-5xl md:text-6xl font-semibold">86<span class="text-indigo-300 text-3xl md:text-4xl">%</span></div>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-slate-400 mb-1">Target</div>
+          <div class="text-2xl text-slate-200 metric-num">75%</div>
+        </div>
+      </div>
+      <div class="relative h-3 rounded-full bg-white/10 overflow-hidden">
+        <div class="absolute inset-y-0 left-0 adoption-bar rounded-full" style="width: 86%"></div>
+        <div class="absolute inset-y-0" style="left: 75%; width: 2px; background: rgba(255,255,255,0.6);"></div>
+      </div>
+      <div class="flex justify-between text-[11px] text-slate-400 mt-2 font-mono">
+        <span>0%</span><span>25%</span><span class="text-slate-300">50%</span><span class="text-slate-300">75% target</span><span class="text-white">86% actual</span>
+      </div>
+    </div>
+
+    <!-- Secondary metrics -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">3 <span class="text-indigo-300 text-xl">verticals</span></div>
+        <div class="text-sm text-slate-300 mt-1">aligned without mandate</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">0 <span class="text-indigo-300 text-xl">mandates</span></div>
+        <div class="text-sm text-slate-300 mt-1">influence, not authority</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">Permanent</div>
+        <div class="text-sm text-slate-300 mt-1">corporate funding secured</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">Q4<span class="text-indigo-300"> +capital</span></div>
+        <div class="text-sm text-slate-300 mt-1">roadmap accelerated a year early</div>
+      </div>
+    </div>
+
+    <!-- Pull quote -->
+    <div class="mt-12 max-w-3xl">
+      <div class="quote-rule pl-6">
+        <p class="text-xl md:text-2xl text-white leading-snug">
+          "Adoption is a natural byproduct of delivered value, aligning the system with the organic motivations of Design, Product, and Engineering successfully broke down historical organizational silos."
+        </p>
+        <div class="mt-3 text-sm text-slate-400">— Reflection from the VDS Partnership & Alignment retrospective.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Reflections ───────────────────── -->
+<section id="reflections" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <span class="eyebrow text-indigo-600">05 — Reflections</span>
+      <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-4">What I'd carry forward.</h2>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        The alignment is the headline. The model is the asset.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 01</div>
+        <h3 class="text-lg text-slate-900 mb-2">Lead with influence, not authority.</h3>
+        <p class="text-slate-600">The product model that earns trust outlasts any mandate. Diplomatic, value-driven leadership is what makes a platform worth adopting and worth replicating.</p>
+      </div>
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 02</div>
+        <h3 class="text-lg text-slate-900 mb-2">Solve their problem, not yours.</h3>
+        <p class="text-slate-600">Aligning the system with each vertical's organic motivations is what turns skeptics into advocates. That's the mechanism behind the model.</p>
+      </div>
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 03</div>
+        <h3 class="text-lg text-slate-900 mb-2">Prove value before asking for commitment.</h3>
+        <p class="text-slate-600">Measurable outcomes, not outputs, are what secure permanent investment. Funding follows proof.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── CTA / Footer ───────────────────── -->
+<section class="py-20 bg-slate-50 border-t border-slate-200">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div class="max-w-2xl">
+        <span class="eyebrow text-indigo-600">Next</span>
+        <h2 class="text-2xl md:text-3xl text-slate-900 mt-2 mb-3">Want to talk through the partnership model?</h2>
+        <p class="text-slate-600">I'm happy to walk through the stakeholder strategy, the governance approach, and how this value-exchange model translates to other platform contexts as well as where the work is heading next.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="../index.html#contact" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-slate-900 text-white hover:bg-indigo-700 transition">
+          Get in touch
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="../index.html" class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-300 text-slate-700 hover:border-indigo-300 hover:text-indigo-700 transition">
+          Back to portfolio
+        </a>
+      </div>
+    </div>
+    <div class="mt-16 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
+      <span>© 2026 Andrew Pendleton · Senior Executive, Design Infrastructure & Agent‑Native Systems</span>
+      <span class="font-mono text-[11px] tracking-widest uppercase">Case Study · 02 / Partnership & Value-Driven Alignment</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

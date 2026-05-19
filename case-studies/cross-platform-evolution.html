@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study · Cross-Platform Evolution: Architecting a Multi-Channel Design System Ecosystem</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/img/favicon/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/favicon-180.png">
+<style>
+  :root {
+    --indigo-50: #eef2ff;
+    --indigo-100: #e0e7ff;
+    --indigo-200: #c7d2fe;
+    --indigo-300: #a5b4fc;
+    --indigo-500: #6366f1;
+    --indigo-600: #4f46e5;
+    --indigo-700: #4338ca;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+  }
+  html { scroll-behavior: smooth; }
+  html, body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--slate-900); }
+  body { background: #fff; }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+  h1, h2, h3, h4 { letter-spacing: -0.02em; }
+  h1 { font-weight: 600; line-height: 1.05; }
+  h2 { font-weight: 600; line-height: 1.15; }
+  h3 { font-weight: 600; line-height: 1.25; }
+  .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; }
+  section { scroll-margin-top: 80px; }
+  .dot-grid {
+    background-image: radial-gradient(rgba(99,102,241,0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .pill-ring {
+    background: conic-gradient(from -90deg, #4f46e5 0deg, #6366f1 90deg, #818cf8 180deg, #a5b4fc 270deg, #4f46e5 360deg);
+  }
+  .metric-num { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+  .adoption-bar {
+    background: linear-gradient(90deg, #4f46e5 0%, #6366f1 60%, #818cf8 100%);
+  }
+  .pillar { transition: border-color .2s, box-shadow .2s, transform .2s; }
+  .pillar:hover { border-color: var(--indigo-300); box-shadow: 0 20px 40px -20px rgba(79,70,229,0.25); transform: translateY(-2px); }
+  .nav-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--slate-300); transition: background .2s, transform .2s; }
+  .nav-dot.active { background: var(--indigo-600); transform: scale(1.6); }
+  .quote-rule { border-left: 3px solid var(--indigo-500); }
+  .hero-bg {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  }
+  .pillar-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+  @media print {
+    .no-print { display: none; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- ───────────────────── Top utility nav ───────────────────── -->
+<header class="no-print sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2 tracking-tight">
+      <span class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 text-white text-sm font-semibold flex items-center justify-center">AP</span>
+      <span class="hidden sm:inline text-slate-900">Andrew Pendleton</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#challenge" class="text-slate-600 hover:text-indigo-600 transition-colors">Challenge</a>
+      <a href="#approach" class="text-slate-600 hover:text-indigo-600 transition-colors">Approach</a>
+      <a href="#phases" class="text-slate-600 hover:text-indigo-600 transition-colors">Phases</a>
+      <a href="#results" class="text-slate-600 hover:text-indigo-600 transition-colors">Results</a>
+      <a href="#reflections" class="text-slate-600 hover:text-indigo-600 transition-colors">Reflections</a>
+    </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="https://www.linkedin.com/in/andrewpendleton/" target="_blank" rel="noopener noreferrer"
+         class="w-11 h-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
+         aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="../index.html#contact" class="px-5 py-2 rounded-full bg-slate-900 text-white hover:bg-indigo-600 transition-colors">
+        Get in touch
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ───────────────────── Hero ───────────────────── -->
+<section class="relative hero-bg text-white overflow-hidden">
+  <div class="absolute inset-0 opacity-20" aria-hidden="true">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-indigo-500 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-indigo-300">Verizon Design System</span>
+      <span class="w-1 h-1 rounded-full bg-indigo-400"></span>
+      <span class="font-mono text-[11px] tracking-[0.18em] uppercase text-indigo-300">2025 — 2026</span>
+    </div>
+
+    <h1 class="text-4xl md:text-6xl max-w-4xl mb-6">
+      Cross-Platform Evolution: Architecting
+      <span class="bg-gradient-to-r from-indigo-300 to-blue-200 bg-clip-text text-transparent">a Multi-Channel Design System Ecosystem</span>.
+    </h1>
+
+    <p class="text-lg md:text-xl text-slate-300 max-w-3xl mb-10">
+      How a token-first architecture and federated governance model expanded VDS from a web component library to a unified native platform, delivering iOS and Android parity a full year ahead of schedule.
+    </p>
+
+    <!-- Headline metrics strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 max-w-4xl">
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">Native components delivered</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">45<span class="text-indigo-300 text-xl"> of 48</span></div>
+        <div class="text-xs text-slate-400 mt-1">2026 target</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">Token parity</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">100<span class="text-indigo-300">%</span></div>
+        <div class="text-xs text-slate-400 mt-1">across all platforms</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">Delivered</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">1<span class="text-indigo-300">yr</span></div>
+        <div class="text-xs text-slate-400 mt-1">ahead of schedule</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="text-xs uppercase tracking-widest text-indigo-300 mb-2">Platforms unified</div>
+        <div class="metric-num text-3xl md:text-4xl font-semibold">3</div>
+        <div class="text-xs text-slate-400 mt-1">Web · iOS · Android</div>
+      </div>
+    </div>
+
+    <!-- Role meta -->
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-3 gap-6 text-sm">
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Role</div>
+        <div class="text-slate-200">Sr. Director, Design Systems</div>
+      </div>
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Team</div>
+        <div class="text-slate-200">Design · Eng · Product · Content<br><span class="text-slate-400">US & India</span></div>
+      </div>
+      <div>
+        <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Surfaces</div>
+        <div class="text-slate-200">Web, iOS (SwiftUI), Android (Compose)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Challenge ───────────────────── -->
+<section id="challenge" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <span class="eyebrow text-indigo-600">01 — The Challenge</span>
+        <h2 class="text-3xl md:text-4xl text-slate-900 mt-3">The multi-channel fracture.</h2>
+      </div>
+      <div class="lg:col-span-8 space-y-5 text-slate-600 text-lg leading-relaxed">
+        <p>
+          When a design system is confined to a single platform, the broader ecosystem naturally fractures. As mobile native apps grew in strategic importance at Verizon, native engineering teams were forced to independently interpret design specifications leading to fragmented user experiences, duplicated discovery cycles, and a mounting maintenance tax across Web, iOS, and Android.
+        </p>
+        <p>
+          The instinct is to treat this as a component problem. It's not. It's an infrastructure problem. We repositioned the design system from a web code library to an omni-channel foundational platform built on token-first architecture, shared governance, and native libraries that give mobile teams the same leverage web teams have had for years.
+        </p>
+        <div class="quote-rule pl-5 mt-8 text-slate-900">
+          The gap was structural rather than aspirational. <span class="font-medium">Native developers had no VDS components to build with.</span> Every component, every interaction pattern, every accessibility behavior was being reinvented in isolation across both Android and iOS.
+        </div>
+      </div>
+    </div>
+
+    <!-- Before/after snapshot -->
+    <div class="mt-16 grid md:grid-cols-2 gap-6">
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-4">Before</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Web-only component library with no native equivalent</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Native teams independently interpreting design specifications</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Fragmented user experiences across desktop and mobile apps</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-none"></span>Three separate development cycles for every brand or compliance update</li>
+        </ul>
+      </div>
+      <div class="p-7 rounded-2xl bg-gradient-to-br from-indigo-50 to-white border border-indigo-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-4">After</div>
+        <ul class="space-y-3 text-slate-800">
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Unified token engine compiling to Web, iOS, and Android simultaneously</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>45 native components giving mobile teams parity with web</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Consistent brand and accessibility standards across all 4 flagship Verizon apps</li>
+          <li class="flex gap-3"><span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-600 flex-none"></span>Single release cadence across platforms, eliminating mobile-release lag</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Approach: Timeline ───────────────────── -->
+<section id="approach" class="py-24 bg-slate-50 border-y border-slate-200 relative overflow-hidden">
+  <div class="absolute inset-0 dot-grid opacity-50" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-5">
+        <span class="eyebrow text-indigo-600">02 — The Approach</span>
+        <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-6">Unifying the core engine.</h2>
+        <p class="text-slate-600 text-lg leading-relaxed mb-6">
+          Platform parity is achieved by building the right foundation first. A token-first architecture means every design decision such as color, spacing, type, and motion compiles automatically to every platform runtime. Components become portable because the substrate they sit on is platform-agnostic.
+        </p>
+        <p class="text-slate-600 leading-relaxed">
+          From that foundation, we built in four sequential phases: establish the token engine, build native component libraries, federate governance across mobile verticals, and scale to every digital touchpoint in the Verizon ecosystem.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Token-first, not platform-first</span>
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Parity by design, not by accident</span>
+          <span class="px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-sm">Ship early, scale continuously</span>
+        </div>
+      </div>
+
+      <!-- Timeline visual -->
+      <div class="lg:col-span-7 flex items-center">
+        <div class="overflow-x-auto pb-4 w-full">
+          <div class="flex items-start min-w-max">
+            <!-- Phase 01 -->
+            <div class="flex items-start">
+              <div class="w-44 rounded-2xl bg-white border border-indigo-200 shadow-md p-5 text-center">
+                <div class="font-mono text-xs text-indigo-600 mb-2">PHASE · 01</div>
+                <div class="text-sm font-medium text-slate-900">Token-First Architecture</div>
+                <div class="text-xs text-slate-500 mt-1">Build the platform-agnostic substrate</div>
+              </div>
+              <div class="flex items-center px-3 mt-10 text-indigo-400 text-xl font-light">→</div>
+            </div>
+            <!-- Phase 02 -->
+            <div class="flex items-start">
+              <div class="w-44 rounded-2xl bg-white border border-indigo-200 shadow-md p-5 text-center">
+                <div class="font-mono text-xs text-indigo-600 mb-2">PHASE · 02</div>
+                <div class="text-sm font-medium text-slate-900">Native Component Parity</div>
+                <div class="text-xs text-slate-500 mt-1">Give mobile teams the same leverage</div>
+              </div>
+              <div class="flex items-center px-3 mt-10 text-indigo-400 text-xl font-light">→</div>
+            </div>
+            <!-- Phase 03 -->
+            <div class="flex items-start">
+              <div class="w-44 rounded-2xl bg-white border border-indigo-200 shadow-md p-5 text-center">
+                <div class="font-mono text-xs text-indigo-600 mb-2">PHASE · 03</div>
+                <div class="text-sm font-medium text-slate-900">Federated Governance</div>
+                <div class="text-xs text-slate-500 mt-1">Synchronize without centralizing</div>
+              </div>
+              <div class="flex items-center px-3 mt-10 text-indigo-400 text-xl font-light">→</div>
+            </div>
+            <!-- Phase 04 -->
+            <div class="flex items-start">
+              <div class="w-44 rounded-2xl bg-white border border-indigo-200 shadow-md p-5 text-center">
+                <div class="font-mono text-xs text-indigo-600 mb-2">PHASE · 04</div>
+                <div class="text-sm font-medium text-slate-900">All Digital Experiences</div>
+                <div class="text-xs text-slate-500 mt-1">Scale to every touchpoint</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Four Phases Deep Dive ───────────────────── -->
+<section id="phases" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-14">
+      <span class="eyebrow text-indigo-600">03 — The Phases</span>
+      <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-4">Four phases, one unified platform.</h2>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        Each phase built on the last. The token engine made components portable. The components gave native teams leverage. Governance synchronized delivery. Scale extended the investment across the full enterprise ecosystem.
+      </p>
+    </div>
+
+    <!-- Phase 01 — Token-First Architecture -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 01</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">Token-First</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Building the platform-agnostic substrate that makes everything else portable.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Built an automated token compilation engine using platform-agnostic JSON schemas.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Tokens distribute values into native formats: CSS/Tailwind for Web, SwiftUI/Swift for iOS, Jetpack Compose/Kotlin for Android.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Eliminated visual design QA loops across all platform runtimes.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Brand-wide styling updates such as color, spacing, and type now compile instantly across all three platforms.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">100%</div>
+          <div class="text-sm text-slate-600">token parity across Web, iOS, Android</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">Weeks <span class="text-indigo-600">→ sec</span></div>
+          <div class="text-sm text-slate-600">brand sync time across platforms</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 02 — Native Component Parity -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 02</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">Native Parity</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Giving native developers the same leverage web teams have had for years.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Built native component libraries for iOS (SwiftUI) and Android (Jetpack Compose) using shared behavioral and accessibility specifications.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Embedded Dynamic Type across all native components as a system primitive, ensuring accessible text sizing by default.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Utilized AI code translation to refactor existing web components for native use, dramatically accelerating delivery.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Secured Q4 CapEx investment to pull the 2026 roadmap forward, delivering the library a full year ahead of schedule.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">45 <span class="text-slate-500 text-base font-normal">of 48</span></div>
+          <div class="text-sm text-slate-600">components delivered per platform</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">1<span class="text-indigo-600"> yr</span></div>
+          <div class="text-sm text-slate-600">ahead of original schedule</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 03 — Federated Governance -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200 mb-6">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 03</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">Governance</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Synchronizing mobile roadmaps through shared ownership, not top-down control.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Established cross-platform mobile working groups with leadership from iOS and Android verticals.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Brought native mobile engineering leads to the core systems table.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Synchronized multi-channel product roadmaps, eliminating mobile-release lag.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Teams now ship features to app stores and desktop web simultaneously.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">4<span class="text-indigo-600"> apps</span></div>
+          <div class="text-sm text-slate-600">flagship Verizon apps aligned</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">1<span class="text-indigo-600"> cadence</span></div>
+          <div class="text-sm text-slate-600">unified release schedule across Web, iOS, Android</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Phase 04 — All Digital Experiences -->
+    <article class="pillar grid lg:grid-cols-12 gap-8 p-8 rounded-2xl border border-slate-200">
+      <div class="lg:col-span-3">
+        <div class="pillar-num text-indigo-600 mb-3">PHASE · 04</div>
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="text-2xl text-slate-900">All Experiences</h3>
+        </div>
+        <p class="text-slate-500 text-sm">Scaling the foundation to serve every Verizon digital touchpoint.</p>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">What we did</div>
+        <ul class="space-y-3 text-slate-700">
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Scaled the token and component architecture to support secondary touchpoints including kiosks, hardware displays, and third-party portals.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>VDS Native became the foundational UI layer across GTS and all 4 TPD flagship apps.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>The unified system established a single source of truth for all Verizon digital experiences.</li>
+          <li class="flex gap-3"><span class="mt-2 w-1 h-1 rounded-full bg-indigo-500 flex-none"></span>Reduced the cost and complexity of launching new customer touchpoints through reusable, platform-portable infrastructure.</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-4 space-y-3">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-slate-400 mb-3">Signals it worked</div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">3<span class="text-indigo-600"> platforms</span></div>
+          <div class="text-sm text-slate-600">Web · iOS · Android unified</div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="metric-num text-2xl font-semibold text-slate-900">4 <span class="text-indigo-600">→ 1</span></div>
+          <div class="text-sm text-slate-600">native platform combinations consolidated</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ───────────────────── Results ───────────────────── -->
+<section id="results" class="py-24 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 text-white relative overflow-hidden">
+  <div class="absolute inset-0 hero-grid opacity-50" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <span class="eyebrow text-indigo-300">04 — Results</span>
+      <h2 class="text-3xl md:text-4xl text-white mt-3 mb-4">The compounding platform.</h2>
+      <p class="text-slate-300 text-lg leading-relaxed">
+        Platform parity is a leading indicator for everything downstream: accessibility coverage, ship velocity, brand consistency, and reduced engineering overhead.
+      </p>
+    </div>
+
+    <!-- Big component progress bar -->
+    <div class="rounded-2xl bg-slate-900/40 border border-white/10 p-8 mb-8">
+      <div class="flex items-end justify-between mb-3">
+        <div>
+          <div class="text-indigo-300 text-xs uppercase tracking-widest mb-1">Native components delivered per platform</div>
+          <div class="metric-num text-5xl md:text-6xl font-semibold">45<span class="text-indigo-300 text-3xl md:text-4xl"> of 48</span></div>
+        </div>
+        <div class="text-right">
+          <div class="text-xs text-slate-400 mb-1">Target</div>
+          <div class="text-2xl text-slate-200 metric-num">48</div>
+        </div>
+      </div>
+      <!-- bar -->
+      <div class="relative h-3 rounded-full bg-white/10 overflow-hidden">
+        <div class="absolute inset-y-0 left-0 adoption-bar rounded-full" style="width: 93.75%"></div>
+      </div>
+      <div class="flex justify-between text-[11px] text-slate-400 mt-2 font-mono">
+        <span>0</span><span>12</span><span class="text-slate-300">24</span><span class="text-slate-300">36</span><span class="text-white">45 delivered</span><span>48 target</span>
+      </div>
+    </div>
+
+    <!-- Secondary metrics -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">100<span class="text-indigo-300">%</span></div>
+        <div class="text-sm text-slate-300 mt-1">token parity across all platforms</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">1<span class="text-indigo-300 text-xl"> yr</span></div>
+        <div class="text-sm text-slate-300 mt-1">ahead of original schedule</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">3 <span class="text-indigo-300 text-xl">platforms</span></div>
+        <div class="text-sm text-slate-300 mt-1">Web · iOS · Android unified</div>
+      </div>
+      <div class="bg-slate-900/60 p-6">
+        <div class="metric-num text-3xl font-semibold">4 <span class="text-indigo-300 text-xl">apps</span></div>
+        <div class="text-sm text-slate-300 mt-1">flagship Verizon apps served</div>
+      </div>
+    </div>
+
+    <!-- Pull quotes -->
+    <div class="mt-12 max-w-3xl space-y-8">
+      <div class="quote-rule pl-6">
+        <p class="text-xl md:text-2xl text-white leading-snug">
+          "This critical enablement piece allows native developers to finally achieve parity with web teams, streamlining development across the mobile application ecosystem...<br/><br/>
+          By breaking down silos between the web and mobile development teams, Andrew's team was able to deliver a unified experience that serves the broader engineering organization."
+        </p>
+        <div class="mt-3 text-sm text-slate-400">— Richard Dalton, VP CX Design</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── Reflections ───────────────────── -->
+<section id="reflections" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-3xl mb-12">
+      <span class="eyebrow text-indigo-600">05 — Reflections</span>
+      <h2 class="text-3xl md:text-4xl text-slate-900 mt-3 mb-4">What I'd carry forward.</h2>
+      <p class="text-slate-600 text-lg leading-relaxed">
+        The components are the headline. The architecture and the decision-making model are the asset.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 01</div>
+        <h3 class="text-lg text-slate-900 mb-2">Use AI as a development accelerant, not just a product feature.</h3>
+        <p class="text-slate-600">AI code translation from web to native was an internal force multiplier. By using AI to refactor existing web components for native runtimes, the team compressed a multi-year delivery arc into months.</p>
+      </div>
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 02</div>
+        <h3 class="text-lg text-slate-900 mb-2">Strategic funding at the right moment compounds outcomes.</h3>
+        <p class="text-slate-600">Identifying and securing Q4 CapEx to pull the 2026 roadmap forward was deliberate. The right investment at the right phase of maturity changes what's possible.</p>
+      </div>
+      <div class="p-7 rounded-2xl bg-slate-50 border border-slate-200">
+        <div class="font-mono text-[11px] tracking-widest uppercase text-indigo-600 mb-3">Lesson 03</div>
+        <h3 class="text-lg text-slate-900 mb-2">Accessibility is and should always be foundational.</h3>
+        <p class="text-slate-600">Embedding Dynamic Type and accessibility standards into every native component means every adopting team inherits inclusive design without additional effort. That's the difference between compliance as a gate and accessibility as infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────── CTA / Footer ───────────────────── -->
+<section class="py-20 bg-slate-50 border-t border-slate-200">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div class="max-w-2xl">
+        <span class="eyebrow text-indigo-600">Next</span>
+        <h2 class="text-2xl md:text-3xl text-slate-900 mt-2 mb-3">Want the longer version of this story?</h2>
+        <p class="text-slate-600">I'm happy to walk through the token architecture, the governance model, and the acceleration playbook in detail as well as where VDS Native is heading next as the platform scales across the Verizon ecosystem.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="../index.html#contact" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-slate-900 text-white hover:bg-indigo-700 transition">
+          Get in touch
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="../index.html" class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-slate-300 text-slate-700 hover:border-indigo-300 hover:text-indigo-700 transition">
+          Back to portfolio
+        </a>
+      </div>
+    </div>
+    <div class="mt-16 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
+      <span>© 2026 Andrew Pendleton · Senior Executive, Design Infrastructure & Agent‑Native Systems</span>
+      <span class="font-mono text-[11px] tracking-widest uppercase">Case Study · 02 / Cross-Platform Evolution</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
