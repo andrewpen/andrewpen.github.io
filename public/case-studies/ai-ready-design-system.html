@@ -28,6 +28,7 @@
     --slate-800: #1e293b;
     --slate-900: #0f172a;
   }
+  html { scroll-behavior: smooth; }
   html, body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--slate-900); }
   body { background: #fff; }
   .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
@@ -54,16 +55,7 @@
   .nav-dot.active { background: var(--indigo-600); transform: scale(1.6); }
   .quote-rule { border-left: 3px solid var(--indigo-500); }
   .hero-bg {
-    background:
-      radial-gradient(1200px 600px at 90% -10%, rgba(99,102,241,0.35), transparent 60%),
-      radial-gradient(900px 500px at -10% 110%, rgba(59,130,246,0.25), transparent 60%),
-      linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  }
-  .hero-grid {
-    background-image:
-      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 56px 56px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
   }
   .pillar-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
   @media print {
@@ -75,32 +67,37 @@
 <body class="antialiased">
 
 <!-- ───────────────────── Top utility nav ───────────────────── -->
-<header class="no-print sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-slate-200">
-  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-    <a href="../index.html" class="flex items-center gap-2 text-slate-700 hover:text-indigo-700 transition">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-      <span class="text-sm">Back to portfolio</span>
+<header class="no-print sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
+  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="../index.html" class="flex items-center gap-2 tracking-tight">
+      <span class="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 text-white text-sm font-semibold flex items-center justify-center">AP</span>
+      <span class="hidden sm:inline text-slate-900">Andrew Pendleton</span>
     </a>
-    <div class="hidden md:flex items-center gap-6 text-sm text-slate-500">
-      <a href="#challenge" class="hover:text-indigo-700 transition">Challenge</a>
-      <a href="#approach" class="hover:text-indigo-700 transition">Approach</a>
-      <a href="#pipeline" class="hover:text-indigo-700 transition">Pipeline</a>
-      <a href="#results" class="hover:text-indigo-700 transition">Results</a>
-      <a href="#reflections" class="hover:text-indigo-700 transition">Reflections</a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#challenge" class="text-slate-600 hover:text-indigo-600 transition-colors">Challenge</a>
+      <a href="#approach" class="text-slate-600 hover:text-indigo-600 transition-colors">Approach</a>
+      <a href="#pipeline" class="text-slate-600 hover:text-indigo-600 transition-colors">Pipeline</a>
+      <a href="#results" class="text-slate-600 hover:text-indigo-600 transition-colors">Results</a>
+      <a href="#reflections" class="text-slate-600 hover:text-indigo-600 transition-colors">Reflections</a>
     </div>
-    <span class="font-mono text-[11px] tracking-widest text-slate-400 uppercase">Case Study · 03</span>
-  </div>
+    <div class="hidden md:flex items-center gap-3">
+      <a href="https://www.linkedin.com/in/andrewpendleton/" target="_blank" rel="noopener noreferrer"
+         class="w-11 h-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
+         aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="../index.html#contact" class="px-5 py-2 rounded-full bg-slate-900 text-white hover:bg-indigo-600 transition-colors">
+        Get in touch
+      </a>
+    </div>
+  </nav>
 </header>
 
 <!-- ───────────────────── Hero ───────────────────── -->
 <section class="relative hero-bg text-white overflow-hidden">
-  <div class="absolute inset-0 hero-grid opacity-60" aria-hidden="true"></div>
-  <div class="absolute top-10 right-10 hidden lg:block opacity-30" aria-hidden="true">
-    <div class="w-64 h-64 rounded-full border border-indigo-300/40 flex items-center justify-center">
-      <div class="w-44 h-44 rounded-full border border-indigo-300/40 flex items-center justify-center">
-        <div class="w-24 h-24 rounded-full pill-ring opacity-90"></div>
-      </div>
-    </div>
+  <div class="absolute inset-0 opacity-20" aria-hidden="true">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-indigo-500 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500 rounded-full blur-3xl"></div>
   </div>
 
   <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-24 md:pt-28 md:pb-32">

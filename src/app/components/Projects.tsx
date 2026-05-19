@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { projects } from "../content";
 
 export function Projects() {
@@ -13,16 +14,21 @@ export function Projects() {
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {projects.map((p) => (
-            <div
+            <a
               key={p.title}
+              href={p.caseStudyHref}
               className="group relative p-7 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 hover:border-indigo-300 hover:shadow-xl transition-all overflow-hidden"
             >
               <div className="absolute -top-12 -right-12 w-40 h-40 bg-indigo-100 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
               <div className="relative">
-                <div className="mb-6">
+                <div className="flex items-center justify-between mb-6">
                   <span className="px-3 py-1 rounded-full bg-indigo-50 text-indigo-700">
                     {p.tag}
                   </span>
+                  <ArrowUpRight
+                    className="text-slate-400 group-hover:text-indigo-600 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all"
+                    size={20}
+                  />
                 </div>
                 <h3 className="text-slate-900 mb-3">{p.title}</h3>
                 <p className="text-slate-600 mb-6">{p.text}</p>
@@ -30,7 +36,7 @@ export function Projects() {
                   {p.metric}
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

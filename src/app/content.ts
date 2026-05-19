@@ -168,21 +168,21 @@ export const projects = [
     title: "AI-Ready Architecture: Transforming VDS into an LLM Knowledge Source",
     text: "Transformed the Verizon Design System from a passive code repository into an active AI infrastructure layer. Normalized 48 components into machine-readable JSON schemas, shipped one of Verizon's first MCP servers to expose live VDS context to AI agents, and integrated VDS into 6 AI tools across design and engineering — making compliant code the default output of every AI tool in the ecosystem.",
     metric: "700 hrs reclaimed · 48 components normalized · 6 AI tools integrated",
-    caseStudyHref: "/case_studies/ai-ready-design-system_case_study/ai-ready-design-system.html",
+    caseStudyHref: "/case-studies/ai-ready-design-system.html",
   },
   {
     tag: "Partnership & Adoption",
     title: "Value-Driven Alignment: Cultivating Enterprise Adoption Through Cross-Functional Partnership",
     text: "Moved VDS from a contested platform to a funded enterprise standard through a deliberate stakeholder strategy built on empathy, tailored value propositions, and shared governance — not mandates. Conducted a listening tour across 42+ stakeholders, crafted distinct value messages for Design, Product, and Engineering, and co-authored a governance model that turned skeptics into advocates.",
     metric: "86% adoption · 0 mandates · Permanent corporate funding secured",
-    caseStudyHref: "/case_studies/value-driven-alignment_case_study/value-driven-alignment.html",
+    caseStudyHref: "/case-studies/value-driven-alignment.html",
   },
   {
     tag: "Cross-Platform Infrastructure",
     title: "Cross-Platform Evolution: Architecting a Multi-Channel Design System Ecosystem",
     text: "Expanded VDS from a web-only component library to a unified native platform spanning Web, iOS, and Android via a token-first architecture and federated governance model. A single token engine compiles simultaneously to CSS, SwiftUI, and Jetpack Compose, giving native teams the same leverage web teams have had for years — delivered a full year ahead of schedule.",
     metric: "45 of 48 components · 100% token parity · 3 platforms unified · 1 yr early",
-    caseStudyHref: "/case_studies/cross-platform-evolution_case_study/cross-platform-evolution.html",
+    caseStudyHref: "/case-studies/cross-platform-evolution.html",
   },
 ];
 
