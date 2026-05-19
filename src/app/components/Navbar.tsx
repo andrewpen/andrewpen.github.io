@@ -8,6 +8,7 @@ const links = [
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "speaking", label: "Speaking" },
+  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -22,25 +23,27 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <button
-          onClick={() => scrollTo("home")}
+        <a
+          href="#home"
+          onClick={(e) => { e.preventDefault(); scrollTo("home"); }}
           className="flex items-center gap-2 tracking-tight"
         >
           <span className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 text-white flex items-center justify-center">
             AP
           </span>
           <span className="hidden sm:inline text-slate-900">Andrew Pendleton</span>
-        </button>
+        </a>
 
         <ul className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <li key={l.id}>
-              <button
-                onClick={() => scrollTo(l.id)}
+              <a
+                href={`#${l.id}`}
+                onClick={(e) => { e.preventDefault(); scrollTo(l.id); }}
                 className="text-slate-600 hover:text-indigo-600 transition-colors"
               >
                 {l.label}
-              </button>
+              </a>
             </li>
           ))}
         </ul>
@@ -79,12 +82,13 @@ export function Navbar() {
           <ul className="flex flex-col px-6 py-4 gap-3">
             {links.map((l) => (
               <li key={l.id}>
-                <button
-                  onClick={() => scrollTo(l.id)}
-                  className="w-full text-left py-2 text-slate-700 hover:text-indigo-600"
+                <a
+                  href={`#${l.id}`}
+                  onClick={(e) => { e.preventDefault(); scrollTo(l.id); }}
+                  className="block w-full py-2 text-slate-700 hover:text-indigo-600"
                 >
                   {l.label}
-                </button>
+                </a>
               </li>
             ))}
           </ul>

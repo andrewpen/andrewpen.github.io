@@ -29,12 +29,12 @@ export const aboutHighlights = [
   {
     icon: Sparkles,
     title: "Agent-Native Infrastructure",
-    text: "Architected one of Verizon's first MCP server enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
+    text: "Delivered one of Verizon's first MCP servers enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
   },
   {
     icon: Users,
     title: "Manager of Managers",
-    text: "Lead a global team of Directors across product, design, engineering, and content strategy, spanning the US and India. Build leadership layers that drive accountability, performance, and craft.",
+    text: "Lead a global team across product, design, engineering, and content strategy, spanning the US and India. Build leadership layers that drive accountability, performance, and craft.",
   },
   {
     icon: Target,
@@ -56,7 +56,7 @@ export const skills = [
     name: "Agent-Native Platform Architecture",
     icon: Brain,
     level: 91,
-    desc: "Designed Verizon's first MCP server enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
+    desc: "Delivered one of Verizon's first MCP servers enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
   },
   {
     name: "Global Team Leadership",
@@ -110,9 +110,9 @@ export const roles = [
     title: "Sr Director, Experience Design (Design Systems)",
     period: "2021 — Present",
     summary:
-      "Lead the Verizon Design System (VDS), enterprise design infrastructure spanning web, iOS, and Android, as a Senior Director managing a team of Associate Directors across product, design, engineering, and content strategy. Transforming a component library into an agent-native platform that both humans and AI can generate high-quality, accessible experiences from.",
+      "Lead the Verizon Design System (VDS), enterprise design infrastructure spanning web, iOS, and Android, as a Senior Director managing a team across product, design, engineering, and content strategy. Transforming a component library into an agent-native platform that both humans and AI can generate high-quality, accessible experiences from.",
     achievements: [
-      "Shipped an agent-native layer for VDS via MCP enabling AI agents to consume, generate from, and validate against design system standards in real time (one of Verizon's first MCP server)",
+      "Shipped an agent-native layer for VDS via MCP enabling AI agents to consume, generate from, and validate against design system standards in real time (one of Verizon's first MCP servers)",
       "Achieved 86% VDS adoption enterprise-wide, exceeding the 75% target, without organizational mandate, through quality, tooling, and partnership",
       "Delivered VDS Native (iOS SwiftUI + Android Jetpack Compose) with 48 components for each platform, achieving mobile parity a full year ahead of schedule",
       //"Prototyped VDS Dev Assistant (VS Code) and Design Assistant (Figma), translating design intent cleanly into developer workflows; both delivered a full year ahead of schedule",
@@ -156,16 +156,6 @@ export const roles = [
       "Joined Verizon as a consultant delivering front-end web capabilities, transitioning to full-time within a year.",
     achievements: [
       "Delivered impactful front-end solutions rapidly leading to full-time conversion",
-    ],
-  },
-  {
-    company: "Baptist Health",
-    title: "Web Application Developer",
-    period: "2011 — 2013",
-    summary:
-      "Began career building administrative and employee-facing digital experiences for a major healthcare system.",
-    achievements: [
-      "Developed and maintained healthcare web applications serving administration and clinical staff",
     ],
   },
 ];
@@ -234,10 +224,10 @@ export const speakingEvents = [
 // ─── Education ────────────────────────────────────────────────────────────────
 
 export const education = [
-  { degree: "MS in Analytics & Applied AI", school: "Dakota State University (Est. 2028)", level: "graduate", inProgress: true, logo: "/img/education/dsu.png" },
-  { degree: "Master of Management Information Systems", school: "University of Arkansas, Little Rock", level: "graduate", inProgress: false, logo: "/img/education/ualr.png" },
-  { degree: "Bachelor of Computer Sciences", school: "Henderson State University", level: "undergraduate", inProgress: false, logo: "/img/education/hsu.png" },
-  { degree: "Bachelor of Digital Art & Design", school: "Henderson State University", level: "undergraduate", inProgress: false, logo: "/img/education/hsu.png" },
+  { degree: "MS in Analytics & Applied AI", school: "Dakota State University", level: "graduate", inProgress: true, expectedYear: "2028", logo: "/img/education/dsu.png" },
+  { degree: "Master of Management Information Systems", school: "University of Arkansas, Little Rock", level: "graduate", inProgress: false, expectedYear: undefined, logo: "/img/education/ualr.png" },
+  { degree: "Bachelor of Computer Sciences", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
+  { degree: "Bachelor of Digital Art & Design", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
 ];
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
@@ -249,5 +239,5 @@ export const contact = {
   location: "New York, NY",
   linkedinUrl: "https://www.linkedin.com/in/andrewpendleton/",
   footerCopyright: "© 2026 Andrew Pendleton",
-  footerTagline: "Senior Product Executive · New York, NY",
+  footerTagline: "Senior Executive · Design Infrastructure & Agent-Native Systems",
 };
