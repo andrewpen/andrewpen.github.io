@@ -47,7 +47,9 @@
     --slate-800: #1e293b;
     --slate-900: #0f172a;
   }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
   html, body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--slate-900); }
   body { background: #fff; }
   .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
@@ -124,6 +126,8 @@
   </div>
 
 </header>
+
+<main>
 
 <!-- ───────────────────── Hero ───────────────────── -->
 <section class="relative hero-bg text-white overflow-hidden">
@@ -585,6 +589,8 @@
   </div>
 </section>
 
+
+</main>
 
 <script>
   (function () {

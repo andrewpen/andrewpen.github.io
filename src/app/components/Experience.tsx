@@ -40,7 +40,7 @@ export function Experience() {
                       </div>
                       <div>
                         <div className="text-slate-900">{r.title}</div>
-                        <div className="text-slate-500">{r.company} · {r.period}</div>
+                        <div className={active === i ? "text-slate-600" : "text-slate-500"}>{r.company} · {r.period}</div>
                       </div>
                     </div>
                     <ChevronRight
