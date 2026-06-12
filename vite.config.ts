@@ -34,7 +34,7 @@ export default defineConfig({
   build: {
     // Output built files to dist/ for deployment
     outDir: path.resolve(__dirname, 'dist'),
-    emptyOutDir: false,
+    emptyOutDir: true,
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
