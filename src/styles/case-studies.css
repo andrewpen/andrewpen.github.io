@@ -1,0 +1,3 @@
+/* Tailwind utilities for the static case-study pages (replaces the runtime CDN build). */
+@import 'tailwindcss' source(none);
+@source '../../case-studies/*.html';

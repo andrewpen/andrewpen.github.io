@@ -26,8 +26,7 @@ export function Skills() {
                 onFocus={() => setActive(i)}
                 onBlur={() => setActive(null)}
                 onClick={() => setActive(isActive ? null : i)}
-                aria-pressed={isActive}
-                aria-label={`${s.name}${isActive ? ", expanded" : ""}`}
+                aria-expanded={isActive}
                 className={`relative text-left p-6 rounded-2xl border transition-all duration-300 ${
                   isActive
                     ? "bg-slate-900 border-slate-900 text-white shadow-2xl -translate-y-1"
@@ -48,7 +47,14 @@ export function Skills() {
                   {s.name}
                 </h3>
                 <p className={`${isActive ? "text-slate-300" : "text-slate-500"}`}>
-                  {isActive ? s.desc : "Click to learn more"}
+                  {isActive ? (
+                    s.desc
+                  ) : (
+                    <>
+                      <span aria-hidden="true">Select to learn more</span>
+                      <span className="sr-only">{s.desc}</span>
+                    </>
+                  )}
                 </p>
               </button>
             );

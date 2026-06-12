@@ -50,10 +50,10 @@ export function Contact() {
         </div>
       </div>
 
-      <div className="mt-20 pt-8 border-t border-white/10 max-w-7xl mx-auto px-6 text-slate-400 flex flex-wrap gap-4 justify-between">
+      <footer className="mt-20 pt-8 border-t border-white/10 max-w-7xl mx-auto px-6 text-slate-400 flex flex-wrap gap-4 justify-between">
         <div>{contact.footerCopyright}</div>
         <div>{contact.footerTagline}</div>
-      </div>
+      </footer>
     </section>
   );
 }

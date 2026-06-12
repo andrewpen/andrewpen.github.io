@@ -7,7 +7,7 @@ export function Resume() {
       {/* Header */}
       <header className="bg-slate-900 text-white">
         <div className="max-w-5xl mx-auto px-6 md:px-10 py-8 md:py-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
-          <img src="/img/2023-profile.png" alt={hero.name} className="w-24 h-24 rounded-full object-cover shrink-0 border-2 border-indigo-400" />
+          <img src="/img/2023-profile.webp" alt={hero.name} className="w-24 h-24 rounded-full object-cover shrink-0 border-2 border-indigo-400" />
           <div>
             <h1 className="text-4xl font-bold tracking-tight mb-1">{hero.name}</h1>
             <p className="text-indigo-300 text-lg mb-5">{hero.tagline}</p>
@@ -19,6 +19,9 @@ export function Resume() {
               </a>
             </div>
           </div>
+          <a href="/" className="sm:ml-auto text-sm text-indigo-300 hover:text-white whitespace-nowrap print:hidden">
+            ← Back to site
+          </a>
         </div>
       </header>
 

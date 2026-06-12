@@ -34,11 +34,14 @@ export default defineConfig({
   build: {
     // Output built files to dist/ for deployment
     outDir: path.resolve(__dirname, 'dist'),
-    emptyOutDir: false,
+    emptyOutDir: true,
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html'),
         resume: path.resolve(__dirname, 'resume.html'),
+        csAiReady: path.resolve(__dirname, 'case-studies/ai-ready-design-system.html'),
+        csValueDriven: path.resolve(__dirname, 'case-studies/value-driven-alignment.html'),
+        csCrossPlatform: path.resolve(__dirname, 'case-studies/cross-platform-evolution.html'),
       },
     },
   },
