@@ -47,7 +47,9 @@
     --slate-800: #1e293b;
     --slate-900: #0f172a;
   }
-  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
   html, body { font-family: 'Inter', system-ui, -apple-system, sans-serif; color: var(--slate-900); }
   body { background: #fff; }
   .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
@@ -124,6 +126,8 @@
   </div>
 
 </header>
+
+<main>
 
 <!-- ───────────────────── Hero ───────────────────── -->
 <section class="relative hero-bg text-white overflow-hidden">
@@ -259,7 +263,7 @@
 
       <!-- Timeline visual -->
       <div class="lg:col-span-7 flex items-center">
-        <div class="overflow-x-auto pb-4 w-full">
+        <div class="overflow-x-auto pb-4 w-full focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:-outline-offset-2" tabindex="0" role="region" aria-label="Rollout phases timeline, scrolls horizontally">
           <div class="flex items-start min-w-max">
             <!-- Phase 01 -->
             <div class="flex items-start">
@@ -575,6 +579,8 @@
   </div>
 </section>
 
+
+</main>
 
 <script>
   (function () {

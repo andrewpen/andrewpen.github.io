@@ -54,6 +54,7 @@ export function Speaking() {
               <ImageWithFallback
                 src={e.src}
                 alt={`${e.label} ${e.year}`}
+                loading="lazy"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent" />
