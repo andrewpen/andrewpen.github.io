@@ -77,23 +77,21 @@ export function Navbar() {
         </button>
       </nav>
 
-      {open && (
-        <div id="mobile-nav" className="md:hidden border-t border-slate-200 bg-white">
-          <ul className="flex flex-col px-6 py-4 gap-3">
-            {links.map((l) => (
-              <li key={l.id}>
-                <a
-                  href={`#${l.id}`}
-                  onClick={(e) => { e.preventDefault(); scrollTo(l.id); }}
-                  className="block w-full py-2 text-slate-700 hover:text-indigo-600"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <div id="mobile-nav" className={`${open ? "block" : "hidden"} md:hidden border-t border-slate-200 bg-white`}>
+        <ul className="flex flex-col px-6 py-4 gap-3">
+          {links.map((l) => (
+            <li key={l.id}>
+              <a
+                href={`#${l.id}`}
+                onClick={(e) => { e.preventDefault(); scrollTo(l.id); }}
+                className="block w-full py-2 text-slate-700 hover:text-indigo-600"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }

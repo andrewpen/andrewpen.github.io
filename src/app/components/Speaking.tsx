@@ -35,17 +35,21 @@ export function Speaking() {
           ref={scrollRef}
           role="region"
           aria-label="Speaking events carousel — use left and right arrow keys to scroll"
+          tabIndex={0}
           onKeyDown={handleCarouselKeyDown}
-          className="flex gap-5 overflow-x-auto pb-4 px-6 max-w-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-5 overflow-x-auto pb-4 px-6 max-w-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-2 focus-visible:outline-indigo-600 focus-visible:-outline-offset-2"
         >
           {/* Left inset to align with page content */}
           <div className="shrink-0 w-[calc((100vw-var(--content-width,1280px))/2)] hidden xl:block" />
 
-          {events.map((e) => (
+          {events.map((e) => {
+            const isSelected = selected?.label === e.label && selected?.year === e.year;
+            return (
             <button
               key={`${e.label}-${e.year}`}
               onClick={() => setSelected(e)}
-              className={`relative shrink-0 w-[min(320px,80vw)] h-52 rounded-2xl overflow-hidden shadow-md group cursor-pointer text-left transition-all ${selected?.label === e.label && selected?.year === e.year ? "ring-2 ring-indigo-500 ring-offset-2 ring-offset-slate-50" : ""}`}
+              aria-pressed={isSelected}
+              className={`relative shrink-0 w-[min(320px,80vw)] h-52 rounded-2xl overflow-hidden shadow-md group cursor-pointer text-left transition-all ${isSelected ? "ring-2 ring-indigo-500 ring-offset-2 ring-offset-slate-50" : ""}`}
             >
               <ImageWithFallback
                 src={e.src}
@@ -58,13 +62,14 @@ export function Speaking() {
                 <div className="text-slate-300 text-sm">{e.year}</div>
               </div>
             </button>
-          ))}
+            );
+          })}
         </div>
       </div>
 
       {/* Summary panel */}
       <div className="max-w-7xl mx-auto px-6 mt-8">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+        <div aria-live="polite" className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
             <div className="mb-1 text-indigo-600 text-sm font-medium">{selected.year}</div>
             <h3 className="text-xl font-semibold text-slate-900 mb-4">{selected.label}</h3>
             <p className="text-slate-600 leading-relaxed">{selected.summary}</p>

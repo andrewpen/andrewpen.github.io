@@ -66,12 +66,12 @@ export function About() {
                           )}
                         </div>
                         <div className="text-slate-500 mb-4">{e.school}</div>
-                        <img src={e.logo} alt={e.school} className="w-36 h-16 sm:w-40 sm:h-20 rounded-xl object-contain bg-white border border-slate-100 p-2" />
+                        <img src={e.logo} alt="" className="w-36 h-16 sm:w-40 sm:h-20 rounded-xl object-contain bg-white border border-slate-100 p-2" />
                       </div>
                     ))}
                   </div>
                   {level === "undergraduate" && (
-                    <p className="text-slate-400 text-sm mt-4">
+                    <p className="text-slate-500 text-sm mt-4">
                       CS and design — two disciplines, one perspective.
                     </p>
                   )}
