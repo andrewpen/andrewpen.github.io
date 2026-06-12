@@ -15,7 +15,7 @@ export const hero = {
   email: "andrew.d.pendleton@gmail.com",
   location: "New York, NY",
   linkedinUrl: "https://www.linkedin.com/in/andrewpendleton/",
-  profileImage: "/img/profile-standing-v2.png",
+  profileImage: "/img/profile-standing-v2.webp",
 };
 
 // ─── About ────────────────────────────────────────────────────────────────────
@@ -190,31 +190,31 @@ export const projects = [
 
 export const speakingEvents = [
   {
-    src: "/img/speaking%20events/2026-CES.png",
+    src: "/img/speaking-events/2026-CES.webp",
     label: "CES",
     year: "2026",
     summary: "At the 2026 CES panel \"Building Accessibility In: From Design Systems to Testing, Powered by Verizon,\" Andrew Pendleton and Fred Moltz explored how Verizon uses its design system as the \"technological representation\" of a village to scale accessibility. Instead of treating accessibility as a final compliance check, Verizon \"shifts left,\" treating it as a foundational requirement by co-creating components with accessibility experts early in the design process. To handle enterprise scale, the teams codify these standards into automated workflows, utilizing tools like the Evinced Flow Analyzer, Figma nudges, and AI assistants like Copilot to guide developers in real time. This approach not only prevents well-intentioned mistakes from reaching production but also drives immense productivity gains, reducing component iteration cycles from 18 months to just four to five months, and turning some 10-hour tasks into 30-minute exercises. Ultimately, this integration yields faster speed to market and a better customer experience.",
   },
   {
-    src: "/img/speaking%20events/2025-CES.png",
+    src: "/img/speaking-events/2025-CES.webp",
     label: "CES",
     year: "2025",
     summary: "The CES panel \"UGD: User Generated Design\" focused on product development strategies that involve the accessibility community early in the design process to drive inclusive innovation. Moderated by Paul Amadeus Lane, the session was structured to explore the core principles of User Generated Design (UGD) and its critical role in fostering inclusivity. The panel featured Rebecca Rosenberg, Rob Moser, Allison Stransky representing Samsung, and Andrew Pendleton representing Verizon. The planned discussion covered the unique challenges of user generated design, accessibility in storytelling, and specific examples of corporate implementation. The session concluded with a forward-looking discussion, prompting all panelists to envision the landscape of user generated design five to ten years in the future and to share their \"secret sauce\" for professionals looking to thrive in this evolving field.",
   },
   {
-    src: "/img/speaking%20events/2025-AccessibilitySummit.PNG",
+    src: "/img/speaking-events/2025-AccessibilitySummit.webp",
     label: "Accessibility Summit",
     year: "2025",
     summary: "At the 10th Annual Accessibility Summit, Andrew's presentation, \"Partnership to Platform,\" detailed the evolution of the Verizon Design System (VDS) from a human-driven \"people partnership\" into an AI-powered intelligent platform. Originally, VDS successfully integrated accessibility by \"shifting left\" and involving experts early in the design process rather than treating them as a final compliance gate. However, this created a scaling problem, as the necessary human engagements, reviews, and meetings became a bottleneck. To solve this, Verizon is building an \"Intelligent Platform\" that embeds VDS rules, user research, and WCAG guidelines directly into an AI \"brain\". This brain acts as a proactive co-pilot in tools like Figma and code editors, shifting accessibility from reactive auditing to proactive compliance. Furthermore, AI automates complex variant testing, turning a four-to-six-hour manual task into a process that takes seconds. Ultimately, through a three-pillar framework of empowering, training, and aggregating context, Verizon uses AI to elevate its workforce, freeing them to tackle more complex, human-centered accessibility challenges.",
   },
   {
-    src: "/img/speaking%20events/2025-BrowserStackEvent.jpg",
+    src: "/img/speaking-events/2025-BrowserStackEvent.webp",
     label: "BrowserStack World",
     year: "2025",
     summary: "In \"Leveraging AI for Next-Gen Developer Enablement,\" Andrew spoke to the tech industry's obsession with AI-driven speed, defining it as a \"productivity trap\" that can lead to technical debt and inconsistent experiences. To counteract this, Verizon utilizes its Verizon Design System (VDS) as a centralized foundation built on Quality, Consistency, Inclusivity, and Efficiency. Rather than using AI exclusively for surface-level code generation, the most meaningful applications happen \"below the surface\" in complex testing and validation workflows. By implementing AI for \"Smart Diffing\" in visual regression testing, integrating automated accessibility checks into the CI/CD pipeline, and using a proactive \"VDS Guardian Angel\" in Figma, organizations can eliminate human error at the source. Ultimately, a rigorous, AI-supported focus on quality naturally results in sustainable and meaningful productivity gains.",
   },
   {
-    src: "/img/speaking%20events/2023-UXIndia-1.JPG",
+    src: "/img/speaking-events/2023-UXIndia-1.webp",
     label: "UX India",
     year: "2023",
     summary: "In Andrew's presentation at UX India, \"How design systems elevate UX design,\" he shared that embedding a design system directly into the product iteration cycle elevates user experience and prevents costly downstream scope cuts. Grounded in Verizon Design's principles of being \"Meaningful, Human, and Responsible,\" the talk highlights the launch of the \"myPlan\" mobile experience as a key case study. Instead of treating the Verizon Design System (VDS) as a static library of parts thrown over the wall, the VDS team embedded themselves into the creative process, acting as guardrails that encouraged targeted transformation while maintaining ecosystem alignment. To solve complex engineering handoff hurdles across multiple teams, VDS formed a sub-team to build and distribute larger \"organisms and templates,\" rather than just atomic components. By centralizing this complex UI and accessibility work, the process yielded a uniform, high-fidelity launch with drastically fewer defects, ultimately allowing designers to spend more time designing instead of triaging issues.",

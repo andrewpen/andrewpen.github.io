@@ -1,4 +1,4 @@
-import { Mail, MapPin, ArrowRight, Download } from "lucide-react";
+import { Mail, MapPin, ArrowRight, FileText } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { hero } from "../content";
 
@@ -45,7 +45,7 @@ export function Hero() {
               href="/resume.html"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/30 hover:bg-white/10 transition-colors"
             >
-              <Download size={18} /> View resume
+              <FileText size={18} aria-hidden="true" /> View resume
             </a>
           </div>
 
