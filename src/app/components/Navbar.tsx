@@ -5,7 +5,7 @@ type NavLink = { label: string; href: string; current?: boolean };
 
 type NavbarProps = {
   links: NavLink[];
-  cta: { label: string; href?: string; onClick?: () => void };
+  cta?: { label: string; href?: string; onClick?: () => void };
   logoHref?: string;
 };
 
@@ -61,15 +61,16 @@ export function Navbar({ links, cta, logoHref = "/" }: NavbarProps) {
               {l.label}
             </a>
           ))}
-          {cta.onClick ? (
-            <button onClick={cta.onClick} style={ctaStyle}>
-              {cta.label}
-            </button>
-          ) : (
-            <a href={cta.href} style={ctaStyle}>
-              {cta.label}
-            </a>
-          )}
+          {cta &&
+            (cta.onClick ? (
+              <button onClick={cta.onClick} style={ctaStyle}>
+                {cta.label}
+              </button>
+            ) : (
+              <a href={cta.href} style={ctaStyle}>
+                {cta.label}
+              </a>
+            ))}
         </nav>
       </div>
     </header>
