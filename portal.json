@@ -1,6 +1,8 @@
 {
   "name": "andrewpen.github.io",
-  "purpose": "Personal portfolio/resume website, deployed on GitHub Pages.",
-  "kind": "remote",
-  "url": "https://andrewpen.github.io"
+  "purpose": "Personal portfolio/resume site (published at andrewpen.github.io). The portal tracks the local dev server.",
+  "kind": "local",
+  "run": "npm run dev -- --port 5175",
+  "port": 5175,
+  "healthPath": "/"
 }
