@@ -15,12 +15,16 @@ Personal portfolio site for Andrew Pendleton — Senior Executive in design infr
 src/
   app/
     content.ts          # All site copy and data in one place
-    App.tsx             # Root layout, section composition
-    Resume.tsx          # Standalone resume page (/resume.html)
-    components/         # One file per section (Hero, About, Experience, etc.)
-  styles/               # Tailwind entry, theme tokens
-case-studies/           # Static case-study pages, built as Vite entries
-public/                 # Static assets copied verbatim (images, favicons, 404)
+    boldPalette.ts       # Shared accent colors for the editorial redesign
+    App.tsx              # Homepage layout, section composition (/)
+    Resume.tsx            # Standalone CV page (/resume.html)
+    Writing.tsx           # Essay index page (/writing.html)
+    WritingPost.tsx        # The one essay with a full published page so far
+    components/           # One file per section (Hero, Speaking, Work, etc.)
+  styles/                 # Tailwind entry, theme tokens, shared bold CSS
+case-studies/             # Static case-study pages, built as Vite entries
+writing/                  # Individual essay pages, built as Vite entries
+public/                   # Static assets copied verbatim (images, favicons, 404)
 ```
 
 ## Dev

@@ -1,146 +1,217 @@
-import { hero, about, roles, education, skills, projects } from "./content";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { hero, roles, education, skills, projects, cvStats, contact } from "./content";
+import { BLUE, PINK, CYAN, MINT, NAVY, ink } from "./boldPalette";
+
+const navLinks = [
+  { label: "Portfolio", href: "/" },
+  { label: "Writing", href: "/writing.html" },
+  { label: "Speaking", href: "/#speaking" },
+  { label: "CV", href: "/resume.html", current: true },
+];
+
+const footerLinks = [
+  { label: "Portfolio", href: "/" },
+  { label: "Writing", href: "/writing.html" },
+  { label: "LinkedIn", href: contact.linkedinUrl },
+  { label: "Email", href: `mailto:${contact.email}` },
+];
 
 export function Resume() {
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans">
-
-      {/* Header */}
-      <header className="bg-slate-900 text-white">
-        <div className="max-w-5xl mx-auto px-6 md:px-10 py-8 md:py-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
-          <img src="/img/2023-profile.webp" alt={hero.name} className="w-24 h-24 rounded-full object-cover shrink-0 border-2 border-indigo-400" />
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight mb-1">{hero.name}</h1>
-            <p className="text-indigo-300 text-lg mb-5">{hero.tagline}</p>
-            <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm text-slate-300">
-              <a href={`mailto:${hero.email}`} className="hover:text-white">{hero.email}</a>
-              <span>{hero.location}</span>
-              <a href={hero.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white">
-                linkedin.com/in/andrewpendleton
-              </a>
-            </div>
-          </div>
-          <a href="/" className="sm:ml-auto text-sm text-indigo-300 hover:text-white whitespace-nowrap print:hidden">
-            ← Back to site
-          </a>
-        </div>
-      </header>
-
-      {/* Body */}
-      <div id="resume-body" className="max-w-5xl mx-auto px-6 md:px-10 py-8 md:py-10 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-8 md:gap-12">
-
-        {/* Sidebar */}
-        <aside className="space-y-8">
-
-          <section>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Education</h2>
-            <div className="space-y-4">
-              {education.map((e) => (
-                <div key={e.degree}>
-                  <p className="font-semibold text-sm text-slate-900 leading-snug">{e.degree}</p>
-                  <p className="text-xs text-slate-500 mt-0.5">{e.school}{e.expectedYear ? ` · Est. ${e.expectedYear}` : ""}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Skills</h2>
-            <ul className="space-y-1.5">
-              {skills.map((s) => (
-                <li key={s.name} className="text-sm text-slate-700">{s.name}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-4">Selected Work</h2>
-            <div className="space-y-4">
-              {projects.map((p) => (
-                <div key={p.title}>
-                  <p className="font-semibold text-sm text-slate-900 leading-snug">{p.title}</p>
-                  <p className="text-xs text-indigo-600 mt-0.5">{p.metric}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-        </aside>
-
-        {/* Main */}
-        <main className="space-y-8">
-
-          <section>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Summary</h2>
-            <p className="text-sm text-slate-600 leading-relaxed">{about.bio}</p>
-          </section>
-
-          <section>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-5">Experience</h2>
-            <div className="space-y-8">
-              {roles.map((r) => (
-                <div key={r.title}>
-                  <div className="flex items-baseline justify-between gap-4 mb-1">
-                    <h3 className="font-bold text-slate-900">{r.title}</h3>
-                    <span className="text-xs text-slate-500 shrink-0">{r.period}</span>
-                  </div>
-                  <p className="text-sm text-indigo-600 mb-2">{r.company}</p>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-3">{r.summary}</p>
-                  <ul className="space-y-1.5">
-                    {r.achievements.map((a, i) => (
-                      <li key={i} className="flex gap-2.5 text-sm text-slate-600">
-                        <span className="mt-1.5 w-1 h-1 rounded-full bg-indigo-400 shrink-0" />
-                        <span>{a}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
-        </main>
+    <div className="apb" style={{ background: "#ffffff", color: "#1f2e3d", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <div className="apb-noprint">
+        <Navbar links={navLinks} cta={{ label: "Print / PDF", onClick: () => window.print() }} />
       </div>
 
-      {/* Print styles */}
-      <style>{`
-        @media print {
-          * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-          @page { margin: 0.6in 0.7in; }
-          body { margin: 0; }
-          .min-h-screen { min-height: unset; }
+      <main id="top" style={{ flex: 1 }}>
+        <section style={{ position: "relative", background: NAVY, color: "#ffffff", overflow: "hidden" }}>
+          <div
+            aria-hidden="true"
+            className="apb-rail"
+            style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: 56, borderRight: "1px solid #2b3f51", display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <span
+              style={{
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+                fontFamily: "var(--ap-font-mono)",
+                fontSize: "0.6875rem",
+                letterSpacing: "0.24em",
+                textTransform: "uppercase",
+                color: "#8aabc2",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Curriculum vitae · 2013 — present
+            </span>
+          </div>
+          <div
+            style={{
+              maxWidth: 1280,
+              margin: "0 auto",
+              padding: "72px 32px",
+              paddingLeft: "clamp(32px,8vw,88px)",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: 48,
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <span className="a3-badge" style={{ background: "#BE3372", color: "#ffffff", marginBottom: 24, display: "inline-block" }}>
+                Curriculum vitae
+              </span>
+              <h1 style={{ margin: "0 0 18px", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.9, fontSize: "clamp(3rem,8vw,7rem)" }}>
+                Andrew
+                <span style={{ display: "block", color: CYAN }}>Pendleton.</span>
+              </h1>
+              <p style={{ fontSize: "clamp(1.0625rem,2vw,1.375rem)", lineHeight: 1.35, color: "#d9e6ee", margin: "0 0 32px", maxWidth: "34ch" }}>
+                Senior Director, Experience Design — design infrastructure and agent-native systems.
+              </p>
+              <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontFamily: "var(--ap-font-mono)", fontSize: "0.8125rem" }}>
+                <a href={`mailto:${hero.email}`} style={{ color: CYAN }}>
+                  {hero.email}
+                </a>
+                <span style={{ color: "#b8cddc" }}>{hero.location}</span>
+                <a href={hero.linkedinUrl} target="_blank" rel="noopener noreferrer" style={{ color: CYAN }}>
+                  linkedin.com/in/andrewpendleton
+                </a>
+              </div>
+            </div>
+            <img
+              src="/img/2023-profile.webp"
+              alt={hero.name}
+              style={{ justifySelf: "end", display: "block", width: "100%", maxWidth: 260, aspectRatio: "1", objectFit: "cover", objectPosition: "top center", borderRadius: 16 }}
+            />
+          </div>
+          <div aria-hidden="true" style={{ display: "flex", height: 10 }}>
+            <span style={{ flex: 1, background: BLUE }} />
+            <span style={{ flex: 1, background: PINK }} />
+            <span style={{ flex: 1, background: CYAN }} />
+            <span style={{ flex: 1, background: MINT }} />
+          </div>
+        </section>
 
-          header { background: #1e293b !important; }
-          .text-indigo-600 { color: #4f46e5 !important; }
-          a { text-decoration: none; color: inherit; }
+        <section style={{ background: "#eef4f8", padding: "48px 0" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+            <dl style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 24, margin: 0 }}>
+              {cvStats.map((s) => (
+                <div key={s.label} style={{ background: "#ffffff", borderRadius: 16, padding: 24, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)", borderBottom: `6px solid ${s.color}` }}>
+                  <dt style={{ fontSize: "clamp(1.75rem,3vw,2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, fontVariantNumeric: "tabular-nums", color: "#1f2e3d" }}>{s.value}</dt>
+                  <dd style={{ margin: "10px 0 0", fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#476b85", lineHeight: 1.5 }}>
+                    {s.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
 
-          header > div { padding: 0 !important; gap: 0.75rem !important; align-items: stretch !important; height: 5rem !important; overflow: hidden !important; }
-          header img { width: auto !important; height: 100% !important; border-radius: 0 !important; border-width: 1px !important; object-fit: cover !important; object-position: top center !important; }
-          header > div > div { display: flex !important; flex-direction: column !important; justify-content: center !important; padding: 0.5rem 0 !important; }
-          header h1 { font-size: 1.4rem !important; margin-bottom: 0.1rem !important; line-height: 1.2 !important; }
-          header p { font-size: 0.8rem !important; margin-bottom: 0.3rem !important; }
-          header .flex { font-size: 0.7rem !important; gap: 0.5rem !important; }
+        <section style={{ background: "#ffffff", padding: "80px 0" }}>
+          <div
+            className="apb-cvbody"
+            style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "minmax(260px,300px) minmax(0,1fr)", gap: 56, alignItems: "start" }}
+          >
+            <div style={{ order: 2 }}>
+              <div style={{ marginBottom: 48 }}>
+                <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 16px" }}>Summary</p>
+                <p style={{ fontSize: "1.0625rem", lineHeight: 1.65, color: "#38546a", margin: 0, maxWidth: "68ch" }}>
+                  Twelve years at Verizon, starting as a front-end consultant and growing into a Senior Director owning enterprise design infrastructure. I transform fragmented
+                  component libraries into opinionated, agent-native platforms — reducing accumulated complexity, enforcing quality and accessibility at scale, and driving
+                  alignment across design, engineering and product.
+                </p>
+              </div>
 
-          #resume-body {
-            display: flex !important;
-            flex-direction: column !important;
-            padding: 1rem 0 !important;
-            gap: 0 !important;
-            max-width: 100% !important;
-          }
-          #resume-body main { order: 1; }
-          #resume-body aside {
-            order: 2;
-            display: grid !important;
-            grid-template-columns: 1fr 1fr 1fr !important;
-            gap: 1.5rem !important;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 1.2rem;
-            margin-top: 1.2rem;
-          }
+              <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 32 }}>
+                <h2 style={{ fontSize: "clamp(1.5rem,3vw,2.25rem)", fontWeight: 700, letterSpacing: "-0.025em", margin: 0 }}>Experience</h2>
+                <span style={{ flex: 1, height: 1, background: "#d9e6ee" }} />
+                <span style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#476b85" }}>2013 — present</span>
+              </div>
 
-          #resume-body main > section > div > div { break-inside: avoid; }
-        }
-      `}</style>
+              <div style={{ display: "grid", gap: 24 }}>
+                {roles.map((r) => (
+                  <article key={r.title} style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderLeft: `8px solid ${r.rule}` }}>
+                    <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 20, flexWrap: "wrap", marginBottom: 10 }}>
+                      <h3 style={{ fontSize: "clamp(1.25rem,2.4vw,1.75rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>{r.title}</h3>
+                      <span style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.8125rem", color: ink(r.rule), fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap" }}>{r.period}</span>
+                    </div>
+                    <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#476b85", margin: "0 0 16px" }}>{r.company}</p>
+                    <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "#38546a", margin: "0 0 20px", maxWidth: "70ch" }}>{r.summary}</p>
+                    <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 10 }}>
+                      {r.achievements.map((a, i) => (
+                        <li key={i} style={{ display: "flex", gap: 14, fontSize: "0.9375rem", lineHeight: 1.6, color: "#38546a" }}>
+                          <span aria-hidden="true" style={{ flex: "none", width: 8, height: 8, borderRadius: 9999, background: r.rule, marginTop: 8 }} />
+                          <span>{a}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <aside style={{ order: 1, display: "grid", gap: 24, alignContent: "start" }}>
+              <section style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)" }}>
+                <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: MINT, margin: "0 0 20px" }}>Education</p>
+                <div style={{ display: "grid", gap: 18 }}>
+                  {education.map((e) => (
+                    <div key={e.degree} style={{ paddingLeft: 16, borderLeft: `3px solid ${e.rule}` }}>
+                      <p style={{ fontSize: "1rem", fontWeight: 600, lineHeight: 1.3, margin: "0 0 4px" }}>{e.degree}</p>
+                      <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", color: "#b8cddc", margin: 0 }}>
+                        {e.school}
+                        {e.expectedYear ? ` · Est. ${e.expectedYear}` : ""}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${BLUE}` }}>
+                <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 20px" }}>Capabilities</p>
+                <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {skills.map((s) => (
+                    <li key={s.name}>
+                      <span className="a3-badge" style={{ background: "#eef4f8", color: "#38546a" }}>
+                        {s.name}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <section style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${PINK}` }}>
+                <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 20px" }}>Selected work</p>
+                <div style={{ display: "grid", gap: 18 }}>
+                  {projects.map((p) => (
+                    <a key={p.title} href={p.caseStudyHref} style={{ display: "block", paddingLeft: 16, borderLeft: `3px solid ${p.rule}`, textDecoration: "none", color: "inherit" }}>
+                      <p style={{ fontSize: "0.9375rem", fontWeight: 600, lineHeight: 1.35, margin: "0 0 6px" }}>{p.title}</p>
+                      <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", color: ink(p.rule), margin: 0, fontVariantNumeric: "tabular-nums" }}>{p.metric}</p>
+                    </a>
+                  ))}
+                </div>
+              </section>
+
+              <section className="apb-noprint" style={{ background: BLUE, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.12)" }}>
+                <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 12px" }}>Also</p>
+                <p style={{ fontSize: "1rem", lineHeight: 1.5, margin: "0 0 16px" }}>Four signature talks and six published essays sit alongside this CV.</p>
+                <div style={{ display: "flex", gap: 20, flexWrap: "wrap", fontSize: "0.9375rem", fontWeight: 600 }}>
+                  <a href="/#speaking" style={{ color: "#ffffff", textDecoration: "underline" }}>
+                    Speaking →
+                  </a>
+                  <a href="/writing.html" style={{ color: "#ffffff", textDecoration: "underline" }}>
+                    Writing →
+                  </a>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </section>
+      </main>
+
+      <div className="apb-noprint">
+        <Footer links={footerLinks} />
+      </div>
     </div>
   );
 }
