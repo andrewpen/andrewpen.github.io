@@ -11,7 +11,7 @@ export const hero = {
   name: "Andrew Pendleton",
   tagline: "Senior Executive · Design Infrastructure & Agent-Native Systems",
   headline: "Hi, I'm Andrew Pendleton.",
-  subheadline: "I build the systems humans and AI agents build from.",
+  intro: "I build the systems humans and AI agents build from — and I write about what that changes. Twelve years turning fragmented component libraries into opinionated, agent-native platforms.",
   bio: "Senior Director at Verizon leading enterprise design infrastructure, agent-native AI tooling, and design-to-code platform strategy. I transform component libraries into opinionated, scalable systems that enable both people and AI to generate high-quality, accessible experiences across one of the world's largest developer ecosystems.",
   email: "andrew.d.pendleton@gmail.com",
   location: "New York, NY",

@@ -65,7 +65,7 @@ export function Hero() {
             </span>
           </h1>
           <p style={{ fontSize: "1.125rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 40px", maxWidth: "46ch" }}>
-            {hero.subheadline} — and I write about what that changes. Twelve years turning fragmented component libraries into opinionated, agent-native platforms.
+            {hero.intro}
           </p>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 56 }}>
             <a href="#writing" style={{ padding: "14px 28px", borderRadius: 16, background: "#ffffff", color: NAVY, fontWeight: 600, textDecoration: "none" }}>
