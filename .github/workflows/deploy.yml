@@ -9,6 +9,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # Publishing waits for an explicit human approval in the Actions tab.
+    # Configure required reviewers on this environment in repo settings;
+    # without them this line has no gating effect.
+    environment: github-pages
+
     steps:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
