@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@a3kds/design-system':
-        specifier: file:vendor/a3kds-design-system-0.1.0-alpha.4+0c1b3275131f.tgz
-        version: file:vendor/a3kds-design-system-0.1.0-alpha.4+0c1b3275131f.tgz(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: file:vendor/a3kds-design-system-0.1.0-alpha.4+c67ac82d8db0.tgz
+        version: file:vendor/a3kds-design-system-0.1.0-alpha.4+c67ac82d8db0.tgz(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lucide-react:
         specifier: 0.487.0
         version: 0.487.0(react@18.3.1)
@@ -42,8 +42,8 @@ importers:
 
 packages:
 
-  '@a3kds/design-system@file:vendor/a3kds-design-system-0.1.0-alpha.4+0c1b3275131f.tgz':
-    resolution: {integrity: sha512-JmzEBg212ORwLMLn/EGkT3gj/W6ECj35FPbYCgxXK8wGsCCq+ZVQLDNT+Z1gH5GrgaOhoi8TrNRWphNWdpmeIw==, tarball: file:vendor/a3kds-design-system-0.1.0-alpha.4+0c1b3275131f.tgz}
+  '@a3kds/design-system@file:vendor/a3kds-design-system-0.1.0-alpha.4+c67ac82d8db0.tgz':
+    resolution: {integrity: sha512-Mcbep0j8ZdelBfBbXDsEKVQ26N9Rcy+7DPTZZTGIwe73cHs2TH3igKx73o1dfv3/simIeWrZ2/zuQr5g0rtQ6w==, tarball: file:vendor/a3kds-design-system-0.1.0-alpha.4+c67ac82d8db0.tgz}
     version: 0.1.0-alpha.4
     engines: {node: '>=22'}
     peerDependencies:
@@ -875,7 +875,7 @@ packages:
 
 snapshots:
 
-  '@a3kds/design-system@file:vendor/a3kds-design-system-0.1.0-alpha.4+0c1b3275131f.tgz(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@a3kds/design-system@file:vendor/a3kds-design-system-0.1.0-alpha.4+c67ac82d8db0.tgz(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)

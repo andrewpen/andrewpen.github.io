@@ -4,7 +4,20 @@ import { posts } from "../content";
 // The featured surface and badge now take their colours from the package.
 import { CYAN } from "../boldPalette";
 
-const [latest, ...rest] = posts;
+/**
+ * Deliberate behaviour for an empty list (P04-A02 acceptance).
+ *
+ * This destructure used to sit at MODULE level, so an empty `posts` threw
+ * while the module was still evaluating and took the WHOLE PAGE down — not
+ * just this section — with "Cannot read properties of undefined (reading
+ * 'slug')" and an empty #root. Verified by building and loading the site with
+ * an empty array before changing anything.
+ *
+ * With nothing to tease, the section renders NOTHING. A heading and an
+ * "All writing" button above an empty grid advertises a library that does not
+ * exist yet; the honest empty state for a teaser is absence. The All-writing
+ * page remains reachable from the site nav.
+ */
 
 /**
  * Writing teaser — migrated to A3KDS foundations (P04-A02).
@@ -20,7 +33,10 @@ const [latest, ...rest] = posts;
  *
  * Every literal below is either a token reference or a named local exception.
  */
-export function WritingTeaser() {
+export function WritingTeaser({ posts: items = posts }: { posts?: typeof posts } = {}) {
+  if (items.length === 0) return null;
+  const [latest, ...rest] = items;
+
   return (
     <section
       id="writing"
@@ -98,6 +114,11 @@ export function WritingTeaser() {
             marginBottom: "var(--a3kds-space-8)",
             /* W-6: the library had no elevation token before this section. */
             boxShadow: "var(--a3kds-elevation-floating)",
+            /* The featured card is this site's own composition, not a shared
+               Card, so it needs the same protection the shared Card got: one
+               unbreakable title otherwise sets its min-content width and
+               scrolls the page sideways. Found by the long-title fixture. */
+            overflowWrap: "anywhere",
           }}
         >
           <div>
