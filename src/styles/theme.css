@@ -231,3 +231,22 @@
     line-height: 1.5;
   }
 }
+
+/* Named local exception (P04-A01/W-4, amended). The writing CTA keeps the
+   site's navy fill; the system supplies the shape, size, focus ring and anchor
+   semantics. Expressed as a class rather than an inline style so the hover
+   state stays navy too — an inline background would leave hover shifting to
+   action-primary-hover, i.e. navy going blue on hover. */
+.a3kds-btn.ap-writing-cta {
+  background-color: var(--a3kds-color-neutral-950);
+  color: var(--a3kds-color-neutral-0);
+}
+/* A hover rule is REQUIRED here, not optional: the system's primary hover
+   still applies underneath, so without this the navy link would turn
+   action-primary blue on hover — the exact jump the owner asked to avoid.
+   Lightening within the navy family keeps the identity. The original anchor
+   had no hover treatment at all; this is the smallest addition that stops the
+   inherited one from contradicting the decision. */
+.a3kds-btn.ap-writing-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--a3kds-color-neutral-800);
+}

@@ -1,22 +1,84 @@
+import { LinkButton, Card } from "@a3kds/design-system";
 import { posts } from "../content";
-import { MINT, NAVY, CYAN } from "../boldPalette";
+// Only CYAN remains: it colours the decorative word, which W-2 keeps local.
+// The featured surface and badge now take their colours from the package.
+import { CYAN } from "../boldPalette";
 
 const [latest, ...rest] = posts;
 
+/**
+ * Writing teaser — migrated to A3KDS foundations (P04-A02).
+ *
+ * WHAT MOVED AND WHAT DID NOT, per the accepted W-1..W-9 decisions:
+ *
+ * Shared, from the package: the fluid editorial display roles, the tracking
+ * steps, the two elevation steps, Card's accent rule, and LinkButton.
+ *
+ * Local, deliberately: this composition, the post data, the per-post rule
+ * COLOUR (content-derived — the system owns the rule, not what a colour
+ * means), the stub-versus-real distinction, and the decorative word.
+ *
+ * Every literal below is either a token reference or a named local exception.
+ */
 export function WritingTeaser() {
   return (
-    <section id="writing" style={{ background: "#ffffff", padding: "112px 0" }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32, flexWrap: "wrap", marginBottom: 48 }}>
+    <section
+      id="writing"
+      style={{
+        background: "var(--a3kds-color-neutral-0)",
+        /* W-3 (amended 2026-09-13): 112 -> 96. The scale had no 96px step, so
+           the first pass snapped to 64 — a bigger reduction than was approved.
+           The owner chose to add the step rather than accept the larger change. */
+        padding: "var(--a3kds-space-24) 0",
+      }}
+    >
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 var(--a3kds-space-8)" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            gap: "var(--a3kds-space-8)",
+            flexWrap: "wrap",
+            marginBottom: "var(--a3kds-space-12)",
+          }}
+        >
           <div style={{ maxWidth: "34ch" }}>
-            <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 16px" }}>
+            <p
+              style={{
+                fontFamily: "var(--ap-font-mono)",
+                fontSize: "var(--a3kds-font-size-2xs)",
+                /* W-7: the eyebrow's 0.18em is now a shared step. */
+                letterSpacing: "var(--a3kds-letter-spacing-widest)",
+                textTransform: "uppercase",
+                color: "var(--a3kds-accent)",
+                margin: "0 0 var(--a3kds-space-4)",
+              }}
+            >
               01 — Writing
             </p>
-            <h2 style={{ fontSize: "clamp(2.25rem,5vw,4rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, margin: 0 }}>The argument, in essays.</h2>
+            {/* W-1: the fluid display role the scale did not have. */}
+            <h2
+              style={{
+                fontSize: "var(--a3kds-typography-editorial-display-size)",
+                fontWeight: "var(--a3kds-typography-editorial-display-weight)",
+                letterSpacing: "var(--a3kds-typography-editorial-display-letter-spacing)",
+                lineHeight: "var(--a3kds-typography-editorial-display-line-height)",
+                margin: 0,
+              }}
+            >
+              The argument, in essays.
+            </h2>
           </div>
-          <a href="/writing.html" style={{ padding: "14px 28px", borderRadius: 16, background: NAVY, color: "#ffffff", fontWeight: 600, textDecoration: "none" }}>
+          {/* W-4 (amended 2026-09-13): LinkButton gives the pill, the single
+              action size, the tested focus ring and real anchor semantics. The
+              FILL stays navy — a named local exception, because adopting
+              LinkButton also meant adopting action-primary blue, which was a
+              colour change I failed to flag when it was approved. Only the
+              colour is local; everything else is the system's. */}
+          <LinkButton href="/writing.html" className="ap-writing-cta">
             All writing
-          </a>
+          </LinkButton>
         </div>
 
         <a
@@ -25,33 +87,86 @@ export function WritingTeaser() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 40,
+            gap: "var(--a3kds-space-10)",
             alignItems: "center",
-            background: NAVY,
-            color: "#ffffff",
+            background: "var(--a3kds-color-neutral-950)",
+            color: "var(--a3kds-color-neutral-0)",
             textDecoration: "none",
-            borderRadius: 16,
-            padding: 56,
-            marginBottom: 32,
-            boxShadow: "0 24px 48px rgb(20 31 41 / 0.24)",
+            borderRadius: "var(--a3kds-radius-md)",
+            /* W-3: was 56px. */
+            padding: "var(--a3kds-space-12)",
+            marginBottom: "var(--a3kds-space-8)",
+            /* W-6: the library had no elevation token before this section. */
+            boxShadow: "var(--a3kds-elevation-floating)",
           }}
         >
           <div>
-            <span className="a3-badge" style={{ background: MINT, color: NAVY, marginBottom: 20, display: "inline-block" }}>
+            <span className="a3-badge" style={{
+                background: "var(--a3kds-color-brand-mint-300)",
+                color: "var(--a3kds-color-neutral-950)",
+                marginBottom: "var(--a3kds-space-5)",
+                display: "inline-block",
+              }}>
               Latest essay
             </span>
-            <h3 style={{ fontSize: "clamp(1.75rem,3.4vw,3rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.05, margin: "0 0 20px" }}>{latest.title}</h3>
-            <p style={{ fontSize: "1.0625rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 24px", maxWidth: "56ch" }}>{latest.excerpt}</p>
-            <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.08em", color: "#8aabc2", margin: 0 }}>
+            {/* W-1: the second fluid role. */}
+            <h3
+              style={{
+                fontSize: "var(--a3kds-typography-editorial-title-size)",
+                fontWeight: "var(--a3kds-typography-editorial-title-weight)",
+                letterSpacing: "var(--a3kds-typography-editorial-title-letter-spacing)",
+                lineHeight: "var(--a3kds-typography-editorial-title-line-height)",
+                margin: "0 0 var(--a3kds-space-5)",
+              }}
+            >
+              {latest.title}
+            </h3>
+            <p
+              style={{
+                /* W-5: was 1.0625rem. */
+                fontSize: "var(--a3kds-typography-body-size)",
+                lineHeight: "var(--a3kds-line-height-relaxed)",
+                color: "var(--a3kds-color-neutral-200)",
+                margin: "0 0 var(--a3kds-space-6)",
+                maxWidth: "56ch",
+              }}
+            >
+              {latest.excerpt}
+            </p>
+            <p
+              style={{
+                fontFamily: "var(--ap-font-mono)",
+                fontSize: "var(--a3kds-font-size-xs)",
+                /* W-7: metadata tracking, now a shared step. */
+                letterSpacing: "var(--a3kds-letter-spacing-wider)",
+                color: "var(--a3kds-color-neutral-400)",
+                margin: 0,
+              }}
+            >
               {latest.date} · {latest.words} · read →
             </p>
           </div>
-          <p aria-hidden="true" style={{ margin: 0, fontSize: "clamp(4rem,10vw,9rem)", fontWeight: 700, letterSpacing: "-0.05em", lineHeight: 0.85, color: CYAN, justifySelf: "end", textAlign: "right", opacity: 0.9 }}>
+          {/* W-2: editorial art, deliberately local. Its line-height and
+              tracking stay local with it — they exist for this one word. */}
+          <p
+            aria-hidden="true"
+            style={{
+              margin: 0,
+              fontSize: "clamp(4rem,10vw,9rem)",
+              fontWeight: "var(--a3kds-font-weight-bold)",
+              letterSpacing: "-0.05em",
+              lineHeight: 0.85,
+              color: CYAN,
+              justifySelf: "end",
+              textAlign: "right",
+              opacity: 0.9,
+            }}
+          >
             Judg&shy;ment.
           </p>
         </a>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "var(--a3kds-space-6)" }}>
           {rest.map((p) => (
             <PostCard key={p.title} post={p} />
           ))}
@@ -64,36 +179,91 @@ export function WritingTeaser() {
 function PostCard({ post }: { post: (typeof posts)[number] }) {
   const inner = (
     <>
-      <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.08em", color: "#476b85", margin: 0 }}>{post.date} · {post.words}</p>
-      <h3 className="lift-t" style={{ fontSize: "1.375rem", lineHeight: 1.2, fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>{post.title}</h3>
-      <p style={{ fontSize: "0.9375rem", lineHeight: 1.6, color: "#38546a", margin: 0 }}>{post.excerpt}</p>
+      <p
+        style={{
+          fontFamily: "var(--ap-font-mono)",
+          fontSize: "var(--a3kds-font-size-2xs)",
+          letterSpacing: "var(--a3kds-letter-spacing-wider)",
+          color: "var(--a3kds-color-neutral-600)",
+          margin: 0,
+        }}
+      >
+        {post.date} · {post.words}
+      </p>
+      <h3
+        className="lift-t"
+        style={{
+          fontSize: "var(--a3kds-font-size-xl)",
+          /* W-8: was 1.2. */
+          lineHeight: "var(--a3kds-line-height-snug)",
+          fontWeight: "var(--a3kds-font-weight-bold)",
+          letterSpacing: "var(--a3kds-letter-spacing-tight)",
+          margin: 0,
+        }}
+      >
+        {post.title}
+      </h3>
+      <p
+        style={{
+          /* W-5: was 0.9375rem. */
+          fontSize: "var(--a3kds-typography-body-sm-size)",
+          lineHeight: "var(--a3kds-line-height-relaxed)",
+          color: "var(--a3kds-color-neutral-700)",
+          margin: 0,
+        }}
+      >
+        {post.excerpt}
+      </p>
       {!post.hasFullPost && (
-        <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#8aabc2", margin: "auto 0 0" }}>
+        <p
+          style={{
+            fontFamily: "var(--ap-font-mono)",
+            fontSize: "var(--a3kds-font-size-2xs)",
+            /* W-7: was 0.1em, snapped to the shared step. */
+            letterSpacing: "var(--a3kds-letter-spacing-wider)",
+            textTransform: "uppercase",
+            color: "var(--a3kds-color-neutral-400)",
+            margin: "auto 0 0",
+          }}
+        >
           Full essay coming soon
         </p>
       )}
     </>
   );
-  const style = {
-    display: "flex" as const,
-    flexDirection: "column" as const,
-    gap: 14,
-    background: "#ffffff",
-    border: "1px solid #d9e6ee",
-    borderTop: `6px solid ${post.rule}`,
-    borderRadius: 16,
-    padding: 28,
-    boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)",
-    textDecoration: "none",
-    color: "inherit",
-  };
 
+  // W-6/W-9: the card, its accent rule and its elevation are the system's.
+  // The accent COLOUR is the post's, because which colour means which essay is
+  // content, not a system role.
+  const card = (
+    <Card
+      accent={post.rule}
+      elevation="raised"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "var(--a3kds-space-4)" /* W-3: was 14px, off the 4px grid */,
+        /* W-3: was 28px. */
+        padding: "var(--a3kds-space-6)",
+        background: "var(--a3kds-color-neutral-0)",
+        color: "inherit",
+        textDecoration: "none",
+        height: "100%",
+        boxSizing: "border-box",
+      }}
+    >
+      {inner}
+    </Card>
+  );
+
+  // Destination and stub semantics preserved exactly: a real essay is a link,
+  // a stub is not interactive.
   if (post.hasFullPost) {
     return (
-      <a href={`/writing/${post.slug}.html`} className="lift" style={style}>
-        {inner}
+      <a href={`/writing/${post.slug}.html`} className="lift" style={{ textDecoration: "none", color: "inherit", display: "block", height: "100%" }}>
+        {card}
       </a>
     );
   }
-  return <div style={style}>{inner}</div>;
+  return card;
 }
