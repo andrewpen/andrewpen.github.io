@@ -291,3 +291,17 @@
      rather than a different one. */
   background-color: #0FAFBD;
 }
+
+/* Named local exception (P06-A02). Actions on the site's dark sections keep
+   the weight they were drawn with.
+
+   This is the SAME gap as .ap-chrome-cta, and the same owner decision applied
+   consistently: .a3kds-btn declares no font-weight, so an action label
+   inherits 400 from the body where these were 600. Only the weight is here —
+   the COLOUR is not, because inside data-mode="dark" the system already
+   resolves the action to #11C4D4 on #141f29, which is this site's cyan on
+   navy exactly. Re-stating it locally would duplicate the system rather than
+   extend it. */
+.a3kds-btn.ap-hero-cta {
+  font-weight: 600;
+}

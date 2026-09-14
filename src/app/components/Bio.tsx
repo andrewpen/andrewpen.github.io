@@ -1,16 +1,23 @@
+import { LinkButton } from "@a3kds/design-system";
 import { about, aboutHighlights, hero, contact } from "../content";
+import { chrome } from "../destinations";
+
+// Destinations from the record; the wording stays this section's.
+const [cv, linkedin] = chrome(["resume", "linkedin"], "home");
 import { CYAN, MINT, NAVY } from "../boldPalette";
 
 export function Bio() {
   return (
-    <section id="bio" style={{ background: NAVY, color: "#ffffff", padding: "112px 0" }}>
+    // data-mode="dark": this surface is dark, and the system's dark palette is
+    // this site's palette. See Hero for the measurement.
+    <section id="bio" data-mode="dark" style={{ background: NAVY, color: "#ffffff", padding: "112px 0" }}>
       <div
         style={{
           maxWidth: 1280,
           margin: "0 auto",
           padding: "0 32px",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
           gap: 64,
           alignItems: "start",
         }}
@@ -28,18 +35,20 @@ export function Bio() {
             third order effects.
           </p>
           <p style={{ fontSize: "1.0625rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 32px", maxWidth: "64ch" }}>{about.bio}</p>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="/resume.html" style={{ padding: "14px 28px", borderRadius: 16, background: CYAN, color: NAVY, fontWeight: 600, textDecoration: "none" }}>
-              Full CV
-            </a>
-            <a
-              href={contact.linkedinUrl}
+          <div style={{ display: "flex", gap: "var(--a3kds-space-3)", flexWrap: "wrap" }}>
+            <LinkButton href={cv.href} className="ap-hero-cta">Full CV</LinkButton>
+            {/* target/rel survive the migration: LinkButton is a real anchor and
+                passes anchor attributes through, which is the reason it exists
+                rather than a button that calls location.assign. */}
+            <LinkButton
+              href={linkedin.href}
+              variant="secondary"
+              className="ap-hero-cta"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ padding: "14px 28px", borderRadius: 16, border: "1px solid #8aabc2", color: "#ffffff", fontWeight: 600, textDecoration: "none" }}
             >
               LinkedIn
-            </a>
+            </LinkButton>
           </div>
         </div>
         <div style={{ display: "grid", gap: 20 }}>

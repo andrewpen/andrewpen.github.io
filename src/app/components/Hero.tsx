@@ -1,9 +1,20 @@
+import { LinkButton } from "@a3kds/design-system";
 import { hero, heroStats } from "../content";
+import { chrome } from "../destinations";
 import { BLUE, CYAN, NAVY } from "../boldPalette";
+
+// Destinations, not literals — the same record the chrome uses (P06-A01).
+// The RECORD owns where these go. The section owns what they say: "Read the
+// writing" is this hero's copy, not the destination's name.
+const [readWriting, talks] = chrome(["writing-section", "speaking"], "home");
 
 export function Hero() {
   return (
-    <section id="top" style={{ position: "relative", background: NAVY, color: "#ffffff", overflow: "hidden" }}>
+    // data-mode="dark" because this surface IS dark. The system's dark action
+    // resolves to #11C4D4 on #141f29 — byte-identical to the site's cyan on
+    // navy — so the actions below take their colour from the system instead of
+    // a local exception re-stating what the system already says.
+    <section id="top" data-mode="dark" style={{ position: "relative", background: NAVY, color: "#ffffff", overflow: "hidden" }}>
       <div
         aria-hidden="true"
         className="apb-rail"
@@ -41,7 +52,7 @@ export function Hero() {
           padding: "64px 32px 0",
           paddingLeft: "clamp(32px,8vw,88px)",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
           gap: 24,
           alignItems: "end",
         }}
@@ -67,21 +78,21 @@ export function Hero() {
           <p style={{ fontSize: "1.125rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 40px", maxWidth: "46ch" }}>
             {hero.intro}
           </p>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 56 }}>
-            <a href="#writing" style={{ padding: "14px 28px", borderRadius: 16, background: "#ffffff", color: NAVY, fontWeight: 600, textDecoration: "none" }}>
+          <div style={{ display: "flex", gap: "var(--a3kds-space-3)", flexWrap: "wrap", marginBottom: "var(--a3kds-space-14, 56px)" }}>
+            {/* Both are navigation, so both are LinkButton — real anchors with
+                the tested focus ring, not anchors dressed as buttons. The pair
+                keeps its hierarchy: the primary leads, the secondary supports. */}
+            <LinkButton href={readWriting.href} className="ap-hero-cta">
               Read the writing
-            </a>
-            <a
-              href="#speaking"
-              style={{ padding: "14px 28px", borderRadius: 16, border: "1px solid #8aabc2", color: "#ffffff", fontWeight: 600, textDecoration: "none" }}
-            >
+            </LinkButton>
+            <LinkButton href={talks.href} variant="secondary" className="ap-hero-cta">
               Talks and topics
-            </a>
+            </LinkButton>
           </div>
           <dl
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(120px, 100%), 1fr))",
               gap: 24,
               margin: 0,
               paddingTop: 32,
