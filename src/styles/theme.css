@@ -320,6 +320,23 @@
    canvas, so there is no mode whose palette matches. Raised with Codex. */
 .ap-subscribe-field .a3kds-formfield-label {
   color: #ffffff;
+
+  /* Owner decision 2026-09-14 (Andrew), batch D review: restore the site's own
+     label treatment.
+
+     The system's form label is Inter 16px/600 sentence case. Every other label
+     and eyebrow on this page is mono, 11px, uppercase and tracked, so adopting
+     the system's left ONE label on the homepage reading differently from its
+     neighbours — and it carried no behaviour the old one lacked. Unlike the
+     pill or the action colours, there was nothing gained to weigh against it.
+
+     The field, its label wiring, its error and hint plumbing and the focus
+     ring all still come from the system; only the label's type is local. */
+  font-family: var(--ap-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 .a3kds-btn.ap-subscribe-cta {
   background-color: #141f29;

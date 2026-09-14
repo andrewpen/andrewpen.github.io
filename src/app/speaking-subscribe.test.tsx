@@ -13,6 +13,8 @@ import userEvent from "@testing-library/user-event";
 import { Speaking } from "./components/Speaking";
 import { Subscribe } from "./components/Subscribe";
 import { contact, speakingEvents } from "./content";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 describe("Speaking selection", () => {
   const gallery = (c: HTMLElement) =>
@@ -254,5 +256,37 @@ describe("Subscribe does not pretend", () => {
     render(<Subscribe />);
     await user.click(screen.getByRole("button", { name: /subscribe/i }));
     expect(assigned.length).toBe(0);
+  });
+});
+
+/**
+ * Owner decision 2026-09-14 (Andrew), batch D review.
+ *
+ * The system's form label is Inter 16px/600 sentence case; every other label
+ * on this page is mono, 11px, uppercase and tracked. Adopting the system's
+ * left one label reading differently from its neighbours while carrying no
+ * behaviour the old one lacked, so the site's treatment is restored locally.
+ *
+ * Asserted because it looks like a stray override: someone tidying the CSS
+ * would see a local rule fighting a system component and remove it.
+ */
+describe("the subscribe field's label", () => {
+  const rule = () => {
+    const css = readFileSync(resolve(__dirname, "../styles/theme.css"), "utf8");
+    const start = css.indexOf(".ap-subscribe-field .a3kds-formfield-label {");
+    return css.slice(start, css.indexOf("}", start));
+  };
+
+  it("keeps the site's mono uppercase treatment", () => {
+    const block = rule();
+    expect(block).toMatch(/font-family:\s*var\(--ap-font-mono\)/);
+    expect(block).toMatch(/text-transform:\s*uppercase/);
+    expect(block).toMatch(/font-size:\s*0\.6875rem/);
+    expect(block).toMatch(/letter-spacing:\s*0\.14em/);
+  });
+
+  it("and stays white, which is what keeps it readable on the blue", () => {
+    // 5.22 against the section; the system's default was 2.65, below AA.
+    expect(rule()).toMatch(/color:\s*#ffffff/);
   });
 });
