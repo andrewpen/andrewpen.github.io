@@ -5,7 +5,7 @@
  * entry points for, because a row whose target does not exist is a whole
  * clickable card that goes nowhere — and it fails silently in a browser.
  */
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -114,13 +114,73 @@ describe("reflow", () => {
   });
 });
 
-describe("content fixtures", () => {
-  it("a long title does not break the row's three-column grid", () => {
-    const { container } = render(<Work />);
+describe("content fixtures, injected through the real input", () => {
+  /**
+   * The first version of both of these was a surrogate (CX-068).
+   *
+   * The long-title test read the grid string and never supplied a long title —
+   * and minmax(0,1fr) lets a TRACK shrink, which says nothing about whether
+   * the text inside it overflows. The missing-target test checked a filesystem
+   * path I made up and never rendered Work at all.
+   *
+   * Both now replace the content module the component actually reads.
+   */
+  const withProjects = async (projects: unknown[]) => {
+    vi.resetModules();
+    const real = await vi.importActual<typeof import("./content")>("./content");
+    vi.doMock("./content", () => ({ ...real, projects }));
+    const { Work: W } = await import("./components/Work");
+    return { W, real };
+  };
+
+  const LONG_TITLE =
+    "AI-Ready Architecture: Transforming a Very Large Enterprise Design System " +
+    "Into a Machine-Readable Knowledge Source for Agents and Their Operators";
+
+  it("a long title stays inside its row and does not push the arrow out", async () => {
+    const real = await vi.importActual<typeof import("./content")>("./content");
+    const { W } = await withProjects(
+      (real.projects as Record<string, unknown>[]).map(p => ({ ...p, title: LONG_TITLE })));
+
+    const { container } = render(<W />);
     const row = container.querySelector<HTMLElement>("a[href]")!;
+    const h3 = row.querySelector("h3")!;
+
+    expect(h3.textContent).toBe(LONG_TITLE);
+    // The arrow is the last grid child; it must still be present and after the
+    // text column, which is what "does not get pushed out" means structurally.
+    const arrow = row.querySelector('[aria-hidden="true"]:last-child');
+    expect(arrow?.textContent?.trim()).toBe("→");
     expect(row.style.gridTemplateColumns).toContain("minmax(0,1fr)");
-    // minmax(0,...) is what lets a long title shrink instead of pushing the
-    // arrow out of the row.
+
+    vi.doUnmock("./content"); vi.resetModules();
+  });
+
+  it("FIXTURE: a project missing its required content is caught, not rendered blank", async () => {
+    const real = await vi.importActual<typeof import("./content")>("./content");
+    const broken = (real.projects as Record<string, unknown>[]).map((p, i) =>
+      i === 0 ? { ...p, title: "", caseStudyHref: "" } : p);
+    const { W } = await withProjects(broken);
+
+    const { container } = render(<W />);
+
+    // The component renders what it is given, so the deliberate handling is a
+    // CHECK, not a silent fallback: a row with no title or no target is not a
+    // usable link and must fail validation rather than ship as a blank card.
+    const rows = [...container.querySelectorAll("a")];
+    const unusable = rows.filter(r =>
+      !r.getAttribute("href") || !r.querySelector("h3")?.textContent?.trim());
+    expect(unusable.length, "a row with no title or target must be detectable").toBe(1);
+
+    vi.doUnmock("./content"); vi.resetModules();
+  });
+
+  it("with real content, no row is unusable", async () => {
+    const { container } = render(<Work />);
+    const rows = [...container.querySelectorAll("a")];
+    const unusable = rows.filter(r =>
+      !r.getAttribute("href") || !r.querySelector("h3")?.textContent?.trim());
+    expect(unusable).toEqual([]);
   });
 
   it("every row still renders its title, text and metric", () => {
@@ -128,6 +188,42 @@ describe("content fixtures", () => {
     for (const row of container.querySelectorAll("a[href]")) {
       expect(row.querySelector("h3")?.textContent?.trim()).toBeTruthy();
       expect(row.querySelectorAll("p").length).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
+
+/**
+ * Regressions for two defects the REAL fixtures exposed (CX-068).
+ *
+ * Neither was visible from the grid string. Rendering a long title at 320px
+ * showed the row's middle track resolving to 10.6px — minmax(0,1fr) permits
+ * that collapse, it does not prevent it — and the title overflowing its own
+ * box by 72px with overflow-wrap: normal.
+ */
+describe("a long title has somewhere to go", () => {
+  it("the title can break, so the track's min-content width can shrink", () => {
+    const { container } = render(<Work />);
+    const h3 = container.querySelector<HTMLElement>("a[href] h3")!;
+    // "anywhere", not "break-word": only anywhere affects min-content sizing.
+    expect(h3.style.overflowWrap).toBe("anywhere");
+  });
+
+  it("the row's own gap and padding shrink with the viewport", () => {
+    const { container } = render(<Work />);
+    const row = container.querySelector<HTMLElement>("a[href]")!;
+    // Flat 40px padding and 40px gaps consumed 160px of a 256px row at 320px,
+    // leaving the text 10.6px. Both are fluid now.
+    expect(row.style.gap).toContain("clamp(");
+    expect(row.style.padding).toContain("clamp(");
+  });
+
+  it("the advisory cards follow W-3's padding, not the component default", () => {
+    const { container } = render(<Practice />);
+    for (const c of container.querySelectorAll<HTMLElement>(".a3kds-card")) {
+      // Card's own default is space-4. W-3 settled this site's cards at
+      // space-6; dropping to the default would make these two tighter than
+      // every other card on the site.
+      expect(c.style.padding).toBe("var(--a3kds-space-6)");
     }
   });
 });
