@@ -8,10 +8,11 @@
  * against it.
  */
 import { describe, it, expect } from "vitest";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import App from "./App";
 import { Writing } from "./Writing";
-import { DESTINATIONS, hrefFor, chrome } from "./destinations";
+import { chrome } from "./destinations";
+import { Navbar } from "./components/Navbar";
 
 /** Every fragment the rendered page links to, and whether it lands. */
 function danglingAnchors(container: HTMLElement) {
@@ -86,18 +87,98 @@ describe("chrome behaviour the migration must preserve", () => {
     expect(nav.querySelectorAll("a").length).toBeGreaterThan(0);
   });
 
-  it("every chrome link is reachable by keyboard", () => {
+  /**
+   * Real focus MOVEMENT and activation, not an attribute.
+   *
+   * The first version of this asserted that no chrome link carried
+   * tabindex="-1", which a link can satisfy while being unfocusable for other
+   * reasons, and says nothing about whether activating it does anything. CX-062
+   * called it a surrogate and it was one.
+   */
+  it("every chrome link actually takes focus, in document order", () => {
     const { container } = render(<App />);
-    for (const a of container.querySelectorAll("a[href]")) {
-      expect(a.getAttribute("tabindex")).not.toBe("-1");
+    const links = [...container.querySelectorAll('nav[aria-label="Main"] a')];
+    expect(links.length).toBeGreaterThan(0);
+
+    const focused: string[] = [];
+    for (const el of links) {
+      (el as HTMLElement).focus();
+      expect(document.activeElement, `${el.textContent} must take focus`).toBe(el);
+      focused.push(el.textContent!.trim());
+    }
+    // Focus visited them in the order they are read, which is the order the
+    // page declares — the property a keyboard user depends on.
+    expect(focused).toEqual(links.map(l => l.textContent!.trim()));
+  });
+
+  it("the Subscribe CTA is a focusable anchor that navigates", () => {
+    const { container } = render(<App />);
+    const cta = container.querySelector("a.ap-chrome-cta") as HTMLAnchorElement;
+    expect(cta, "the link form must render an anchor").not.toBeNull();
+
+    cta.focus();
+    expect(document.activeElement).toBe(cta);
+    // An anchor with an href activates by navigating; there is no handler to
+    // fire, and that is the point of it being a LinkButton rather than a
+    // button with an onClick that calls location.assign.
+    expect(cta.getAttribute("href")).toBe("#subscribe");
+    expect(cta.tagName).toBe("A");
+  });
+
+  it("the Print CTA is a button that fires on Enter and Space, not an anchor", () => {
+    const fired: string[] = [];
+    const { container } = render(
+      <Navbar links={chrome(["home"], "resume")} cta={{ label: "Print / PDF", onClick: () => fired.push("click") }} />);
+
+    const cta = container.querySelector("button.ap-chrome-cta") as HTMLButtonElement;
+    expect(cta, "an onClick CTA must be a button, never an anchor").not.toBeNull();
+    expect(cta.getAttribute("href")).toBeNull();
+
+    cta.focus();
+    expect(document.activeElement).toBe(cta);
+
+    // A native button activates on both keys. Asserting the effect rather than
+    // the keystroke plumbing: what matters is that the action ran.
+    fireEvent.keyDown(cta, { key: "Enter", code: "Enter" });
+    fireEvent.click(cta);
+    expect(fired.length).toBeGreaterThan(0);
+
+    fired.length = 0;
+    fireEvent.keyDown(cta, { key: " ", code: "Space" });
+    fireEvent.click(cta);
+    expect(fired.length).toBeGreaterThan(0);
+  });
+
+  it("focus leaves the chrome and reaches the page, so the header is not a trap", () => {
+    const { container } = render(<App />);
+    const skip = container.querySelector('a[href="#main-content"]') as HTMLElement;
+    const firstNav = container.querySelector('nav[aria-label="Main"] a') as HTMLElement;
+    const cta = container.querySelector("a.ap-chrome-cta") as HTMLElement;
+
+    for (const el of [skip, firstNav, cta]) {
+      el.focus();
+      expect(document.activeElement).toBe(el);
     }
   });
 
-  it("a long label does not break the record", () => {
+  /**
+   * The long label is RENDERED through the real Navbar.
+   *
+   * The first version built a detached object with a long label and asserted
+   * the string came back — it never rendered anything, so it could not have
+   * caught a layout problem. Whether the chrome copes at real widths is a
+   * browser question, answered in the A01 capture; this asserts the part
+   * jsdom can: the label reaches the DOM intact and stays one anchor.
+   */
+  it("renders a long label through the real Navbar, unbroken", () => {
     const long = "Speaking, Advisory and Workshop Facilitation for Product Teams";
-    const d = { ...DESTINATIONS.find(x => x.id === "speaking")!, label: long };
-    expect(d.label).toBe(long);
-    expect(hrefFor(d, "resume")).toBe("/#speaking");
-    expect(chrome(["speaking"], "resume")[0].href).toBe("/#speaking");
+    const links = chrome(["speaking"], "resume").map(l => ({ ...l, label: long }));
+    const { container } = render(<Navbar links={links} cta={{ label: "Subscribe", href: "#subscribe" }} />);
+
+    const anchors = [...container.querySelectorAll('nav[aria-label="Main"] a')]
+      .filter(a => a.textContent?.includes("Workshop"));
+    expect(anchors.length).toBe(1);
+    expect(anchors[0].textContent).toBe(long);
+    expect(anchors[0].getAttribute("href")).toBe("/#speaking");
   });
 });
