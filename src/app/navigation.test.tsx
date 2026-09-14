@@ -8,7 +8,8 @@
  * against it.
  */
 import { describe, it, expect } from "vitest";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import App from "./App";
 import { Writing } from "./Writing";
 import { chrome } from "./destinations";
@@ -88,88 +89,123 @@ describe("chrome behaviour the migration must preserve", () => {
   });
 
   /**
-   * Real focus MOVEMENT and activation, not an attribute.
+   * REAL Tab traversal, driven by the keyboard.
    *
-   * The first version of this asserted that no chrome link carried
-   * tabindex="-1", which a link can satisfy while being unfocusable for other
-   * reasons, and says nothing about whether activating it does anything. CX-062
-   * called it a surrogate and it was one.
+   * Two rewrites got here. The first asserted no link carried tabindex="-1",
+   * which says nothing about focus. The second called .focus() in a loop —
+   * which sets the order itself rather than exercising Tab, so it would have
+   * passed with every link removed from the tab sequence (CX-063).
    */
-  it("every chrome link actually takes focus, in document order", () => {
+  it("Tab walks the chrome in order and reaches page content beyond it", async () => {
+    const user = userEvent.setup();
     const { container } = render(<App />);
-    const links = [...container.querySelectorAll('nav[aria-label="Main"] a')];
-    expect(links.length).toBeGreaterThan(0);
 
-    const focused: string[] = [];
-    for (const el of links) {
-      (el as HTMLElement).focus();
-      expect(document.activeElement, `${el.textContent} must take focus`).toBe(el);
-      focused.push(el.textContent!.trim());
+    const seen: string[] = [];
+    // Start from the document, not from an element focused by hand.
+    await user.tab();
+    for (let i = 0; i < 12; i += 1) {
+      const el = document.activeElement as HTMLElement;
+      if (!el || el === document.body) break;
+      seen.push((el.textContent ?? "").trim().slice(0, 20));
+      if (!el.closest("header") && !el.matches('a[href="#main-content"]')) break;
+      await user.tab();
     }
-    // Focus visited them in the order they are read, which is the order the
-    // page declares — the property a keyboard user depends on.
-    expect(focused).toEqual(links.map(l => l.textContent!.trim()));
+
+    // The chrome is traversed in the order it is read...
+    expect(seen[0]).toMatch(/Skip to main content/i);
+    expect(seen).toEqual(expect.arrayContaining(["Writing", "Speaking", "Work", "Practice", "Bio"]));
+    // The CTA is part of the chrome and must be IN the tab sequence. Asserting
+    // it here rather than by calling focus() on it: focus() succeeds on a
+    // tabindex="-1" element, so it cannot tell reachable from unreachable.
+    expect(seen).toContain("Subscribe");
+
+    // ...and Tab LEAVES it. The previous version claimed this while only ever
+    // focusing chrome elements, so it could not have detected a focus trap.
+    const last = document.activeElement as HTMLElement;
+    expect(last.closest("header"), "Tab must reach content outside the header").toBeNull();
+    expect(container.contains(last)).toBe(true);
   });
 
-  it("the Subscribe CTA is a focusable anchor that navigates", () => {
+  it("REGRESSION: a link removed from the tab sequence is detected", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<App />);
+    const speaking = container.querySelector('nav[aria-label="Main"] a[href="#speaking"]') as HTMLElement;
+    speaking.setAttribute("tabindex", "-1");
+
+    const seen: string[] = [];
+    await user.tab();
+    for (let i = 0; i < 12; i += 1) {
+      const el = document.activeElement as HTMLElement;
+      if (!el || el === document.body) break;
+      seen.push((el.textContent ?? "").trim());
+      if (!el.closest("header") && !el.matches('a[href="#main-content"]')) break;
+      await user.tab();
+    }
+    expect(seen).not.toContain("Speaking");
+  });
+
+  it("Enter on the Subscribe CTA activates it as a link", async () => {
+    const user = userEvent.setup();
     const { container } = render(<App />);
     const cta = container.querySelector("a.ap-chrome-cta") as HTMLAnchorElement;
-    expect(cta, "the link form must render an anchor").not.toBeNull();
 
-    cta.focus();
-    expect(document.activeElement).toBe(cta);
-    // An anchor with an href activates by navigating; there is no handler to
-    // fire, and that is the point of it being a LinkButton rather than a
-    // button with an onClick that calls location.assign.
+    let defaultPrevented: boolean | null = null;
+    cta.addEventListener("click", e => { defaultPrevented = e.defaultPrevented; e.preventDefault(); });
+
+    // Reached BY TAB, not by focus(). focus() works on an element that is out
+    // of the tab sequence, so it would pass on a CTA no keyboard user can get
+    // to — a mutation that survived until this was changed.
+    await user.tab();
+    for (let i = 0; i < 12 && document.activeElement !== cta; i += 1) await user.tab();
+    expect(document.activeElement, "Tab must be able to reach the CTA").toBe(cta);
+
+    await user.keyboard("{Enter}");
+
+    // Enter on a focused anchor fires a click. jsdom does NOT then navigate —
+    // it has no navigation — so the assertion is that activation reached the
+    // element, and the href it would follow is the right one. Real navigation
+    // is browser evidence, recorded in the A01 capture, not claimed here.
+    expect(defaultPrevented, "Enter must activate the anchor").not.toBeNull();
     expect(cta.getAttribute("href")).toBe("#subscribe");
-    expect(cta.tagName).toBe("A");
   });
 
-  it("the Print CTA is a button that fires on Enter and Space, not an anchor", () => {
+  it("Enter and Space activate the Print CTA, with no injected click", async () => {
+    const user = userEvent.setup();
     const fired: string[] = [];
     const { container } = render(
-      <Navbar links={chrome(["home"], "resume")} cta={{ label: "Print / PDF", onClick: () => fired.push("click") }} />);
+      <Navbar links={chrome(["home"], "resume")} cta={{ label: "Print / PDF", onClick: () => fired.push("run") }} />);
 
     const cta = container.querySelector("button.ap-chrome-cta") as HTMLButtonElement;
-    expect(cta, "an onClick CTA must be a button, never an anchor").not.toBeNull();
-    expect(cta.getAttribute("href")).toBeNull();
+    expect(cta, "an onClick CTA must be a button").not.toBeNull();
 
+    // The previous version sent a keyDown and then called fireEvent.click()
+    // unconditionally, so a keyboard activation that never happened still
+    // passed — the test clicked for it. Nothing is clicked here.
     cta.focus();
-    expect(document.activeElement).toBe(cta);
-
-    // A native button activates on both keys. Asserting the effect rather than
-    // the keystroke plumbing: what matters is that the action ran.
-    fireEvent.keyDown(cta, { key: "Enter", code: "Enter" });
-    fireEvent.click(cta);
-    expect(fired.length).toBeGreaterThan(0);
+    await user.keyboard("{Enter}");
+    expect(fired, "Enter must activate the button on its own").toEqual(["run"]);
 
     fired.length = 0;
-    fireEvent.keyDown(cta, { key: " ", code: "Space" });
-    fireEvent.click(cta);
-    expect(fired.length).toBeGreaterThan(0);
+    cta.focus();
+    await user.keyboard(" ");
+    expect(fired, "Space must activate the button on its own").toEqual(["run"]);
   });
 
-  it("focus leaves the chrome and reaches the page, so the header is not a trap", () => {
-    const { container } = render(<App />);
-    const skip = container.querySelector('a[href="#main-content"]') as HTMLElement;
-    const firstNav = container.querySelector('nav[aria-label="Main"] a') as HTMLElement;
-    const cta = container.querySelector("a.ap-chrome-cta") as HTMLElement;
+  it("REGRESSION: blocked keyboard activation fails, so the test above means something", async () => {
+    const user = userEvent.setup();
+    const fired: string[] = [];
+    const { container } = render(
+      <Navbar links={chrome(["home"], "resume")} cta={{ label: "Print / PDF", onClick: () => fired.push("run") }} />);
 
-    for (const el of [skip, firstNav, cta]) {
-      el.focus();
-      expect(document.activeElement).toBe(el);
-    }
+    const cta = container.querySelector("button.ap-chrome-cta") as HTMLButtonElement;
+    cta.addEventListener("keydown", e => e.preventDefault(), true);
+
+    cta.focus();
+    await user.keyboard("{Enter}");
+    await user.keyboard(" ");
+    expect(fired, "with activation blocked, nothing should have run").toEqual([]);
   });
 
-  /**
-   * The long label is RENDERED through the real Navbar.
-   *
-   * The first version built a detached object with a long label and asserted
-   * the string came back — it never rendered anything, so it could not have
-   * caught a layout problem. Whether the chrome copes at real widths is a
-   * browser question, answered in the A01 capture; this asserts the part
-   * jsdom can: the label reaches the DOM intact and stays one anchor.
-   */
   it("renders a long label through the real Navbar, unbroken", () => {
     const long = "Speaking, Advisory and Workshop Facilitation for Product Teams";
     const links = chrome(["speaking"], "resume").map(l => ({ ...l, label: long }));
