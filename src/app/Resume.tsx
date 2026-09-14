@@ -1,21 +1,14 @@
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { hero, roles, education, skills, projects, cvStats, contact } from "./content";
+import { chrome, hrefFor, destination } from "./destinations";
+import { hero, roles, education, skills, projects, cvStats} from "./content";
 import { BLUE, PINK, CYAN, MINT, NAVY, ink } from "./boldPalette";
 
-const navLinks = [
-  { label: "Portfolio", href: "/" },
-  { label: "Writing", href: "/writing.html" },
-  { label: "Speaking", href: "/#speaking" },
-  { label: "CV", href: "/resume.html", current: true },
-];
+const navLinks = chrome(
+  ["home", "writing-index", "speaking", "resume"], "resume", "resume");
 
-const footerLinks = [
-  { label: "Portfolio", href: "/" },
-  { label: "Writing", href: "/writing.html" },
-  { label: "LinkedIn", href: contact.linkedinUrl },
-  { label: "Email", href: `mailto:${contact.email}` },
-];
+const footerLinks = chrome(
+  ["home", "writing-index", "linkedin", "email"], "resume");
 
 export function Resume() {
   return (
@@ -196,7 +189,7 @@ export function Resume() {
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 12px" }}>Also</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.5, margin: "0 0 16px" }}>Four signature talks and six published essays sit alongside this CV.</p>
                 <div style={{ display: "flex", gap: 20, flexWrap: "wrap", fontSize: "0.9375rem", fontWeight: 600 }}>
-                  <a href="/#speaking" style={{ color: "#ffffff", textDecoration: "underline" }}>
+                  <a href={hrefFor(destination("speaking"), "resume")} style={{ color: "#ffffff", textDecoration: "underline" }}>
                     Speaking →
                   </a>
                   <a href="/writing.html" style={{ color: "#ffffff", textDecoration: "underline" }}>

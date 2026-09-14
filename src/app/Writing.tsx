@@ -2,29 +2,21 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Ticker } from "./components/Ticker";
 import { Subscribe } from "./components/Subscribe";
-import { posts, writingStats, writingTicker, contact } from "./content";
+import { posts, writingStats, writingTicker } from "./content";
+import { chrome, hrefFor, destination } from "./destinations";
 import { CYAN, MINT, NAVY } from "./boldPalette";
 
-const navLinks = [
-  { label: "Portfolio", href: "/" },
-  { label: "Writing", href: "/writing.html", current: true },
-  { label: "Speaking", href: "/#speaking" },
-  { label: "CV", href: "/resume.html" },
-];
-
-const footerLinks = [
-  { label: "Portfolio", href: "/" },
-  { label: "LinkedIn", href: contact.linkedinUrl },
-  { label: "Email", href: `mailto:${contact.email}` },
-  { label: "CV", href: "/resume.html" },
-];
+const navLinks = chrome(
+  ["home", "writing-index", "speaking", "resume"], "writing", "writing-index");
+const footerLinks = chrome(
+  ["home", "linkedin", "email", "resume"], "writing");
 
 const [latest, ...earlier] = posts;
 
 export function Writing() {
   return (
     <div className="apb" style={{ background: "#ffffff", color: "#1f2e3d", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      <Navbar links={navLinks} cta={{ label: "Subscribe", href: "#subscribe" }} />
+      <Navbar links={navLinks} cta={{ label: "Subscribe", href: hrefFor(destination("subscribe-writing"), "writing") }} />
 
       <main id="top" style={{ flex: 1 }}>
         <section style={{ position: "relative", background: NAVY, color: "#ffffff", overflow: "hidden" }}>

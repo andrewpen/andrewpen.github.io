@@ -8,22 +8,15 @@ import { Work } from "./components/Work";
 import { Bio } from "./components/Bio";
 import { Practice } from "./components/Practice";
 import { Subscribe } from "./components/Subscribe";
-import { ticker, contact } from "./content";
+import { ticker } from "./content";
+import { chrome, hrefFor, destination } from "./destinations";
 
-const navLinks = [
-  { label: "Writing", href: "#writing" },
-  { label: "Speaking", href: "#speaking" },
-  { label: "Work", href: "#work" },
-  { label: "Practice", href: "#practice" },
-  { label: "Bio", href: "#bio" },
-];
-
-const footerLinks = [
-  { label: "Writing", href: "/writing.html" },
-  { label: "LinkedIn", href: contact.linkedinUrl },
-  { label: "Email", href: `mailto:${contact.email}` },
-  { label: "CV", href: "/resume.html" },
-];
+// WHICH destinations and in what ORDER stays here: route order is
+// website-owned. WHERE each one points is the record's business.
+const navLinks = chrome(
+  ["writing-section", "speaking", "work", "practice", "bio"], "home");
+const footerLinks = chrome(
+  ["writing-index", "linkedin", "email", "resume"], "home");
 
 export default function App() {
   return (
@@ -34,7 +27,7 @@ export default function App() {
       >
         Skip to main content
       </a>
-      <Navbar links={navLinks} cta={{ label: "Subscribe", href: "#subscribe" }} />
+      <Navbar links={navLinks} cta={{ label: "Subscribe", href: hrefFor(destination("subscribe-home"), "home") }} />
       <main id="main-content">
         <Hero />
         <Ticker items={ticker} />

@@ -1,22 +1,15 @@
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { chrome, hrefFor, destination } from "./destinations";
 import { caseStudies, studyById, RULES } from "./caseStudies";
 import { BLUE, PINK, MINT, CYAN, NAVY, ink } from "./boldPalette";
 import { contact } from "./content";
 
-const navLinks = [
-  { label: "Portfolio", href: "/" },
-  { label: "Writing", href: "/writing.html" },
-  { label: "Work", href: "/#work", current: true },
-  { label: "CV", href: "/resume.html" },
-];
+const navLinks = chrome(
+  ["home", "writing-index", "work", "resume"], "case-study", "work");
 
-const footerLinks = [
-  { label: "Portfolio", href: "/" },
-  { label: "Writing", href: "/writing.html" },
-  { label: "CV", href: "/resume.html" },
-  { label: "Email", href: `mailto:${contact.email}` },
-];
+const footerLinks = chrome(
+  ["home", "writing-index", "resume", "email"], "case-study");
 
 const MONO = "var(--ap-font-mono)";
 const EYEBROW = {
@@ -338,7 +331,7 @@ export function CaseStudy({ id }: { id: string }) {
               <a href={`mailto:${contact.email}`} style={{ padding: "15px 30px", borderRadius: 16, background: NAVY, color: "#ffffff", fontWeight: 600, textDecoration: "none" }}>
                 Get in touch
               </a>
-              <a href="/#work" style={{ padding: "15px 30px", borderRadius: 16, border: "1px solid #ffffff", color: "#ffffff", fontWeight: 600, textDecoration: "none" }}>
+              <a href={hrefFor(destination("work"), "case-study")} style={{ padding: "15px 30px", borderRadius: 16, border: "1px solid #ffffff", color: "#ffffff", fontWeight: 600, textDecoration: "none" }}>
                 Back to portfolio
               </a>
             </div>

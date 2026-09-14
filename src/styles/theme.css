@@ -250,3 +250,28 @@
 .a3kds-btn.ap-writing-cta:hover:not(:disabled):not([aria-disabled="true"]) {
   background-color: var(--a3kds-color-neutral-800);
 }
+
+/* Named local exception (P06-A01). The site chrome's CTA keeps its cyan fill
+   on navy text; the system supplies the shape, the single size, the focus ring
+   and — in the link form — real anchor semantics.
+
+   A class rather than an inline background, for the same reason as
+   .ap-writing-cta: the system's primary hover still applies underneath, so an
+   inline fill would leave the cyan jumping to action-primary on hover. The
+   hand-styled original had no hover state at all, so this is not a new
+   behaviour being invented — it is what stops an inherited one from
+   contradicting the colour. */
+.a3kds-btn.ap-chrome-cta {
+  /* These MIRROR boldPalette.ts (CYAN, NAVY), which is where this site keeps
+     its palette. The duplication is pre-existing and real: the palette lives
+     in TypeScript, consumed through inline styles, so a CSS rule has no way to
+     reach it. Flagged for the batch review rather than fixed here — giving the
+     palette one home is a larger change than this activity's scope. */
+  background-color: #11C4D4;
+  color: #141f29;
+}
+.a3kds-btn.ap-chrome-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  /* Darkened within the cyan family, so hover reads as the same control
+     rather than a different one. */
+  background-color: #0FAFBD;
+}
