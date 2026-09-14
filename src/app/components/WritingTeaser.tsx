@@ -59,7 +59,13 @@ export function WritingTeaser({ posts: items = posts }: { posts?: typeof posts }
             marginBottom: "var(--a3kds-space-12)",
           }}
         >
-          <div style={{ maxWidth: "34ch" }}>
+          {/* min(34ch, 100%), not a bare 34ch. FLUID TYPE IS SIZED BY THE
+              VIEWPORT, NOT THE CONTAINER: in a narrow column on a wide screen
+              the display face stays at its 5vw size, so a 34ch measure becomes
+              far wider than the column and overflows it. A bare ch measure is
+              safe with fixed type and is not safe with fluid type — this is a
+              consequence of adopting the editorial display roles (W-1). */}
+          <div style={{ maxWidth: "min(34ch, 100%)" }}>
             <p
               style={{
                 fontFamily: "var(--ap-font-mono)",
@@ -102,7 +108,7 @@ export function WritingTeaser({ posts: items = posts }: { posts?: typeof posts }
           className="lift"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
             gap: "var(--a3kds-space-10)",
             alignItems: "center",
             background: "var(--a3kds-color-neutral-950)",
@@ -187,7 +193,12 @@ export function WritingTeaser({ posts: items = posts }: { posts?: typeof posts }
           </p>
         </a>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "var(--a3kds-space-6)" }}>
+        {/* min(300px, 100%) rather than a bare 300px floor. A bare floor cannot
+            shrink below 300px, so the track — not the content — forced the
+            section 40px wider than a 320px container and broke reflow at 400%
+            zoom (WCAG 1.4.10). The floor still applies whenever there is room
+            for it, so nothing changes at any supported width. */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: "var(--a3kds-space-6)" }}>
           {rest.map((p) => (
             <PostCard key={p.title} post={p} />
           ))}
