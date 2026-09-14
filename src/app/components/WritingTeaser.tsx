@@ -48,7 +48,12 @@ export function WritingTeaser({ posts: items = posts }: { posts?: typeof posts }
         padding: "var(--a3kds-space-24) 0",
       }}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 var(--a3kds-space-8)" }}>
+      {/* A SIZE CONTAINER, so the display type below can respond to this
+          element's width instead of the viewport's. Viewport-sized fluid type
+          is container-blind: in a narrow column on a wide screen it stays at
+          its 5vw size and overflows. Nothing here changes at any supported
+          width — see the heading's cap. */}
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 var(--a3kds-space-8)", containerType: "inline-size" }}>
         <div
           style={{
             display: "flex",
@@ -82,7 +87,12 @@ export function WritingTeaser({ posts: items = posts }: { posts?: typeof posts }
             {/* W-1: the fluid display role the scale did not have. */}
             <h2
               style={{
-                fontSize: "var(--a3kds-typography-editorial-display-size)",
+                /* The token, capped by the CONTAINER. 12cqi exceeds the
+                   token's own maximum until the container is under ~533px, so
+                   at every supported width this resolves to exactly the token
+                   and the cap is inert; below that the heading tracks its
+                   column instead of overflowing it. */
+                fontSize: "min(var(--a3kds-typography-editorial-display-size), 12cqi)",
                 fontWeight: "var(--a3kds-typography-editorial-display-weight)",
                 letterSpacing: "var(--a3kds-typography-editorial-display-letter-spacing)",
                 lineHeight: "var(--a3kds-typography-editorial-display-line-height)",
