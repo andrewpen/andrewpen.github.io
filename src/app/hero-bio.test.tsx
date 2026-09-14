@@ -5,7 +5,7 @@
  * an <img> with a wrong src renders as nothing and says nothing — the failure
  * this batch is required to detect rather than capture.
  */
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render } from "@testing-library/react";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
@@ -47,12 +47,32 @@ describe("portraits and assets", () => {
   });
 
   /**
-   * The missing-asset fixture the activity requires. Without it, the check
-   * above only proves today's filenames happen to be right.
+   * The missing-asset fixture, injected through the REAL path.
+   *
+   * The first version called onDisk() twice with a good and a bad string,
+   * which exercised my helper and not the check — it would have passed with
+   * the component rendering no images at all (CX-065). This replaces the
+   * content module the component actually reads, renders it, and runs the
+   * same assertion the passing test runs.
    */
-  it("FIXTURE: a reference to a file that is not there is detected", () => {
-    expect(onDisk("/img/profile-standing-v2.webp")).toBe(true);
-    expect(onDisk("/img/no-such-portrait.webp")).toBe(false);
+  it("FIXTURE: a portrait the component asks for but that is not there FAILS", async () => {
+    vi.resetModules();
+    const real = await vi.importActual<typeof import("./content")>("./content");
+    vi.doMock("./content", () => ({
+      ...real,
+      hero: { ...real.hero, profileImage: "/img/no-such-portrait.webp" },
+    }));
+
+    const { Hero: BrokenHero } = await import("./components/Hero");
+    const { container } = render(<BrokenHero />);
+    const srcs = images(container).map(i => i.src);
+
+    expect(srcs, "the component must still ask for an image").toContain("/img/no-such-portrait.webp");
+    // The same assertion as the passing test above — and here it must fail.
+    expect(srcs.every(onDisk)).toBe(false);
+
+    vi.doUnmock("./content");
+    vi.resetModules();
   });
 });
 

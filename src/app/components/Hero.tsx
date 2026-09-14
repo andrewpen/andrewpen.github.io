@@ -49,21 +49,21 @@ export function Hero() {
         style={{
           maxWidth: 1280,
           margin: "0 auto",
-          padding: "64px 32px 0",
-          paddingLeft: "clamp(32px,8vw,88px)",
+          padding: "var(--a3kds-space-16) var(--a3kds-space-8) 0",
+          paddingLeft: "clamp(var(--a3kds-space-8),8vw,88px)",
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(min(320px, 100%), 1fr))",
-          gap: 24,
+          gap: "var(--a3kds-space-6)",
           alignItems: "end",
         }}
       >
-        <div style={{ paddingBottom: 64 }}>
-          <span className="a3-badge" style={{ background: "#BE3372", color: "#ffffff", marginBottom: 24, display: "inline-block" }}>
+        <div style={{ paddingBottom: "var(--a3kds-space-16)" }}>
+          <span className="a3-badge" style={{ background: "#BE3372", color: "#ffffff", marginBottom: "var(--a3kds-space-6)", display: "inline-block" }}>
             Writing · Speaking · Advisory
           </span>
           <h1
             style={{
-              margin: "0 0 20px",
+              margin: "0 0 var(--a3kds-space-5)",
               fontWeight: 700,
               letterSpacing: "-0.04em",
               lineHeight: 0.88,
@@ -71,14 +71,18 @@ export function Hero() {
             }}
           >
             Hello,
-            <span style={{ display: "block", fontSize: "clamp(1.75rem,3.6vw,3.25rem)", letterSpacing: "-0.02em", lineHeight: 1.05, marginTop: 16, color: CYAN }}>
+            <span style={{ display: "block", fontSize: "clamp(1.75rem,3.6vw,3.25rem)", letterSpacing: "-0.02em", lineHeight: 1.05, marginTop: "var(--a3kds-space-4)", color: CYAN }}>
               I'm Andrew Pendleton.
             </span>
           </h1>
-          <p style={{ fontSize: "1.125rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 40px", maxWidth: "46ch" }}>
+          <p style={{ fontSize: "1.125rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 var(--a3kds-space-10)", maxWidth: "46ch" }}>
             {hero.intro}
           </p>
-          <div style={{ display: "flex", gap: "var(--a3kds-space-3)", flexWrap: "wrap", marginBottom: "var(--a3kds-space-14, 56px)" }}>
+          <div style={{ display: "flex", gap: "var(--a3kds-space-3)", flexWrap: "wrap", /* 56px has NO step on the system scale (48 then 64), so this is a
+                          literal and is written as one. var(--a3kds-space-14, 56px) would
+                          have read as token adoption while always resolving to the
+                          fallback — a claim the artifact does not support. */
+                          marginBottom: 56 }}>
             {/* Both are navigation, so both are LinkButton — real anchors with
                 the tested focus ring, not anchors dressed as buttons. The pair
                 keeps its hierarchy: the primary leads, the secondary supports. */}
@@ -93,9 +97,9 @@ export function Hero() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(min(120px, 100%), 1fr))",
-              gap: 24,
+              gap: "var(--a3kds-space-6)",
               margin: 0,
-              paddingTop: 32,
+              paddingTop: "var(--a3kds-space-8)",
               borderTop: "1px solid #2b3f51",
             }}
           >
