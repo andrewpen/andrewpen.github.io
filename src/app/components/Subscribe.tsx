@@ -24,7 +24,7 @@ export function Subscribe() {
           margin: "0 auto",
           padding: "0 32px",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
           gap: 48,
           alignItems: "center",
         }}

@@ -61,7 +61,7 @@ export function Writing() {
             <p style={{ fontSize: "1.125rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 48px", maxWidth: "52ch" }}>
               On design systems, AI, and what happens to a craft when the cost of producing the artifact falls to nothing.
             </p>
-            <dl style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 24, margin: 0, paddingTop: 32, borderTop: "1px solid #2b3f51", maxWidth: 760 }}>
+            <dl style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(140px, 100%), 1fr))", gap: 24, margin: 0, paddingTop: 32, borderTop: "1px solid #2b3f51", maxWidth: 760 }}>
               {writingStats.map((s) => (
                 <div key={s.label}>
                   <dt style={{ fontSize: "clamp(1.75rem,3.2vw,2.75rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, color: s.color, fontVariantNumeric: "tabular-nums" }}>{s.value}</dt>
@@ -83,7 +83,7 @@ export function Writing() {
               className="lift"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
                 gap: 40,
                 alignItems: "center",
                 background: NAVY,
@@ -116,7 +116,7 @@ export function Writing() {
               <span style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#476b85" }}>{earlier.length} essays</span>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 24 }}>
               {earlier.map((p) => (
                 <PostCard key={p.title} post={p} />
               ))}
