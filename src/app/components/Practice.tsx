@@ -1,3 +1,4 @@
+import { Card } from "@a3kds/design-system";
 import { contact } from "../content";
 import { BLUE, PINK } from "../boldPalette";
 
@@ -9,10 +10,13 @@ export function Practice() {
           style={{
             background: "#f7fafc",
             borderRadius: 16,
-            padding: 56,
+            // Was a flat 56px. At 320px the panel's own inset left 144px for a
+            // 280px grid floor, which is where the homepage's sideways scroll
+            // came from. Fluid now, and the floor below is bounded.
+            padding: "clamp(var(--a3kds-space-6), 5vw, 56px)",
             boxShadow: "0 16px 40px rgb(20 31 41 / 0.10)",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
             gap: 48,
             alignItems: "start",
           }}
@@ -33,16 +37,16 @@ export function Practice() {
             </p>
           </div>
           <div style={{ display: "grid", gap: 20 }}>
-            <div style={{ background: "#ffffff", borderRadius: 16, padding: 28, borderTop: `6px solid ${BLUE}`, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)" }}>
-              <h3 style={{ fontSize: "1.125rem", fontWeight: 700, margin: "0 0 8px" }}>Design system strategy and audits</h3>
+            <Card accent={BLUE} elevation="raised" className="ap-advisory-card">
+              <h3 style={{ fontSize: "1.125rem", fontWeight: 700, margin: "0 0 var(--a3kds-space-2)" }}>Design system strategy and audits</h3>
               <p style={{ fontSize: "0.9375rem", lineHeight: 1.6, color: "#38546a", margin: 0 }}>Where the system is, where adoption actually stalls, and what to stop building.</p>
-            </div>
-            <div style={{ background: "#ffffff", borderRadius: 16, padding: 28, borderTop: `6px solid ${PINK}`, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)" }}>
-              <h3 style={{ fontSize: "1.125rem", fontWeight: 700, margin: "0 0 8px" }}>Agent-native platform architecture</h3>
+            </Card>
+            <Card accent={PINK} elevation="raised" className="ap-advisory-card">
+              <h3 style={{ fontSize: "1.125rem", fontWeight: 700, margin: "0 0 var(--a3kds-space-2)" }}>Agent-native platform architecture</h3>
               <p style={{ fontSize: "0.9375rem", lineHeight: 1.6, color: "#38546a", margin: 0 }}>
                 Making a system legible to agents: schemas, MCP surfaces, and the validation layer underneath.
               </p>
-            </div>
+            </Card>
           </div>
         </div>
       </div>
