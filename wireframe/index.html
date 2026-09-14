@@ -1887,38 +1887,6 @@
   .anno-connected .anno-prov { font-family: 'Space Mono', monospace; font-size: 8px; color: #9a9a9a; margin: 5px 0 0; }
   .anno-unavailable { font-size: 10px; color: #8a3a3a; margin: 0; }
 </style>
-<script>
-  // Render the connected annotation FROM THE SHARED RECORD.
-  //
-  // The markup ships showing "unavailable", and this only ever replaces it
-  // with something a record actually says. A fetch that fails, a missing file
-  // or an absent composition all leave the unavailable state standing —
-  // inventing a plausible description is the failure this connection exists to
-  // remove, and a wireframe that describes a composition nobody can find is
-  // worse than one that admits it cannot.
-  (async () => {
-    const slots = document.querySelectorAll('.anno-connected[data-composition]');
-    if (!slots.length) return;
-    let data = null;
-    try {
-      const res = await fetch('./connections.json', { cache: 'no-store' });
-      if (res.ok) data = await res.json();
-    } catch { /* leave the unavailable state */ }
-    if (!data) return;
-    for (const slot of slots) {
-      const record = (data.compositions || []).find(c => c.id === slot.dataset.composition);
-      if (!record) continue;   // unavailable stands
-      const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-      const deps = (record.dependsOn || []).map(d => `<li>${esc(d.id)} <em>(${esc(d.kind)})</em> — ${esc(d.role || '')}</li>`).join('');
-      const exc = (record.localExceptions || []).map(e => `<li>${esc(e.what)} — ${esc(e.why)}</li>`).join('');
-      const src = data.source || {};
-      slot.innerHTML =
-        `<p class="anno-id">identity ${esc(record.identity)} · ${record.packageExport ? 'package export' : 'not installable'} · owned by ${esc(record.ownedBy)}</p>` +
-        (deps ? `<p class="anno-own">From the system</p><ul>${deps}</ul>` : '') +
-        (exc ? `<p class="anno-own">Local by decision</p><ul>${exc}</ul>` : '') +
-        `<p class="anno-prov">record from ${esc(src.package || '?')}@${esc(src.version || '?')} (${esc(src.integrity || '?')})</p>`;
-    }
-  })();
-</script>
+<script type="module" src="./connect.js"></script>
 </body>
 </html>
