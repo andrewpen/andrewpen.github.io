@@ -21,8 +21,14 @@ export function renderConnected(record, source = {}) {
   const exc = (record.localExceptions || [])
     .map(e => `<li>${esc(e.what)} — ${esc(e.why)}</li>`).join('');
   return `<p class="anno-id">identity ${esc(record.identity)} · ${record.packageExport ? 'package export' : 'not installable'} · owned by ${esc(record.ownedBy)}</p>`
-    + (deps ? `<p class="anno-own">From the system</p><ul>${deps}</ul>` : '')
-    + (exc ? `<p class="anno-own">Local by decision</p><ul>${exc}</ul>` : '')
+    // Owner decision 2026-09-14 (Andrew): name the system rather than
+    // describing it, and say what the local things ARE rather than how they
+    // got that way. "A3KDS" is the name a reader will see everywhere else;
+    // "Local only" answers the question being asked — what would I lose by
+    // dropping the design system — without restating the decision, which the
+    // record's own text already gives.
+    + (deps ? `<p class="anno-own">A3KDS</p><ul>${deps}</ul>` : '')
+    + (exc ? `<p class="anno-own">Local only</p><ul>${exc}</ul>` : '')
     + `<p class="anno-prov">record from ${esc(source.package || '?')}@${esc(source.version || '?')} (${esc(source.integrity || '?')})</p>`;
 }
 

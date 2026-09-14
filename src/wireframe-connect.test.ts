@@ -72,6 +72,29 @@ describe("the wireframe's connection to the shared record", () => {
  * A committed generated artifact whose diff is never empty cannot answer the
  * only question its diff exists to answer: did the record change?
  */
+/**
+ * Owner decision 2026-09-14 (Andrew): the two headings are "A3KDS" and
+ * "Local only".
+ *
+ * The split itself is what the wireframe exists to communicate — what would I
+ * lose by dropping the design system — so the words are part of the record's
+ * job, not styling, and a silent rewording would undo a decision.
+ */
+describe("the shared-versus-local split", () => {
+  it("names the system and says what is local, in the owner's words", () => {
+    const html = renderConnected(record, source);
+    expect(html).toContain(">A3KDS<");
+    expect(html).toContain(">Local only<");
+    expect(html).not.toContain("From the system");
+    expect(html).not.toContain("Local by decision");
+  });
+
+  it("still keeps the two groups separate and labelled", () => {
+    const html = renderConnected(record, source);
+    expect(html.indexOf(">A3KDS<")).toBeLessThan(html.indexOf(">Local only<"));
+  });
+});
+
 describe("sync-connections", () => {
   const root = resolve(__dirname, "..");
   const out = resolve(root, "wireframe/connections.json");
