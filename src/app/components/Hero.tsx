@@ -125,7 +125,7 @@ export function Hero() {
           </dl>
         </div>
         <div style={{ position: "relative", alignSelf: "end", minHeight: 420 }}>
-          <div aria-hidden="true" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "76%", background: BLUE, borderRadius: "16px 16px 0 0" }} />
+          <div aria-hidden="true" style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: "76%", background: BLUE, borderRadius: "var(--a3kds-radius-md) var(--a3kds-radius-md) 0 0" }} />
           <img
             src={hero.profileImage}
             alt={hero.name}
