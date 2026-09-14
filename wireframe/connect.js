@@ -14,6 +14,37 @@
 
 const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+/**
+ * How a reference is labelled, and whether THIS page can open it.
+ *
+ * The record's refs were built and then ignored: renderConnected showed
+ * identity, dependencies, exceptions and provenance, so the two things D2
+ * actually names — the implementation, and the requirements governing it —
+ * were carried in the record and never reached a reader (CX-059).
+ *
+ * A ref without `repo` lives in the design system. This page is served from
+ * the website and reads a PACKAGE, so it cannot resolve those; naming them and
+ * saying where they live beats both a dead link and silence.
+ */
+const REF_SECTIONS = [
+  { title: 'Implementation', rels: ['source'] },
+  { title: 'Requirements', rels: ['contract'] },
+  { title: 'Records', rels: ['evidence', 'decisions', 'identity'] },
+];
+
+function renderRefs(record) {
+  const refs = record.refs || [];
+  return REF_SECTIONS.map(({ title, rels }) => {
+    const items = refs.filter(r => rels.includes(r.rel)).map(r => {
+      // "here" means this repository, the one the page is served from.
+      const here = r.repo === 'website';
+      const where = here ? '' : ' <em class="anno-elsewhere">in A3KDS — not linked here</em>';
+      return `<li><code>${esc(r.href)}</code>${where} — ${esc(r.role || '')}</li>`;
+    }).join('');
+    return items ? `<p class="anno-own">${title}</p><ul>${items}</ul>` : '';
+  }).join('');
+}
+
 /** The annotation for one record. Pure, so what it renders is testable. */
 export function renderConnected(record, source = {}) {
   const deps = (record.dependsOn || [])
@@ -29,20 +60,47 @@ export function renderConnected(record, source = {}) {
     // record's own text already gives.
     + (deps ? `<p class="anno-own">A3KDS</p><ul>${deps}</ul>` : '')
     + (exc ? `<p class="anno-own">Local only</p><ul>${exc}</ul>` : '')
+    + renderRefs(record)
     + `<p class="anno-prov">record from ${esc(source.package || '?')}@${esc(source.version || '?')} (${esc(source.integrity || '?')})</p>`;
+}
+
+/**
+ * What this page can and cannot vouch for (D6).
+ *
+ * DERIVED from the sections that actually connected, never written by hand.
+ * A hand-written "only Writing is connected" is true until it silently is not,
+ * and the page would go on claiming a coverage it no longer had — the same
+ * class of stale claim the shared record exists to remove. Connect a second
+ * section and this sentence updates itself.
+ */
+function renderCoverage(names) {
+  if (!names.length) {
+    return 'No section on this page is connected to the shared record. '
+      + 'Every annotation below is a snapshot: hand-written, and true only when it was written.';
+  }
+  const list = names.length === 1 ? names[0]
+    : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+  return `${list} ${names.length === 1 ? 'is' : 'are'} connected to the shared record and `
+    + `${names.length === 1 ? 'describes' : 'describe'} what A3KDS actually ships. `
+    + 'Every other annotation on this page is a snapshot: hand-written, and true only when it '
+    + 'was written. Later chunks extend the connected set.';
 }
 
 /** Fill every connected slot it can, and leave the rest saying so. */
 export function connect(document, data) {
   const slots = document.querySelectorAll('.anno-connected[data-composition]');
   let filled = 0;
+  const connected = [];
   for (const slot of slots) {
     const record = (data?.compositions || []).find(c => c.id === slot.dataset.composition);
     if (!record) continue;                       // the unavailable state stands
     slot.innerHTML = renderConnected(record, data.source);
+    connected.push(record.name || record.id);
     filled += 1;
   }
-  return { slots: slots.length, filled };
+  const notice = document.querySelector('[data-coverage-notice]');
+  if (notice) notice.textContent = renderCoverage(connected);
+  return { slots: slots.length, filled, connected };
 }
 
 export async function loadConnections(fetchImpl = fetch) {

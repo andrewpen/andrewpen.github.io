@@ -138,3 +138,67 @@ describe("sync-connections", () => {
     }
   });
 });
+
+/**
+ * CX-059 / D2 and D6, asserted against the REAL page and the REAL record.
+ *
+ * The suite above renders a hand-made record into a hand-made document, which
+ * is right for the rendering rules and wrong for these two: both are claims
+ * about what a reader actually sees on wireframe/index.html. A synthetic
+ * fixture would have passed while the shipped page said nothing — which is
+ * exactly how refs stayed unrendered for a whole activity.
+ */
+describe("the real wireframe page", () => {
+  const root = resolve(__dirname, "..");
+  const realDoc = () => {
+    const html = readFileSync(resolve(root, "wireframe/index.html"), "utf8");
+    return new DOMParser().parseFromString(html, "text/html");
+  };
+  const realData = () =>
+    JSON.parse(readFileSync(resolve(root, "wireframe/connections.json"), "utf8"));
+
+  it("ships saying nothing is connected, before any script runs", () => {
+    const notice = realDoc().querySelector("[data-coverage-notice]");
+    expect(notice).not.toBeNull();
+    expect(notice!.textContent).toMatch(/No section on this page is connected/);
+    expect(notice!.textContent).toMatch(/snapshot/);
+  });
+
+  it("names the connected section and calls the rest snapshots, after connecting", () => {
+    const doc = realDoc();
+    const { filled } = connect(doc as unknown as Document, realData());
+    expect(filled).toBeGreaterThan(0);
+
+    const text = doc.querySelector("[data-coverage-notice]")!.textContent!;
+    expect(text).toMatch(/Writing teaser/);
+    expect(text).toMatch(/Every other annotation on this page is a snapshot/);
+    expect(text).not.toMatch(/No section on this page is connected/);
+  });
+
+  it("shows the implementation and the requirements D2 asks for", () => {
+    const doc = realDoc();
+    connect(doc as unknown as Document, realData());
+    const slot = doc.querySelector('.anno-connected[data-composition="writing-teaser"]')!;
+    const text = slot.textContent!;
+
+    expect(text).toMatch(/Implementation/);
+    expect(text).toMatch(/src\/app\/components\/WritingTeaser\.tsx/);
+    expect(text).toMatch(/Requirements/);
+    expect(text).toMatch(/contracts\/action\.contract\.json/);
+  });
+
+  it("says which references this page cannot open, rather than linking nothing", () => {
+    const doc = realDoc();
+    connect(doc as unknown as Document, realData());
+    const slot = doc.querySelector('.anno-connected[data-composition="writing-teaser"]')!;
+
+    // The contract lives in the design system; the implementation is here.
+    const contract = [...slot.querySelectorAll("li")]
+      .find(li => /action\.contract\.json/.test(li.textContent ?? ""))!;
+    expect(contract.textContent).toMatch(/in A3KDS/);
+
+    const impl = [...slot.querySelectorAll("li")]
+      .find(li => /WritingTeaser\.tsx/.test(li.textContent ?? ""))!;
+    expect(impl.textContent).not.toMatch(/in A3KDS/);
+  });
+});
