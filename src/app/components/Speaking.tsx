@@ -4,7 +4,13 @@ import { ink, NAVY, CYAN } from "../boldPalette";
 
 export function Speaking() {
   const [active, setActive] = useState(0);
-  const activeEvent = speakingEvents[active];
+  // speakingEvents[active] is undefined when the list is empty, and the detail
+  // panel below reads .year off it — an empty content file crashed the whole
+  // homepage, not just this section. Clamping also survives a list that shrinks
+  // under a selection that is already past its new end.
+  const activeEvent = speakingEvents.length
+    ? speakingEvents[Math.min(active, speakingEvents.length - 1)]
+    : undefined;
 
   return (
     <section id="speaking" style={{ background: "#eef4f8", padding: "112px 0", borderTop: "1px solid #d9e6ee" }}>
@@ -19,7 +25,7 @@ export function Speaking() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, marginBottom: 96 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))", gap: 24, marginBottom: 96 }}>
           {speakingTopics.map((t) => (
             <article
               key={t.num}
@@ -39,7 +45,7 @@ export function Speaking() {
         </div>
 
         <h3 style={{ fontSize: "clamp(1.5rem,3vw,2.25rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: "0 0 28px" }}>Where I've spoken</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: 20, marginBottom: 32 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(190px, 100%), 1fr))", gap: 20, marginBottom: 32 }}>
           {speakingEvents.map((e, i) => {
             const isActive = active === i;
             return (
@@ -73,12 +79,21 @@ export function Speaking() {
             );
           })}
         </div>
-        <div aria-live="polite" style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 40, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)" }}>
-          <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: CYAN, margin: "0 0 12px" }}>
-            {activeEvent.year} · {activeEvent.label}
-          </p>
-          <h4 style={{ fontSize: "clamp(1.375rem,2.6vw,2rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.15, margin: "0 0 16px" }}>{activeEvent.talk}</h4>
-          <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "#d9e6ee", margin: 0, maxWidth: "80ch" }}>{activeEvent.summary}</p>
+        <div aria-live="polite" style={{ background: NAVY, color: "#ffffff", borderRadius: "var(--a3kds-radius-md)", padding: "var(--a3kds-space-10)", boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)" }}>
+          {activeEvent ? (
+            <>
+              <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: CYAN, margin: "0 0 var(--a3kds-space-3)" }}>
+                {activeEvent.year} · {activeEvent.label}
+              </p>
+              <h4 style={{ fontSize: "clamp(1.375rem,2.6vw,2rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.15, margin: "0 0 var(--a3kds-space-4)" }}>{activeEvent.talk}</h4>
+              <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "#d9e6ee", margin: 0, maxWidth: "80ch" }}>{activeEvent.summary}</p>
+            </>
+          ) : (
+            // Says what is true rather than rendering an empty navy slab.
+            <p style={{ fontSize: "1rem", lineHeight: 1.6, color: "#d9e6ee", margin: 0 }}>
+              No speaking events are listed yet.
+            </p>
+          )}
         </div>
       </div>
     </section>

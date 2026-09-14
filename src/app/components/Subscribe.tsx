@@ -1,19 +1,32 @@
 import { useState, type FormEvent } from "react";
+import { Button, FormField, TextField } from "@a3kds/design-system";
 import { contact } from "../content";
 import { BLUE, NAVY } from "../boldPalette";
 
 // There's no newsletter/ESP backend behind this yet (nothing was specified),
 // so submitting opens a pre-filled email to Andrew instead of faking a
 // "subscribed" state that wouldn't actually add anyone to a list.
+//
+// The wording matters as much as the behaviour (P06-D3). Nothing here can know
+// whether the handoff worked: window.location.href = mailto: is silent when no
+// handler is registered, and there is no event to tell us. So the message says
+// what was ATTEMPTED and names the fallback, rather than claiming an email
+// client opened — which would be a false success by a quieter route.
 export function Subscribe() {
   const [message, setMessage] = useState("");
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    // preventDefault keeps this off the network: there is no endpoint, and a
+    // native submit would navigate to the page's own URL with the address in
+    // the query string.
     e.preventDefault();
     const email = new FormData(e.currentTarget).get("email");
     const body = encodeURIComponent(`Please add me to the essay list: ${email}`);
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent("Subscribe to the essays")}&body=${body}`;
-    setMessage("Opening your email client to send the request.");
+    setMessage(
+      `Asked your email client to open a message to ${contact.email}. ` +
+        "If nothing happened, your browser has no email app set up — write to that address directly."
+    );
   }
 
   return (
@@ -37,22 +50,19 @@ export function Subscribe() {
         </div>
         <div>
           <form onSubmit={handleSubmit} style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "flex-end" }}>
-            <div style={{ flex: "1 1 260px" }}>
-              <label htmlFor="subscribe-email" style={{ display: "block", fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 10, color: "#ffffff" }}>
-                Email address
-              </label>
-              <input
-                id="subscribe-email"
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                required
-                style={{ width: "100%", boxSizing: "border-box", padding: "14px 18px", borderRadius: 16, border: "1px solid #ffffff", background: "#ffffff", color: "#1f2e3d", fontFamily: "inherit", fontSize: "1rem" }}
-              />
+            <div style={{ flex: "1 1 260px" }} className="ap-subscribe-field">
+              <FormField label="Email address" htmlFor="subscribe-email">
+                <TextField
+                  id="subscribe-email"
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                />
+              </FormField>
             </div>
-            <button type="submit" style={{ padding: "15px 30px", borderRadius: 16, border: "none", background: NAVY, color: "#ffffff", fontFamily: "inherit", fontSize: "1rem", fontWeight: 600, cursor: "pointer" }}>
-              Subscribe
-            </button>
+            {/* An action that DOES something here, so a Button, not a link. */}
+            <Button type="submit" className="ap-subscribe-cta">Subscribe</Button>
           </form>
           <p aria-live="polite" style={{ fontSize: "0.9375rem", margin: "14px 0 0", minHeight: "1.5em", color: "#ffffff" }}>{message}</p>
         </div>

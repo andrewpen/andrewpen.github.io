@@ -305,3 +305,29 @@
 .a3kds-btn.ap-hero-cta {
   font-weight: 600;
 }
+
+/* Named local exceptions (P06-A05). The Subscribe section sits on the site's
+   BLUE, and the system's light-canvas colours are unreadable there.
+
+   Measured before fixing, not guessed: the FormField label came out
+   rgb(31,46,61) on rgb(10,110,194) — contrast 2.65, below AA's 4.5 — and the
+   Button came out rgb(10,110,194) on the same blue, contrast 1.00. That is not
+   "low contrast", it is an invisible button.
+
+   This is the third surface where the system's light palette lands on a
+   coloured ground. The dark sections solve it properly with data-mode="dark";
+   this one cannot, because the ground is BLUE rather than the system's dark
+   canvas, so there is no mode whose palette matches. Raised with Codex. */
+.ap-subscribe-field .a3kds-formfield-label {
+  color: #ffffff;
+}
+.a3kds-btn.ap-subscribe-cta {
+  background-color: #141f29;
+  color: #ffffff;
+}
+.a3kds-btn.ap-subscribe-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  /* Lightened within the navy family, for the same reason as .ap-writing-cta:
+     without this the system's primary hover returns the button to the blue it
+     was invisible against. */
+  background-color: #24384a;
+}
