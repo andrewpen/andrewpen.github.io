@@ -4,14 +4,15 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "node scripts/sync-connections.mjs && vite build",
     "dev": "vite",
     "preview": "vite preview",
     "test": "vitest run --config vitest.config.ts",
-    "test:watch": "vitest --config vitest.config.ts"
+    "test:watch": "vitest --config vitest.config.ts",
+    "sync:connections": "node scripts/sync-connections.mjs"
   },
   "dependencies": {
-    "@a3kds/design-system": "file:vendor/a3kds-design-system-0.1.0-alpha.4+c67ac82d8db0.tgz",
+    "@a3kds/design-system": "file:vendor/a3kds-design-system-0.1.0-alpha.4+c1ce6bf83bc9.tgz",
     "lucide-react": "0.487.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"
