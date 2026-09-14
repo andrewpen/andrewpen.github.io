@@ -12,6 +12,11 @@ import { BLUE, NAVY } from "../boldPalette";
 // handler is registered, and there is no event to tell us. So the message says
 // what was ATTEMPTED and names the fallback, rather than claiming an email
 // client opened — which would be a false success by a quieter route.
+//
+// It also assigns NO CAUSE. An earlier version said "your browser has no email
+// app set up", which was a second unobservable claim replacing the first: the
+// handoff can fail for reasons this code cannot see, and naming one would be a
+// guess wearing the voice of a diagnosis (CX-072).
 export function Subscribe() {
   const [message, setMessage] = useState("");
 
@@ -25,7 +30,7 @@ export function Subscribe() {
     window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent("Subscribe to the essays")}&body=${body}`;
     setMessage(
       `Asked your email client to open a message to ${contact.email}. ` +
-        "If nothing happened, your browser has no email app set up — write to that address directly."
+        `If nothing opens, email ${contact.email} directly.`
     );
   }
 

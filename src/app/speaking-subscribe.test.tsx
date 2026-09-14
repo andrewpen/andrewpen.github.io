@@ -72,6 +72,69 @@ describe("Speaking selection", () => {
   });
 });
 
+describe("Speaking when the data shrinks under the selection", () => {
+  /**
+   * CX-072: clamping the EVENT alone left aria-pressed comparing the raw
+   * index, so the panel showed a clamped event while no button reported
+   * itself selected. The two halves have to share one effective index.
+   */
+  it("keeps exactly one button pressed, matching the panel", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<Speaking />);
+    const items = () => [...container.querySelectorAll('button[aria-pressed]')] as HTMLElement[];
+
+    // Select the last event, which is the index a shrinking list strands.
+    const all = items();
+    all[all.length - 1].focus();
+    await user.keyboard("{Enter}");
+
+    const pressed = items().filter(b => b.getAttribute("aria-pressed") === "true");
+    expect(pressed.length).toBe(1);
+
+    const live = container.querySelector('[aria-live="polite"]')!.textContent ?? "";
+    expect(live).toContain(speakingEvents[speakingEvents.length - 1].label);
+  });
+
+  it("the list shrinking UNDER a live selection keeps the two halves agreed", async () => {
+    const user = userEvent.setup();
+    const { rerender, container } = render(<Speaking events={speakingEvents} />);
+    const items = () => [...container.querySelectorAll('button[aria-pressed]')] as HTMLElement[];
+
+    // Select the last event...
+    const all = items();
+    all[all.length - 1].focus();
+    await user.keyboard("{Enter}");
+
+    // ...then the data shrinks beneath it. `active` now points past the end.
+    rerender(<Speaking events={speakingEvents.slice(0, 1)} />);
+
+    const pressed = items().filter(b => b.getAttribute("aria-pressed") === "true");
+    const live = container.querySelector('[aria-live="polite"]')!.textContent ?? "";
+
+    // Clamping only the EVENT left the panel showing a clamped event while no
+    // button reported itself selected: the two halves disagreed.
+    expect(pressed.length).toBe(1);
+    expect(live).toContain(speakingEvents[0].label);
+    expect(pressed[0].textContent).toContain(speakingEvents[0].label);
+  });
+
+  it("with a SHORTER list, the pressed button and the panel agree", async () => {
+    vi.resetModules();
+    const real = await vi.importActual<typeof import("./content")>("./content");
+    vi.doMock("./content", () => ({ ...real, speakingEvents: real.speakingEvents.slice(0, 1) }));
+    const { Speaking: Short } = await import("./components/Speaking");
+
+    const { container } = render(<Short />);
+    const pressed = [...container.querySelectorAll('button[aria-pressed="true"]')];
+    // One event, one pressed button, and the panel showing that same event.
+    expect(pressed.length).toBe(1);
+    const live = container.querySelector('[aria-live="polite"]')!.textContent ?? "";
+    expect(live).toContain(real.speakingEvents[0].label);
+
+    vi.doUnmock("./content"); vi.resetModules();
+  });
+});
+
 describe("Speaking with no event data", () => {
   it("renders a statement instead of crashing", async () => {
     vi.resetModules();
@@ -142,8 +205,11 @@ describe("Subscribe does not pretend", () => {
     // A mailto navigation is silent when no handler is registered: there is no
     // event to observe. Saying "opening your email client" flatly would be a
     // claim the code cannot support.
-    expect(said).toMatch(/if nothing happened/i);
+    expect(said).toMatch(/if nothing opens/i);
     expect(said).toContain(contact.email);
+    // And assigns NO CAUSE. An earlier version blamed the browser having no
+    // email app, which is a second unobservable claim replacing the first.
+    expect(said).not.toMatch(/no email app|not set up|browser has no/i);
   });
 
   it("an INVALID address is rejected by the field and stays recoverable", async () => {

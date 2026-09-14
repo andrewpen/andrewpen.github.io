@@ -2,15 +2,29 @@ import { useState } from "react";
 import { speakingEvents, speakingTopics } from "../content";
 import { ink, NAVY, CYAN } from "../boldPalette";
 
-export function Speaking() {
+/**
+ * `events` is injectable so the shrinking-list case can be exercised.
+ *
+ * With the module import alone the divergence CX-072 describes is unreachable:
+ * the list is static, so `active` can only ever be an index that exists, and
+ * `selected === i` and `active === i` agree for every value. The single-index
+ * fix is still correct — it makes the panel and the pressed state derive from
+ * ONE value rather than two that happen to coincide — but it cannot be tested
+ * without data that changes under a live selection. The default keeps every
+ * call site unchanged.
+ */
+export function Speaking({ events = speakingEvents }: { events?: typeof speakingEvents } = {}) {
   const [active, setActive] = useState(0);
-  // speakingEvents[active] is undefined when the list is empty, and the detail
-  // panel below reads .year off it — an empty content file crashed the whole
-  // homepage, not just this section. Clamping also survives a list that shrinks
-  // under a selection that is already past its new end.
-  const activeEvent = speakingEvents.length
-    ? speakingEvents[Math.min(active, speakingEvents.length - 1)]
-    : undefined;
+  // ONE effective index, used by both the detail panel and the gallery's
+  // pressed state. Clamping only the event left aria-pressed comparing the raw
+  // `active`, so a shrinking list showed a clamped event in the panel while NO
+  // button reported itself selected — the two halves disagreed (CX-072).
+  //
+  // speakingEvents[active] is also undefined when the list is empty, and the
+  // panel reads .year off it: an empty content file crashed the whole
+  // homepage, not just this section.
+  const selected = events.length ? Math.min(active, events.length - 1) : -1;
+  const activeEvent = selected >= 0 ? events[selected] : undefined;
 
   return (
     <section id="speaking" style={{ background: "#eef4f8", padding: "112px 0", borderTop: "1px solid #d9e6ee" }}>
@@ -46,8 +60,8 @@ export function Speaking() {
 
         <h3 style={{ fontSize: "clamp(1.5rem,3vw,2.25rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: "0 0 28px" }}>Where I've spoken</h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(190px, 100%), 1fr))", gap: 20, marginBottom: 32 }}>
-          {speakingEvents.map((e, i) => {
-            const isActive = active === i;
+          {events.map((e, i) => {
+            const isActive = selected === i;
             return (
               <button
                 key={`${e.label}-${e.year}`}
