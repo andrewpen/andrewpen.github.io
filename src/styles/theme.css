@@ -269,6 +269,22 @@
      palette one home is a larger change than this activity's scope. */
   background-color: #11C4D4;
   color: #141f29;
+
+  /* Owner decision 2026-09-14 (Andrew), batch A review, option B.
+     Restores the label typography this CTA had before the migration.
+
+     It is here because the SYSTEM does not set it: .a3kds-btn declares
+     font-family and neither font-size nor font-weight, so an action label
+     inherits from wherever the button sits — this one inherited 16px/400 from
+     the body and went bigger and lighter than the 14px/600 it was designed
+     with. That is an upstream gap, raised separately; this restores the
+     header's emphasis without weakening the migration, since the shape, the
+     focus ring and the anchor semantics still come from the system.
+
+     If the design system later specifies label typography, revisit this:
+     it will then be overriding a real decision rather than filling a hole. */
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 .a3kds-btn.ap-chrome-cta:hover:not(:disabled):not([aria-disabled="true"]) {
   /* Darkened within the cyan family, so hover reads as the same control

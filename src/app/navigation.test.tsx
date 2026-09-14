@@ -10,6 +10,8 @@
 import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import App from "./App";
 import { Writing } from "./Writing";
 import { chrome } from "./destinations";
@@ -216,5 +218,34 @@ describe("chrome behaviour the migration must preserve", () => {
     expect(anchors.length).toBe(1);
     expect(anchors[0].textContent).toBe(long);
     expect(anchors[0].getAttribute("href")).toBe("/#speaking");
+  });
+});
+
+/**
+ * Owner decision 2026-09-14 (Andrew), batch A review, option B.
+ *
+ * Asserted because it is a decision that looks like an accident from the
+ * outside: a local rule setting type on a system component invites someone to
+ * "clean it up". The system sets no label typography, so removing this would
+ * silently restore the drift it was chosen to fix.
+ */
+describe("the chrome CTA's label typography", () => {
+  it("is declared locally, because the system leaves it to inherit", () => {
+    const css = readFileSync(resolve(__dirname, "../styles/theme.css"), "utf8");
+    const rule = css.slice(css.indexOf(".a3kds-btn.ap-chrome-cta {"));
+    const block = rule.slice(0, rule.indexOf("}"));
+    expect(block).toMatch(/font-size:\s*0\.875rem/);
+    expect(block).toMatch(/font-weight:\s*600/);
+  });
+
+  it("the package still does not set it, which is why the rule exists", () => {
+    const pkg = readFileSync(
+      resolve(__dirname, "../../node_modules/@a3kds/design-system/dist/styles.css"), "utf8");
+    const btn = pkg.slice(pkg.indexOf(".a3kds-btn{"));
+    const block = btn.slice(0, btn.indexOf("}"));
+    // If this ever fails, the system HAS specified label typography and the
+    // local rule above is now overriding a decision rather than filling a gap.
+    expect(block).not.toMatch(/font-size/);
+    expect(block).not.toMatch(/font-weight/);
   });
 });
