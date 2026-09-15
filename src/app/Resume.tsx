@@ -110,7 +110,7 @@ export function Resume() {
         <section style={{ background: "#ffffff", padding: "80px 0" }}>
           <div
             className="apb-cvbody"
-            style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "minmax(260px,300px) minmax(0,1fr)", gap: 56, alignItems: "start" }}
+            style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "minmax(min(260px, 100%),300px) minmax(0,1fr)", gap: 56, alignItems: "start" }}
           >
             <div style={{ order: 2 }}>
               <div style={{ marginBottom: 48 }}>

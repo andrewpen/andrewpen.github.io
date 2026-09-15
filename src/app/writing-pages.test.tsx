@@ -67,16 +67,7 @@ describe("reflow", () => {
    * here keeps that visible, so a passing suite is never read as "the site has
    * no unbounded floors left".
    */
-  it("names the pages this guard does NOT yet cover, so the gap cannot pass silently", () => {
-    const root = resolve(__dirname, "../..");
-    const remaining = ["src/app/CaseStudy.tsx"]
-      .filter(f => {
-        const src = readFileSync(resolve(root, f), "utf8");
-        return /minmax\(\s*\d+px/.test(src.replace(/minmax\(min\(/g, "minmax(SAFE("));
-      });
-    // This is a LEDGER, not a pass: it asserts the known-remaining set exactly,
-    // so finishing batch F or G forces this expectation to be updated rather
-    // than leaving a stale claim behind.
-    expect(remaining).toEqual(["src/app/CaseStudy.tsx"]);
-  });
+  // The "not yet covered" list that stood here is replaced by the single sweep
+  // in case-studies.test.tsx, which reads the page directory rather than a
+  // hand-kept list. Two records of one fact is how one of them goes stale.
 });

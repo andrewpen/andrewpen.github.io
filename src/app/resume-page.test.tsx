@@ -77,10 +77,7 @@ describe("reflow", () => {
     }
   });
 
-  it("names the pages this guard does NOT yet cover, so the gap cannot pass silently", () => {
-    const root = resolve(__dirname, "../..");
-    const remaining = ["src/app/CaseStudy.tsx"].filter(f =>
-      /minmax\(\s*\d+px/.test(readFileSync(resolve(root, f), "utf8").replace(/minmax\(min\(/g, "minmax(SAFE(")));
-    expect(remaining).toEqual(["src/app/CaseStudy.tsx"]);
-  });
+  // The "not yet covered" list that stood here is replaced by the single sweep
+  // in case-studies.test.tsx, which reads the page directory rather than a
+  // hand-kept list. Two records of one fact is how one of them goes stale.
 });

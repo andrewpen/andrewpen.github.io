@@ -351,6 +351,40 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
+/* P07-A01 batch G: the case studies' closing actions, on the site's BLUE.
+
+   Same situation as .ap-subscribe-cta and the same resolution. These two take
+   the system's pill, its single action size, its focus ring and its anchor
+   semantics; only the colours are local, because the ground is the site's blue
+   and is neither the system's light canvas nor its dark one. This is the
+   FOURTH surface where that gap shows, which is a system question rather than
+   a fourth thing to patch — raised, not solved here.
+
+   The hover rule is required, not decorative: without it the system's own
+   hover applies underneath and contradicts the decision. */
+.a3kds-btn.ap-casestudy-cta {
+  background-color: var(--a3kds-color-neutral-950);
+  color: var(--a3kds-color-neutral-0);
+  /* The label weight the owner restored in batch A and applied again in batch
+     B. These anchors were 600; the system's action is 400. Same decision, same
+     value, applied here rather than re-asked. */
+  font-weight: 600;
+}
+.a3kds-btn.ap-casestudy-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  /* The same lightening .ap-writing-cta uses, expressed the same way. */
+  background-color: var(--a3kds-color-neutral-800);
+}
+.a3kds-btn.ap-casestudy-cta-secondary {
+  border-color: var(--a3kds-color-neutral-0);
+  color: var(--a3kds-color-neutral-0);
+  font-weight: 600;
+}
+.a3kds-btn.ap-casestudy-cta-secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--a3kds-color-neutral-0);
+  color: var(--a3kds-color-neutral-0);
+  background-color: rgb(255 255 255 / 0.12);
+}
+
 .a3kds-btn.ap-subscribe-cta {
   background-color: #141f29;
   color: #ffffff;

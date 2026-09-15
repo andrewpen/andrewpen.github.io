@@ -1,3 +1,4 @@
+import { LinkButton } from "@a3kds/design-system";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { chrome, hrefFor, destination } from "./destinations";
@@ -136,7 +137,7 @@ export function CaseStudy({ id }: { id: string }) {
         {/* ── 01 Challenge ─────────────────────────────────────────────── */}
         <section id="challenge" style={{ background: "#ffffff", padding: "96px 0" }}>
           <div style={SHELL}>
-            <div className="apb-split" style={{ display: "grid", gridTemplateColumns: "minmax(260px,380px) minmax(0,1fr)", gap: 56, alignItems: "start", marginBottom: 56 }}>
+            <div className="apb-split" style={{ display: "grid", gridTemplateColumns: "minmax(min(260px, 100%),380px) minmax(0,1fr)", gap: 56, alignItems: "start", marginBottom: 56 }}>
               <div>
                 <p style={{ ...EYEBROW, color: PINK }}>01 — The challenge</p>
                 <h2 style={{ ...H2, margin: 0 }}>{s.challengeTitle}</h2>
@@ -155,7 +156,7 @@ export function CaseStudy({ id }: { id: string }) {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 24 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(300px, 100%),1fr))", gap: 24 }}>
               <div style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)", borderTop: "6px solid #8aabc2" }}>
                 <p style={{ ...EYEBROW, color: "#476b85", margin: "0 0 20px" }}>Before</p>
                 <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 12 }}>
@@ -300,7 +301,7 @@ export function CaseStudy({ id }: { id: string }) {
               <h2 style={{ ...H2, margin: "0 0 20px" }}>What I'd carry forward.</h2>
               <p style={{ fontSize: "1.0625rem", lineHeight: 1.7, color: "#38546a", margin: 0 }}>{s.reflectionsBody}</p>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 24 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(280px, 100%),1fr))", gap: 24 }}>
               {s.lessons.map((l, n) => {
                 const rule = RULES[n % RULES.length];
                 return (
@@ -316,8 +317,13 @@ export function CaseStudy({ id }: { id: string }) {
         </section>
 
         {/* ── Next ─────────────────────────────────────────────────────── */}
-        <section style={{ background: BLUE, color: "#ffffff", padding: "80px 0" }}>
-          <div style={{ ...SHELL, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 40, alignItems: "center" }}>
+        {/* data-mode="dark": this surface is dark, so the system supplies dark
+            action colours rather than its light-canvas ones. The BLUE ground is
+            not the system's dark canvas either, which is why the two actions
+            still carry a named local colour exception below - the same
+            arrangement batch D accepted for Subscribe. */}
+        <section data-mode="dark" style={{ background: BLUE, color: "#ffffff", padding: "80px 0" }}>
+          <div style={{ ...SHELL, display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(300px, 100%),1fr))", gap: 40, alignItems: "center" }}>
             <div>
               <p style={{ ...EYEBROW, color: "#ffffff" }}>Next</p>
               <h2 style={{ fontSize: "clamp(1.75rem,3.6vw,2.75rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.05, margin: "0 0 16px", textWrap: "balance" }}>
@@ -328,12 +334,16 @@ export function CaseStudy({ id }: { id: string }) {
               </p>
             </div>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a href={`mailto:${contact.email}`} style={{ padding: "15px 30px", borderRadius: 16, background: NAVY, color: "#ffffff", fontWeight: 600, textDecoration: "none" }}>
+              <LinkButton href={`mailto:${contact.email}`} className="ap-casestudy-cta">
                 Get in touch
-              </a>
-              <a href={hrefFor(destination("work"), "case-study")} style={{ padding: "15px 30px", borderRadius: 16, border: "1px solid #ffffff", color: "#ffffff", fontWeight: 600, textDecoration: "none" }}>
+              </LinkButton>
+              <LinkButton
+                href={hrefFor(destination("work"), "case-study")}
+                variant="secondary"
+                className="ap-casestudy-cta-secondary"
+              >
                 Back to portfolio
-              </a>
+              </LinkButton>
             </div>
           </div>
         </section>
