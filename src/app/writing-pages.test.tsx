@@ -69,7 +69,7 @@ describe("reflow", () => {
    */
   it("names the pages this guard does NOT yet cover, so the gap cannot pass silently", () => {
     const root = resolve(__dirname, "../..");
-    const remaining = ["src/app/Resume.tsx", "src/app/CaseStudy.tsx"]
+    const remaining = ["src/app/CaseStudy.tsx"]
       .filter(f => {
         const src = readFileSync(resolve(root, f), "utf8");
         return /minmax\(\s*\d+px/.test(src.replace(/minmax\(min\(/g, "minmax(SAFE("));
@@ -77,6 +77,6 @@ describe("reflow", () => {
     // This is a LEDGER, not a pass: it asserts the known-remaining set exactly,
     // so finishing batch F or G forces this expectation to be updated rather
     // than leaving a stale claim behind.
-    expect(remaining).toEqual(["src/app/Resume.tsx", "src/app/CaseStudy.tsx"]);
+    expect(remaining).toEqual(["src/app/CaseStudy.tsx"]);
   });
 });

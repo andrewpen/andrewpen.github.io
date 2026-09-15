@@ -46,7 +46,13 @@ export function Resume() {
               padding: "72px 32px",
               paddingLeft: "clamp(32px,8vw,88px)",
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              // A bare 300px floor cannot shrink below 300px. At 400% zoom
+              // (320px effective) it resolved to a 300px track inside a 256px
+              // content box and painted 12px past the section's clip edge, so
+              // the name block and the portrait were CUT OFF. The section's
+              // overflow:hidden hid that from the page's scrollWidth, which is
+              // why the zoom check reported a pass.
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))",
               gap: 48,
               alignItems: "center",
             }}
@@ -90,7 +96,7 @@ export function Resume() {
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
             <dl style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 24, margin: 0 }}>
               {cvStats.map((s) => (
-                <div key={s.label} style={{ background: "#ffffff", borderRadius: 16, padding: 24, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)", borderBottom: `6px solid ${s.color}` }}>
+                <div key={s.label} className="apb-cv-card" style={{ background: "#ffffff", borderRadius: 16, padding: 24, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)", borderBottom: `6px solid ${s.color}` }}>
                   <dt style={{ fontSize: "clamp(1.75rem,3vw,2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, fontVariantNumeric: "tabular-nums", color: "#1f2e3d" }}>{s.value}</dt>
                   <dd style={{ margin: "10px 0 0", fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#476b85", lineHeight: 1.5 }}>
                     {s.label}
@@ -124,7 +130,7 @@ export function Resume() {
 
               <div style={{ display: "grid", gap: 24 }}>
                 {roles.map((r) => (
-                  <article key={r.title} style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderLeft: `8px solid ${r.rule}` }}>
+                  <article key={r.title} className="apb-cv-role" style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderLeft: `8px solid ${r.rule}` }}>
                     <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 20, flexWrap: "wrap", marginBottom: 10 }}>
                       <h3 style={{ fontSize: "clamp(1.25rem,2.4vw,1.75rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>{r.title}</h3>
                       <span style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.8125rem", color: ink(r.rule), fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap" }}>{r.period}</span>
@@ -145,11 +151,11 @@ export function Resume() {
             </div>
 
             <aside style={{ order: 1, display: "grid", gap: 24, alignContent: "start" }}>
-              <section style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)" }}>
+              <section className="apb-cv-card" style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)" }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: MINT, margin: "0 0 20px" }}>Education</p>
                 <div style={{ display: "grid", gap: 18 }}>
                   {education.map((e) => (
-                    <div key={e.degree} style={{ paddingLeft: 16, borderLeft: `3px solid ${e.rule}` }}>
+                    <div key={e.degree} className="apb-cv-entry" style={{ paddingLeft: 16, borderLeft: `3px solid ${e.rule}` }}>
                       <p style={{ fontSize: "1rem", fontWeight: 600, lineHeight: 1.3, margin: "0 0 4px" }}>{e.degree}</p>
                       <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", color: "#b8cddc", margin: 0 }}>
                         {e.school}
@@ -160,7 +166,7 @@ export function Resume() {
                 </div>
               </section>
 
-              <section style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${BLUE}` }}>
+              <section className="apb-cv-card" style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${BLUE}` }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 20px" }}>Capabilities</p>
                 <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {skills.map((s) => (
@@ -173,7 +179,7 @@ export function Resume() {
                 </ul>
               </section>
 
-              <section style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${PINK}` }}>
+              <section className="apb-cv-card" style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${PINK}` }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 20px" }}>Selected work</p>
                 <div style={{ display: "grid", gap: 18 }}>
                   {projects.map((p) => (

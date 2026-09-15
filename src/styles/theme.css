@@ -173,6 +173,19 @@
   @media print {
     .apb-noprint { display: none !important; }
     body, .apb { background: #ffffff !important; }
+
+    /* PAGE BREAKS. Reviewed against a real printed PDF (P07-D1): the education
+       card was split across the page 1-2 boundary and a role card broke in the
+       middle of its bullet list. A card that fits on a page must not straddle
+       one. */
+    .apb-cv-card, .apb-cv-entry { break-inside: avoid; }
+
+    /* A role card is legitimately TALLER than a page, so forbidding a break
+       inside it would push it whole to the next page and leave most of one
+       blank. It may break - but not immediately after its heading, and never
+       through a single achievement. */
+    .apb-cv-role h3 { break-after: avoid; }
+    .apb-cv-role li { break-inside: avoid; }
   }
 
   @media (prefers-reduced-motion: reduce) {
