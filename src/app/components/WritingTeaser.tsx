@@ -264,7 +264,11 @@ function PostCard({ post }: { post: (typeof posts)[number] }) {
             /* W-7: was 0.1em, snapped to the shared step. */
             letterSpacing: "var(--a3kds-letter-spacing-wider)",
             textTransform: "uppercase",
-            color: "var(--a3kds-color-neutral-400)",
+            /* A RAMP STEP IS NOT A TEXT ROLE. neutral-400 is #8aabc2, which is
+               2.42:1 on this white card - below WCAG AA for 11px text, and
+               invisible to token validation because the token itself is fine.
+               The muted TEXT role is 5.66:1 here and flips with the mode. */
+            color: "var(--a3kds-text-muted)",
             margin: "auto 0 0",
           }}
         >

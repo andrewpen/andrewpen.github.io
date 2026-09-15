@@ -149,7 +149,11 @@ function PostCard({ post }: { post: (typeof posts)[number] }) {
           fontSize: "0.6875rem",
           letterSpacing: "0.14em",
           textTransform: "uppercase",
-          color: post.hasFullPost ? post.rule : "#8aabc2",
+          /* #8aabc2 is 2.42:1 on this white card - below AA for 11px text.
+             #476b85 (5.66:1) is the same value the muted text role carries in
+             light mode, and the literal matches this file's unmigrated style
+             rather than pre-empting the P07 migration. */
+          color: post.hasFullPost ? post.rule : "#476b85",
           margin: "auto 0 0",
           paddingTop: 16,
           borderTop: "1px solid #d9e6ee",
