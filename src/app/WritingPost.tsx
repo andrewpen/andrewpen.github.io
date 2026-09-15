@@ -59,7 +59,7 @@ export function WritingPost() {
         </section>
 
         <article style={{ background: "#ffffff", padding: "80px 0 96px" }}>
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 56, alignItems: "start" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 56, alignItems: "start" }}>
             <div style={{ maxWidth: "68ch" }}>
               <p style={{ fontSize: "1.0625rem", lineHeight: 1.7, margin: "0 0 24px" }}>
                 For most of my career the org chart was a map of scarcity. Design was expensive, so we hired designers. Front-end was expensive, so we hired engineers. Research

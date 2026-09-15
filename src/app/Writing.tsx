@@ -1,3 +1,4 @@
+import { Card } from "@a3kds/design-system";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Ticker } from "./components/Ticker";
@@ -125,19 +126,6 @@ export function Writing() {
 }
 
 function PostCard({ post }: { post: (typeof posts)[number] }) {
-  const style = {
-    display: "flex" as const,
-    flexDirection: "column" as const,
-    gap: 14,
-    background: "#ffffff",
-    border: "1px solid #d9e6ee",
-    borderTop: `6px solid ${post.rule}`,
-    borderRadius: 16,
-    padding: 28,
-    boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)",
-    textDecoration: "none",
-    color: "inherit",
-  };
   const inner = (
     <>
       <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.08em", color: "#476b85", margin: 0 }}>{post.date} · {post.words}</p>
@@ -153,22 +141,48 @@ function PostCard({ post }: { post: (typeof posts)[number] }) {
              #476b85 (5.66:1) is the same value the muted text role carries in
              light mode, and the literal matches this file's unmigrated style
              rather than pre-empting the P07 migration. */
-          color: post.hasFullPost ? post.rule : "#476b85",
+          color: post.hasFullPost ? post.rule : "var(--a3kds-text-muted)",
           margin: "auto 0 0",
-          paddingTop: 16,
-          borderTop: "1px solid #d9e6ee",
+          paddingTop: "var(--a3kds-space-4)",
+          borderTop: "1px solid var(--a3kds-border-subtle)",
         }}
       >
         {post.hasFullPost ? "Read →" : "Full essay coming soon"}
       </p>
     </>
   );
+  const card = (
+    <Card
+      accent={post.rule}
+      elevation="raised"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "var(--a3kds-space-4)" /* W-3: was 14px, off the 4px grid */,
+        padding: "var(--a3kds-space-6)" /* W-3: was 28px */,
+        background: "var(--a3kds-color-neutral-0)",
+        color: "inherit",
+        textDecoration: "none",
+        height: "100%",
+        boxSizing: "border-box",
+      }}
+    >
+      {inner}
+    </Card>
+  );
+
+  // Destination and stub semantics preserved exactly: a real essay is a link,
+  // a stub is not interactive.
   if (post.hasFullPost) {
     return (
-      <a href={`/writing/${post.slug}.html`} className="lift" style={style}>
-        {inner}
+      <a
+        href={`/writing/${post.slug}.html`}
+        className="lift"
+        style={{ textDecoration: "none", color: "inherit", display: "block", height: "100%" }}
+      >
+        {card}
       </a>
     );
   }
-  return <div style={style}>{inner}</div>;
+  return card;
 }
