@@ -61,7 +61,15 @@ export function renderConnected(record, source = {}) {
     + (deps ? `<p class="anno-own">A3KDS</p><ul>${deps}</ul>` : '')
     + (exc ? `<p class="anno-own">Local only</p><ul>${exc}</ul>` : '')
     + renderRefs(record)
-    + `<p class="anno-prov">record from ${esc(source.package || '?')}@${esc(source.version || '?')} (${esc(source.integrity || '?')})</p>`;
+    // The VERSION alone was the whole provenance line, and it cannot carry
+    // this weight: 0.1.0-alpha.4 is live on the public registry, and a locally
+    // packed candidate declares the same version with different bytes. Shown
+    // alone it told a reader they were looking at the published release. The
+    // specifier names the actual tarball, and a local install says so.
+    + `<p class="anno-prov">record from ${esc(source.package || '?')}@${esc(source.version || '?')} (${esc(source.integrity || '?')})`
+    + (source.specifier ? `<br><span class="anno-prov-src">${esc(source.specifier)}</span>` : '')
+    + (source.installedFrom ? `<br><span class="anno-prov-src">${esc(source.installedFrom)}</span>` : '')
+    + `</p>`;
 }
 
 /**

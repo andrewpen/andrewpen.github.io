@@ -22,6 +22,27 @@ const record = {
 const source = { package: "@a3kds/design-system", version: "0.1.0-alpha.4", integrity: "abc123" };
 
 describe("the wireframe's connection to the shared record", () => {
+  // A version string cannot identify these bytes. 0.1.0-alpha.4 is live on the
+  // public registry AND is what a locally packed candidate declares, so a
+  // provenance line showing only the version told a reader they were looking
+  // at the published release when they were not.
+  it("does not let a local candidate build pass for the published release", () => {
+    const candidate = {
+      ...source,
+      specifier: "file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz",
+      installedFrom: "a local candidate tarball, NOT the public registry",
+    };
+    const html = renderConnected(record, candidate);
+    expect(html).toContain("a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz");
+    expect(html).toContain("NOT the public registry");
+  });
+
+  it("still renders when provenance carries only a version, as older records do", () => {
+    const html = renderConnected(record, source);
+    expect(html).toContain("@a3kds/design-system@0.1.0-alpha.4");
+    expect(html).not.toContain("undefined");
+  });
+
   it("shows the identity, ownership and provenance", () => {
     const html = renderConnected(record, source);
     expect(html).toContain("CMP-11");

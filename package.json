@@ -12,7 +12,7 @@
     "sync:connections": "node scripts/sync-connections.mjs"
   },
   "dependencies": {
-    "@a3kds/design-system": "file:vendor/a3kds-design-system-0.1.0-alpha.4+c1ce6bf83bc9.tgz",
+    "@a3kds/design-system": "file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz",
     "lucide-react": "0.487.0",
     "react": "18.3.1",
     "react-dom": "18.3.1"

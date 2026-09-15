@@ -256,6 +256,10 @@
       <span class="anno-rule" style="width: 22px;"></span>
       <span class="lbl">Component note</span>
     </span>
+    <span style="display: flex; align-items: center; gap: 7px;">
+      <span class="tag-shared">on N pages of this site</span>
+      <span class="lbl">Reuse WITHIN this website. Not a consumer of A3KDS &mdash; this site is one consumer however many of its own pages use a component.</span>
+    </span>
   </div>
 
   <div style="display: flex; flex-direction: column; gap: 34px;">
@@ -293,6 +297,9 @@
           <li>CTA pill → <code>#subscribe</code>, renders as button when <code>onClick</code> passed</li>
         </ul>
         <p class="anno-data">Nav + footer link arrays are declared in App.tsx, not content.ts</p>
+        <div class="anno-connected" data-composition="chrome-navbar">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -354,6 +361,9 @@
           <li>Portrait layered over a blue block</li>
         </ul>
         <p class="anno-data">data: hero, heroStats (4)</p>
+        <div class="anno-connected" data-composition="hero">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -595,6 +605,9 @@
           <li>Detail panel below reflects the selected event</li>
         </ul>
         <p class="anno-data">data: speakingTopics (4), speakingEvents (5)</p>
+        <div class="anno-connected" data-composition="speaking">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -656,6 +669,9 @@
           <li>Coloured left border per project</li>
         </ul>
         <p class="anno-data">data: projects (3) → /case-studies/*.html</p>
+        <div class="anno-connected" data-composition="work">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -718,6 +734,9 @@
           <li>Highlight cards ×3 — title + text, coloured left rule</li>
         </ul>
         <p class="anno-data">data: about, aboutHighlights (3), contact</p>
+        <div class="anno-connected" data-composition="bio">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -760,6 +779,9 @@
           <li>Two service cards — <code>&lt;h3&gt;</code> + description, coloured top rule</li>
         </ul>
         <p class="anno-data">data: contact (email) — all other copy is literal in the component</p>
+        <div class="anno-connected" data-composition="practice">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -795,6 +817,9 @@
           <li>Status line rendered after submit</li>
         </ul>
         <p class="anno-flag">No newsletter backend — submit opens a pre-filled <code>mailto:</code> rather than faking a subscribe</p>
+        <div class="anno-connected" data-composition="subscribe">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -821,6 +846,9 @@
           <li>4 links: Writing, LinkedIn, Email (<code>mailto:</code>), CV</li>
         </ul>
         <p class="anno-data">Only nav out to /writing.html and /resume.html</p>
+        <div class="anno-connected" data-composition="chrome-footer">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
       </aside>
     </div>
 
@@ -947,7 +975,7 @@
             </div>
           </div></div>
           <div class="spec-info">
-            <h2 class="spec-name">Card <span class="tag-local">inline</span> <span class="tag-n">×19</span></h2>
+            <h2 class="spec-name">Card <span class="tag-local">inline — pre-migration</span> <span class="tag-n">×19</span></h2>
             <p class="spec-sig">radius 16 · shadow 0 4px 16px rgb(20 31 41 / .08)</p>
             <ul class="anno-list">
               <li>Four shadow depths in use — <code>.08</code>, <code>.09</code>, <code>.10</code>, <code>.20</code>, <code>.24</code> — chosen ad hoc</li>
@@ -955,6 +983,7 @@
               <li>Border <code>1px solid #d9e6ee</code> on light grounds only</li>
             </ul>
             <p class="spec-used">every section except Hero and Ticker</p>
+            <p class="anno-flag">This inventory describes the site BEFORE the convergence. Practice and WritingTeaser now use the A3KDS <code>Card</code>; the shadow list below is what that migration removed, not what ships.</p>
           </div>
         </div>
 
@@ -1285,7 +1314,7 @@
           </div>
         </div>
         <div class="spec-info">
-          <h2 class="spec-name">Footer.tsx <span class="tag-shared">shared ×4</span></h2>
+          <h2 class="spec-name">Footer.tsx <span class="tag-shared">on 4 pages of this site</span></h2>
           <p class="spec-sig">&lt;Footer links={FooterLink[]} /&gt;</p>
           <ul class="anno-list">
             <li>Copyright line — <code>contact.footerCopyright</code></li>
@@ -1361,7 +1390,7 @@
           </div>
         </div>
         <div class="spec-info">
-          <h2 class="spec-name">Navbar.tsx <span class="tag-shared">shared ×4</span></h2>
+          <h2 class="spec-name">Navbar.tsx <span class="tag-shared">on 4 pages of this site</span></h2>
           <p class="spec-sig">&lt;Navbar links cta logoHref? /&gt;</p>
           <ul class="anno-list">
             <li>Logo SVG (30px) + wordmark, links to <code>logoHref</code> (default <code>/</code>)</li>
@@ -1495,12 +1524,13 @@
           </div>
         </div>
         <div class="spec-info">
-          <h2 class="spec-name">Subscribe.tsx <span class="tag-shared">shared ×3</span> <span class="tag-state">stateful</span></h2>
+          <h2 class="spec-name">Subscribe.tsx <span class="tag-shared">on 3 pages of this site</span> <span class="tag-state">stateful</span></h2>
           <p class="spec-sig">&lt;Subscribe /&gt; — <code>useState(message)</code> · <code>id="subscribe"</code></p>
           <ul class="anno-list">
             <li><code>&lt;h2&gt;</code> + supporting copy</li>
-            <li><code>&lt;form&gt;</code>: email <code>&lt;input name="email"&gt;</code> + submit button</li>
-            <li>Status line rendered after submit</li>
+            <li><code>&lt;form&gt;</code>: A3KDS <code>FormField</code> + <code>TextField</code> for the email, A3KDS <code>Button</code> to submit</li>
+            <li>Label type and the button fill are named local exceptions — see the connected record below</li>
+            <li>Status line rendered after submit; it never claims a subscription</li>
           </ul>
           <p class="spec-data">data: contact</p>
           <p class="spec-used">used by: homepage · writing · essay</p>
@@ -1524,7 +1554,7 @@
           </div>
         </div>
         <div class="spec-info">
-          <h2 class="spec-name">Ticker.tsx <span class="tag-shared">shared ×2</span></h2>
+          <h2 class="spec-name">Ticker.tsx <span class="tag-shared">on 2 pages of this site</span></h2>
           <p class="spec-sig">&lt;Ticker items={string[]} /&gt;</p>
           <ul class="anno-list">
             <li>Pink band, <code>aria-hidden</code> — decorative only</li>
@@ -1894,6 +1924,7 @@
   .anno-connected ul { margin: 0 0 5px; padding-left: 15px; }
   .anno-connected li { font-size: 10px; color: #4a4a4a; margin-bottom: 2px; }
   .anno-connected .anno-prov { font-family: 'Space Mono', monospace; font-size: 8px; color: #9a9a9a; margin: 5px 0 0; }
+  .anno-connected .anno-prov-src { color: #7a7a7a; word-break: break-all; }
   .anno-unavailable { font-size: 10px; color: #8a3a3a; margin: 0; }
   .anno-elsewhere { color: #8a8a8a; font-style: normal; }
   .anno-coverage {

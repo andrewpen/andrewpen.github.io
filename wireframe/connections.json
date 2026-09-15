@@ -3,11 +3,14 @@
   "source": {
     "package": "@a3kds/design-system",
     "version": "0.1.0-alpha.4",
-    "integrity": "676f728a047d5590"
+    "integrity": "e94f63d30915989f",
+    "specifier": "file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz",
+    "installedFrom": "a local candidate tarball, NOT the public registry",
+    "versionCaveat": "version is what the package declares. It does not identify these bytes: a local candidate shares the version string of the published release, so read specifier and integrity for identity."
   },
-  "syncedAt": "2026-09-14T11:12:10Z",
+  "syncedAt": "2026-09-15T20:46:09Z",
   "schema": "compositions/1",
-  "activity": "P05-A01",
+  "activity": "P06-D6",
   "purpose": "Composition records for sections the convergence project has migrated. A record LINKS the authorities that own each fact; it does not restate them.",
   "rules": [
     "identity names a composition declared in pattern-map.json, which owns composition identity and its local-or-shared disposition. That disposition is an owner decision and is deliberately absent here.",
@@ -89,10 +92,448 @@
           "role": "Owns CMP-11 and its disposition."
         }
       ]
+    },
+    {
+      "id": "chrome-navbar",
+      "identity": "CMP-04",
+      "name": "Site navigation",
+      "description": "The fixed chrome at the top of every page: the wordmark, the section links and the subscribe action.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch A)",
+      "dependsOn": [
+        {
+          "kind": "component",
+          "id": "LinkButton",
+          "role": "The section links and the wordmark."
+        },
+        {
+          "kind": "component",
+          "id": "Button",
+          "role": "The subscribe action."
+        },
+        {
+          "kind": "contract",
+          "id": "action",
+          "role": "Governs the actions' shape, size and semantics."
+        }
+      ],
+      "localExceptions": [
+        {
+          "what": ".ap-chrome-cta",
+          "why": "Owner decision, batch A: the cyan fill, and the 14px/600 label weight restored over the system's. Recommendation B, accepted.",
+          "carries": [
+            "background cyan",
+            "font-size 14px",
+            "font-weight 600",
+            "a matching hover rule, without which the system's hover contradicts the decision"
+          ]
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Navbar.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. It receives its links as props rather than reading the destination record itself."
+        },
+        {
+          "href": "src/app/destinations.ts",
+          "repo": "website",
+          "rel": "source",
+          "role": "Owns every destination and how a href is formed from one. Which links appear, and in what order, is App.tsx's."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-a-review.json",
+          "rel": "decisions",
+          "role": "Owns batch A's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "contracts/action.contract.json",
+          "rel": "contract",
+          "role": "Owns the action API and its guarantees."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
+    },
+    {
+      "id": "chrome-footer",
+      "identity": "CMP-02",
+      "name": "Site footer",
+      "description": "The closing chrome: the contact line, the section links repeated, and the colophon.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch A)",
+      "dependsOn": [],
+      "localExceptions": [
+        {
+          "what": "The whole of its type and layout",
+          "why": "NO design-system COMPONENT is used here. What batch A migrated in the footer is its destinations and four tokens; the rest is website-local and was never claimed otherwise."
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Footer.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. It imports nothing from the package - stated plainly so this record cannot be read as component adoption."
+        },
+        {
+          "href": "src/app/destinations.ts",
+          "repo": "website",
+          "rel": "source",
+          "role": "Owns every destination and how a href is formed from one. Which links appear, and in what order, is App.tsx's."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-a-review.json",
+          "rel": "decisions",
+          "role": "Owns batch A's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "identity": "CMP-03",
+      "name": "Hero",
+      "description": "The opening surface: the oversized greeting, the standfirst, two actions and the portrait.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch B)",
+      "dependsOn": [
+        {
+          "kind": "component",
+          "id": "LinkButton",
+          "role": "Both actions."
+        },
+        {
+          "kind": "contract",
+          "id": "action",
+          "role": "Governs the actions, including the single-line truncation they gained here."
+        }
+      ],
+      "localExceptions": [
+        {
+          "what": ".ap-hero-cta",
+          "why": "Owner decision, batch B: the label weight only, applied for the same reason as batch A.",
+          "carries": [
+            "font-weight 600"
+          ]
+        },
+        {
+          "what": "The 8.5rem greeting",
+          "why": "The shared editorial display role maxes at 4rem. Adopting it would more than halve the hero, which is a design decision and not a migration."
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Hero.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. It declares data-mode=\"dark\" so the system supplies dark-surface action colours rather than needing a local colour rule."
+        },
+        {
+          "href": "src/app/destinations.ts",
+          "repo": "website",
+          "rel": "source",
+          "role": "Owns every destination and how a href is formed from one. Which links appear, and in what order, is App.tsx's."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-b-evidence.json",
+          "rel": "decisions",
+          "role": "Owns batch B's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "contracts/action.contract.json",
+          "rel": "contract",
+          "role": "Owns the action API and its guarantees."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
+    },
+    {
+      "id": "bio",
+      "identity": "CMP-01",
+      "name": "Bio",
+      "description": "The biography surface: portrait, narrative, statistics and an action to the full resume.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch B)",
+      "dependsOn": [
+        {
+          "kind": "component",
+          "id": "LinkButton",
+          "role": "The resume action."
+        },
+        {
+          "kind": "contract",
+          "id": "action",
+          "role": "Governs the action."
+        }
+      ],
+      "localExceptions": [
+        {
+          "what": ".ap-hero-cta",
+          "why": "The same label-weight decision as the hero.",
+          "carries": [
+            "font-weight 600"
+          ]
+        },
+        {
+          "what": "The statistic figures",
+          "why": "The system has no role for statistics. There is nothing to migrate to, which is a gap rather than a divergence."
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Bio.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. Declares data-mode=\"dark\" for the same reason as the hero."
+        },
+        {
+          "href": "src/app/destinations.ts",
+          "repo": "website",
+          "rel": "source",
+          "role": "Owns every destination and how a href is formed from one. Which links appear, and in what order, is App.tsx's."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-b-evidence.json",
+          "rel": "decisions",
+          "role": "Owns batch B's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "contracts/action.contract.json",
+          "rel": "contract",
+          "role": "Owns the action API and its guarantees."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "identity": "CMP-10",
+      "name": "Work",
+      "description": "Three case-study rows, each a single link carrying a numeral, a title, a metric and an arrow.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch C)",
+      "dependsOn": [],
+      "localExceptions": [
+        {
+          "what": "The accent on the left edge",
+          "why": "Owner decision, batch C: the system's card puts its rule on TOP, so adopting the card here would move a rule from the left of three prominent rows to the top. A visual change, not a migration."
+        },
+        {
+          "what": "The row layout itself",
+          "why": "NO design-system component is used. Batch C migrated this section's spacing floors and its destinations, not its structure."
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Work.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. It imports nothing from the package."
+        },
+        {
+          "href": "src/app/destinations.ts",
+          "repo": "website",
+          "rel": "source",
+          "role": "Owns every destination and how a href is formed from one. Which links appear, and in what order, is App.tsx's."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-c-evidence.json",
+          "rel": "decisions",
+          "role": "Owns batch C's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
+    },
+    {
+      "id": "practice",
+      "identity": "CMP-06",
+      "name": "Practice",
+      "description": "Two advisory cards on an inset panel.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch C)",
+      "dependsOn": [
+        {
+          "kind": "component",
+          "id": "Card",
+          "role": "Both advisory cards, with the system's border, radius, elevation and background."
+        }
+      ],
+      "localExceptions": [
+        {
+          "what": "24px card padding",
+          "why": "Owner decision W-3, carried forward: the component's default is 16px, which would have made these two cards tighter than every other card on the site.",
+          "carries": [
+            "padding 24px"
+          ]
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Practice.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. Its inset is fluid rather than a flat 56px - the fix for the 320px overflow carried since batch A."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-c-evidence.json",
+          "rel": "decisions",
+          "role": "Owns batch C's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/writing-section-decisions.json",
+          "rel": "decisions",
+          "role": "Owns W-3, the padding decision this section follows."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
+    },
+    {
+      "id": "speaking",
+      "identity": "CMP-07",
+      "name": "Speaking",
+      "description": "A gallery of speaking events with a detail view driven by the current selection.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch D)",
+      "dependsOn": [],
+      "localExceptions": [
+        {
+          "what": "The gallery and its detail view",
+          "why": "NO design-system component is used, and DetailPanel in particular is NOT used here despite the resemblance. Batch D migrated this section's sizing and its empty-list behaviour."
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Speaking.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. One effective index drives both the panel and aria-pressed, so a shrinking list cannot show a selected event that no button reports."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-d-evidence.json",
+          "rel": "decisions",
+          "role": "Owns batch D's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
+    },
+    {
+      "id": "subscribe",
+      "identity": "CMP-08",
+      "name": "Subscribe",
+      "description": "An email field and action that opens a pre-filled message. There is no mailing list behind it.",
+      "packageExport": false,
+      "ownedBy": "website",
+      "migratedIn": "P06 (batch D)",
+      "dependsOn": [
+        {
+          "kind": "component",
+          "id": "TextField",
+          "role": "The email field, with the system's wiring, error and hint plumbing and focus ring."
+        },
+        {
+          "kind": "component",
+          "id": "FormField",
+          "role": "The label, hint and error association."
+        },
+        {
+          "kind": "component",
+          "id": "Button",
+          "role": "The submit action."
+        },
+        {
+          "kind": "contract",
+          "id": "action",
+          "role": "Governs the action."
+        }
+      ],
+      "localExceptions": [
+        {
+          "what": ".ap-subscribe-field .a3kds-formfield-label",
+          "why": "Owner decision, batch D: the site's label treatment restored over the system's, because it was the only label on the homepage that no longer matched its neighbours and the system's carried no behaviour the old one lacked.",
+          "carries": [
+            "font-family mono",
+            "font-size 0.6875rem",
+            "text-transform uppercase",
+            "letter-spacing 0.14em",
+            "colour white"
+          ]
+        },
+        {
+          "what": ".ap-subscribe-cta",
+          "why": "The system's light-canvas action colours land on this blue ground and measured 1.00:1 - the button was the same colour as the section behind it. A named exception restores the navy fill.",
+          "carries": [
+            "background navy",
+            "a matching hover rule"
+          ]
+        }
+      ],
+      "refs": [
+        {
+          "href": "src/app/components/Subscribe.tsx",
+          "repo": "website",
+          "rel": "source",
+          "role": "The implementation. It makes no network request, stores nothing, and never says \"subscribed\"; the tests assert those as absences."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/batch-d-evidence.json",
+          "rel": "decisions",
+          "role": "Owns batch D's decisions, measurements and who accepted them."
+        },
+        {
+          "href": "contracts/action.contract.json",
+          "rel": "contract",
+          "role": "Owns the action API and its guarantees."
+        },
+        {
+          "href": "docs/projects/website-convergence/baseline/pattern-map.json",
+          "rel": "identity",
+          "role": "Owns composition identity and the local-or-shared disposition."
+        }
+      ]
     }
   ],
   "limitations": [
-    "One composition. SectionHeading was in P05's scope as 'where applicable'; the migrated section does not have a separable heading composition — its heading is two elements inside the section — so inventing a record for it would create an identity nothing implements.",
-    "This record describes relationships, not appearance. It does not and cannot say the section looks right; that is P04-D5, already accepted by the owner."
+    "Nine compositions, not eleven. pattern-map.json declares CMP-01..CMP-11; CMP-05 (PostCard) has no record of its own because it is part of writing-teaser rather than a separable composition, and CMP-09 (Ticker) has none because NO batch migrated it - it imports neither a component nor a token. Their absence is stated here so it cannot be read as an oversight, and neither may be counted as adoption.",
+    "Four of these nine use NO design-system COMPONENT: chrome-footer, work, speaking and the Ticker that has no record at all. What was migrated in those sections is tokens, spacing floors and the shared destination record. Each says so in its own localExceptions rather than leaving a reader to infer component adoption from the presence of a record.",
+    "A record describes relationships, not appearance. It does not and cannot say a section looks right; that is what the four owner-accepted batch reviews are for.",
+    "packageExport is false for every record here. These are website compositions; none is installable, and none of them is an external consumer of the package.",
+    "These records make no backlog claim, though the work section does produce the tall mobile rows tracked as F24. ref.backlog is not in record-ownership.json's claimToFact, and adding an unmapped claim kind is exactly what that registry exists to prevent; the batch C decisions record owns that finding instead.",
+    "A composition's dependency on the shared destination record is claimed as ref.source on destinations.ts, not as a dependsOn entry. dependsOn recognises components and contracts, which are package facts; a website module is route-and-content, and claiming it twice would put one fact under two authorities."
   ]
 }
