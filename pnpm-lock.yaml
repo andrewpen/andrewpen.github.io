@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@a3kds/design-system':
-        specifier: file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz
-        version: file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.1.0-alpha.5
+        version: 0.1.0-alpha.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lucide-react:
         specifier: 0.487.0
         version: 0.487.0(react@18.3.1)
@@ -57,9 +57,8 @@ importers:
 
 packages:
 
-  '@a3kds/design-system@file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz':
-    resolution: {integrity: sha512-oww82BObt79IG3k7bvaYf0Lo7SBzHGI1sk7jcgCVsgyDjpdxTuklcD3KA3OeHH5km/+Ze2zaJEbIP8uQCoXjHQ==, tarball: file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz}
-    version: 0.1.0-alpha.4
+  '@a3kds/design-system@0.1.0-alpha.5':
+    resolution: {integrity: sha512-OMmVZqlcf00AifSJph17O6YrrFxKk5Ch9Fmk73FHUw18llL0LepMIRueDStFXKz4waOdCiCmaQ3i/wh0du6rwQ==}
     engines: {node: '>=22'}
     peerDependencies:
       react: '>=18'
@@ -1271,7 +1270,7 @@ packages:
 
 snapshots:
 
-  '@a3kds/design-system@file:vendor/a3kds-design-system-0.1.0-alpha.4+a22d33a890c2.tgz(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@a3kds/design-system@0.1.0-alpha.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
