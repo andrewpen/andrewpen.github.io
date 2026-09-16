@@ -85,7 +85,7 @@ export function Writing() {
                 borderRadius: 16,
                 padding: 56,
                 marginBottom: 40,
-                boxShadow: "0 24px 48px rgb(20 31 41 / 0.24)",
+                boxShadow: "var(--a3kds-elevation-floating)" /* byte-identical to the literal it replaces */,
               }}
             >
               <div>

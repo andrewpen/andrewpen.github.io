@@ -96,7 +96,7 @@ export function Resume() {
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
             <dl style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 24, margin: 0 }}>
               {cvStats.map((s) => (
-                <div key={s.label} className="apb-cv-card" style={{ background: "#ffffff", borderRadius: 16, padding: 24, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)", borderBottom: `6px solid ${s.color}` }}>
+                <div key={s.label} className="apb-cv-card" style={{ background: "#ffffff", borderRadius: 16, padding: 24, boxShadow: "var(--a3kds-elevation-raised)", borderBottom: `6px solid ${s.color}` }}>
                   <dt style={{ fontSize: "clamp(1.75rem,3vw,2.5rem)", fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1, fontVariantNumeric: "tabular-nums", color: "#1f2e3d" }}>{s.value}</dt>
                   <dd style={{ margin: "10px 0 0", fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.1em", textTransform: "uppercase", color: "#476b85", lineHeight: 1.5 }}>
                     {s.label}

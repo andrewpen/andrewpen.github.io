@@ -157,7 +157,7 @@ export function CaseStudy({ id }: { id: string }) {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(300px, 100%),1fr))", gap: 24 }}>
-              <div style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "0 4px 16px rgb(20 31 41 / 0.08)", borderTop: "6px solid #8aabc2" }}>
+              <div style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "var(--a3kds-elevation-raised)", borderTop: "6px solid #8aabc2" }}>
                 <p style={{ ...EYEBROW, color: "#476b85", margin: "0 0 20px" }}>Before</p>
                 <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 12 }}>
                   {s.before.map((text, i) => (
