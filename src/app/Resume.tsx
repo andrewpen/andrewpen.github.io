@@ -130,7 +130,7 @@ export function Resume() {
 
               <div style={{ display: "grid", gap: 24 }}>
                 {roles.map((r) => (
-                  <article key={r.title} className="apb-cv-role" style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderLeft: `8px solid ${r.rule}` }}>
+                  <article key={r.title} className="apb-cv-role" style={{ background: "#f7fafc", borderRadius: 16, padding: 36, boxShadow: "var(--a3kds-elevation-raised)", borderLeft: `8px solid ${r.rule}` }}>
                     <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 20, flexWrap: "wrap", marginBottom: 10 }}>
                       <h3 style={{ fontSize: "clamp(1.25rem,2.4vw,1.75rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.15, margin: 0 }}>{r.title}</h3>
                       <span style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.8125rem", color: ink(r.rule), fontVariantNumeric: "tabular-nums", whiteSpace: "nowrap" }}>{r.period}</span>
@@ -151,7 +151,7 @@ export function Resume() {
             </div>
 
             <aside style={{ order: 1, display: "grid", gap: 24, alignContent: "start" }}>
-              <section className="apb-cv-card" style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)" }}>
+              <section className="apb-cv-card" style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "var(--a3kds-elevation-floating)" }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: MINT, margin: "0 0 20px" }}>Education</p>
                 <div style={{ display: "grid", gap: 18 }}>
                   {education.map((e) => (
@@ -166,7 +166,7 @@ export function Resume() {
                 </div>
               </section>
 
-              <section className="apb-cv-card" style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${BLUE}` }}>
+              <section className="apb-cv-card" style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "var(--a3kds-elevation-raised)", borderTop: `6px solid ${BLUE}` }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 20px" }}>Capabilities</p>
                 <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {skills.map((s) => (
@@ -179,7 +179,7 @@ export function Resume() {
                 </ul>
               </section>
 
-              <section className="apb-cv-card" style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${PINK}` }}>
+              <section className="apb-cv-card" style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "var(--a3kds-elevation-raised)", borderTop: `6px solid ${PINK}` }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 20px" }}>Selected work</p>
                 <div style={{ display: "grid", gap: 18 }}>
                   {projects.map((p) => (
@@ -191,7 +191,7 @@ export function Resume() {
                 </div>
               </section>
 
-              <section className="apb-noprint" style={{ background: BLUE, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.12)" }}>
+              <section className="apb-noprint" style={{ background: BLUE, color: "#ffffff", borderRadius: 16, padding: 32, boxShadow: "var(--a3kds-elevation-raised)" }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 12px" }}>Also</p>
                 <p style={{ fontSize: "1rem", lineHeight: 1.5, margin: "0 0 16px" }}>Four signature talks and six published essays sit alongside this CV.</p>
                 <div style={{ display: "flex", gap: 20, flexWrap: "wrap", fontSize: "0.9375rem", fontWeight: 600 }}>

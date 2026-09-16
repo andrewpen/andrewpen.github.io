@@ -29,7 +29,7 @@ export function Work() {
                 background: "#f7fafc",
                 borderRadius: "var(--a3kds-radius-md)",
                 padding: "clamp(var(--a3kds-space-5), 4vw, 40px)",
-                boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)",
+                boxShadow: "var(--a3kds-elevation-raised)",
                 borderLeft: `8px solid ${p.rule}`,
                 textDecoration: "none",
                 color: "inherit",

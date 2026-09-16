@@ -68,6 +68,53 @@ describe("the closing actions are the system's", () => {
   });
 });
 
+describe("elevation", () => {
+  /**
+   * Owner decision (Andrew, 2026-09-16): every off-scale elevation snaps onto
+   * the system's two levels. Sixteen occurrences carried five different
+   * shadows — .09, .10, .12 and .20 at various blurs — against a system that
+   * offers raised and floating. Alpha carries the perceived depth, so each
+   * snapped to whichever level its alpha was nearer, midpoint 0.16.
+   *
+   * This guards the decision rather than the values: a new hand-written shadow
+   * is how the scale grew a third and a fourth level the first time.
+   */
+  it("no page component writes a literal box-shadow", () => {
+    const dir = resolve(__dirname);
+    const files = [
+      ...readdirSync(dir).filter(f => f.endsWith(".tsx") && !f.includes(".test.")).map(f => join(dir, f)),
+      ...readdirSync(join(dir, "components")).filter(f => f.endsWith(".tsx") && !f.includes(".test.")).map(f => join(dir, "components", f)),
+    ];
+    const offenders: string[] = [];
+    for (const f of files) {
+      const src = readFileSync(f, "utf8");
+      for (const m of src.matchAll(/boxShadow:\s*"([^"]*)"/g)) {
+        if (!m[1].includes("var(--a3kds-elevation-")) offenders.push(`${f.split("/src/")[1]}: ${m[1]}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it("the detector actually detects — a literal must be seen as one", () => {
+    const literal = 'boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)"';
+    const token = 'boxShadow: "var(--a3kds-elevation-raised)"';
+    const isLiteral = (s: string) =>
+      [...s.matchAll(/boxShadow:\s*"([^"]*)"/g)].some(m => !m[1].includes("var(--a3kds-elevation-"));
+    expect(isLiteral(literal)).toBe(true);
+    expect(isLiteral(token)).toBe(false);
+  });
+
+  it("both system levels are actually in use, so the snap did not collapse to one", () => {
+    const dir = resolve(__dirname);
+    const all = [
+      ...readdirSync(dir).filter(f => f.endsWith(".tsx") && !f.includes(".test.")).map(f => join(dir, f)),
+      ...readdirSync(join(dir, "components")).filter(f => f.endsWith(".tsx") && !f.includes(".test.")).map(f => join(dir, "components", f)),
+    ].map(f => readFileSync(f, "utf8")).join("\n");
+    expect(all).toContain("var(--a3kds-elevation-raised)");
+    expect(all).toContain("var(--a3kds-elevation-floating)");
+  });
+});
+
 describe("reflow, swept across every page component", () => {
   /**
    * ONE sweep rather than a per-batch list. The earlier per-batch version kept

@@ -80,7 +80,7 @@ export function WritingPost() {
                 bottleneck moved to a question nobody owned — <em>should this component exist at all?</em>
               </p>
 
-              <blockquote style={{ margin: "0 0 32px", background: NAVY, color: "#ffffff", borderRadius: 16, padding: 40, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)", borderLeft: `8px solid ${MINT}` }}>
+              <blockquote style={{ margin: "0 0 32px", background: NAVY, color: "#ffffff", borderRadius: 16, padding: 40, boxShadow: "var(--a3kds-elevation-floating)", borderLeft: `8px solid ${MINT}` }}>
                 <p style={{ fontSize: "clamp(1.25rem,2.6vw,1.875rem)", lineHeight: 1.25, fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>
                   A team that can build anything in an afternoon does not have a velocity problem. It has a taste problem.
                 </p>
@@ -110,7 +110,7 @@ export function WritingPost() {
             </div>
 
             <aside style={{ display: "grid", gap: 24 }}>
-              <div style={{ background: "#f7fafc", borderRadius: 16, padding: 28, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${CYAN}`, display: "flex", gap: 18, alignItems: "flex-start", flexWrap: "wrap" }}>
+              <div style={{ background: "#f7fafc", borderRadius: 16, padding: 28, boxShadow: "var(--a3kds-elevation-raised)", borderTop: `6px solid ${CYAN}`, display: "flex", gap: 18, alignItems: "flex-start", flexWrap: "wrap" }}>
                 <img src="/img/2023-profile.webp" alt="" width={72} height={72} style={{ width: 72, height: 72, objectFit: "cover", objectPosition: "top center", borderRadius: 9999, display: "block" }} />
                 <div style={{ flex: "1 1 180px" }}>
                   <p style={{ fontWeight: 700, margin: "0 0 8px" }}>{hero.name}</p>
@@ -124,7 +124,7 @@ export function WritingPost() {
                   </p>
                 </div>
               </div>
-              <div style={{ background: BLUE, color: "#ffffff", borderRadius: 16, padding: 28, boxShadow: "0 8px 32px rgb(20 31 41 / 0.12)" }}>
+              <div style={{ background: BLUE, color: "#ffffff", borderRadius: 16, padding: 28, boxShadow: "var(--a3kds-elevation-raised)" }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.14em", textTransform: "uppercase", margin: "0 0 12px" }}>Next essay</p>
                 <p style={{ fontSize: "1.125rem", fontWeight: 700, lineHeight: 1.25, margin: "0 0 12px" }}>What intent.md Taught Me About Using AI</p>
                 <p style={{ fontSize: "0.9375rem", margin: 0 }}>

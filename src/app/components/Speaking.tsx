@@ -43,7 +43,7 @@ export function Speaking({ events = speakingEvents }: { events?: typeof speaking
           {speakingTopics.map((t) => (
             <article
               key={t.num}
-              style={{ background: "#ffffff", borderRadius: 16, padding: 32, display: "flex", flexDirection: "column", gap: 16, boxShadow: "0 8px 32px rgb(20 31 41 / 0.10)", borderBottom: `8px solid ${t.rule}` }}
+              style={{ background: "#ffffff", borderRadius: 16, padding: 32, display: "flex", flexDirection: "column", gap: 16, boxShadow: "var(--a3kds-elevation-raised)", borderBottom: `8px solid ${t.rule}` }}
             >
               <p aria-hidden="true" style={{ margin: 0, fontFamily: "var(--ap-font-mono)", fontSize: "2.25rem", fontWeight: 700, lineHeight: 1, color: ink(t.rule), fontVariantNumeric: "tabular-nums" }}>
                 {t.num}
@@ -93,7 +93,7 @@ export function Speaking({ events = speakingEvents }: { events?: typeof speaking
             );
           })}
         </div>
-        <div aria-live="polite" style={{ background: NAVY, color: "#ffffff", borderRadius: "var(--a3kds-radius-md)", padding: "var(--a3kds-space-10)", boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)" }}>
+        <div aria-live="polite" style={{ background: NAVY, color: "#ffffff", borderRadius: "var(--a3kds-radius-md)", padding: "var(--a3kds-space-10)", boxShadow: "var(--a3kds-elevation-floating)" }}>
           {activeEvent ? (
             <>
               <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: CYAN, margin: "0 0 var(--a3kds-space-3)" }}>

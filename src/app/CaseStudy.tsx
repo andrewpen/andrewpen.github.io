@@ -148,7 +148,7 @@ export function CaseStudy({ id }: { id: string }) {
                     {text}
                   </p>
                 ))}
-                <blockquote style={{ margin: "32px 0 0", background: NAVY, color: "#ffffff", borderRadius: 16, padding: 36, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)", borderLeft: `8px solid ${MINT}` }}>
+                <blockquote style={{ margin: "32px 0 0", background: NAVY, color: "#ffffff", borderRadius: 16, padding: 36, boxShadow: "var(--a3kds-elevation-floating)", borderLeft: `8px solid ${MINT}` }}>
                   <p style={{ fontSize: "clamp(1.125rem,2.2vw,1.5rem)", lineHeight: 1.3, fontWeight: 700, letterSpacing: "-0.02em", margin: 0, textWrap: "pretty" }}>
                     {s.challengeQuote}
                   </p>
@@ -168,7 +168,7 @@ export function CaseStudy({ id }: { id: string }) {
                   ))}
                 </ul>
               </div>
-              <div style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 36, boxShadow: "0 16px 40px rgb(20 31 41 / 0.20)", borderTop: `6px solid ${MINT}` }}>
+              <div style={{ background: NAVY, color: "#ffffff", borderRadius: 16, padding: 36, boxShadow: "var(--a3kds-elevation-floating)", borderTop: `6px solid ${MINT}` }}>
                 <p style={{ ...EYEBROW, color: MINT, margin: "0 0 20px" }}>After</p>
                 <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 12 }}>
                   {s.after.map((text, i) => (
@@ -212,7 +212,7 @@ export function CaseStudy({ id }: { id: string }) {
                   <article
                     key={ph.num}
                     className="apb-split"
-                    style={{ display: "grid", gridTemplateColumns: "minmax(240px,320px) minmax(0,1fr)", gap: 40, background: "#ffffff", borderRadius: 16, padding: 40, boxShadow: "0 8px 32px rgb(20 31 41 / 0.10)", borderLeft: `8px solid ${rule}` }}
+                    style={{ display: "grid", gridTemplateColumns: "minmax(240px,320px) minmax(0,1fr)", gap: 40, background: "#ffffff", borderRadius: 16, padding: 40, boxShadow: "var(--a3kds-elevation-raised)", borderLeft: `8px solid ${rule}` }}
                   >
                     <div>
                       <p aria-hidden="true" style={{ margin: "0 0 14px", fontFamily: MONO, fontSize: "clamp(2.25rem,4vw,3.5rem)", fontWeight: 700, lineHeight: 1, color: ink(rule), fontVariantNumeric: "tabular-nums" }}>
@@ -305,7 +305,7 @@ export function CaseStudy({ id }: { id: string }) {
               {s.lessons.map((l, n) => {
                 const rule = RULES[n % RULES.length];
                 return (
-                  <article key={l.num} style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "0 8px 32px rgb(20 31 41 / 0.09)", borderTop: `6px solid ${rule}`, display: "flex", flexDirection: "column", gap: 12 }}>
+                  <article key={l.num} style={{ background: "#f7fafc", borderRadius: 16, padding: 32, boxShadow: "var(--a3kds-elevation-raised)", borderTop: `6px solid ${rule}`, display: "flex", flexDirection: "column", gap: 12 }}>
                     <p aria-hidden="true" style={{ margin: 0, fontFamily: MONO, fontSize: "2rem", fontWeight: 700, lineHeight: 1, color: ink(rule), fontVariantNumeric: "tabular-nums" }}>{l.num}</p>
                     <h3 style={{ fontSize: "1.25rem", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.2, margin: 0, textWrap: "pretty" }}>{l.title}</h3>
                     <p style={{ fontSize: "0.9375rem", lineHeight: 1.6, color: "#38546a", margin: 0 }}>{l.text}</p>

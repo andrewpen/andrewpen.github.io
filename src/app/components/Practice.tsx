@@ -14,7 +14,7 @@ export function Practice() {
             // 280px grid floor, which is where the homepage's sideways scroll
             // came from. Fluid now, and the floor below is bounded.
             padding: "clamp(var(--a3kds-space-6), 5vw, 56px)",
-            boxShadow: "0 16px 40px rgb(20 31 41 / 0.10)",
+            boxShadow: "var(--a3kds-elevation-raised)",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
             gap: "var(--a3kds-space-12)",
