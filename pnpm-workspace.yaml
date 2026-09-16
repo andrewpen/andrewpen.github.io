@@ -3,5 +3,3 @@ packages:
 allowBuilds:
   '@tailwindcss/oxide': true
   esbuild: true
-minimumReleaseAgeExclude:
-  - '@a3kds/design-system@0.1.0-alpha.5'
