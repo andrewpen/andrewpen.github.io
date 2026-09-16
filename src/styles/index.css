@@ -1,2 +1,8 @@
+/* A3KDS foundations, consumed from the PACKAGE (P04-D1): no source-path
+   import may mask a packaging problem. Imported before the site's own
+   rules so local styles still win. */
+@import "@a3kds/design-system/tokens.css";
+@import "@a3kds/design-system/styles.css";
+
 @import './tailwind.css';
 @import './theme.css';

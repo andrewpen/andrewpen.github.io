@@ -3,6 +3,7 @@ import {
   Layers, Brain, Globe2, ShieldCheck, BarChart3,
   Cpu, RefreshCw, Handshake,
 } from "lucide-react";
+import { BLUE, PINK, MINT, CYAN, DEEP } from "./boldPalette";
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
@@ -10,7 +11,7 @@ export const hero = {
   name: "Andrew Pendleton",
   tagline: "Senior Executive · Design Infrastructure & Agent-Native Systems",
   headline: "Hi, I'm Andrew Pendleton.",
-  subheadline: "I build the systems humans and AI agents build from.",
+  intro: "I build the systems humans and AI agents build from — and I write about what that changes. Twelve years turning fragmented component libraries into opinionated, agent-native platforms.",
   bio: "Senior Director at Verizon leading enterprise design infrastructure, agent-native AI tooling, and design-to-code platform strategy. I transform component libraries into opinionated, scalable systems that enable both people and AI to generate high-quality, accessible experiences across one of the world's largest developer ecosystems.",
   email: "andrew.d.pendleton@gmail.com",
   location: "New York, NY",
@@ -28,16 +29,19 @@ export const about = {
 export const aboutHighlights = [
   {
     icon: Sparkles,
+    rule: CYAN,
     title: "Agent-Native Infrastructure",
     text: "Delivered one of Verizon's first MCP servers enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
   },
   {
     icon: Users,
+    rule: MINT,
     title: "Manager of Managers",
     text: "Lead a global team across product, design, engineering, and content strategy, spanning the US and India. Build leadership layers that drive accountability, performance, and craft.",
   },
   {
     icon: Target,
+    rule: PINK,
     title: "Design-to-Code Systems",
     text: "Shipped a VDS Dev Assistant for VS Code and Design Assistant for Figma translating design intent cleanly into developer workflows. Drove 86% enterprise adoption across a Fortune 50 digital ecosystem without mandate.",
   },
@@ -106,6 +110,7 @@ export const skills = [
 
 export const roles = [
   {
+    rule: BLUE,
     company: "Verizon",
     title: "Sr Director, Experience Design (Design Systems)",
     period: "2021 — Present",
@@ -125,6 +130,7 @@ export const roles = [
     ],
   },
   {
+    rule: PINK,
     company: "Verizon",
     title: "Sr Manager, Digital Marketing Business Operations",
     period: "2016 — 2021",
@@ -138,6 +144,7 @@ export const roles = [
     ],
   },
   {
+    rule: CYAN,
     company: "Verizon",
     title: "Manager, Front End Web Development",
     period: "2014 — 2016",
@@ -149,6 +156,7 @@ export const roles = [
     ],
   },
   {
+    rule: DEEP,
     company: "Verizon",
     title: "Consultant, Front End Web Development",
     period: "2013 — 2014",
@@ -164,6 +172,8 @@ export const roles = [
 
 export const projects = [
   {
+    num: "01",
+    rule: BLUE,
     tag: "Agent-Native Infrastructure",
     title: "AI-Ready Architecture: Transforming VDS into an LLM Knowledge Source",
     text: "Transformed the Verizon Design System from a passive code repository into an active AI infrastructure layer. Normalized 48 components into machine-readable JSON schemas, shipped one of Verizon's first MCP servers to expose live VDS context to AI agents, and integrated VDS into 6 AI tools across design and engineering, making compliant code the default output of every AI tool in the ecosystem.",
@@ -171,6 +181,8 @@ export const projects = [
     caseStudyHref: "/case-studies/ai-ready-design-system.html",
   },
   {
+    num: "02",
+    rule: PINK,
     tag: "Partnership & Adoption",
     title: "Value-Driven Alignment: Cultivating Enterprise Adoption Through Cross-Functional Partnership",
     text: "Moved VDS from a contested platform to a funded enterprise standard through a deliberate stakeholder strategy built on empathy, tailored value propositions, and shared governance. Conducted a listening tour across 42+ stakeholders, crafted distinct value messages for Design, Product, and Engineering, and co-authored a governance model that turned skeptics into advocates.",
@@ -178,6 +190,8 @@ export const projects = [
     caseStudyHref: "/case-studies/value-driven-alignment.html",
   },
   {
+    num: "03",
+    rule: CYAN,
     tag: "Cross-Platform Infrastructure",
     title: "Cross-Platform Evolution: Architecting a Multi-Channel Design System Ecosystem",
     text: "Expanded VDS from a web-only component library to a unified native platform spanning Web, iOS, and Android via a token-first architecture and federated governance model. A single token engine compiles simultaneously to CSS, SwiftUI, and Jetpack Compose, giving native teams the same leverage web teams have had for years, delivered a full year ahead of schedule.",
@@ -193,30 +207,40 @@ export const speakingEvents = [
     src: "/img/speaking-events/2026-CES.webp",
     label: "CES",
     year: "2026",
+    rule: BLUE,
+    talk: "Building Accessibility In: From Design Systems to Testing",
     summary: "At the 2026 CES panel \"Building Accessibility In: From Design Systems to Testing, Powered by Verizon,\" Andrew Pendleton and Fred Moltz explored how Verizon uses its design system as the \"technological representation\" of a village to scale accessibility. Instead of treating accessibility as a final compliance check, Verizon \"shifts left,\" treating it as a foundational requirement by co-creating components with accessibility experts early in the design process. To handle enterprise scale, the teams codify these standards into automated workflows, utilizing tools like the Evinced Flow Analyzer, Figma nudges, and AI assistants like Copilot to guide developers in real time. This approach not only prevents well-intentioned mistakes from reaching production but also drives immense productivity gains, reducing component iteration cycles from 18 months to just four to five months, and turning some 10-hour tasks into 30-minute exercises. Ultimately, this integration yields faster speed to market and a better customer experience.",
   },
   {
     src: "/img/speaking-events/2025-CES.webp",
     label: "CES",
     year: "2025",
+    rule: PINK,
+    talk: "UGD: User Generated Design",
     summary: "The CES panel \"UGD: User Generated Design\" focused on product development strategies that involve the accessibility community early in the design process to drive inclusive innovation. Moderated by Paul Amadeus Lane, the session was structured to explore the core principles of User Generated Design (UGD) and its critical role in fostering inclusivity. The panel featured Rebecca Rosenberg, Rob Moser, Allison Stransky representing Samsung, and Andrew Pendleton representing Verizon. The planned discussion covered the unique challenges of user generated design, accessibility in storytelling, and specific examples of corporate implementation. The session concluded with a forward-looking discussion, prompting all panelists to envision the landscape of user generated design five to ten years in the future and to share their \"secret sauce\" for professionals looking to thrive in this evolving field.",
   },
   {
     src: "/img/speaking-events/2025-AccessibilitySummit.webp",
     label: "Accessibility Summit",
     year: "2025",
+    rule: CYAN,
+    talk: "Partnership to Platform",
     summary: "At the 10th Annual Accessibility Summit, Andrew's presentation, \"Partnership to Platform,\" detailed the evolution of the Verizon Design System (VDS) from a human-driven \"people partnership\" into an AI-powered intelligent platform. Originally, VDS successfully integrated accessibility by \"shifting left\" and involving experts early in the design process rather than treating them as a final compliance gate. However, this created a scaling problem, as the necessary human engagements, reviews, and meetings became a bottleneck. To solve this, Verizon is building an \"Intelligent Platform\" that embeds VDS rules, user research, and WCAG guidelines directly into an AI \"brain\". This brain acts as a proactive co-pilot in tools like Figma and code editors, shifting accessibility from reactive auditing to proactive compliance. Furthermore, AI automates complex variant testing, turning a four-to-six-hour manual task into a process that takes seconds. Ultimately, through a three-pillar framework of empowering, training, and aggregating context, Verizon uses AI to elevate its workforce, freeing them to tackle more complex, human-centered accessibility challenges.",
   },
   {
     src: "/img/speaking-events/2025-BrowserStackEvent.webp",
     label: "BrowserStack World",
     year: "2025",
+    rule: MINT,
+    talk: "Leveraging AI for Next-Gen Developer Enablement",
     summary: "In \"Leveraging AI for Next-Gen Developer Enablement,\" Andrew spoke to the tech industry's obsession with AI-driven speed, defining it as a \"productivity trap\" that can lead to technical debt and inconsistent experiences. To counteract this, Verizon utilizes its Verizon Design System (VDS) as a centralized foundation built on Quality, Consistency, Inclusivity, and Efficiency. Rather than using AI exclusively for surface-level code generation, the most meaningful applications happen \"below the surface\" in complex testing and validation workflows. By implementing AI for \"Smart Diffing\" in visual regression testing, integrating automated accessibility checks into the CI/CD pipeline, and using a proactive \"VDS Guardian Angel\" in Figma, organizations can eliminate human error at the source. Ultimately, a rigorous, AI-supported focus on quality naturally results in sustainable and meaningful productivity gains.",
   },
   {
     src: "/img/speaking-events/2023-UXIndia-1.webp",
     label: "UX India",
     year: "2023",
+    rule: DEEP,
+    talk: "How Design Systems Elevate UX Design",
     summary: "In Andrew's presentation at UX India, \"How design systems elevate UX design,\" he shared that embedding a design system directly into the product iteration cycle elevates user experience and prevents costly downstream scope cuts. Grounded in Verizon Design's principles of being \"Meaningful, Human, and Responsible,\" the talk highlights the launch of the \"myPlan\" mobile experience as a key case study. Instead of treating the Verizon Design System (VDS) as a static library of parts thrown over the wall, the VDS team embedded themselves into the creative process, acting as guardrails that encouraged targeted transformation while maintaining ecosystem alignment. To solve complex engineering handoff hurdles across multiple teams, VDS formed a sub-team to build and distribute larger \"organisms and templates,\" rather than just atomic components. By centralizing this complex UI and accessibility work, the process yielded a uniform, high-fidelity launch with drastically fewer defects, ultimately allowing designers to spend more time designing instead of triaging issues.",
   },
 ];
@@ -224,10 +248,10 @@ export const speakingEvents = [
 // ─── Education ────────────────────────────────────────────────────────────────
 
 export const education = [
-  { degree: "MS in Analytics & Applied AI", school: "Dakota State University", level: "graduate", inProgress: true, expectedYear: "2028", logo: "/img/education/dsu.png" },
-  { degree: "Master of Management Information Systems", school: "University of Arkansas, Little Rock", level: "graduate", inProgress: false, expectedYear: undefined, logo: "/img/education/ualr.png" },
-  { degree: "Bachelor of Computer Sciences", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
-  { degree: "Bachelor of Digital Art & Design", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
+  { rule: CYAN, degree: "MS in Analytics & Applied AI", school: "Dakota State University", level: "graduate", inProgress: true, expectedYear: "2028", logo: "/img/education/dsu.png" },
+  { rule: MINT, degree: "Master of Management Information Systems", school: "University of Arkansas, Little Rock", level: "graduate", inProgress: false, expectedYear: undefined, logo: "/img/education/ualr.png" },
+  { rule: BLUE, degree: "Bachelor of Computer Sciences", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
+  { rule: PINK, degree: "Bachelor of Digital Art & Design", school: "Henderson State University", level: "undergraduate", inProgress: false, expectedYear: undefined, logo: "/img/education/hsu.png" },
 ];
 
 // ─── Contact ──────────────────────────────────────────────────────────────────
@@ -241,3 +265,135 @@ export const contact = {
   footerCopyright: "© 2026 Andrew Pendleton",
   footerTagline: "Senior Executive · Design Infrastructure & Agent-Native Systems",
 };
+
+// ─── Stats strips ─────────────────────────────────────────────────────────────
+
+export const heroStats = [
+  { value: "86%", label: "Enterprise adoption, zero mandates", color: CYAN },
+  { value: "48", label: "Components across three platforms", color: MINT },
+  { value: "12", label: "Years inside one design org", color: "#ffffff" },
+  { value: "6", label: "Stages since 2023", color: CYAN },
+];
+
+export const cvStats = [
+  { value: "86%", label: "Enterprise adoption, zero mandates", color: BLUE },
+  { value: "48", label: "Components across three platforms", color: PINK },
+  { value: "12", label: "Years inside one design org", color: CYAN },
+  { value: "20+", label: "Engineers led globally", color: MINT },
+];
+
+export const writingStats = [
+  { value: "6", label: "Essays published", color: CYAN },
+  { value: "2×", label: "Per month, roughly", color: MINT },
+  { value: "2026", label: "Writing since", color: "#ffffff" },
+];
+
+// ─── Ticker tape ──────────────────────────────────────────────────────────────
+
+export const ticker = [
+  "CES 2026", "Accessibility Summit", "BrowserStack World", "CES 2025", "UX India", "Verizon Accessibility Champion",
+];
+
+export const writingTicker = [
+  "Design systems", "Agent-native platforms", "Accessibility at scale", "The shape of work", "Adoption without mandate", "AI and judgment",
+];
+
+// ─── Speaking topics ("talks I can give tomorrow") ────────────────────────────
+
+export const speakingTopics = [
+  {
+    num: "01",
+    rule: BLUE,
+    kind: "Keynote · 30–45 min",
+    title: "Shift left is not a slogan, it is an architecture",
+    abstract: "Accessibility stops being a gate when it is a property of the components everyone already uses. Co-creating with accessibility experts early, codifying the result, and making the compliant path the cheapest one.",
+    proof: "Component cycles 18 mo → 4–5 mo",
+  },
+  {
+    num: "02",
+    rule: PINK,
+    kind: "Keynote · 30–45 min",
+    title: "Making a design system legible to machines",
+    abstract: "Normalizing 48 components into machine-readable schemas, shipping an MCP server so agents read live system context, and wiring it into the six AI tools the team already had open.",
+    proof: "48 components · 6 tools · ~700 hrs",
+  },
+  {
+    num: "03",
+    rule: CYAN,
+    kind: "Talk · 20–30 min",
+    title: "The productivity trap",
+    abstract: "The industry bought speed and is paying in drift and debt. Where AI earns its keep is below the surface: smart diffing in visual regression, automated a11y in CI, proactive nudges in Figma.",
+    proof: "4–6 hr variant test → seconds",
+  },
+  {
+    num: "04",
+    rule: DEEP,
+    kind: "Talk · 20–30 min",
+    title: "Adoption without mandate",
+    abstract: "A listening tour across 42 stakeholders, three value propositions for three disciplines, and a governance model co-authored with the loudest skeptics. Partnership beat the memo.",
+    proof: "86% adoption · 0 mandates",
+  },
+];
+
+// ─── Writing / essays ─────────────────────────────────────────────────────────
+// Only the first post below has a full essay body and a real page (see
+// src/app/WritingPost.tsx + writing/the-compound-professional-is-not-coming.html).
+// The rest are titles/excerpts only until the full drafts exist — their cards
+// intentionally don't link anywhere yet rather than pointing at empty pages.
+
+export const posts = [
+  {
+    slug: "the-compound-professional-is-not-coming",
+    title: "The Compound Professional Is Not Coming. It Is Already Here.",
+    date: "Sep 8, 2026",
+    words: "620 words",
+    rule: CYAN,
+    excerpt: "When the cost of producing a design, a prototype, or a landing page collapses, the scarce skill is no longer the building. It is judgment across the whole arc.",
+    hasFullPost: true,
+  },
+  {
+    slug: null,
+    title: "What intent.md Taught Me About Using AI",
+    date: "Aug 24, 2026",
+    words: "900 words",
+    rule: BLUE,
+    excerpt: "A single file describing what I actually wanted beat every prompt technique I had collected. Intent is the artifact; everything downstream is compilation.",
+    hasFullPost: false,
+  },
+  {
+    slug: null,
+    title: "A DESIGN.md Is Not a Design System",
+    date: "Aug 10, 2026",
+    words: "1,100 words",
+    rule: PINK,
+    excerpt: "Writing your conventions down feels like governance. It isn't. A system is the set of decisions someone cannot easily route around.",
+    hasFullPost: false,
+  },
+  {
+    slug: null,
+    title: "I Don't Think I'll Ever Read Email Again",
+    date: "Jul 27, 2026",
+    words: "750 words",
+    rule: CYAN,
+    excerpt: "Not because a tool summarizes it, but because the inbox was never the unit of work. Once something else holds the intent, the queue stops mattering.",
+    hasFullPost: false,
+  },
+  {
+    slug: null,
+    title: "Fresh Eyes Are an Investment, Not Charity",
+    date: "Jul 13, 2026",
+    words: "800 words",
+    rule: MINT,
+    excerpt: "The newest person is the only one who can still see what you have stopped noticing. Treating their confusion as their gap wastes your shortest-lived asset.",
+    hasFullPost: false,
+  },
+  {
+    slug: null,
+    title: "The Best Partners Are the Ones Who Argue With You",
+    date: "Jun 29, 2026",
+    words: "950 words",
+    rule: DEEP,
+    excerpt: "Eighty-six percent adoption did not come from the teams who agreed with me. It came from the two who spent a year telling me the system was wrong.",
+    hasFullPost: false,
+  },
+];

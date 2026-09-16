@@ -1,0 +1,1938 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homepage Wireframe &amp; Architecture | Andrew Pendleton</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Space+Mono:wght@400;700&amp;family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap">
+  <style>
+
+    body { margin: 0; font-family: "Space Grotesk", "Trebuchet MS", sans-serif; background: #ffffff; color: #1a1a1a; }
+    a { color: #be3372; } a:hover { color: #8e2455; }
+
+    /* low-fi primitives */
+    .wf-box { border: 1.5px dashed #b4b4b4; background: #f5f5f5; border-radius: 2px; }
+    .wf-solid { border: 1.5px solid #1a1a1a; background: #ffffff; border-radius: 2px; }
+    .wf-fill { background: #dcdcdc; border-radius: 2px; }
+    .wf-dark { background: #4a4a4a; border-radius: 2px; }
+
+    .bar { height: 10px; background: #d2d2d2; border-radius: 2px; }
+    .bar-lg { height: 16px; background: #c4c4c4; border-radius: 2px; }
+    .bar-xl { height: 30px; background: #a8a8a8; border-radius: 2px; }
+    .bar-on-dark { height: 10px; background: #6a6a6a; border-radius: 2px; }
+
+    .chip { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.14em;
+            text-transform: uppercase; padding: 4px 9px; border: 1.5px solid #1a1a1a;
+            border-radius: 2px; display: inline-block; }
+    .btn { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.06em;
+           padding: 10px 18px; border: 1.5px solid #1a1a1a; border-radius: 3px;
+           display: inline-block; background: #ffffff; }
+    .btn-fill { background: #1a1a1a; color: #ffffff; }
+
+    /* annotation layer */
+    .anno-rule { height: 3px; background: #be3372; width: 34px; }
+    .anno-name { font-family: "Space Mono", monospace; font-size: 13px; font-weight: 700;
+                 color: #be3372; margin: 10px 0 2px; letter-spacing: -0.01em; }
+    .anno-meta { font-family: "Space Mono", monospace; font-size: 10px; color: #8a8a8a;
+                 letter-spacing: 0.04em; margin: 0 0 10px; }
+    .anno-list { margin: 0; padding: 0; list-style: none; display: flex;
+                 flex-direction: column; gap: 6px; }
+    .anno-list li { font-size: 12.5px; line-height: 1.45; color: #3a3a3a;
+                    padding-left: 13px; position: relative; }
+    .anno-list li::before { content: "–"; position: absolute; left: 0; color: #be3372; }
+    .anno-data { font-family: "Space Mono", monospace; font-size: 10.5px; color: #6a6a6a;
+                 line-height: 1.6; margin: 12px 0 0; padding-top: 10px;
+                 border-top: 1px solid #e2e2e2; }
+    .anno-flag { font-family: "Space Mono", monospace; font-size: 10.5px; color: #1a1a1a;
+                 background: #ffe9b8; padding: 5px 8px; border-radius: 2px;
+                 margin-top: 10px; line-height: 1.5; }
+
+    .sec-num { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.2em;
+               text-transform: uppercase; color: #8a8a8a; }
+    .lbl { font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.1em;
+           text-transform: uppercase; color: #7a7a7a; }
+    .lbl-dark { color: #9a9a9a; }
+
+    /* ── page shell — every page, not just page 1 ───────────────────── */
+    .wf-page { max-width: 1180px; margin: 0 auto; padding: 56px 60px 72px;
+               box-sizing: border-box; }
+
+    /* ── page 2: token + atom specimens, drawn at true values ───────── */
+    .tok-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+                gap: 10px; }
+    .tok { display: flex; align-items: center; gap: 9px; border: 1px solid #e2e2e2;
+           border-radius: 3px; padding: 9px 11px; font-family: "Space Mono", monospace;
+           font-size: 11px; }
+    .tok.wide { grid-column: span 2; }
+    .tok-v { color: #8a8a8a; margin-left: auto; font-size: 10px; }
+    .sw { width: 20px; height: 20px; border-radius: 3px; flex-shrink: 0;
+          border: 1px solid rgb(0 0 0 / 0.08); }
+    .tag-n { font-family: "Space Mono", monospace; font-size: 9.5px; color: #8a8a8a;
+             font-weight: 400; }
+
+    .at-badge { display: inline-flex; align-items: center; padding: 2px 8px;
+                border-radius: 9999px; font-size: 0.8125rem; font-weight: 600;
+                line-height: 1.5; font-family: "Inter", system-ui, sans-serif; }
+    .at-btn { padding: 10px 20px; border-radius: 16px; font-weight: 600; font-size: 12px;
+              display: inline-block; font-family: "Inter", system-ui, sans-serif; }
+    .at-card { background: #fff; border: 1px solid #d9e6ee; border-radius: 16px;
+               padding: 16px; box-shadow: 0 4px 16px rgb(20 31 41 / 0.08);
+               font-family: "Inter", system-ui, sans-serif; }
+    .at-eyebrow { font-family: "JetBrains Mono", monospace; font-size: 0.6875rem;
+                  letter-spacing: 0.18em; text-transform: uppercase; color: #BE3372; }
+    .at-meta { font-family: "JetBrains Mono", monospace; font-size: 0.75rem;
+               letter-spacing: 0.08em; color: #476b85; margin: 0; }
+    .at-statlabel { font-family: "JetBrains Mono", monospace; font-size: 0.6875rem;
+                    letter-spacing: 0.1em; text-transform: uppercase; color: #b8cddc;
+                    line-height: 1.5; margin-top: 8px; }
+    .at-tick { font-family: "JetBrains Mono", monospace; font-size: 0.8125rem;
+               letter-spacing: 0.18em; text-transform: uppercase; color: #fff; }
+    /* ── tab chrome ─────────────────────────────────────────────────── */
+    .tabs { position: sticky; top: 0; z-index: 50; background: #ffffff;
+            border-bottom: 2px solid #1a1a1a; }
+    .tabs-inner { max-width: 1180px; margin: 0 auto; padding: 0 60px;
+                  display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+                  box-sizing: border-box; }
+    .tabs-brand { font-family: "Space Mono", monospace; font-size: 11px;
+                  letter-spacing: 0.1em; text-transform: uppercase; color: #1a1a1a;
+                  padding: 14px 0; font-weight: 700; }
+    .tabs-list { display: flex; gap: 2px; margin-left: auto; }
+    .tab { font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.06em;
+           color: #7a7a7a; text-decoration: none; padding: 15px 14px;
+           border-bottom: 3px solid transparent; display: block; }
+    .tab:hover { color: #1a1a1a; }
+    .tab[aria-current="page"] { color: #be3372; border-bottom-color: #be3372; font-weight: 700; }
+    .tab-n { color: #c4c4c4; margin-right: 6px; }
+    .tab[aria-current="page"] .tab-n { color: #be3372; }
+
+    /* ── shared page furniture ──────────────────────────────────────── */
+    .page-head { display: flex; justify-content: space-between; align-items: flex-end;
+                 gap: 32px; flex-wrap: wrap; border-bottom: 2px solid #1a1a1a;
+                 padding-bottom: 20px; margin-bottom: 22px; }
+    .page-title { font-size: 34px; font-weight: 700; letter-spacing: -0.03em;
+                  margin: 0; line-height: 1.05; }
+    .page-meta { font-family: "Space Mono", monospace; font-size: 10.5px; color: #7a7a7a;
+                 margin: 0; line-height: 1.7; text-align: right; }
+    .page-intro { font-size: 14px; line-height: 1.6; color: #3a3a3a; margin: 0 0 40px;
+                  max-width: 76ch; }
+
+    /* ── page 2: specimens ──────────────────────────────────────────── */
+    .spec-list { display: flex; flex-direction: column; gap: 0; }
+    .spec-row { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 40px;
+                align-items: start; padding: 26px 0; border-top: 1px solid #e2e2e2; }
+    .spec-row:first-child { border-top: none; padding-top: 0; }
+    .spec-frame { background: #fafafa; border: 1px solid #e2e2e2; border-radius: 3px;
+                  padding: 14px; }
+    .spec-stage { border-radius: 3px; padding: 14px; min-height: 74px;
+                  display: flex; background: #ffffff; border: 1px solid #ececec; }
+    .spec-stage.dark { background: #4a4a4a; border-color: #4a4a4a; }
+    .spec-name { font-family: "Space Mono", monospace; font-size: 16px; font-weight: 700;
+                 color: #1a1a1a; margin: 0 0 4px; letter-spacing: -0.02em;
+                 display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .spec-sig { font-family: "Space Mono", monospace; font-size: 10.5px; color: #8a8a8a;
+                margin: 0 0 12px; }
+    .spec-data, .spec-used { font-family: "Space Mono", monospace; font-size: 10.5px;
+                             color: #6a6a6a; line-height: 1.6; margin: 10px 0 0; }
+    .spec-data { padding-top: 10px; border-top: 1px solid #e2e2e2; }
+    .spec-used { margin-top: 4px; color: #8a8a8a; }
+    .tag-shared, .tag-state, .tag-local { font-family: "Space Mono", monospace;
+        font-size: 8.5px; letter-spacing: 0.1em; text-transform: uppercase;
+        padding: 3px 7px; border-radius: 2px; font-weight: 400; }
+    .tag-shared { background: #d8ecff; color: #0a4d82; }
+    .tag-state { background: #ffe9b8; color: #6a4a00; }
+    .tag-local { background: #ececec; color: #5a5a5a; }
+
+    /* ── page 3: IA ─────────────────────────────────────────────────── */
+    .ia-block { margin-bottom: 46px; }
+    .ia-h { font-family: "Space Mono", monospace; font-size: 13px; font-weight: 700;
+            letter-spacing: 0.06em; text-transform: uppercase; color: #be3372;
+            margin: 0 0 5px; }
+    .ia-sub { font-size: 13px; color: #5a5a5a; margin: 0 0 16px; line-height: 1.5; }
+    .ia-note { font-size: 12.5px; line-height: 1.6; color: #5a5a5a; margin: 14px 0 0;
+               padding-left: 13px; border-left: 2px solid #e2e2e2; max-width: 78ch; }
+    .tree { font-family: "Space Mono", monospace; font-size: 11.5px; line-height: 1.75;
+            background: #fafafa; border: 1px solid #e2e2e2; border-radius: 3px;
+            padding: 18px 20px; margin: 0; overflow-x: auto; color: #2a2a2a; }
+    .t-note { color: #8a8a8a; }
+    .t-dim  { color: #b0b0b0; }
+    .t-warn { color: #be3372; }
+
+    .tbl-wrap { overflow-x: auto; }
+    .ia-tbl { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+    .ia-tbl th { font-family: "Space Mono", monospace; font-size: 9.5px;
+                 letter-spacing: 0.12em; text-transform: uppercase; color: #7a7a7a;
+                 text-align: left; padding: 0 14px 8px 0; border-bottom: 1.5px solid #1a1a1a;
+                 white-space: nowrap; }
+    .ia-tbl td { padding: 11px 14px 11px 0; border-bottom: 1px solid #ececec;
+                 vertical-align: top; line-height: 1.55; color: #2a2a2a; }
+    .ia-tbl tr.row-off td { color: #9a9a9a; background: #fbfbfb; }
+    .td-dim { color: #9a9a9a; }
+    .arr { color: #be3372; }
+    .badge-cur { font-family: "Space Mono", monospace; font-size: 8.5px;
+                 letter-spacing: 0.1em; text-transform: uppercase; background: #ececec;
+                 color: #5a5a5a; padding: 2px 6px; border-radius: 2px; }
+    .matrix td { text-align: center; }
+    .matrix td:first-child { text-align: left; }
+    .matrix th:not(:first-child) { text-align: center; }
+    .matrix .y { color: #be3372; font-size: 15px; }
+    .matrix .n { color: #d4d4d4; font-size: 15px; }
+
+    .gap-list { list-style: none; margin: 0; padding: 0;
+                display: flex; flex-direction: column; gap: 16px; }
+    .gap-list li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 12px;
+                   font-size: 13px; line-height: 1.6; color: #2a2a2a; max-width: 84ch; }
+    .gap-n { font-family: "Space Mono", monospace; font-size: 11px; font-weight: 700;
+             color: #ffffff; background: #be3372; border-radius: 2px;
+             width: 22px; height: 22px; display: flex; align-items: center;
+             justify-content: center; }
+
+    /* ── narrow screens ─────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .wf-row { grid-template-columns: minmax(0, 1fr) !important; }
+      .spec-row { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+      .wf-page { padding: 32px 20px 48px !important; }
+      .tabs-inner { padding: 0 20px; }
+      .tabs-brand { display: none; }
+      .tabs-list { margin-left: 0; }
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="tabs">
+    <div class="tabs-inner">
+      <span class="tabs-brand">andrewpendleton.io</span>
+      <div class="tabs-list">
+        <a class="tab" href="#wireframe" data-tab="wireframe"><span class="tab-n">1</span>Wireframe</a>
+        <a class="tab" href="#components" data-tab="components"><span class="tab-n">2</span>Components</a>
+        <a class="tab" href="#compositions" data-tab="compositions"><span class="tab-n">3</span>Compositions</a>
+        <a class="tab" href="#architecture" data-tab="architecture"><span class="tab-n">4</span>Architecture</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page" id="wireframe">
+<div class="wf-page" style="padding: 56px 60px 72px; max-width: 1180px; margin: 0 auto; box-sizing: border-box;">
+
+  <!-- ── document header ─────────────────────────────────────────────── -->
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; border-bottom: 2px solid #1a1a1a; padding-bottom: 20px; margin-bottom: 14px;">
+    <div>
+      <p class="lbl" style="margin: 0 0 8px;">Wireframe · structure &amp; components</p>
+      <h1 style="font-size: 34px; font-weight: 700; letter-spacing: -0.03em; margin: 0; line-height: 1.05;">
+        andrewpendleton.io — homepage
+      </h1>
+    </div>
+    <p style="font-family: 'Space Mono', monospace; font-size: 10.5px; color: #7a7a7a; margin: 0; line-height: 1.7; text-align: right;">
+      src/app/App.tsx<br>8 sections · 10 components
+    </p>
+  </div>
+
+  <!-- Coverage (P05-D6). Ships stating the SAFEST truth — nothing is
+       connected — because that is what is true before connect.js runs, and if
+       the script never runs it stays true. connect() replaces it with the set
+       it actually connected. -->
+  <p class="anno-coverage" data-coverage-notice>
+    No section on this page is connected to the shared record. Every annotation
+    below is a snapshot: hand-written, and true only when it was written.
+  </p>
+
+  <!-- legend -->
+  <div style="display: flex; gap: 22px; flex-wrap: wrap; align-items: center; margin-bottom: 40px;">
+    <span style="display: flex; align-items: center; gap: 7px;">
+      <span class="wf-box" style="width: 22px; height: 13px;"></span>
+      <span class="lbl">Region</span>
+    </span>
+    <span style="display: flex; align-items: center; gap: 7px;">
+      <span class="wf-fill" style="width: 22px; height: 13px;"></span>
+      <span class="lbl">Content block</span>
+    </span>
+    <span style="display: flex; align-items: center; gap: 7px;">
+      <span class="wf-dark" style="width: 22px; height: 13px;"></span>
+      <span class="lbl">Dark ground</span>
+    </span>
+    <span style="display: flex; align-items: center; gap: 7px;">
+      <span class="anno-rule" style="width: 22px;"></span>
+      <span class="lbl">Component note</span>
+    </span>
+    <span style="display: flex; align-items: center; gap: 7px;">
+      <span class="tag-shared">on N pages of this site</span>
+      <span class="lbl">Reuse WITHIN this website. Not a consumer of A3KDS &mdash; this site is one consumer however many of its own pages use a component.</span>
+    </span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 34px;">
+
+    <!-- ══ NAVBAR ═══════════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">Sticky header</p>
+        <!-- skip link -->
+        <div style="border: 1.5px dotted #b4b4b4; border-radius: 2px; padding: 7px 12px; margin-bottom: 7px; background: #fbfbfb;">
+          <span class="lbl">Skip to main content — visible on focus (App.tsx)</span>
+        </div>
+        <div class="wf-dark" style="padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="width: 24px; height: 24px; border-radius: 999px; background: #8a8a8a; display: block;"></span>
+            <span class="bar-on-dark" style="width: 104px;"></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 9px; flex-wrap: wrap;">
+            <span class="bar-on-dark" style="width: 44px;"></span>
+            <span class="bar-on-dark" style="width: 52px;"></span>
+            <span class="bar-on-dark" style="width: 34px;"></span>
+            <span class="bar-on-dark" style="width: 50px;"></span>
+            <span class="bar-on-dark" style="width: 26px;"></span>
+            <span style="padding: 7px 15px; border-radius: 3px; background: #cfcfcf; font-family: 'Space Mono', monospace; font-size: 10px; color: #2a2a2a;">Subscribe</span>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Navbar.tsx</p>
+        <p class="anno-meta">props: links[], cta, logoHref</p>
+        <ul class="anno-list">
+          <li>Logo SVG (30px) + wordmark, links to <code>/</code></li>
+          <li><code>&lt;nav aria-label="Main"&gt;</code> — 5 anchor links to in-page ids</li>
+          <li>CTA pill → <code>#subscribe</code>, renders as button when <code>onClick</code> passed</li>
+        </ul>
+        <p class="anno-data">Nav + footer link arrays are declared in App.tsx, not content.ts</p>
+        <div class="anno-connected" data-composition="chrome-navbar">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ HERO ═════════════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">#top</p>
+        <div class="wf-dark" style="padding: 0; display: flex;">
+          <!-- vertical rail -->
+          <div style="width: 40px; border-right: 1px solid #6a6a6a; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase; color: #9a9a9a; white-space: nowrap;">Rail · rotated label</span>
+          </div>
+          <div style="flex: 1; padding: 30px 26px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 26px; align-items: end;">
+            <div style="display: flex; flex-direction: column; gap: 13px;">
+              <span style="align-self: flex-start; padding: 5px 11px; border-radius: 999px; background: #7a7a7a; font-family: 'Space Mono', monospace; font-size: 9px; color: #f0f0f0;">badge</span>
+              <span class="bar-xl" style="width: 62%; height: 40px;"></span>
+              <span class="bar-lg" style="width: 84%; background: #8a8a8a;"></span>
+              <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                <span class="bar-on-dark" style="width: 96%;"></span>
+                <span class="bar-on-dark" style="width: 90%;"></span>
+                <span class="bar-on-dark" style="width: 64%;"></span>
+              </div>
+              <div style="display: flex; gap: 9px; margin-top: 8px; flex-wrap: wrap;">
+                <span style="padding: 9px 16px; border-radius: 3px; background: #e8e8e8; font-family: 'Space Mono', monospace; font-size: 10px; color: #2a2a2a;">Read the writing</span>
+                <span style="padding: 9px 16px; border-radius: 3px; border: 1.5px solid #9a9a9a; font-family: 'Space Mono', monospace; font-size: 10px; color: #d8d8d8;">Talks and topics</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; border-top: 1px solid #6a6a6a; padding-top: 14px; margin-top: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 5px;"><span class="bar-lg" style="width: 74%; background: #8a8a8a;"></span><span class="bar-on-dark" style="width: 100%; height: 7px;"></span></div>
+                <div style="display: flex; flex-direction: column; gap: 5px;"><span class="bar-lg" style="width: 62%; background: #8a8a8a;"></span><span class="bar-on-dark" style="width: 100%; height: 7px;"></span></div>
+                <div style="display: flex; flex-direction: column; gap: 5px;"><span class="bar-lg" style="width: 58%; background: #8a8a8a;"></span><span class="bar-on-dark" style="width: 100%; height: 7px;"></span></div>
+                <div style="display: flex; flex-direction: column; gap: 5px;"><span class="bar-lg" style="width: 70%; background: #8a8a8a;"></span><span class="bar-on-dark" style="width: 100%; height: 7px;"></span></div>
+              </div>
+            </div>
+            <!-- portrait on colour block -->
+            <div style="position: relative; min-height: 190px; display: flex; align-items: flex-end;">
+              <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 76%; background: #6a6a6a; border-radius: 3px 3px 0 0;"></div>
+              <div style="position: relative; width: 100%; height: 178px; border: 1.5px dashed #9a9a9a; border-radius: 2px; display: flex; align-items: center; justify-content: center;">
+                <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0;">
+                  <line x1="0" y1="0" x2="100" y2="100" stroke="#9a9a9a" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
+                  <line x1="100" y1="0" x2="0" y2="100" stroke="#9a9a9a" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
+                </svg>
+                <span class="lbl lbl-dark" style="position: relative; background: #4a4a4a; padding: 3px 7px;">portrait</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Hero.tsx</p>
+        <p class="anno-meta">full-bleed navy, no props</p>
+        <ul class="anno-list">
+          <li>Vertical rail — rotated label, <code>aria-hidden</code></li>
+          <li><code>.a3-badge</code> pill</li>
+          <li>Two-tier <code>&lt;h1&gt;</code>: "Hello," + name in cyan</li>
+          <li>Intro paragraph — <code>hero.intro</code></li>
+          <li>Two CTAs → <code>#writing</code>, <code>#speaking</code></li>
+          <li><code>&lt;dl&gt;</code> stat grid, one <code>dt/dd</code> per stat</li>
+          <li>Portrait layered over a blue block</li>
+        </ul>
+        <p class="anno-data">data: hero, heroStats (4)</p>
+        <div class="anno-connected" data-composition="hero">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ TICKER ═══════════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">Marquee band</p>
+        <div style="background: #b8b8b8; padding: 13px 0; overflow: hidden; border-radius: 2px;">
+          <div style="display: flex; gap: 26px; padding: 0 16px; white-space: nowrap;">
+            <span class="bar" style="width: 112px; background: #efefef;"></span>
+            <span class="bar" style="width: 96px; background: #efefef;"></span>
+            <span class="bar" style="width: 128px; background: #efefef;"></span>
+            <span class="bar" style="width: 88px; background: #efefef;"></span>
+            <span class="bar" style="width: 136px; background: #efefef;"></span>
+            <span class="bar" style="width: 74px; background: #efefef;"></span>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Ticker.tsx</p>
+        <p class="anno-meta">props: items — string[]</p>
+        <ul class="anno-list">
+          <li>Pink band, <code>aria-hidden</code> — decorative only</li>
+          <li>Items rendered twice for a seamless <code>.apb-ticker</code> loop</li>
+        </ul>
+        <p class="anno-data">data: ticker</p>
+      </aside>
+    </div>
+
+    <!-- ══ 01 WRITING ═══════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">01 — Writing · #writing</p>
+        <div class="wf-box" style="padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+            <div style="display: flex; flex-direction: column; gap: 9px; flex: 1 1 220px;">
+              <span class="lbl" style="color: #be3372;">01 — Writing</span>
+              <span class="bar-xl" style="width: 68%;"></span>
+            </div>
+            <span class="btn btn-fill">All writing →</span>
+          </div>
+
+          <!-- featured card -->
+          <div class="wf-dark" style="padding: 24px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 22px; align-items: center; margin-bottom: 18px;">
+            <div style="display: flex; flex-direction: column; gap: 9px;">
+              <span style="align-self: flex-start; padding: 4px 10px; border-radius: 999px; background: #9a9a9a; font-family: 'Space Mono', monospace; font-size: 9px; color: #1a1a1a;">Latest essay</span>
+              <span class="bar-lg" style="width: 92%; background: #8a8a8a;"></span>
+              <span class="bar-lg" style="width: 74%; background: #8a8a8a;"></span>
+              <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 4px;">
+                <span class="bar-on-dark" style="width: 96%;"></span>
+                <span class="bar-on-dark" style="width: 82%;"></span>
+              </div>
+              <span class="bar-on-dark" style="width: 46%; height: 7px; margin-top: 4px;"></span>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: flex-end;">
+              <span style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; letter-spacing: -0.04em; color: #7a7a7a; line-height: 0.85;">Judg&shy;ment.</span>
+            </div>
+          </div>
+
+          <!-- post card grid -->
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
+            <div class="wf-solid" style="padding: 14px; display: flex; flex-direction: column; gap: 8px; border-top: 5px solid #8a8a8a;">
+              <span class="bar" style="width: 62%; height: 7px;"></span>
+              <span class="bar-lg" style="width: 92%;"></span>
+              <span class="bar" style="width: 100%;"></span>
+              <span class="bar" style="width: 78%;"></span>
+              <span class="lbl" style="margin-top: 4px; font-size: 8.5px;">Full essay coming soon</span>
+            </div>
+            <div class="wf-solid" style="padding: 14px; display: flex; flex-direction: column; gap: 8px; border-top: 5px solid #8a8a8a;">
+              <span class="bar" style="width: 62%; height: 7px;"></span>
+              <span class="bar-lg" style="width: 86%;"></span>
+              <span class="bar" style="width: 100%;"></span>
+              <span class="bar" style="width: 70%;"></span>
+              <span class="lbl" style="margin-top: 4px; font-size: 8.5px;">Full essay coming soon</span>
+            </div>
+            <div class="wf-solid" style="padding: 14px; display: flex; flex-direction: column; gap: 8px; border-top: 5px solid #8a8a8a;">
+              <span class="bar" style="width: 62%; height: 7px;"></span>
+              <span class="bar-lg" style="width: 90%;"></span>
+              <span class="bar" style="width: 100%;"></span>
+              <span class="bar" style="width: 74%;"></span>
+              <span class="lbl" style="margin-top: 4px; font-size: 8.5px;">Full essay coming soon</span>
+            </div>
+            <div class="wf-solid" style="padding: 14px; display: flex; flex-direction: column; gap: 8px; border-top: 5px solid #8a8a8a;">
+              <span class="bar" style="width: 62%; height: 7px;"></span>
+              <span class="bar-lg" style="width: 88%;"></span>
+              <span class="bar" style="width: 100%;"></span>
+              <span class="bar" style="width: 66%;"></span>
+              <span class="lbl" style="margin-top: 4px; font-size: 8.5px;">Full essay coming soon</span>
+            </div>
+            <div class="wf-solid" style="padding: 14px; display: flex; flex-direction: column; gap: 8px; border-top: 5px solid #8a8a8a;">
+              <span class="bar" style="width: 62%; height: 7px;"></span>
+              <span class="bar-lg" style="width: 94%;"></span>
+              <span class="bar" style="width: 100%;"></span>
+              <span class="bar" style="width: 72%;"></span>
+              <span class="lbl" style="margin-top: 4px; font-size: 8.5px;">Full essay coming soon</span>
+            </div>
+            <div style="border: 1.5px dotted #c8c8c8; border-radius: 2px; display: flex; align-items: center; justify-content: center; padding: 14px;">
+              <span class="lbl" style="text-align: center; line-height: 1.5;">grid auto-fit<br>minmax(300px, 1fr)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">WritingTeaser.tsx</p>
+        <p class="anno-meta">+ local PostCard sub-component</p>
+        <ul class="anno-list">
+          <li>Eyebrow + <code>&lt;h2&gt;</code> + "All writing" → <code>/writing.html</code></li>
+          <li>Featured card = <code>posts[0]</code> — badge, title, excerpt, meta, display word</li>
+          <li><code>PostCard</code> ×5 — date·words, title, excerpt, coloured top rule</li>
+          <li>Card is an <code>&lt;a&gt;</code> only when <code>hasFullPost</code>, else a <code>&lt;div&gt;</code></li>
+        </ul>
+        <p class="anno-data">data: posts (6) — 1 featured + 5 cards</p>
+        <p class="anno-flag">5 of 6 posts are stubs — "Full essay coming soon", no linked page</p>
+        <!-- Connected to the shared record (P05-A02). Everything inside is
+             rendered from wireframe/connections.json, which is generated from
+             the installed @a3kds/design-system. If the record is absent this
+             shows an unavailable state and where to get it, rather than the
+             hand-written description it replaced. -->
+        <div class="anno-connected" data-composition="writing-teaser">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ 02 SPEAKING ══════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">02 — Speaking · #speaking</p>
+        <div class="wf-box" style="padding: 24px; background: #eef0f2;">
+          <div style="display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; max-width: 62%;">
+            <span class="lbl" style="color: #be3372;">02 — Speaking</span>
+            <span class="bar-xl" style="width: 88%;"></span>
+            <span class="bar" style="width: 96%;"></span>
+          </div>
+
+          <!-- topic cards -->
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px;">
+            <div class="wf-solid" style="padding: 13px; display: flex; flex-direction: column; gap: 7px; border-bottom: 5px solid #8a8a8a;">
+              <span class="bar-lg" style="width: 34%;"></span>
+              <span class="bar" style="width: 92%;"></span>
+              <span class="bar" style="width: 100%; height: 7px;"></span>
+              <span class="bar" style="width: 76%; height: 7px;"></span>
+              <span class="lbl" style="margin-top: 3px; font-size: 8.5px;">30–45 min</span>
+            </div>
+            <div class="wf-solid" style="padding: 13px; display: flex; flex-direction: column; gap: 7px; border-bottom: 5px solid #8a8a8a;">
+              <span class="bar-lg" style="width: 34%;"></span>
+              <span class="bar" style="width: 86%;"></span>
+              <span class="bar" style="width: 100%; height: 7px;"></span>
+              <span class="bar" style="width: 70%; height: 7px;"></span>
+              <span class="lbl" style="margin-top: 3px; font-size: 8.5px;">30–45 min</span>
+            </div>
+            <div class="wf-solid" style="padding: 13px; display: flex; flex-direction: column; gap: 7px; border-bottom: 5px solid #8a8a8a;">
+              <span class="bar-lg" style="width: 34%;"></span>
+              <span class="bar" style="width: 90%;"></span>
+              <span class="bar" style="width: 100%; height: 7px;"></span>
+              <span class="bar" style="width: 82%; height: 7px;"></span>
+              <span class="lbl" style="margin-top: 3px; font-size: 8.5px;">20–30 min</span>
+            </div>
+            <div class="wf-solid" style="padding: 13px; display: flex; flex-direction: column; gap: 7px; border-bottom: 5px solid #8a8a8a;">
+              <span class="bar-lg" style="width: 34%;"></span>
+              <span class="bar" style="width: 84%;"></span>
+              <span class="bar" style="width: 100%; height: 7px;"></span>
+              <span class="bar" style="width: 66%; height: 7px;"></span>
+              <span class="lbl" style="margin-top: 3px; font-size: 8.5px;">20–30 min</span>
+            </div>
+          </div>
+
+          <span class="bar-lg" style="width: 30%; display: block; margin-bottom: 14px;"></span>
+
+          <!-- event gallery -->
+          <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 11px; margin-bottom: 18px;">
+            <div class="wf-solid" style="overflow: hidden; box-shadow: 0 0 0 2.5px #6a6a6a;">
+              <div style="aspect-ratio: 4/3; background: #d8d8d8; position: relative; display: flex; align-items: center; justify-content: center;">
+                <span class="lbl" style="font-size: 8px;">photo</span>
+                <span style="position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: #6a6a6a;"></span>
+              </div>
+              <div style="padding: 8px 9px; display: flex; justify-content: space-between; gap: 5px; align-items: baseline;">
+                <span class="bar" style="width: 52%; height: 7px;"></span><span class="bar" style="width: 22%; height: 7px;"></span>
+              </div>
+            </div>
+            <div class="wf-solid" style="overflow: hidden;">
+              <div style="aspect-ratio: 4/3; background: #d8d8d8; position: relative; display: flex; align-items: center; justify-content: center;">
+                <span class="lbl" style="font-size: 8px;">photo</span>
+                <span style="position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: #a8a8a8;"></span>
+              </div>
+              <div style="padding: 8px 9px; display: flex; justify-content: space-between; gap: 5px; align-items: baseline;">
+                <span class="bar" style="width: 46%; height: 7px;"></span><span class="bar" style="width: 22%; height: 7px;"></span>
+              </div>
+            </div>
+            <div class="wf-solid" style="overflow: hidden;">
+              <div style="aspect-ratio: 4/3; background: #d8d8d8; position: relative; display: flex; align-items: center; justify-content: center;">
+                <span class="lbl" style="font-size: 8px;">photo</span>
+                <span style="position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: #a8a8a8;"></span>
+              </div>
+              <div style="padding: 8px 9px; display: flex; justify-content: space-between; gap: 5px; align-items: baseline;">
+                <span class="bar" style="width: 58%; height: 7px;"></span><span class="bar" style="width: 22%; height: 7px;"></span>
+              </div>
+            </div>
+            <div class="wf-solid" style="overflow: hidden;">
+              <div style="aspect-ratio: 4/3; background: #d8d8d8; position: relative; display: flex; align-items: center; justify-content: center;">
+                <span class="lbl" style="font-size: 8px;">photo</span>
+                <span style="position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: #a8a8a8;"></span>
+              </div>
+              <div style="padding: 8px 9px; display: flex; justify-content: space-between; gap: 5px; align-items: baseline;">
+                <span class="bar" style="width: 50%; height: 7px;"></span><span class="bar" style="width: 22%; height: 7px;"></span>
+              </div>
+            </div>
+            <div class="wf-solid" style="overflow: hidden;">
+              <div style="aspect-ratio: 4/3; background: #d8d8d8; position: relative; display: flex; align-items: center; justify-content: center;">
+                <span class="lbl" style="font-size: 8px;">photo</span>
+                <span style="position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: #a8a8a8;"></span>
+              </div>
+              <div style="padding: 8px 9px; display: flex; justify-content: space-between; gap: 5px; align-items: baseline;">
+                <span class="bar" style="width: 44%; height: 7px;"></span><span class="bar" style="width: 22%; height: 7px;"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- detail panel -->
+          <div class="wf-dark" style="padding: 20px; display: flex; flex-direction: column; gap: 9px;">
+            <span class="lbl lbl-dark" style="font-size: 8.5px;">selected event — aria-live="polite"</span>
+            <span class="bar-lg" style="width: 66%; background: #8a8a8a;"></span>
+            <span class="bar-on-dark" style="width: 96%;"></span>
+            <span class="bar-on-dark" style="width: 88%;"></span>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Speaking.tsx</p>
+        <p class="anno-meta">stateful — useState(active)</p>
+        <ul class="anno-list">
+          <li>Eyebrow + <code>&lt;h2&gt;</code> + intro</li>
+          <li>Topic cards ×4 — title, body, metrics, format</li>
+          <li>"Where I've spoken" <code>&lt;h3&gt;</code></li>
+          <li>Event gallery ×5 — each a <code>&lt;button aria-pressed&gt;</code> with 4:3 photo + coloured rule + label/year</li>
+          <li>Detail panel below reflects the selected event</li>
+        </ul>
+        <p class="anno-data">data: speakingTopics (4), speakingEvents (5)</p>
+        <div class="anno-connected" data-composition="speaking">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ 03 WORK ══════════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">03 — Work · #work</p>
+        <div class="wf-box" style="padding: 24px;">
+          <div style="display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; max-width: 56%;">
+            <span class="lbl" style="color: #be3372;">03 — Work</span>
+            <span class="bar-xl" style="width: 86%;"></span>
+            <span class="bar" style="width: 92%;"></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="wf-solid" style="padding: 16px 18px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; border-left: 7px solid #8a8a8a;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 30px; font-weight: 700; color: #b0b0b0; line-height: 1;">01</span>
+              <div style="display: flex; flex-direction: column; gap: 7px;">
+                <span class="bar" style="width: 26%; height: 7px;"></span>
+                <span class="bar-lg" style="width: 74%;"></span>
+                <span class="bar" style="width: 100%;"></span>
+                <span class="bar" style="width: 84%;"></span>
+                <span class="bar" style="width: 40%; height: 7px; background: #b8b8b8;"></span>
+              </div>
+              <span style="font-size: 20px; color: #9a9a9a;">→</span>
+            </div>
+            <div class="wf-solid" style="padding: 16px 18px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; border-left: 7px solid #8a8a8a;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 30px; font-weight: 700; color: #b0b0b0; line-height: 1;">02</span>
+              <div style="display: flex; flex-direction: column; gap: 7px;">
+                <span class="bar" style="width: 30%; height: 7px;"></span>
+                <span class="bar-lg" style="width: 82%;"></span>
+                <span class="bar" style="width: 100%;"></span>
+                <span class="bar" style="width: 78%;"></span>
+                <span class="bar" style="width: 44%; height: 7px; background: #b8b8b8;"></span>
+              </div>
+              <span style="font-size: 20px; color: #9a9a9a;">→</span>
+            </div>
+            <div class="wf-solid" style="padding: 16px 18px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: center; border-left: 7px solid #8a8a8a;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 30px; font-weight: 700; color: #b0b0b0; line-height: 1;">03</span>
+              <div style="display: flex; flex-direction: column; gap: 7px;">
+                <span class="bar" style="width: 28%; height: 7px;"></span>
+                <span class="bar-lg" style="width: 78%;"></span>
+                <span class="bar" style="width: 100%;"></span>
+                <span class="bar" style="width: 72%;"></span>
+                <span class="bar" style="width: 38%; height: 7px; background: #b8b8b8;"></span>
+              </div>
+              <span style="font-size: 20px; color: #9a9a9a;">→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Work.tsx</p>
+        <p class="anno-meta">3 case-study rows</p>
+        <ul class="anno-list">
+          <li>Eyebrow + <code>&lt;h2&gt;</code> + one-line sub</li>
+          <li>Row anatomy: big number · tag · title · body · metric · arrow</li>
+          <li>Whole row is one <code>&lt;a&gt;</code> → <code>caseStudyHref</code></li>
+          <li>Coloured left border per project</li>
+        </ul>
+        <p class="anno-data">data: projects (3) → /case-studies/*.html</p>
+        <div class="anno-connected" data-composition="work">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ 04 BIO ═══════════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">04 — Bio · #bio</p>
+        <div class="wf-dark" style="padding: 24px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; align-items: start;">
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <span class="lbl" style="color: #d88aab;">04 — Bio</span>
+            <span class="bar-xl" style="width: 88%; background: #8a8a8a;"></span>
+            <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 5px;">
+              <span class="bar-on-dark" style="width: 100%;"></span>
+              <span class="bar-on-dark" style="width: 94%;"></span>
+              <span class="bar-on-dark" style="width: 88%;"></span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 7px;">
+              <span class="bar-on-dark" style="width: 96%;"></span>
+              <span class="bar-on-dark" style="width: 76%;"></span>
+            </div>
+            <div style="display: flex; gap: 9px; margin-top: 10px; flex-wrap: wrap;">
+              <span style="padding: 8px 15px; border-radius: 3px; background: #cfcfcf; font-family: 'Space Mono', monospace; font-size: 10px; color: #2a2a2a;">Full CV</span>
+              <span style="padding: 8px 15px; border-radius: 3px; border: 1.5px solid #9a9a9a; font-family: 'Space Mono', monospace; font-size: 10px; color: #d8d8d8;">LinkedIn</span>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 11px;">
+            <div style="height: 112px; border: 1.5px dashed #9a9a9a; border-radius: 2px; position: relative; display: flex; align-items: center; justify-content: center;">
+              <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0;">
+                <line x1="0" y1="0" x2="100" y2="100" stroke="#8a8a8a" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
+                <line x1="100" y1="0" x2="0" y2="100" stroke="#8a8a8a" stroke-width="0.5" vector-effect="non-scaling-stroke"/>
+              </svg>
+              <span class="lbl lbl-dark" style="position: relative; background: #4a4a4a; padding: 3px 7px;">portrait</span>
+            </div>
+            <div style="padding: 11px 13px; background: #5a5a5a; border-radius: 2px; border-left: 5px solid #8a8a8a; display: flex; flex-direction: column; gap: 6px;">
+              <span class="bar-lg" style="width: 62%; background: #8a8a8a;"></span>
+              <span class="bar-on-dark" style="width: 100%; height: 7px;"></span>
+              <span class="bar-on-dark" style="width: 82%; height: 7px;"></span>
+            </div>
+            <div style="padding: 11px 13px; background: #5a5a5a; border-radius: 2px; border-left: 5px solid #8a8a8a; display: flex; flex-direction: column; gap: 6px;">
+              <span class="bar-lg" style="width: 54%; background: #8a8a8a;"></span>
+              <span class="bar-on-dark" style="width: 100%; height: 7px;"></span>
+              <span class="bar-on-dark" style="width: 74%; height: 7px;"></span>
+            </div>
+            <div style="padding: 11px 13px; background: #5a5a5a; border-radius: 2px; border-left: 5px solid #8a8a8a; display: flex; flex-direction: column; gap: 6px;">
+              <span class="bar-lg" style="width: 58%; background: #8a8a8a;"></span>
+              <span class="bar-on-dark" style="width: 100%; height: 7px;"></span>
+              <span class="bar-on-dark" style="width: 78%; height: 7px;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Bio.tsx</p>
+        <p class="anno-meta">navy ground, two-column</p>
+        <ul class="anno-list">
+          <li>Eyebrow + <code>&lt;h2&gt;</code> + two body paragraphs</li>
+          <li>CTAs: "Full CV" → <code>/resume.html</code>, "LinkedIn" → external</li>
+          <li>Portrait image</li>
+          <li>Highlight cards ×3 — title + text, coloured left rule</li>
+        </ul>
+        <p class="anno-data">data: about, aboutHighlights (3), contact</p>
+        <div class="anno-connected" data-composition="bio">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ 05 PRACTICE ══════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">05 — Practice · #practice</p>
+        <div class="wf-box" style="padding: 24px;">
+          <div style="background: #f0f3f5; border-radius: 6px; padding: 22px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px; align-items: start;">
+            <div style="display: flex; flex-direction: column; gap: 9px;">
+              <span class="lbl" style="color: #be3372;">05 — Practice</span>
+              <span class="bar-xl" style="width: 84%;"></span>
+              <span class="bar" style="width: 96%;"></span>
+              <span class="bar" style="width: 90%;"></span>
+              <span class="bar" style="width: 64%;"></span>
+              <span style="font-family: 'Space Mono', monospace; font-size: 10px; color: #0a6ec2; margin-top: 5px;">andrew.d.pendleton@gmail.com</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="wf-solid" style="padding: 14px; border-top: 5px solid #0a6ec2; display: flex; flex-direction: column; gap: 7px;">
+                <span class="bar-lg" style="width: 78%;"></span>
+                <span class="bar" style="width: 100%;"></span>
+                <span class="bar" style="width: 82%;"></span>
+              </div>
+              <div class="wf-solid" style="padding: 14px; border-top: 5px solid #be3372; display: flex; flex-direction: column; gap: 7px;">
+                <span class="bar-lg" style="width: 70%;"></span>
+                <span class="bar" style="width: 100%;"></span>
+                <span class="bar" style="width: 76%;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Practice.tsx</p>
+        <p class="anno-meta">one raised panel, two columns</p>
+        <ul class="anno-list">
+          <li>Eyebrow + <code>&lt;h2&gt;</code> "Advisory work, quietly."</li>
+          <li>Intro paragraph, then a <code>mailto:</code> link as the only CTA</li>
+          <li>Two service cards — <code>&lt;h3&gt;</code> + description, coloured top rule</li>
+        </ul>
+        <p class="anno-data">data: contact (email) — all other copy is literal in the component</p>
+        <div class="anno-connected" data-composition="practice">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ SUBSCRIBE ════════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">#subscribe — nav CTA target</p>
+        <div style="background: #7a7a7a; border-radius: 2px; padding: 26px 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; align-items: center;">
+          <div style="display: flex; flex-direction: column; gap: 9px;">
+            <span class="bar-xl" style="width: 82%; background: #d8d8d8;"></span>
+            <span class="bar" style="width: 96%; background: #a8a8a8;"></span>
+            <span class="bar" style="width: 72%; background: #a8a8a8;"></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <span class="lbl" style="color: #e4e4e4; font-size: 8.5px;">Email address</span>
+            <div style="display: flex; gap: 9px; flex-wrap: wrap; align-items: stretch;">
+              <div style="flex: 1 1 170px; background: #ffffff; border-radius: 3px; padding: 11px 13px; display: flex; align-items: center;">
+                <span class="lbl" style="font-size: 9px;">you@example.com</span>
+              </div>
+              <span style="padding: 11px 20px; border-radius: 3px; background: #2a2a2a; color: #f0f0f0; font-family: 'Space Mono', monospace; font-size: 10px; display: flex; align-items: center;">Subscribe</span>
+            </div>
+            <span class="lbl" style="color: #d8d8d8; font-size: 8.5px;">status message — appears after submit</span>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Subscribe.tsx</p>
+        <p class="anno-meta">stateful — useState(message)</p>
+        <ul class="anno-list">
+          <li><code>&lt;h2&gt;</code> + supporting copy</li>
+          <li><code>&lt;form&gt;</code>: email <code>&lt;input&gt;</code> + submit button</li>
+          <li>Status line rendered after submit</li>
+        </ul>
+        <p class="anno-flag">No newsletter backend — submit opens a pre-filled <code>mailto:</code> rather than faking a subscribe</p>
+        <div class="anno-connected" data-composition="subscribe">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- ══ FOOTER ═══════════════════════════════════════════════════════ -->
+    <div class="wf-row" style="display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 34px; align-items: start;">
+      <div>
+        <p class="sec-num" style="margin: 0 0 9px;">Footer</p>
+        <div class="wf-dark" style="padding: 20px 22px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <span class="bar-on-dark" style="width: 150px;"></span>
+          <div style="display: flex; gap: 18px; flex-wrap: wrap;">
+            <span class="bar-on-dark" style="width: 44px; background: #8a8a8a;"></span>
+            <span class="bar-on-dark" style="width: 50px; background: #8a8a8a;"></span>
+            <span class="bar-on-dark" style="width: 36px; background: #8a8a8a;"></span>
+            <span class="bar-on-dark" style="width: 22px; background: #8a8a8a;"></span>
+          </div>
+        </div>
+      </div>
+      <aside>
+        <div class="anno-rule"></div>
+        <p class="anno-name">Footer.tsx</p>
+        <p class="anno-meta">props: links[]</p>
+        <ul class="anno-list">
+          <li>Copyright line — <code>contact.footerCopyright</code></li>
+          <li>4 links: Writing, LinkedIn, Email (<code>mailto:</code>), CV</li>
+        </ul>
+        <p class="anno-data">Only nav out to /writing.html and /resume.html</p>
+        <div class="anno-connected" data-composition="chrome-footer">
+          <p class="anno-unavailable">Shared record unavailable — run <code>node scripts/sync-connections.mjs</code></p>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+</div>
+    </section>
+
+    <section class="page" id="components" hidden>
+  <div class="wf-page">
+
+    <div class="page-head">
+      <div>
+        <p class="lbl" style="margin: 0 0 8px;">Page 2 · Atomic inventory</p>
+        <h1 class="page-title">The primitives</h1>
+      </div>
+      <p class="page-meta">17 recurring patterns<br>4 codified · 13 inline</p>
+    </div>
+
+    <p class="page-intro">
+      The elements the compositions on page 3 are assembled from. Specimens here are drawn at
+      <strong>true values</strong> — real radii, padding, type and accent colours — not in the greyscale used for the
+      page-1 layout wireframe.
+    </p>
+
+    <p class="anno-flag" style="max-width: 76ch; margin: 0 0 34px;">
+      <strong>None of these exist as components.</strong> Four are CSS classes in <code>theme.css</code>
+      (<code>.a3-badge</code>, <code>.lift</code>/<code>.lift-t</code>, <code>.apb-ticker</code>, <code>.apb-rail</code>).
+      The other thirteen are inline style objects retyped at each use site — the counts below are occurrences across
+      the 14 <code>.tsx</code> files, not imports.
+    </p>
+
+    <!-- ══ TOKENS ════════════════════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">Tokens</h2>
+      <p class="ia-sub">The only values with a single source of truth.</p>
+
+      <div class="tok-grid">
+        <div class="tok"><span class="sw" style="background: #0A6EC2;"></span><code>BLUE</code><span class="tok-v">#0A6EC2</span></div>
+        <div class="tok"><span class="sw" style="background: #BE3372;"></span><code>PINK</code><span class="tok-v">#BE3372</span></div>
+        <div class="tok"><span class="sw" style="background: #4FE7AF;"></span><code>MINT</code><span class="tok-v">#4FE7AF</span></div>
+        <div class="tok"><span class="sw" style="background: #11C4D4;"></span><code>CYAN</code><span class="tok-v">#11C4D4</span></div>
+        <div class="tok"><span class="sw" style="background: #0C4E8C;"></span><code>DEEP</code><span class="tok-v">#0C4E8C</span></div>
+        <div class="tok"><span class="sw" style="background: #141f29;"></span><code>NAVY</code><span class="tok-v">#141f29</span></div>
+      </div>
+      <p class="ia-note">
+        <code>boldPalette.ts</code> also exports <code>ink(rule)</code>: CYAN and MINT are too bright for small text on
+        light grounds, so it swaps them for BLUE and DEEP while the brighter value still paints the rule or bar.
+      </p>
+
+      <div class="tok-grid" style="margin-top: 18px;">
+        <div class="tok wide"><code>--ap-font-sans</code><span class="tok-v">Inter → system fallback</span></div>
+        <div class="tok wide"><code>--ap-font-mono</code><span class="tok-v">JetBrains Mono → ui-monospace</span></div>
+      </div>
+      <p class="ia-note">
+        Declared in <code>theme.css</code>. The mono face carries every eyebrow, meta line, stat label and metric —
+        45 uses. It is the redesign's loudest signal, and the only typographic decision applied consistently.
+      </p>
+    </section>
+
+    <!-- ══ ATOMS ═════════════════════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">Primitives</h2>
+      <p class="ia-sub">Alphabetical. "×N" is how many times the pattern is written out across the codebase.</p>
+
+      <div class="spec-list">
+
+        <!-- Badge -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="align-items: center; gap: 8px;">
+            <span class="at-badge" style="background: #BE3372; color: #fff;">Writing · Speaking · Advisory</span>
+            <span class="at-badge" style="background: #4FE7AF; color: #141f29;">Latest essay</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Badge <span class="tag-shared">codified</span> <span class="tag-n">×6</span></h2>
+            <p class="spec-sig">.a3-badge + inline background/color</p>
+            <ul class="anno-list">
+              <li><code>inline-flex</code>, padding <code>2px 8px</code>, radius <code>9999px</code>, 0.8125rem/600</li>
+              <li>Colour pair is passed inline at every use site</li>
+            </ul>
+            <p class="spec-used">Hero · WritingTeaser · Writing · Resume</p>
+          </div>
+        </div>
+
+        <!-- Button, filled -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="align-items: center; gap: 10px;">
+            <span class="at-btn" style="background: #fff; color: #141f29; border: 1px solid #e2e2e2;">Read the writing</span>
+            <span class="at-btn" style="background: #141f29; color: #fff;">All writing</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Button, filled <span class="tag-local">inline</span> <span class="tag-n">×5</span></h2>
+            <p class="spec-sig">padding 14px 28px · radius 16 · weight 600</p>
+            <ul class="anno-list">
+              <li>Always an <code>&lt;a&gt;</code> — no <code>&lt;button&gt;</code> except Navbar's CTA and Resume's print action</li>
+              <li>Ground and ink vary per surface; geometry is retyped each time</li>
+            </ul>
+            <p class="spec-used">Hero · WritingTeaser · Bio · Navbar</p>
+          </div>
+        </div>
+
+        <!-- Button, outline -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage dark" style="align-items: center;">
+            <span class="at-btn" style="border: 1px solid #8aabc2; color: #fff;">Talks and topics</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Button, outline <span class="tag-local">inline</span> <span class="tag-n">×2</span></h2>
+            <p class="spec-sig">same geometry, 1px border, no fill</p>
+            <ul class="anno-list">
+              <li>The secondary of a pair — only ever appears beside a filled button</li>
+              <li>Border <code>#8aabc2</code> on navy; there is no light-ground variant</li>
+            </ul>
+            <p class="spec-used">Hero · Bio</p>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="background: #f7fafc;">
+            <div class="at-card" style="border-top: 6px solid #0A6EC2; width: 100%;">
+              <p class="at-meta" style="margin: 0 0 8px;">Aug 24, 2026 · 900 words</p>
+              <h3 style="font-size: 15px; margin: 0 0 6px; font-weight: 700; letter-spacing: -0.02em;">What intent.md Taught Me</h3>
+              <p style="font-size: 12px; color: #38546a; margin: 0; line-height: 1.5;">A single file describing what I actually wanted beat every prompt technique.</p>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Card <span class="tag-local">inline — pre-migration</span> <span class="tag-n">×19</span></h2>
+            <p class="spec-sig">radius 16 · shadow 0 4px 16px rgb(20 31 41 / .08)</p>
+            <ul class="anno-list">
+              <li>Four shadow depths in use — <code>.08</code>, <code>.09</code>, <code>.10</code>, <code>.20</code>, <code>.24</code> — chosen ad hoc</li>
+              <li>Usually carries a coloured rule on one edge</li>
+              <li>Border <code>1px solid #d9e6ee</code> on light grounds only</li>
+            </ul>
+            <p class="spec-used">every section except Hero and Ticker</p>
+            <p class="anno-flag">This inventory describes the site BEFORE the convergence. Practice and WritingTeaser now use the A3KDS <code>Card</code>; the shadow list below is what that migration removed, not what ships.</p>
+          </div>
+        </div>
+
+        <!-- Coloured rule -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="flex-direction: column; gap: 9px;">
+            <span style="display: block; height: 6px; background: #0A6EC2; border-radius: 2px;"></span>
+            <span style="display: block; height: 6px; background: #BE3372; border-radius: 2px;"></span>
+            <span style="display: block; height: 6px; background: #4FE7AF; border-radius: 2px;"></span>
+            <span style="display: block; height: 6px; background: #11C4D4; border-radius: 2px;"></span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Coloured rule <span class="tag-local">inline</span> <span class="tag-n">×22</span></h2>
+            <p class="spec-sig">border{Top|Left|Bottom}: 5–8px solid &lt;accent&gt;</p>
+            <ul class="anno-list">
+              <li>The redesign's signature device — how a card is keyed to a colour</li>
+              <li>Edge and weight vary by section: top on posts, bottom on topics, left on projects and highlights</li>
+              <li>Colour comes from the data (<code>post.rule</code>, <code>p.rule</code>, <code>e.rule</code>), not the component</li>
+            </ul>
+            <p class="spec-used">WritingTeaser · Speaking · Work · Bio · Practice</p>
+          </div>
+        </div>
+
+        <!-- Display numeral -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="align-items: baseline; gap: 16px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 34px; font-weight: 700; color: #b0b0b0; font-variant-numeric: tabular-nums; line-height: 1;">01</span>
+            <span style="font-size: 34px; font-weight: 700; letter-spacing: -0.03em; color: #0A6EC2; font-variant-numeric: tabular-nums; line-height: 1;">86%</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Display numeral <span class="tag-local">inline</span> <span class="tag-n">×8</span></h2>
+            <p class="spec-sig">clamp() size · 700 · tabular-nums</p>
+            <ul class="anno-list">
+              <li>Two variants that look related but are not: mono for sequence numbers (Work), sans for stat values (Hero, CV)</li>
+              <li><code>fontVariantNumeric: tabular-nums</code> on both</li>
+              <li>Stat colour runs through <code>ink()</code>; sequence numbers do too</li>
+            </ul>
+            <p class="spec-used">Hero · Work · Resume · Writing</p>
+          </div>
+        </div>
+
+        <!-- Eyebrow -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="align-items: center;">
+            <span class="at-eyebrow">01 — Writing</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Eyebrow <span class="tag-local">inline</span> <span class="tag-n">×10</span></h2>
+            <p class="spec-sig">mono 0.6875rem · tracking 0.18em · uppercase · PINK</p>
+            <ul class="anno-list">
+              <li>Numbered 01–05 across the five labelled homepage sections</li>
+              <li>Exact same declaration retyped in five components — the most-duplicated pattern in the codebase</li>
+            </ul>
+            <p class="spec-used">WritingTeaser · Speaking · Work · Bio · Practice</p>
+          </div>
+        </div>
+
+        <!-- Hover lift -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="align-items: center; flex-direction: column; gap: 6px;">
+            <span style="font-size: 14px; font-weight: 700; color: #1f2e3d;">Default title</span>
+            <span style="font-size: 14px; font-weight: 700; color: #0A6EC2;">Hovered title</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Hover lift <span class="tag-shared">codified</span> <span class="tag-n">×5</span></h2>
+            <p class="spec-sig">.lift wrapper + .lift-t target</p>
+            <ul class="anno-list">
+              <li><code>.lift:hover .lift-t { color: #0A6EC2 }</code> — the whole interactive vocabulary for cards</li>
+              <li>Applied to 5 wrappers but only 3 carry a <code>.lift-t</code> target, so two lift nothing</li>
+              <li>No transform or shadow change despite the name</li>
+            </ul>
+            <p class="spec-used">WritingTeaser · Work</p>
+          </div>
+        </div>
+
+        <!-- Meta line -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="align-items: center; flex-direction: column; gap: 7px;">
+            <span class="at-meta">Sep 8, 2026 · 620 words · read →</span>
+            <span class="at-meta" style="color: #11C4D4;">2026 · CES</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Meta line <span class="tag-local">inline</span> <span class="tag-n">×12</span></h2>
+            <p class="spec-sig">mono 0.6875–0.8125rem · muted</p>
+            <ul class="anno-list">
+              <li>Middot-separated facts: date · length, year · venue, metric values</li>
+              <li>Four muted inks in rotation — <code>#476b85</code>, <code>#8aabc2</code>, <code>#38546a</code>, <code>#b8cddc</code></li>
+            </ul>
+            <p class="spec-used">WritingTeaser · Speaking · Work · Hero</p>
+          </div>
+        </div>
+
+        <!-- Page shell -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="padding: 8px;">
+            <div style="border: 1px dashed #b4b4b4; width: 100%; padding: 10px 16px; border-radius: 3px;">
+              <div style="background: #ececec; height: 26px; border-radius: 2px;"></div>
+              <p class="at-meta" style="margin: 6px 0 0; text-align: center;">max 1280 · padding 0 32px</p>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Page shell <span class="tag-local">inline</span> <span class="tag-n">×16</span></h2>
+            <p class="spec-sig">maxWidth 1280 · margin 0 auto · padding 0 32px</p>
+            <ul class="anno-list">
+              <li>Every section re-declares the same centring wrapper</li>
+              <li>Hero overrides the left padding to <code>clamp(32px, 8vw, 88px)</code> to clear the rail</li>
+            </ul>
+            <p class="spec-used">all sections, all pages</p>
+          </div>
+        </div>
+
+        <!-- Responsive grid -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage">
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%;">
+              <span style="height: 34px; background: #ececec; border-radius: 3px;"></span>
+              <span style="height: 34px; background: #ececec; border-radius: 3px;"></span>
+              <span style="height: 34px; background: #ececec; border-radius: 3px;"></span>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Responsive grid <span class="tag-local">inline</span> <span class="tag-n">×15</span></h2>
+            <p class="spec-sig">repeat(auto-fit, minmax(Npx, 1fr)) + gap</p>
+            <ul class="anno-list">
+              <li>The only layout strategy on the site — no breakpoints except the 900px rail/CV rules</li>
+              <li>Six different minmax floors in use: 120, 190, 280, 300, 320, 560</li>
+            </ul>
+            <p class="spec-used">Hero · WritingTeaser · Speaking · Bio · Practice · Subscribe</p>
+          </div>
+        </div>
+
+        <!-- Section heading -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="align-items: center;">
+            <span style="font-size: 26px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: #1f2e3d;">The argument, in essays.</span>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Section heading <span class="tag-local">inline</span> <span class="tag-n">×31</span></h2>
+            <p class="spec-sig">clamp(2.25rem, 5vw, 4rem) · 700 · −0.03em</p>
+            <ul class="anno-list">
+              <li>Every heading size is a bespoke <code>clamp()</code> — 31 across the app, no shared scale</li>
+              <li>Tracking is <code>−0.02em</code>, <code>−0.03em</code> or <code>−0.04em</code> depending on size</li>
+              <li><code>theme.css</code> sets base h1–h4 sizes, but every component overrides them</li>
+            </ul>
+            <p class="spec-used">all sections</p>
+          </div>
+        </div>
+
+        <!-- Section shell -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="padding: 6px;">
+            <div style="width: 100%; border-radius: 3px; overflow: hidden;">
+              <div style="background: #ffffff; border: 1px dashed #d4d4d4; height: 20px;"></div>
+              <div style="background: #eef4f8; border: 1px dashed #d4d4d4; border-top: none; height: 20px;"></div>
+              <div style="background: #141f29; height: 20px;"></div>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Section shell <span class="tag-local">inline</span> <span class="tag-n">×6</span></h2>
+            <p class="spec-sig">padding "112px 0" + background</p>
+            <ul class="anno-list">
+              <li>Three grounds alternate down the page: white, <code>#eef4f8</code>, NAVY, plus BLUE for Subscribe</li>
+              <li>Only Speaking adds a <code>borderTop</code> to separate two same-adjacent grounds</li>
+            </ul>
+            <p class="spec-used">WritingTeaser · Speaking · Work · Bio · Practice · Subscribe</p>
+          </div>
+        </div>
+
+        <!-- Stat pair -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage dark">
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; width: 100%;">
+              <div>
+                <div style="font-size: 26px; font-weight: 700; color: #4FE7AF; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;">86%</div>
+                <div class="at-statlabel">Enterprise adoption, zero mandates</div>
+              </div>
+              <div>
+                <div style="font-size: 26px; font-weight: 700; color: #11C4D4; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;">48</div>
+                <div class="at-statlabel">Components across three platforms</div>
+              </div>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Stat pair <span class="tag-local">inline</span> <span class="tag-n">×4 sets</span></h2>
+            <p class="spec-sig">&lt;dt&gt; value + &lt;dd&gt; mono label</p>
+            <ul class="anno-list">
+              <li>Correctly marked up as a <code>&lt;dl&gt;</code> in Hero — the only semantic list on the page</li>
+              <li>Label is mono 0.6875rem, tracking 0.1em, uppercase</li>
+              <li>Value colour carried per item in the data, not the component</li>
+            </ul>
+            <p class="spec-used">Hero · Resume · Writing</p>
+          </div>
+        </div>
+
+        <!-- Text input -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="background: #0A6EC2; align-items: center;">
+            <div style="display: flex; gap: 8px; width: 100%;">
+              <span style="flex: 1; background: #fff; border-radius: 10px; padding: 10px 12px; font-size: 12px; color: #8a8a8a;">you@example.com</span>
+              <span class="at-btn" style="background: #141f29; color: #fff;">Subscribe</span>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Text input <span class="tag-local">inline</span> <span class="tag-n">×1</span></h2>
+            <p class="spec-sig">the only form control on the site</p>
+            <ul class="anno-list">
+              <li><code>&lt;input type="email" name="email" required&gt;</code> with a visible <code>&lt;label&gt;</code></li>
+              <li>No error, disabled, focus or filled state defined</li>
+            </ul>
+            <p class="spec-used">Subscribe</p>
+          </div>
+        </div>
+
+        <!-- Ticker band -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage" style="padding: 0; align-items: center;">
+            <div style="background: #BE3372; padding: 10px 0; width: 100%; overflow: hidden;">
+              <div style="display: flex; gap: 20px; padding: 0 12px; white-space: nowrap;">
+                <span class="at-tick">Accessibility Summit</span>
+                <span class="at-tick">BrowserStack World</span>
+                <span class="at-tick">CES 2025</span>
+              </div>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Ticker band <span class="tag-shared">codified</span> <span class="tag-n">×2</span></h2>
+            <p class="spec-sig">.apb-ticker — 38s linear infinite</p>
+            <ul class="anno-list">
+              <li><code>@keyframes apb-slide</code> translates −50%; the list is doubled so the loop is seamless</li>
+              <li>Honours <code>prefers-reduced-motion</code> — animation drops to none</li>
+              <li>Whole band is <code>aria-hidden</code></li>
+            </ul>
+            <p class="spec-used">homepage · writing</p>
+          </div>
+        </div>
+
+        <!-- Vertical rail -->
+        <div class="spec-row">
+          <div class="spec-frame"><div class="spec-stage dark" style="padding: 0; min-height: 96px;">
+            <div style="width: 42px; border-right: 1px solid #2b3f51; display: flex; align-items: center; justify-content: center;">
+              <span style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.24em; text-transform: uppercase; color: #8aabc2; white-space: nowrap;">Design infrastructure</span>
+            </div>
+          </div></div>
+          <div class="spec-info">
+            <h2 class="spec-name">Vertical rail <span class="tag-shared">codified</span> <span class="tag-n">×3</span></h2>
+            <p class="spec-sig">.apb-rail + writing-mode: vertical-rl</p>
+            <ul class="anno-list">
+              <li>Rotated 180° so it reads bottom-to-top; mono, tracking 0.24em</li>
+              <li><code>.apb-rail</code> exists only to hide it under 900px</li>
+              <li><code>aria-hidden</code> — decorative</li>
+            </ul>
+            <p class="spec-used">Hero · Writing · WritingPost · Resume</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+    </section>
+
+    <section class="page" id="compositions" hidden>
+  <div class="wf-page">
+
+    <div class="page-head">
+      <div>
+        <p class="lbl" style="margin: 0 0 8px;">Page 3 · Composition inventory</p>
+        <h1 class="page-title">Compositions, isolated</h1>
+      </div>
+      <p class="page-meta">src/app/components/<br>11 compositions · alphabetical</p>
+    </div>
+
+    <p class="page-intro">
+      Every component that appears in the homepage wireframe, lifted out of the page and drawn on its own.
+      <strong>Shared</strong> marks a component reused by <code>/writing.html</code>, the essay template or <code>/resume.html</code>;
+      the rest are homepage-only.
+    </p>
+
+    <div class="spec-list">
+
+      <!-- ── Bio ─────────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage dark">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span class="lbl" style="color: #d88aab; font-size: 8px;">04 — Bio</span>
+              <span class="bar-lg" style="width: 86%; background: #8a8a8a;"></span>
+              <span class="bar-on-dark" style="width: 100%; height: 6px;"></span>
+              <span class="bar-on-dark" style="width: 88%; height: 6px;"></span>
+              <div style="display: flex; gap: 6px; margin-top: 5px;">
+                <span style="padding: 5px 10px; border-radius: 3px; background: #cfcfcf; font-size: 8px; font-family: 'Space Mono', monospace; color: #2a2a2a;">Full CV</span>
+                <span style="padding: 5px 10px; border-radius: 3px; border: 1px solid #9a9a9a; font-size: 8px; font-family: 'Space Mono', monospace; color: #d8d8d8;">LinkedIn</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin-top: 7px;">
+                <span style="height: 26px; background: #5a5a5a; border-left: 3px solid #8a8a8a; border-radius: 2px;"></span>
+                <span style="height: 26px; background: #5a5a5a; border-left: 3px solid #8a8a8a; border-radius: 2px;"></span>
+                <span style="height: 26px; background: #5a5a5a; border-left: 3px solid #8a8a8a; border-radius: 2px;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Bio.tsx</h2>
+          <p class="spec-sig">&lt;Bio /&gt; — no props</p>
+          <ul class="anno-list">
+            <li>Eyebrow, <code>&lt;h2&gt;</code>, two body paragraphs</li>
+            <li>CTA pair — "Full CV" → <code>/resume.html</code>, "LinkedIn" → external</li>
+            <li>Portrait image</li>
+            <li>Highlight cards ×3 — title + text, coloured left rule</li>
+          </ul>
+          <p class="spec-data">data: about · aboutHighlights (3) · hero · contact</p>
+        </div>
+      </div>
+
+      <!-- ── Footer ──────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage dark" style="align-items: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%;">
+              <span class="bar-on-dark" style="width: 76px; height: 7px;"></span>
+              <div style="display: flex; gap: 9px;">
+                <span class="bar-on-dark" style="width: 26px; height: 7px; background: #8a8a8a;"></span>
+                <span class="bar-on-dark" style="width: 30px; height: 7px; background: #8a8a8a;"></span>
+                <span class="bar-on-dark" style="width: 22px; height: 7px; background: #8a8a8a;"></span>
+                <span class="bar-on-dark" style="width: 16px; height: 7px; background: #8a8a8a;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Footer.tsx <span class="tag-shared">on 4 pages of this site</span></h2>
+          <p class="spec-sig">&lt;Footer links={FooterLink[]} /&gt;</p>
+          <ul class="anno-list">
+            <li>Copyright line — <code>contact.footerCopyright</code></li>
+            <li>Link row, driven entirely by the <code>links</code> prop</li>
+          </ul>
+          <p class="spec-data">data: contact · link array declared per page</p>
+          <p class="spec-used">used by: homepage · writing · essay · resume</p>
+        </div>
+      </div>
+
+      <!-- ── Hero ────────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage dark" style="padding: 0; display: flex;">
+            <div style="width: 20px; border-right: 1px solid #6a6a6a; flex-shrink: 0;"></div>
+            <div style="flex: 1; padding: 12px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 10px; align-items: end;">
+              <div style="display: flex; flex-direction: column; gap: 5px;">
+                <span style="align-self: flex-start; padding: 3px 7px; border-radius: 999px; background: #7a7a7a; font-size: 7px; font-family: 'Space Mono', monospace; color: #f0f0f0;">badge</span>
+                <span class="bar-xl" style="width: 66%; height: 20px;"></span>
+                <span class="bar-lg" style="width: 84%; background: #8a8a8a; height: 10px;"></span>
+                <span class="bar-on-dark" style="width: 96%; height: 5px;"></span>
+                <span class="bar-on-dark" style="width: 78%; height: 5px;"></span>
+                <div style="display: flex; gap: 5px; margin-top: 3px;">
+                  <span style="padding: 4px 8px; border-radius: 3px; background: #e8e8e8; font-size: 7px; font-family: 'Space Mono', monospace; color: #2a2a2a;">CTA</span>
+                  <span style="padding: 4px 8px; border-radius: 3px; border: 1px solid #9a9a9a; font-size: 7px; font-family: 'Space Mono', monospace; color: #d8d8d8;">CTA</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; border-top: 1px solid #6a6a6a; padding-top: 6px; margin-top: 4px;">
+                  <span class="bar-lg" style="height: 8px; background: #8a8a8a;"></span>
+                  <span class="bar-lg" style="height: 8px; background: #8a8a8a;"></span>
+                  <span class="bar-lg" style="height: 8px; background: #8a8a8a;"></span>
+                  <span class="bar-lg" style="height: 8px; background: #8a8a8a;"></span>
+                </div>
+              </div>
+              <div style="position: relative; min-height: 62px; display: flex; align-items: flex-end;">
+                <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 74%; background: #6a6a6a; border-radius: 2px 2px 0 0;"></div>
+                <div style="position: relative; width: 100%; height: 58px; border: 1px dashed #9a9a9a; border-radius: 2px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Hero.tsx</h2>
+          <p class="spec-sig">&lt;Hero /&gt; — no props · <code>id="top"</code></p>
+          <ul class="anno-list">
+            <li>Vertical rail — rotated label, <code>aria-hidden</code></li>
+            <li><code>.a3-badge</code> pill</li>
+            <li>Two-tier <code>&lt;h1&gt;</code>: "Hello," + name in cyan</li>
+            <li>Intro paragraph — <code>hero.intro</code></li>
+            <li>Two CTAs → <code>#writing</code>, <code>#speaking</code></li>
+            <li><code>&lt;dl&gt;</code> stat grid — one <code>dt</code>/<code>dd</code> pair per stat</li>
+            <li>Portrait layered over a blue block</li>
+          </ul>
+          <p class="spec-data">data: hero · heroStats (4)</p>
+        </div>
+      </div>
+
+      <!-- ── Navbar ──────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage dark" style="align-items: center;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="width: 15px; height: 15px; border-radius: 999px; background: #8a8a8a;"></span>
+                <span class="bar-on-dark" style="width: 52px; height: 7px;"></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 5px;">
+                <span class="bar-on-dark" style="width: 20px; height: 6px;"></span>
+                <span class="bar-on-dark" style="width: 24px; height: 6px;"></span>
+                <span class="bar-on-dark" style="width: 18px; height: 6px;"></span>
+                <span style="padding: 4px 9px; border-radius: 3px; background: #cfcfcf; font-size: 7px; font-family: 'Space Mono', monospace; color: #2a2a2a;">CTA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Navbar.tsx <span class="tag-shared">on 4 pages of this site</span></h2>
+          <p class="spec-sig">&lt;Navbar links cta logoHref? /&gt;</p>
+          <ul class="anno-list">
+            <li>Logo SVG (30px) + wordmark, links to <code>logoHref</code> (default <code>/</code>)</li>
+            <li><code>&lt;nav aria-label="Main"&gt;</code>, one anchor per link</li>
+            <li>A link with <code>current: true</code> renders cyan + <code>aria-current="page"</code></li>
+            <li>CTA renders as <code>&lt;button&gt;</code> when given <code>onClick</code>, else <code>&lt;a&gt;</code></li>
+          </ul>
+          <p class="spec-data">no content.ts import — fully prop-driven</p>
+          <p class="spec-used">used by: homepage · writing · essay · resume</p>
+        </div>
+      </div>
+
+      <!-- ── PostCard ────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage">
+            <div class="wf-solid" style="padding: 11px; display: flex; flex-direction: column; gap: 6px; border-top: 4px solid #8a8a8a; width: 150px;">
+              <span class="bar" style="width: 62%; height: 6px;"></span>
+              <span class="bar-lg" style="width: 92%; height: 11px;"></span>
+              <span class="bar" style="width: 100%; height: 7px;"></span>
+              <span class="bar" style="width: 74%; height: 7px;"></span>
+              <span class="lbl" style="font-size: 7px; margin-top: 2px;">Full essay coming soon</span>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">PostCard <span class="tag-local">local</span></h2>
+          <p class="spec-sig">function PostCard({ post }) — not exported</p>
+          <ul class="anno-list">
+            <li>Declared inside <code>WritingTeaser.tsx</code>, below the section component</li>
+            <li>Meta line (date · words), title, excerpt</li>
+            <li>Coloured top rule from <code>post.rule</code></li>
+            <li>Renders <code>&lt;a&gt;</code> when <code>post.hasFullPost</code>, otherwise a plain <code>&lt;div&gt;</code> plus a "Full essay coming soon" line</li>
+          </ul>
+          <p class="spec-data">data: one <code>posts[]</code> entry</p>
+        </div>
+      </div>
+
+      <!-- ── Practice ────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage">
+            <div style="background: #f0f3f5; border-radius: 4px; padding: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; box-sizing: border-box;">
+              <div style="display: flex; flex-direction: column; gap: 5px;">
+                <span class="lbl" style="color: #be3372; font-size: 7px;">05 — Practice</span>
+                <span class="bar-xl" style="width: 84%; height: 14px;"></span>
+                <span class="bar" style="width: 96%; height: 6px;"></span>
+                <span class="bar" style="width: 72%; height: 6px;"></span>
+                <span style="font-family: 'Space Mono', monospace; font-size: 7px; color: #0a6ec2; margin-top: 3px;">mailto link</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 7px;">
+                <div class="wf-solid" style="padding: 8px; border-top: 4px solid #0a6ec2; display: flex; flex-direction: column; gap: 4px;">
+                  <span class="bar-lg" style="width: 80%; height: 8px;"></span>
+                  <span class="bar" style="width: 100%; height: 5px;"></span>
+                </div>
+                <div class="wf-solid" style="padding: 8px; border-top: 4px solid #be3372; display: flex; flex-direction: column; gap: 4px;">
+                  <span class="bar-lg" style="width: 72%; height: 8px;"></span>
+                  <span class="bar" style="width: 100%; height: 5px;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Practice.tsx</h2>
+          <p class="spec-sig">&lt;Practice /&gt; — no props · <code>id="practice"</code></p>
+          <ul class="anno-list">
+            <li>Whole section sits inside one raised panel, two columns</li>
+            <li>Left: eyebrow, <code>&lt;h2&gt;</code> "Advisory work, quietly.", intro paragraph, <code>mailto:</code> link</li>
+            <li>Right: two service cards — <code>&lt;h3&gt;</code> + description, coloured top rule</li>
+          </ul>
+          <p class="spec-data">data: contact (email only) — all other copy is literal in the component</p>
+        </div>
+      </div>
+
+      <!-- ── Speaking ────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage" style="background: #eef0f2;">
+            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+              <span class="lbl" style="color: #be3372; font-size: 7px;">02 — Speaking</span>
+              <span class="bar-xl" style="width: 70%; height: 14px;"></span>
+              <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;">
+                <span class="wf-solid" style="height: 26px; border-bottom: 4px solid #8a8a8a;"></span>
+                <span class="wf-solid" style="height: 26px; border-bottom: 4px solid #8a8a8a;"></span>
+                <span class="wf-solid" style="height: 26px; border-bottom: 4px solid #8a8a8a;"></span>
+                <span class="wf-solid" style="height: 26px; border-bottom: 4px solid #8a8a8a;"></span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;">
+                <span class="wf-solid" style="height: 22px; box-shadow: 0 0 0 2px #6a6a6a;"></span>
+                <span class="wf-solid" style="height: 22px;"></span>
+                <span class="wf-solid" style="height: 22px;"></span>
+                <span class="wf-solid" style="height: 22px;"></span>
+                <span class="wf-solid" style="height: 22px;"></span>
+              </div>
+              <div class="wf-dark" style="height: 30px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Speaking.tsx <span class="tag-state">stateful</span></h2>
+          <p class="spec-sig">&lt;Speaking /&gt; — <code>useState(active)</code> · <code>id="speaking"</code></p>
+          <ul class="anno-list">
+            <li>Eyebrow, <code>&lt;h2&gt;</code>, intro</li>
+            <li>Topic cards ×4 — title, body, metrics, format</li>
+            <li>"Where I've spoken" <code>&lt;h3&gt;</code></li>
+            <li>Event gallery ×5 — each a <code>&lt;button aria-pressed&gt;</code> with a 4:3 photo, coloured rule, label and year</li>
+            <li>Detail panel with <code>aria-live="polite"</code> reflects the selected event</li>
+          </ul>
+          <p class="spec-data">data: speakingTopics (4) · speakingEvents (5)</p>
+        </div>
+      </div>
+
+      <!-- ── Subscribe ───────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage" style="background: #7a7a7a;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; align-items: center;">
+              <div style="display: flex; flex-direction: column; gap: 5px;">
+                <span class="bar-xl" style="width: 84%; height: 14px; background: #d8d8d8;"></span>
+                <span class="bar" style="width: 96%; height: 6px; background: #a8a8a8;"></span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 5px;">
+                <span class="lbl" style="color: #e4e4e4; font-size: 7px;">Email address</span>
+                <div style="display: flex; gap: 5px;">
+                  <span style="flex: 1; background: #fff; border-radius: 3px; height: 22px;"></span>
+                  <span style="padding: 6px 10px; border-radius: 3px; background: #2a2a2a; color: #f0f0f0; font-size: 7px; font-family: 'Space Mono', monospace;">Subscribe</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Subscribe.tsx <span class="tag-shared">on 3 pages of this site</span> <span class="tag-state">stateful</span></h2>
+          <p class="spec-sig">&lt;Subscribe /&gt; — <code>useState(message)</code> · <code>id="subscribe"</code></p>
+          <ul class="anno-list">
+            <li><code>&lt;h2&gt;</code> + supporting copy</li>
+            <li><code>&lt;form&gt;</code>: A3KDS <code>FormField</code> + <code>TextField</code> for the email, A3KDS <code>Button</code> to submit</li>
+            <li>Label type and the button fill are named local exceptions — see the connected record below</li>
+            <li>Status line rendered after submit; it never claims a subscription</li>
+          </ul>
+          <p class="spec-data">data: contact</p>
+          <p class="spec-used">used by: homepage · writing · essay</p>
+          <p class="anno-flag">No newsletter backend — submit opens a pre-filled <code>mailto:</code> rather than faking a subscribed state</p>
+        </div>
+      </div>
+
+      <!-- ── Ticker ──────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage" style="padding: 0; align-items: center;">
+            <div style="background: #b8b8b8; padding: 9px 0; width: 100%; overflow: hidden;">
+              <div style="display: flex; gap: 14px; padding: 0 10px; white-space: nowrap;">
+                <span class="bar" style="width: 54px; height: 6px; background: #efefef;"></span>
+                <span class="bar" style="width: 44px; height: 6px; background: #efefef;"></span>
+                <span class="bar" style="width: 62px; height: 6px; background: #efefef;"></span>
+                <span class="bar" style="width: 38px; height: 6px; background: #efefef;"></span>
+                <span class="bar" style="width: 58px; height: 6px; background: #efefef;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Ticker.tsx <span class="tag-shared">on 2 pages of this site</span></h2>
+          <p class="spec-sig">&lt;Ticker items={string[]} /&gt;</p>
+          <ul class="anno-list">
+            <li>Pink band, <code>aria-hidden</code> — decorative only</li>
+            <li>Items rendered twice so <code>.apb-ticker</code> loops seamlessly</li>
+          </ul>
+          <p class="spec-data">data: ticker (homepage) · writingTicker (writing)</p>
+          <p class="spec-used">used by: homepage · writing</p>
+        </div>
+      </div>
+
+      <!-- ── Work ────────────────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage">
+            <div style="display: flex; flex-direction: column; gap: 7px; width: 100%;">
+              <span class="lbl" style="color: #be3372; font-size: 7px;">03 — Work</span>
+              <span class="bar-xl" style="width: 66%; height: 14px;"></span>
+              <div class="wf-solid" style="padding: 8px 10px; display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: center; border-left: 5px solid #8a8a8a;">
+                <span style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #b0b0b0;">01</span>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  <span class="bar" style="width: 30%; height: 5px;"></span>
+                  <span class="bar-lg" style="width: 76%; height: 9px;"></span>
+                  <span class="bar" style="width: 100%; height: 5px;"></span>
+                </div>
+                <span style="font-size: 12px; color: #9a9a9a;">→</span>
+              </div>
+              <div class="wf-solid" style="padding: 8px 10px; display: grid; grid-template-columns: auto 1fr auto; gap: 9px; align-items: center; border-left: 5px solid #8a8a8a;">
+                <span style="font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: #b0b0b0;">02</span>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  <span class="bar" style="width: 26%; height: 5px;"></span>
+                  <span class="bar-lg" style="width: 82%; height: 9px;"></span>
+                  <span class="bar" style="width: 100%; height: 5px;"></span>
+                </div>
+                <span style="font-size: 12px; color: #9a9a9a;">→</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">Work.tsx</h2>
+          <p class="spec-sig">&lt;Work /&gt; — no props · <code>id="work"</code></p>
+          <ul class="anno-list">
+            <li>Eyebrow, <code>&lt;h2&gt;</code>, one-line sub</li>
+            <li>Row anatomy: big number · tag · title · body · metric · arrow</li>
+            <li>The whole row is one <code>&lt;a&gt;</code> → <code>caseStudyHref</code></li>
+            <li>Coloured left border per project</li>
+          </ul>
+          <p class="spec-data">data: projects (3) → /case-studies/*.html</p>
+        </div>
+      </div>
+
+      <!-- ── WritingTeaser ───────────────────────────────────────────── -->
+      <div class="spec-row">
+        <div class="spec-frame">
+          <div class="spec-stage">
+            <div style="display: flex; flex-direction: column; gap: 7px; width: 100%;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 4px; flex: 1;">
+                  <span class="lbl" style="color: #be3372; font-size: 7px;">01 — Writing</span>
+                  <span class="bar-xl" style="width: 72%; height: 14px;"></span>
+                </div>
+                <span style="padding: 5px 10px; border-radius: 3px; background: #1a1a1a; color: #fff; font-size: 7px; font-family: 'Space Mono', monospace;">All writing</span>
+              </div>
+              <div class="wf-dark" style="padding: 10px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 8px; align-items: center;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  <span style="align-self: flex-start; padding: 2px 6px; border-radius: 999px; background: #9a9a9a; font-size: 6px; font-family: 'Space Mono', monospace; color: #1a1a1a;">Latest</span>
+                  <span class="bar-lg" style="width: 90%; height: 9px; background: #8a8a8a;"></span>
+                  <span class="bar-on-dark" style="width: 96%; height: 5px;"></span>
+                </div>
+                <span style="font-size: 15px; font-weight: 700; color: #7a7a7a; text-align: right; letter-spacing: -0.03em;">Judgment.</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+                <span class="wf-solid" style="height: 30px; border-top: 4px solid #8a8a8a;"></span>
+                <span class="wf-solid" style="height: 30px; border-top: 4px solid #8a8a8a;"></span>
+                <span class="wf-solid" style="height: 30px; border-top: 4px solid #8a8a8a;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spec-info">
+          <h2 class="spec-name">WritingTeaser.tsx</h2>
+          <p class="spec-sig">&lt;WritingTeaser /&gt; — no props · <code>id="writing"</code></p>
+          <ul class="anno-list">
+            <li>Eyebrow, <code>&lt;h2&gt;</code>, "All writing" → <code>/writing.html</code></li>
+            <li>Featured card = <code>posts[0]</code> — badge, title, excerpt, meta, display word</li>
+            <li><code>PostCard</code> ×5 for the remainder</li>
+            <li>Destructures at module scope: <code>const [latest, ...rest] = posts</code></li>
+          </ul>
+          <p class="spec-data">data: posts (6) — 1 featured + 5 cards</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+    </section>
+
+    <section class="page" id="architecture" hidden>
+  <div class="wf-page">
+
+    <div class="page-head">
+      <div>
+        <p class="lbl" style="margin: 0 0 8px;">Page 4 · Information architecture</p>
+        <h1 class="page-title">How the site is put together</h1>
+      </div>
+      <p class="page-meta">7 built pages · 4 React, 3 static<br>1 content module</p>
+    </div>
+
+    <p class="page-intro">
+      Everything below is read from <code>vite.config.ts</code>, the four entry points and <code>content.ts</code> —
+      not from the published site. Pages that exist as files but are not in the build are marked.
+    </p>
+
+    <!-- ══ 1. SITE MAP ═══════════════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">01 · Site map</h2>
+      <p class="ia-sub">Every entry in the Vite build, with what mounts it.</p>
+      <pre class="tree">/
+├── index.html ................... main.tsx → App.tsx           <span class="t-note">homepage, 8 sections</span>
+│
+├── writing.html ................. writing-main.tsx → Writing.tsx
+│   └── writing/
+│       └── the-compound-professional-is-not-coming.html
+│                                  writing-post-main.tsx → WritingPost.tsx
+│
+├── resume.html .................. resume-main.tsx → Resume.tsx
+│
+└── case-studies/ ................ <span class="t-warn">standalone HTML — no React mount</span>
+    ├── ai-ready-design-system.html
+    ├── value-driven-alignment.html
+    └── cross-platform-evolution.html</pre>
+      <p class="ia-note">
+        The three case studies are ~600-line hand-authored HTML documents. They are in the build inputs and ship,
+        but they are outside the React app entirely — so they do not pick up the redesign's components, palette or nav.
+      </p>
+    </section>
+
+    <!-- ══ 2. HOMEPAGE SECTION ORDER ═════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">02 · Homepage section order</h2>
+      <p class="ia-sub">Document order inside <code>&lt;main id="main-content"&gt;</code>, with the anchor each exposes.</p>
+      <pre class="tree">App.tsx
+├── a[href="#main-content"] ...... <span class="t-note">skip link, visible on focus</span>
+├── Navbar
+└── main#main-content
+    ├── Hero .................... #top
+    ├── Ticker .................. <span class="t-dim">no anchor — decorative</span>
+    ├── WritingTeaser ........... #writing      01 — Writing
+    ├── Speaking ................ #speaking     02 — Speaking
+    ├── Work ...................  #work         03 — Work
+    ├── Bio ..................... #bio          04 — Bio
+    ├── Practice ................ #practice     05 — Practice
+    └── Subscribe ............... #subscribe
+└── Footer</pre>
+      <p class="ia-note">
+        The numbered eyebrows run 01–05 and cover only the five middle sections. Hero, Ticker and Subscribe sit
+        outside that numbering, so "05 — Practice" is the fifth <em>labelled</em> section, not the fifth section.
+      </p>
+    </section>
+
+    <!-- ══ 3. NAVIGATION MODEL ═══════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">03 · Navigation model</h2>
+      <p class="ia-sub">Nav and footer arrays are declared per page, in the page component — never in <code>content.ts</code>.</p>
+
+      <div class="tbl-wrap">
+        <table class="ia-tbl">
+          <thead>
+            <tr><th>Page</th><th>Nav links</th><th>CTA</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>/</code><br><span class="td-dim">App.tsx</span></td>
+              <td>Writing <span class="arr">→</span> <code>#writing</code><br>
+                  Speaking <span class="arr">→</span> <code>#speaking</code><br>
+                  Work <span class="arr">→</span> <code>#work</code><br>
+                  Practice <span class="arr">→</span> <code>#practice</code><br>
+                  Bio <span class="arr">→</span> <code>#bio</code></td>
+              <td>Subscribe <span class="arr">→</span> <code>#subscribe</code></td>
+            </tr>
+            <tr>
+              <td><code>/writing.html</code><br><span class="td-dim">Writing.tsx</span></td>
+              <td>Portfolio <span class="arr">→</span> <code>/</code><br>
+                  Writing <span class="badge-cur">current</span><br>
+                  Speaking <span class="arr">→</span> <code>/#speaking</code><br>
+                  CV <span class="arr">→</span> <code>/resume.html</code></td>
+              <td>Subscribe <span class="arr">→</span> <code>#subscribe</code></td>
+            </tr>
+            <tr>
+              <td><code>/writing/…</code><br><span class="td-dim">WritingPost.tsx</span></td>
+              <td>Portfolio <span class="arr">→</span> <code>/</code><br>
+                  Writing <span class="badge-cur">current</span><br>
+                  Speaking <span class="arr">→</span> <code>/#speaking</code><br>
+                  CV <span class="arr">→</span> <code>/resume.html</code></td>
+              <td>Subscribe <span class="arr">→</span> <code>/writing.html#subscribe</code></td>
+            </tr>
+            <tr>
+              <td><code>/resume.html</code><br><span class="td-dim">Resume.tsx</span></td>
+              <td>Portfolio <span class="arr">→</span> <code>/</code><br>
+                  Writing <span class="arr">→</span> <code>/writing.html</code><br>
+                  Speaking <span class="arr">→</span> <code>/#speaking</code><br>
+                  CV <span class="badge-cur">current</span></td>
+              <td>Print / PDF <span class="td-dim">— <code>window.print()</code>, renders as a button</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="anno-flag" style="margin-top: 16px;">
+        <strong>Asymmetry worth noting:</strong> the homepage nav is entirely in-page anchors — it never links out to
+        <code>/writing.html</code> or <code>/resume.html</code>. Every other page links back with "Portfolio".
+        From the homepage those pages are reachable only through the "All writing" button, Bio's "Full CV", or the footer.
+      </p>
+    </section>
+
+    <!-- ══ 4. LINK GRAPH ═════════════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">04 · Outbound links by section</h2>
+      <p class="ia-sub">Where each homepage section can take you.</p>
+      <div class="tbl-wrap">
+        <table class="ia-tbl">
+          <thead><tr><th>From</th><th>To</th><th>Kind</th></tr></thead>
+          <tbody>
+            <tr><td>Hero</td><td><code>#writing</code>, <code>#speaking</code></td><td>in-page</td></tr>
+            <tr><td>WritingTeaser</td><td><code>/writing.html</code><br><code>/writing/&lt;slug&gt;.html</code></td><td>internal page</td></tr>
+            <tr><td>Work</td><td><code>/case-studies/*.html</code> ×3</td><td>internal page <span class="td-dim">(static)</span></td></tr>
+            <tr><td>Bio</td><td><code>/resume.html</code><br>LinkedIn</td><td>internal page<br>external</td></tr>
+            <tr><td>Practice</td><td><code>mailto:</code></td><td>mail</td></tr>
+            <tr><td>Subscribe</td><td><code>mailto:</code> <span class="td-dim">on submit</span></td><td>mail</td></tr>
+            <tr><td>Footer</td><td><code>/writing.html</code>, LinkedIn, <code>mailto:</code>, <code>/resume.html</code></td><td>mixed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ 5. SHARED COMPONENTS ══════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">05 · Component reuse across pages</h2>
+      <p class="ia-sub">Four of the eleven components are shared; the rest are homepage-only.</p>
+      <div class="tbl-wrap">
+        <table class="ia-tbl matrix">
+          <thead>
+            <tr><th>Component</th><th>/</th><th>/writing</th><th>/writing/…</th><th>/resume</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Navbar</code></td><td class="y">●</td><td class="y">●</td><td class="y">●</td><td class="y">●</td></tr>
+            <tr><td><code>Footer</code></td><td class="y">●</td><td class="y">●</td><td class="y">●</td><td class="y">●</td></tr>
+            <tr><td><code>Subscribe</code></td><td class="y">●</td><td class="y">●</td><td class="y">●</td><td class="n">·</td></tr>
+            <tr><td><code>Ticker</code></td><td class="y">●</td><td class="y">●</td><td class="n">·</td><td class="n">·</td></tr>
+            <tr><td><code>Hero</code></td><td class="y">●</td><td class="n">·</td><td class="n">·</td><td class="n">·</td></tr>
+            <tr><td><code>WritingTeaser</code></td><td class="y">●</td><td class="n">·</td><td class="n">·</td><td class="n">·</td></tr>
+            <tr><td><code>Speaking</code></td><td class="y">●</td><td class="n">·</td><td class="n">·</td><td class="n">·</td></tr>
+            <tr><td><code>Work</code></td><td class="y">●</td><td class="n">·</td><td class="n">·</td><td class="n">·</td></tr>
+            <tr><td><code>Bio</code></td><td class="y">●</td><td class="n">·</td><td class="n">·</td><td class="n">·</td></tr>
+            <tr><td><code>Practice</code></td><td class="y">●</td><td class="n">·</td><td class="n">·</td><td class="n">·</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ 6. CONTENT MODEL ══════════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">06 · Content model</h2>
+      <p class="ia-sub">Single module — <code>src/app/content.ts</code> — consumed by both the homepage and the other pages.</p>
+      <div class="tbl-wrap">
+        <table class="ia-tbl">
+          <thead><tr><th>Export</th><th>Shape</th><th>Consumed by</th></tr></thead>
+          <tbody>
+            <tr><td><code>hero</code></td><td>object</td><td>Hero · Bio · Resume · WritingPost</td></tr>
+            <tr><td><code>heroStats</code></td><td>4 items</td><td>Hero</td></tr>
+            <tr><td><code>about</code></td><td>object</td><td>Bio</td></tr>
+            <tr><td><code>aboutHighlights</code></td><td>3 items</td><td>Bio</td></tr>
+            <tr><td><code>posts</code></td><td>6 items</td><td>WritingTeaser · Writing</td></tr>
+            <tr><td><code>speakingTopics</code></td><td>4 items</td><td>Speaking</td></tr>
+            <tr><td><code>speakingEvents</code></td><td>5 items</td><td>Speaking</td></tr>
+            <tr><td><code>projects</code></td><td>3 items</td><td>Work · Resume</td></tr>
+            <tr><td><code>ticker</code></td><td>strings</td><td>App → Ticker</td></tr>
+            <tr><td><code>contact</code></td><td>object</td><td>Footer · Subscribe · Practice · Bio · all pages</td></tr>
+            <tr class="row-off"><td><code>writingStats</code></td><td>3 items</td><td>Writing <span class="td-dim">only</span></td></tr>
+            <tr class="row-off"><td><code>writingTicker</code></td><td>strings</td><td>Writing <span class="td-dim">only</span></td></tr>
+            <tr class="row-off"><td><code>roles</code></td><td>4 items</td><td>Resume <span class="td-dim">only</span></td></tr>
+            <tr class="row-off"><td><code>skills</code></td><td>9 items</td><td>Resume <span class="td-dim">only</span></td></tr>
+            <tr class="row-off"><td><code>education</code></td><td>4 items</td><td>Resume <span class="td-dim">only</span></td></tr>
+            <tr class="row-off"><td><code>cvStats</code></td><td>4 items</td><td>Resume <span class="td-dim">only</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ia-note">Greyed rows are not reachable from the homepage — they feed <code>/writing.html</code> and <code>/resume.html</code>.</p>
+    </section>
+
+    <!-- ══ 7. GAPS ═══════════════════════════════════════════════════════ -->
+    <section class="ia-block">
+      <h2 class="ia-h">07 · Dead ends and gaps</h2>
+      <p class="ia-sub">Places where the architecture promises something the site does not yet deliver.</p>
+      <ul class="gap-list">
+        <li>
+          <span class="gap-n">1</span>
+          <div>
+            <strong>Five of six essays have no page.</strong>
+            Only <code>the-compound-professional-is-not-coming</code> has <code>hasFullPost: true</code> and a built entry.
+            The other five render as non-clickable cards marked "Full essay coming soon" on both the homepage and <code>/writing.html</code>.
+          </div>
+        </li>
+        <li>
+          <span class="gap-n">2</span>
+          <div>
+            <strong>Case studies are outside the design system.</strong>
+            Three standalone HTML files, no React, no shared <code>Navbar</code> or <code>Footer</code> — reached from Work,
+            but they leave the redesign's visual language entirely.
+          </div>
+        </li>
+        <li>
+          <span class="gap-n">3</span>
+          <div>
+            <strong>Subscribe has no backend.</strong>
+            Present on three of four pages. Submitting opens a pre-filled <code>mailto:</code>; nothing is stored and no list exists.
+          </div>
+        </li>
+        <li>
+          <span class="gap-n">4</span>
+          <div>
+            <strong>Each essay needs a hand-written HTML entry.</strong>
+            Posts live in <code>content.ts</code>, but publishing one also requires a new file under <code>writing/</code>
+            <em>and</em> a new line in <code>vite.config.ts</code>'s rollup inputs. Miss the second and the page builds but never ships.
+          </div>
+        </li>
+        <li>
+          <span class="gap-n">5</span>
+          <div>
+            <strong>Nav link arrays are duplicated four times.</strong>
+            Each page component declares its own <code>navLinks</code> and <code>footerLinks</code>. Adding a destination
+            means editing four files, and they have already drifted — the footer carries "Writing" on some pages and "Portfolio" on others.
+          </div>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var slugs = ['wireframe', 'components', 'compositions', 'architecture'];
+      function show(slug) {
+        if (slugs.indexOf(slug) === -1) slug = slugs[0];
+        slugs.forEach(function (s) {
+          document.getElementById(s).hidden = (s !== slug);
+        });
+        document.querySelectorAll('.tab').forEach(function (t) {
+          if (t.dataset.tab === slug) t.setAttribute('aria-current', 'page');
+          else t.removeAttribute('aria-current');
+        });
+      }
+      function fromHash() { show((location.hash || '').replace('#', '')); }
+      window.addEventListener('hashchange', function () { fromHash(); window.scrollTo(0, 0); });
+      fromHash();
+    })();
+  </script>
+
+<style>
+  .anno-connected { margin-top: 10px; padding-top: 9px; border-top: 1px dashed #c4c4c4; }
+  .anno-connected .anno-id { font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #6a6a6a; margin: 0 0 5px; }
+  .anno-connected .anno-own { font-size: 10.5px; color: #2a2a2a; margin: 0 0 5px; }
+  .anno-connected ul { margin: 0 0 5px; padding-left: 15px; }
+  .anno-connected li { font-size: 10px; color: #4a4a4a; margin-bottom: 2px; }
+  .anno-connected .anno-prov { font-family: 'Space Mono', monospace; font-size: 8px; color: #9a9a9a; margin: 5px 0 0; }
+  .anno-connected .anno-prov-src { color: #7a7a7a; word-break: break-all; }
+  .anno-unavailable { font-size: 10px; color: #8a3a3a; margin: 0; }
+  .anno-elsewhere { color: #8a8a8a; font-style: normal; }
+  .anno-coverage {
+    font-size: 11.5px; line-height: 1.6; color: #4a4a4a; margin: 0 0 22px;
+    padding: 9px 12px; border-left: 3px solid #1a1a1a; background: #f4f4f2;
+    max-width: 78ch;
+  }
+</style>
+<script type="module" src="./connect.js"></script>
+</body>
+</html>

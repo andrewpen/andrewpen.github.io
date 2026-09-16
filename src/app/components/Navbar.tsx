@@ -1,96 +1,81 @@
-import { useState } from "react";
-import { Menu, X, Linkedin } from "lucide-react";
-import { hero } from "../content";
+import type { CSSProperties } from "react";
+import { Button, LinkButton } from "@a3kds/design-system";
+import { CYAN, NAVY } from "../boldPalette";
 
-const links = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "experience", label: "Experience" },
-  { id: "speaking", label: "Speaking" },
-  { id: "projects", label: "Projects" },
-  { id: "contact", label: "Contact" },
-];
+type NavLink = { label: string; href: string; current?: boolean };
 
-export function Navbar() {
-  const [open, setOpen] = useState(false);
+type NavbarProps = {
+  links: NavLink[];
+  cta?: { label: string; href?: string; onClick?: () => void };
+  logoHref?: string;
+};
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setOpen(false);
-  };
+export function Navbar({ links, cta, logoHref = "/" }: NavbarProps) {
+  // The CTA is an ACTION, so it takes the system's action: the pill shape,
+  // the single size, the focus ring and — for the link form — real anchor
+  // semantics. As a hand-styled element it had none of those, which is the
+  // whole reason the action contract exists.
+  //
+  // Its cyan-on-navy fill is this header's colour, not a system role, so it
+  // stays local — through the class pattern W-4 established, NOT an inline
+  // background. An inline fill leaves the system's hover underneath it, so
+  // the cyan would jump to action-primary on hover; the class carries its own
+  // hover rule. (My first attempt invented two --a3kds-local-* properties the
+  // package does not define, which would have silently rendered the default
+  // colour and changed the header.)
+  const ctaSpacing: CSSProperties = { marginLeft: "var(--a3kds-space-3)" };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a
-          href="#home"
-          onClick={(e) => { e.preventDefault(); scrollTo("home"); }}
-          className="flex items-center gap-2 tracking-tight"
-        >
-          <span className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-blue-500 text-white flex items-center justify-center">
-            AP
-          </span>
-          <span className="hidden sm:inline text-slate-900">Andrew Pendleton</span>
+    <header style={{ position: "sticky", top: 0, zIndex: 200, background: NAVY, color: "#eef4f8" }}>
+      <div
+        style={{
+          maxWidth: 1280,
+          margin: "0 auto",
+          // 14px has no step on the system scale; 32 is space-8.
+          padding: "14px var(--a3kds-space-8)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "var(--a3kds-space-6)",
+          flexWrap: "wrap",
+        }}
+      >
+        <a href={logoHref} style={{ display: "flex", alignItems: "center", gap: "var(--a3kds-space-3)", color: "#ffffff", textDecoration: "none" }}>
+          <img src="/img/logo.svg" alt="" width={30} height={30} style={{ display: "block", borderRadius: 9999 }} />
+          <span style={{ fontWeight: 700, letterSpacing: "-0.02em" }}>Andrew Pendleton</span>
         </a>
-
-        <ul className="hidden md:flex items-center gap-8">
+        <nav aria-label="Main" style={{ display: "flex", alignItems: "center", gap: "var(--a3kds-space-1)", flexWrap: "wrap" }}>
           {links.map((l) => (
-            <li key={l.id}>
-              <a
-                href={`#${l.id}`}
-                onClick={(e) => { e.preventDefault(); scrollTo(l.id); }}
-                className="text-slate-600 hover:text-indigo-600 transition-colors"
-              >
-                {l.label}
-              </a>
-            </li>
+            <a
+              key={l.label}
+              href={l.href}
+              aria-current={l.current ? "page" : undefined}
+              style={{
+                padding: "var(--a3kds-space-2) var(--a3kds-space-3)",
+                borderRadius: "var(--a3kds-radius-md)",
+                color: l.current ? CYAN : "#d9e6ee",
+                fontWeight: l.current ? 600 : 400,
+                fontSize: "0.875rem",
+                textDecoration: "none",
+              }}
+            >
+              {l.label}
+            </a>
           ))}
-        </ul>
-
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href={hero.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-11 h-11 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:text-indigo-600 hover:border-indigo-300 transition-colors"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={16} />
-          </a>
-          <button
-            onClick={() => scrollTo("contact")}
-            className="px-5 py-2 rounded-full bg-slate-900 text-white hover:bg-indigo-600 transition-colors"
-          >
-            Get in touch
-          </button>
-        </div>
-
-        <button
-          className="md:hidden text-slate-700"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-
-      <div id="mobile-nav" className={`${open ? "block" : "hidden"} md:hidden border-t border-slate-200 bg-white`}>
-        <ul className="flex flex-col px-6 py-4 gap-3">
-          {links.map((l) => (
-            <li key={l.id}>
-              <a
-                href={`#${l.id}`}
-                onClick={(e) => { e.preventDefault(); scrollTo(l.id); }}
-                className="block w-full py-2 text-slate-700 hover:text-indigo-600"
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+          {cta &&
+            // onClick means it DOES something here (Print/PDF); href means it
+            // navigates. They are different elements, and the package refuses
+            // to let one pretend to be the other.
+            (cta.onClick ? (
+              <Button onClick={cta.onClick} className="ap-chrome-cta" style={ctaSpacing}>
+                {cta.label}
+              </Button>
+            ) : (
+              <LinkButton href={cta.href!} className="ap-chrome-cta" style={ctaSpacing}>
+                {cta.label}
+              </LinkButton>
+            ))}
+        </nav>
       </div>
     </header>
   );

@@ -1,6 +1,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --ap-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ap-font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-size: 16px;
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
@@ -131,6 +133,59 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--ap-font-sans);
+  }
+
+  .a3-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  @keyframes apb-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .apb-ticker {
+    display: flex;
+    width: max-content;
+    animation: apb-slide 38s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .apb-ticker { animation: none; }
+  }
+  @media (max-width: 900px) {
+    .apb-rail { display: none !important; }
+  }
+
+  .lift:hover .lift-t {
+    color: #0A6EC2;
+  }
+
+  @media (max-width: 900px) {
+    .apb-cvbody { grid-template-columns: minmax(0, 1fr) !important; }
+    .apb-split { grid-template-columns: minmax(0, 1fr) !important; }
+  }
+  @media print {
+    .apb-noprint { display: none !important; }
+    body, .apb { background: #ffffff !important; }
+
+    /* PAGE BREAKS. Reviewed against a real printed PDF (P07-D1): the education
+       card was split across the page 1-2 boundary and a role card broke in the
+       middle of its bullet list. A card that fits on a page must not straddle
+       one. */
+    .apb-cv-card, .apb-cv-entry { break-inside: avoid; }
+
+    /* A role card is legitimately TALLER than a page, so forbidding a break
+       inside it would push it whole to the next page and leave most of one
+       blank. It may break - but not immediately after its heading, and never
+       through a single achievement. */
+    .apb-cv-role h3 { break-after: avoid; }
+    .apb-cv-role li { break-inside: avoid; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -188,4 +243,155 @@
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
   }
+}
+
+/* Named local exception (P04-A01/W-4, amended). The writing CTA keeps the
+   site's navy fill; the system supplies the shape, size, focus ring and anchor
+   semantics. Expressed as a class rather than an inline style so the hover
+   state stays navy too — an inline background would leave hover shifting to
+   action-primary-hover, i.e. navy going blue on hover. */
+.a3kds-btn.ap-writing-cta {
+  background-color: var(--a3kds-color-neutral-950);
+  color: var(--a3kds-color-neutral-0);
+}
+/* A hover rule is REQUIRED here, not optional: the system's primary hover
+   still applies underneath, so without this the navy link would turn
+   action-primary blue on hover — the exact jump the owner asked to avoid.
+   Lightening within the navy family keeps the identity. The original anchor
+   had no hover treatment at all; this is the smallest addition that stops the
+   inherited one from contradicting the decision. */
+.a3kds-btn.ap-writing-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--a3kds-color-neutral-800);
+}
+
+/* Named local exception (P06-A01). The site chrome's CTA keeps its cyan fill
+   on navy text; the system supplies the shape, the single size, the focus ring
+   and — in the link form — real anchor semantics.
+
+   A class rather than an inline background, for the same reason as
+   .ap-writing-cta: the system's primary hover still applies underneath, so an
+   inline fill would leave the cyan jumping to action-primary on hover. The
+   hand-styled original had no hover state at all, so this is not a new
+   behaviour being invented — it is what stops an inherited one from
+   contradicting the colour. */
+.a3kds-btn.ap-chrome-cta {
+  /* These MIRROR boldPalette.ts (CYAN, NAVY), which is where this site keeps
+     its palette. The duplication is pre-existing and real: the palette lives
+     in TypeScript, consumed through inline styles, so a CSS rule has no way to
+     reach it. Flagged for the batch review rather than fixed here — giving the
+     palette one home is a larger change than this activity's scope. */
+  background-color: #11C4D4;
+  color: #141f29;
+
+  /* Owner decision 2026-09-14 (Andrew), batch A review, option B.
+     Restores the label typography this CTA had before the migration.
+
+     It is here because the SYSTEM does not set it: .a3kds-btn declares
+     font-family and neither font-size nor font-weight, so an action label
+     inherits from wherever the button sits — this one inherited 16px/400 from
+     the body and went bigger and lighter than the 14px/600 it was designed
+     with. That is an upstream gap, raised separately; this restores the
+     header's emphasis without weakening the migration, since the shape, the
+     focus ring and the anchor semantics still come from the system.
+
+     If the design system later specifies label typography, revisit this:
+     it will then be overriding a real decision rather than filling a hole. */
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.a3kds-btn.ap-chrome-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  /* Darkened within the cyan family, so hover reads as the same control
+     rather than a different one. */
+  background-color: #0FAFBD;
+}
+
+/* Named local exception (P06-A02). Actions on the site's dark sections keep
+   the weight they were drawn with.
+
+   This is the SAME gap as .ap-chrome-cta, and the same owner decision applied
+   consistently: .a3kds-btn declares no font-weight, so an action label
+   inherits 400 from the body where these were 600. Only the weight is here —
+   the COLOUR is not, because inside data-mode="dark" the system already
+   resolves the action to #11C4D4 on #141f29, which is this site's cyan on
+   navy exactly. Re-stating it locally would duplicate the system rather than
+   extend it. */
+.a3kds-btn.ap-hero-cta {
+  font-weight: 600;
+}
+
+/* Named local exceptions (P06-A05). The Subscribe section sits on the site's
+   BLUE, and the system's light-canvas colours are unreadable there.
+
+   Measured before fixing, not guessed: the FormField label came out
+   rgb(31,46,61) on rgb(10,110,194) — contrast 2.65, below AA's 4.5 — and the
+   Button came out rgb(10,110,194) on the same blue, contrast 1.00. That is not
+   "low contrast", it is an invisible button.
+
+   This is the third surface where the system's light palette lands on a
+   coloured ground. The dark sections solve it properly with data-mode="dark";
+   this one cannot, because the ground is BLUE rather than the system's dark
+   canvas, so there is no mode whose palette matches. Raised with Codex. */
+.ap-subscribe-field .a3kds-formfield-label {
+  color: #ffffff;
+
+  /* Owner decision 2026-09-14 (Andrew), batch D review: restore the site's own
+     label treatment.
+
+     The system's form label is Inter 16px/600 sentence case. Every other label
+     and eyebrow on this page is mono, 11px, uppercase and tracked, so adopting
+     the system's left ONE label on the homepage reading differently from its
+     neighbours — and it carried no behaviour the old one lacked. Unlike the
+     pill or the action colours, there was nothing gained to weigh against it.
+
+     The field, its label wiring, its error and hint plumbing and the focus
+     ring all still come from the system; only the label's type is local. */
+  font-family: var(--ap-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+/* P07-A01 batch G: the case studies' closing actions, on the site's BLUE.
+
+   Same situation as .ap-subscribe-cta and the same resolution. These two take
+   the system's pill, its single action size, its focus ring and its anchor
+   semantics; only the colours are local, because the ground is the site's blue
+   and is neither the system's light canvas nor its dark one. This is the
+   FOURTH surface where that gap shows, which is a system question rather than
+   a fourth thing to patch — raised, not solved here.
+
+   The hover rule is required, not decorative: without it the system's own
+   hover applies underneath and contradicts the decision. */
+.a3kds-btn.ap-casestudy-cta {
+  background-color: var(--a3kds-color-neutral-950);
+  color: var(--a3kds-color-neutral-0);
+  /* The label weight the owner restored in batch A and applied again in batch
+     B. These anchors were 600; the system's action is 400. Same decision, same
+     value, applied here rather than re-asked. */
+  font-weight: 600;
+}
+.a3kds-btn.ap-casestudy-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  /* The same lightening .ap-writing-cta uses, expressed the same way. */
+  background-color: var(--a3kds-color-neutral-800);
+}
+.a3kds-btn.ap-casestudy-cta-secondary {
+  border-color: var(--a3kds-color-neutral-0);
+  color: var(--a3kds-color-neutral-0);
+  font-weight: 600;
+}
+.a3kds-btn.ap-casestudy-cta-secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+  border-color: var(--a3kds-color-neutral-0);
+  color: var(--a3kds-color-neutral-0);
+  background-color: rgb(255 255 255 / 0.12);
+}
+
+.a3kds-btn.ap-subscribe-cta {
+  background-color: #141f29;
+  color: #ffffff;
+}
+.a3kds-btn.ap-subscribe-cta:hover:not(:disabled):not([aria-disabled="true"]) {
+  /* Lightened within the navy family, for the same reason as .ap-writing-cta:
+     without this the system's primary hover returns the button to the blue it
+     was invisible against. */
+  background-color: #24384a;
 }

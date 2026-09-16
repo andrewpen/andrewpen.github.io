@@ -39,6 +39,8 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         resume: path.resolve(__dirname, 'resume.html'),
+        writing: path.resolve(__dirname, 'writing.html'),
+        writingCompoundProfessional: path.resolve(__dirname, 'writing/the-compound-professional-is-not-coming.html'),
         csAiReady: path.resolve(__dirname, 'case-studies/ai-ready-design-system.html'),
         csValueDriven: path.resolve(__dirname, 'case-studies/value-driven-alignment.html'),
         csCrossPlatform: path.resolve(__dirname, 'case-studies/cross-platform-evolution.html'),
