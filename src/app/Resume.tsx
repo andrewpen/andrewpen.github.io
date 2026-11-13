@@ -36,7 +36,7 @@ export function Resume() {
                 whiteSpace: "nowrap",
               }}
             >
-              Curriculum vitae · 2013 — present
+              Curriculum vitae · 2007 — present
             </span>
           </div>
           <div
@@ -66,7 +66,7 @@ export function Resume() {
                 <span style={{ display: "block", color: CYAN }}>Pendleton.</span>
               </h1>
               <p style={{ fontSize: "clamp(1.0625rem,2vw,1.375rem)", lineHeight: 1.35, color: "#d9e6ee", margin: "0 0 32px", maxWidth: "34ch" }}>
-                Senior Director, Experience Design — design infrastructure and agent-native systems.
+                Principal Design Engineer, AI & Design Systems at One North — design infrastructure and agent-native systems.
               </p>
               <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontFamily: "var(--ap-font-mono)", fontSize: "0.8125rem" }}>
                 <a href={`mailto:${hero.email}`} style={{ color: CYAN }}>
@@ -116,7 +116,8 @@ export function Resume() {
               <div style={{ marginBottom: 48 }}>
                 <p style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.6875rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "#BE3372", margin: "0 0 16px" }}>Summary</p>
                 <p style={{ fontSize: "1.0625rem", lineHeight: 1.65, color: "#38546a", margin: 0, maxWidth: "68ch" }}>
-                  Twelve years at Verizon, starting as a front-end consultant and growing into a Senior Director owning enterprise design infrastructure. I transform fragmented
+                  Principal Design Engineer at One North, focused on AI and design systems. Before that, 12+ years at Verizon, starting as a front-end consultant and growing into a
+                  Senior Director owning enterprise design infrastructure. I transform fragmented
                   component libraries into opinionated, agent-native platforms — reducing accumulated complexity, enforcing quality and accessibility at scale, and driving
                   alignment across design, engineering and product.
                 </p>

@@ -30,8 +30,8 @@ export function Bio() {
             Twelve years in one building, on purpose.
           </h2>
           <p style={{ fontSize: "1.0625rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 var(--a3kds-space-5)", maxWidth: "64ch" }}>
-            I joined Verizon as a front-end consultant in 2013 and never left. Developer, then manager, then Senior Director owning the design system that roughly 86% of the
-            company's product surfaces build on. Staying in one place that long is unfashionable. It is also the only way I know to watch an idea survive its own second and
+            I joined Verizon as a front-end consultant in 2013 and stayed until 2026. Developer, then manager, then Senior Director owning the design system that roughly 86% of
+            the company's product surfaces build on. Staying in one place that long is unfashionable. It is also the only way I know to watch an idea survive its own second and
             third order effects.
           </p>
           <p style={{ fontSize: "1.0625rem", lineHeight: 1.6, color: "#d9e6ee", margin: "0 0 var(--a3kds-space-8)", maxWidth: "64ch" }}>{about.bio}</p>

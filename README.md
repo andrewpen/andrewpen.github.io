@@ -1,6 +1,6 @@
 # andrewpen.github.io
 
-Personal portfolio site for Andrew Pendleton — Senior Executive in design infrastructure and agent-native systems at Verizon. Live at [andrewpendleton.io](https://andrewpendleton.io).
+Personal portfolio site for Andrew Pendleton — Principal Design Engineer, AI & Design Systems at One North, focusing on design infrastructure and agent-native systems. Live at [andrewpendleton.io](https://andrewpendleton.io).
 
 ## Stack
 

@@ -12,9 +12,10 @@ const navLinks = chrome(
 const footerLinks = chrome(
   ["home", "linkedin", "email", "resume"], "writing");
 
-const [latest, ...earlier] = posts;
-
-export function Writing() {
+// `items` defaults to the published posts; tests pass fixtures to exercise the
+// card, stub and empty-section cases the live content does not currently have.
+export function Writing({ posts: items = posts }: { posts?: typeof posts } = {}) {
+  const [latest, ...earlier] = items;
   return (
     <div className="apb" style={{ background: "#ffffff", color: "#1f2e3d", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Navbar links={navLinks} cta={{ label: "Subscribe", href: hrefFor(destination("subscribe-writing"), "writing") }} />
@@ -43,7 +44,7 @@ export function Writing() {
           </div>
           <div style={{ maxWidth: 1280, margin: "0 auto", padding: "88px 32px 72px", paddingLeft: "clamp(32px,8vw,88px)" }}>
             <span className="a3-badge" style={{ background: "#BE3372", color: "#ffffff", marginBottom: 24, display: "inline-block" }}>
-              Twice a month
+              Writing
             </span>
             <h1 style={{ margin: "0 0 20px", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 0.88, fontSize: "clamp(3.5rem,11vw,9rem)" }}>
               Essays.
@@ -84,7 +85,7 @@ export function Writing() {
                 textDecoration: "none",
                 borderRadius: 16,
                 padding: 56,
-                marginBottom: 40,
+                marginBottom: earlier.length > 0 ? 40 : 0,
                 boxShadow: "var(--a3kds-elevation-floating)" /* byte-identical to the literal it replaces */,
               }}
             >
@@ -103,17 +104,26 @@ export function Writing() {
               </p>
             </a>
 
-            <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 28 }}>
-              <h2 style={{ fontSize: "clamp(1.5rem,3vw,2.25rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>Earlier</h2>
-              <span style={{ flex: 1, height: 1, background: "#d9e6ee" }} />
-              <span style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#476b85" }}>{earlier.length} essays</span>
-            </div>
+            {/* With one published essay there is nothing "earlier": an empty
+                heading reading "0 essays" would advertise a library that does
+                not exist yet, so the section is left out entirely. */}
+            {earlier.length > 0 && (
+              <>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 28 }}>
+                  <h2 style={{ fontSize: "clamp(1.5rem,3vw,2.25rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>Earlier</h2>
+                  <span style={{ flex: 1, height: 1, background: "#d9e6ee" }} />
+                  <span style={{ fontFamily: "var(--ap-font-mono)", fontSize: "0.75rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "#476b85" }}>
+                    {earlier.length} {earlier.length === 1 ? "essay" : "essays"}
+                  </span>
+                </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 24 }}>
-              {earlier.map((p) => (
-                <PostCard key={p.title} post={p} />
-              ))}
-            </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 1fr))", gap: 24 }}>
+                  {earlier.map((p) => (
+                    <PostCard key={p.title} post={p} />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </section>
 

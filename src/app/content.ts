@@ -9,10 +9,10 @@ import { BLUE, PINK, MINT, CYAN, DEEP } from "./boldPalette";
 
 export const hero = {
   name: "Andrew Pendleton",
-  tagline: "Senior Executive · Design Infrastructure & Agent-Native Systems",
+  tagline: "Focusing on Design Infrastructure & Agent-Native Systems",
   headline: "Hi, I'm Andrew Pendleton.",
   intro: "I build the systems humans and AI agents build from — and I write about what that changes. Twelve years turning fragmented component libraries into opinionated, agent-native platforms.",
-  bio: "Senior Director at Verizon leading enterprise design infrastructure, agent-native AI tooling, and design-to-code platform strategy. I transform component libraries into opinionated, scalable systems that enable both people and AI to generate high-quality, accessible experiences across one of the world's largest developer ecosystems.",
+  bio: "Principal Design Engineer, AI & Design Systems at One North. Before that, 12+ years at Verizon, most recently as Senior Director leading enterprise design infrastructure, agent-native AI tooling, and design-to-code platform strategy. I transform component libraries into opinionated, scalable systems that enable both people and AI to generate high-quality, accessible experiences.",
   email: "andrew.d.pendleton@gmail.com",
   location: "New York, NY",
   linkedinUrl: "https://www.linkedin.com/in/andrewpendleton/",
@@ -23,7 +23,7 @@ export const hero = {
 
 export const about = {
   heading: "I build design infrastructure that humans and AI agents both build from.",
-  bio: "With 12+ years at Verizon, starting as a developer and growing into a Senior Director owning enterprise design infrastructure, I specialize in transforming fragmented component libraries into opinionated, agent-native platforms. I reduce accumulated complexity, enforce quality and accessibility at scale, and drive cross-functional alignment across design, engineering, and product.",
+  bio: "Today I'm a Principal Design Engineer at One North, focused on AI and design systems. I specialize in transforming fragmented component libraries into opinionated, agent-native platforms: reducing accumulated complexity, enforcing quality and accessibility at scale, and driving cross-functional alignment across design, engineering, and product.",
 };
 
 export const aboutHighlights = [
@@ -31,19 +31,19 @@ export const aboutHighlights = [
     icon: Sparkles,
     rule: CYAN,
     title: "Agent-Native Infrastructure",
-    text: "Delivered one of Verizon's first MCP servers enabling AI agents to consume, generate from, and validate against VDS standards in real time. Transformed a component library into a living platform that both humans and AI can build from.",
+    text: "At Verizon, my team shipped one of the company's first MCP servers, enabling AI agents to consume, generate from, and validate against VDS standards in real time. Together we turned a component library into a living platform that both humans and AI can build from.",
   },
   {
     icon: Users,
     rule: MINT,
     title: "Manager of Managers",
-    text: "Lead a global team across product, design, engineering, and content strategy, spanning the US and India. Build leadership layers that drive accountability, performance, and craft.",
+    text: "Led a global team across product, design, engineering, and content strategy, spanning the US and India. Built leadership layers that drove accountability, performance, and craft.",
   },
   {
     icon: Target,
     rule: PINK,
     title: "Design-to-Code Systems",
-    text: "Shipped a VDS Dev Assistant for VS Code and Design Assistant for Figma translating design intent cleanly into developer workflows. Drove 86% enterprise adoption across a Fortune 50 digital ecosystem without mandate.",
+    text: "My team shipped a VDS Dev Assistant for VS Code and a Design Assistant for Figma, translating design intent cleanly into developer workflows. Drove 86% enterprise adoption across a Fortune 50 digital ecosystem without mandate.",
   },
 ];
 
@@ -60,13 +60,13 @@ export const skills = [
     name: "Agent-Native Platform Architecture",
     icon: Brain,
     level: 91,
-    desc: "Delivered one of Verizon's first MCP servers enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
+    desc: "My team at Verizon shipped one of the company's first MCP servers, enabling AI agents to consume and generate from a design system in real time. Pioneer in making enterprise platforms agent-readable, generative-UI-ready, and developer-tool native.",
   },
   {
     name: "Global Team Leadership",
     icon: Globe2,
     level: 93,
-    desc: "Leading cross-functional, cross-geographic teams spanning the US and India across product, design, engineering, and content disciplines.",
+    desc: "Led cross-functional, cross-geographic teams spanning the US and India across product, design, engineering, and content disciplines.",
   },
   {
     name: "Accessibility at Scale",
@@ -96,7 +96,7 @@ export const skills = [
     name: "Design-to-Code Infrastructure",
     icon: Cpu,
     level: 97,
-    desc: "Shipped a VS Code Dev Assistant and Figma Design Assistant that translate design intent cleanly into developer workflows. Proven experience building design-to-code systems that bridge disciplines and reduce implementation drift at scale.",
+    desc: "My team shipped a VS Code Dev Assistant and Figma Design Assistant that translate design intent cleanly into developer workflows. Proven experience building design-to-code systems that bridge disciplines and reduce implementation drift at scale.",
   },
   {
     name: "Organizational Change Management",
@@ -111,17 +111,26 @@ export const skills = [
 export const roles = [
   {
     rule: BLUE,
+    company: "One North",
+    title: "Principal Design Engineer, AI & Design Systems",
+    period: "2026 — Present",
+    summary:
+      "Joined One North in September 2026, working at the intersection of AI and design systems.",
+    achievements: [],
+  },
+  {
+    rule: PINK,
     company: "Verizon",
     title: "Sr Director, Experience Design (Design Systems)",
-    period: "2021 — Present",
+    period: "2021 — 2026",
     summary:
-      "Lead the Verizon Design System (VDS), enterprise design infrastructure spanning web, iOS, and Android, as a Senior Director managing a team across product, design, engineering, and content strategy. Transforming a component library into an agent-native platform that both humans and AI can generate high-quality, accessible experiences from.",
+      "Led the Verizon Design System (VDS), enterprise design infrastructure spanning web, iOS, and Android, as a Senior Director managing a team across product, design, engineering, and content strategy. Transformed a component library into an agent-native platform that both humans and AI can generate high-quality, accessible experiences from.",
     achievements: [
-      "Shipped an agent-native layer for VDS via MCP enabling AI agents to consume, generate from, and validate against design system standards in real time (one of Verizon's first MCP servers)",
+      "My team shipped an agent-native layer for VDS via MCP, enabling AI agents to consume, generate from, and validate against design system standards in real time (one of Verizon's first MCP servers)",
       "Achieved 86% VDS adoption enterprise-wide, exceeding the 75% target, without organizational mandate, through quality, tooling, and partnership",
       "Delivered VDS Native (iOS SwiftUI + Android Jetpack Compose) with 48 components for each platform, achieving mobile parity a full year ahead of schedule",
-      //"Prototyped VDS Dev Assistant (VS Code) and Design Assistant (Figma), translating design intent cleanly into developer workflows; both delivered a full year ahead of schedule",
-      "Manage managers: lead Associate Directors of Design, Engineering, and Product across US and India, building a high-performing, multi-disciplinary leadership layer",
+      "My team shipped the VDS Dev Assistant (VS Code) and Design Assistant (Figma), translating design intent cleanly into developer workflows",
+      "Managed managers: led Associate Directors of Design, Engineering, and Product across US and India, building a high-performing, multi-disciplinary leadership layer",
       "Led design system rebranding: an 18-month enterprise rebranding overhaul with new visual identity, dynamic type, and built-in video transcripts",
       "Secured additional capital based on performance evidence to accelerate 2026 initiatives",
       "Embedded accessibility-by-default as a system primitive, awarded Verizon Accessibility Champion at the 2025 Accessibility Summit",
@@ -130,7 +139,7 @@ export const roles = [
     ],
   },
   {
-    rule: PINK,
+    rule: CYAN,
     company: "Verizon",
     title: "Sr Manager, Digital Marketing Business Operations",
     period: "2016 — 2021",
@@ -144,7 +153,7 @@ export const roles = [
     ],
   },
   {
-    rule: CYAN,
+    rule: DEEP,
     company: "Verizon",
     title: "Manager, Front End Web Development",
     period: "2014 — 2016",
@@ -156,7 +165,7 @@ export const roles = [
     ],
   },
   {
-    rule: DEEP,
+    rule: MINT,
     company: "Verizon",
     title: "Consultant, Front End Web Development",
     period: "2013 — 2014",
@@ -176,7 +185,7 @@ export const projects = [
     rule: BLUE,
     tag: "Agent-Native Infrastructure",
     title: "AI-Ready Architecture: Transforming VDS into an LLM Knowledge Source",
-    text: "Transformed the Verizon Design System from a passive code repository into an active AI infrastructure layer. Normalized 48 components into machine-readable JSON schemas, shipped one of Verizon's first MCP servers to expose live VDS context to AI agents, and integrated VDS into 6 AI tools across design and engineering, making compliant code the default output of every AI tool in the ecosystem.",
+    text: "Transformed the Verizon Design System from a passive code repository into an active AI infrastructure layer. My team normalized 48 components into machine-readable JSON schemas, shipped one of Verizon's first MCP servers to expose live VDS context to AI agents, and integrated VDS into 6 AI tools across design and engineering, making compliant code the default output of every AI tool in the ecosystem.",
     metric: "700 hrs reclaimed · 48 components normalized · 6 AI tools integrated",
     caseStudyHref: "/case-studies/ai-ready-design-system.html",
   },
@@ -258,12 +267,12 @@ export const education = [
 
 export const contact = {
   heading: "Let's build something great.",
-  description: "Open to executive conversations, advisory roles, and speaking opportunities. I respond to every message personally.",
+  description: "Open to speaking, writing collaborations, and conversations about design systems and AI. I respond to every message personally.",
   email: "andrew.d.pendleton@gmail.com",
   location: "New York, NY",
   linkedinUrl: "https://www.linkedin.com/in/andrewpendleton/",
   footerCopyright: "© 2026 Andrew Pendleton",
-  footerTagline: "Senior Executive · Design Infrastructure & Agent-Native Systems",
+  footerTagline: "Focusing on Design Infrastructure & Agent-Native Systems",
 };
 
 // ─── Stats strips ─────────────────────────────────────────────────────────────
@@ -272,7 +281,7 @@ export const heroStats = [
   { value: "86%", label: "Enterprise adoption, zero mandates", color: CYAN },
   { value: "48", label: "Components across three platforms", color: MINT },
   { value: "12", label: "Years inside one design org", color: "#ffffff" },
-  { value: "6", label: "Stages since 2023", color: CYAN },
+  { value: String(speakingEvents.length), label: "Stages since 2023", color: CYAN },
 ];
 
 export const cvStats = [
@@ -280,12 +289,6 @@ export const cvStats = [
   { value: "48", label: "Components across three platforms", color: PINK },
   { value: "12", label: "Years inside one design org", color: CYAN },
   { value: "20+", label: "Engineers led globally", color: MINT },
-];
-
-export const writingStats = [
-  { value: "6", label: "Essays published", color: CYAN },
-  { value: "2×", label: "Per month, roughly", color: MINT },
-  { value: "2026", label: "Writing since", color: "#ffffff" },
 ];
 
 // ─── Ticker tape ──────────────────────────────────────────────────────────────
@@ -338,10 +341,11 @@ export const speakingTopics = [
 // ─── Writing / essays ─────────────────────────────────────────────────────────
 // Only the first post below has a full essay body and a real page (see
 // src/app/WritingPost.tsx + writing/the-compound-professional-is-not-coming.html).
-// The rest are titles/excerpts only until the full drafts exist — their cards
-// intentionally don't link anywhere yet rather than pointing at empty pages.
+// The rest are drafts: titles and excerpts only. They stay here so they are
+// ready to publish, but `posts` (what every page renders) leaves them out until
+// their essay exists. To publish one, give it a page and set hasFullPost: true.
 
-export const posts = [
+const allPosts = [
   {
     slug: "the-compound-professional-is-not-coming",
     title: "The Compound Professional Is Not Coming. It Is Already Here.",
@@ -396,4 +400,12 @@ export const posts = [
     excerpt: "Eighty-six percent adoption did not come from the teams who agreed with me. It came from the two who spent a year telling me the system was wrong.",
     hasFullPost: false,
   },
+];
+
+export const posts = allPosts.filter((p) => p.hasFullPost);
+
+// Counted from `posts`, so the number can never claim more than a visitor can read.
+export const writingStats = [
+  { value: String(posts.length), label: posts.length === 1 ? "Essay published" : "Essays published", color: CYAN },
+  { value: "2026", label: "Writing since", color: "#ffffff" },
 ];

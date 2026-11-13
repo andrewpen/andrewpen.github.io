@@ -4,6 +4,28 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { Writing } from "./Writing";
 import { WritingPost } from "./WritingPost";
+import { posts, writingStats } from "./content";
+
+// The live content has one published essay and so renders no cards at all.
+// The card tests below need cards, so they render a fixture that has two real
+// essays after the featured one, and one stub.
+const post = (over: Partial<(typeof posts)[number]>) =>
+  ({
+    slug: "a-slug",
+    title: "A Title",
+    date: "Sep 1, 2026",
+    words: "100 words",
+    rule: "#11C4D4",
+    excerpt: "An excerpt.",
+    hasFullPost: true,
+    ...over,
+  }) as (typeof posts)[number];
+const fixture = [
+  post({ title: "Featured", slug: "featured" }),
+  post({ title: "Real one", slug: "real-one", rule: "#0A6EC2" }),
+  post({ title: "Real two", slug: "real-two", rule: "#BE3372" }),
+  post({ title: "Stub", slug: null as unknown as string, rule: "#4FE7AF", hasFullPost: false }),
+];
 
 /**
  * P07-A01 batch E: the writing index and the essay.
@@ -16,13 +38,13 @@ import { WritingPost } from "./WritingPost";
 
 describe("batch E adopts the shared card rather than re-drawing it", () => {
   it("the index's post cards are the system's Card", () => {
-    const { container } = render(<Writing />);
+    const { container } = render(<Writing posts={fixture} />);
     const cards = container.querySelectorAll(".a3kds-card");
     expect(cards.length, "every earlier-essay card should be a system Card").toBeGreaterThan(0);
   });
 
   it("each card carries the post's own accent colour, which is content and not a system role", () => {
-    const { container } = render(<Writing />);
+    const { container } = render(<Writing posts={fixture} />);
     const accents = [...container.querySelectorAll<HTMLElement>(".a3kds-card[data-accent]")]
       .map(c => c.style.getPropertyValue("--a3kds-local-card-accent"))
       .filter(Boolean);
@@ -32,13 +54,40 @@ describe("batch E adopts the shared card rather than re-drawing it", () => {
   });
 
   it("a stub essay stays non-interactive and a real one is a link", () => {
-    const { container } = render(<Writing />);
+    const { container } = render(<Writing posts={fixture} />);
     const links = [...container.querySelectorAll("a")].filter(a => a.getAttribute("href")?.startsWith("/writing/"));
     expect(links.length, "at least one real essay links out").toBeGreaterThan(0);
     // The stub's label must not be wrapped in an anchor.
     const stub = [...container.querySelectorAll("p")].find(p => /coming soon/i.test(p.textContent || ""));
     expect(stub, "the stub label should still render").not.toBeUndefined();
     expect(stub!.closest("a"), "a stub must not become a link").toBeNull();
+  });
+});
+
+describe("the writing page claims only what a visitor can read (ticket 004)", () => {
+  it("renders no draft: every listed essay has a page", () => {
+    expect(posts.length).toBeGreaterThan(0);
+    for (const p of posts) expect(p.hasFullPost, `${p.title} is listed without an essay`).toBe(true);
+    const { container } = render(<Writing />);
+    expect(container.textContent).not.toMatch(/coming soon/i);
+  });
+
+  it("the essay count is the number of essays listed", () => {
+    const count = writingStats.find(s => /essays? published/i.test(s.label));
+    expect(count?.value).toBe(String(posts.length));
+  });
+
+  it("makes no publishing-frequency claim", () => {
+    const { container } = render(<Writing />);
+    for (const dd of container.querySelectorAll("dl dd")) {
+      expect(dd.textContent, "a stat promising a cadence").not.toMatch(/per month|twice|weekly/i);
+    }
+  });
+
+  it("leaves out the Earlier section when there is nothing earlier", () => {
+    const { container } = render(<Writing posts={[fixture[0]]} />);
+    const headings = [...container.querySelectorAll("h2")].map(h => h.textContent);
+    expect(headings).not.toContain("Earlier");
   });
 });
 

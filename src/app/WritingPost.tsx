@@ -115,7 +115,7 @@ export function WritingPost() {
                 <div style={{ flex: "1 1 180px" }}>
                   <p style={{ fontWeight: 700, margin: "0 0 8px" }}>{hero.name}</p>
                   <p style={{ fontSize: "0.9375rem", lineHeight: 1.6, color: "#38546a", margin: "0 0 12px" }}>
-                    Senior Director of design infrastructure at Verizon. Speaks at CES, the Accessibility Summit, and UX India.
+                    Principal Design Engineer, AI & Design Systems at One North. Previously led design infrastructure at Verizon. Speaks at CES, the Accessibility Summit, and UX India.
                   </p>
                   <p style={{ fontSize: "0.9375rem", margin: 0 }}>
                     <a href="/" style={{ color: BLUE }}>
